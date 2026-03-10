@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import {
   CommandPalette,
   CommandPaletteContent,
@@ -18,6 +18,7 @@ import {
   COMMAND_PALETTE_GROUPS,
   type CommandPaletteItem as PaletteItem,
 } from "@/lib/command-palette-links";
+import { useKeyboardShortcutLabel } from "@/lib/use-keyboard-shortcut-label";
 
 type SearchCommandProps = {
   open: boolean;
@@ -26,12 +27,7 @@ type SearchCommandProps = {
 
 export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
   const router = useRouter();
-
-  const shortcut = useMemo(() => {
-    if (typeof window === "undefined") return "Ctrl K";
-    const isMac = /(Mac|iPhone|iPad)/i.test(window.navigator.platform);
-    return isMac ? "Cmd K" : "Ctrl K";
-  }, []);
+  const shortcut = useKeyboardShortcutLabel();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -59,7 +55,7 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
 
   return (
     <CommandPalette open={open} onOpenChange={onOpenChange}>
-      <CommandPaletteContent className=" rounded-none p-0 pt-3 w-72 sm:max-w-lg sm:rounded-sm sm:p-0 sm:pt-2">
+      <CommandPaletteContent className=" rounded-none p-0 pt-3 w-72 sm:w-full sm:max-w-xl sm:rounded-sm sm:p-0 sm:pt-2">
         <CommandPaletteInput
           placeholder="Search pages and links..."
           className="mt-2 pr-10"

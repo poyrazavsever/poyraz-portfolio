@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage, Separator } from "poyraz-ui/atoms";
 import {
   DropdownMenu,
@@ -19,6 +19,7 @@ import {
   SheetTrigger,
 } from "poyraz-ui/molecules";
 import { SearchCommand } from "@/components/search-command";
+import { useKeyboardShortcutLabel } from "@/lib/use-keyboard-shortcut-label";
 import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/links";
 
 function getNavLinkClass(isActive: boolean) {
@@ -33,12 +34,7 @@ function getNavLinkClass(isActive: boolean) {
 export function SiteNavbar() {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
-
-  const shortcut = useMemo(() => {
-    if (typeof window === "undefined") return "Ctrl K";
-    const isMac = /(Mac|iPhone|iPad)/i.test(window.navigator.platform);
-    return isMac ? "Cmd K" : "Ctrl K";
-  }, []);
+  const shortcut = useKeyboardShortcutLabel();
 
   const isActiveLink = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -83,7 +79,7 @@ export function SiteNavbar() {
             <Icon icon="mdi:magnify" width={16} height={16} />
             <span>Search</span>
           </span>
-          <span className="text-xs text-muted-foreground/80">{shortcut}</span>
+          <span className="text-xs text-muted-foreground">{shortcut}</span>
         </button>
 
         <DropdownMenu>
