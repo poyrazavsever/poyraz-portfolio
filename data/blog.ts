@@ -5,7 +5,7 @@ export const BLOG_NEWS = [
     category: "Technology",
     image: "/news/performance.svg",
     date: "Mar 6, 2026",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "ui-system-basics",
@@ -13,7 +13,7 @@ export const BLOG_NEWS = [
     category: "Design",
     image: "/news/design.svg",
     date: "Mar 5, 2026",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "next-16-notes-2",
@@ -21,7 +21,7 @@ export const BLOG_NEWS = [
     category: "Technology",
     image: "/news/performance.svg",
     date: "Mar 6, 2026",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "ui-system-basics-2",
@@ -29,7 +29,7 @@ export const BLOG_NEWS = [
     category: "Design",
     image: "/news/design.svg",
     date: "Mar 5, 2026",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
 ] as const;
 
@@ -43,7 +43,7 @@ export const BLOG_ARTICLES = [
     image: "/news/design.svg",
     date: "Mar 2026",
     readTime: "4 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-2",
@@ -54,7 +54,7 @@ export const BLOG_ARTICLES = [
     image: "/news/performance.svg",
     date: "Mar 2026",
     readTime: "5 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-3",
@@ -65,7 +65,7 @@ export const BLOG_ARTICLES = [
     image: "/news/performance.svg",
     date: "Mar 2026",
     readTime: "6 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-4",
@@ -76,7 +76,7 @@ export const BLOG_ARTICLES = [
     image: "/images/hero1.png",
     date: "Feb 2026",
     readTime: "4 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-5",
@@ -87,7 +87,7 @@ export const BLOG_ARTICLES = [
     image: "/news/design.svg",
     date: "Feb 2026",
     readTime: "5 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-6",
@@ -98,7 +98,7 @@ export const BLOG_ARTICLES = [
     image: "/news/performance.svg",
     date: "Feb 2026",
     readTime: "5 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-7",
@@ -109,7 +109,7 @@ export const BLOG_ARTICLES = [
     image: "/images/hero2.png",
     date: "Jan 2026",
     readTime: "4 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-8",
@@ -120,7 +120,7 @@ export const BLOG_ARTICLES = [
     image: "/news/design.svg",
     date: "Jan 2026",
     readTime: "6 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-9",
@@ -131,7 +131,7 @@ export const BLOG_ARTICLES = [
     image: "/news/performance.svg",
     date: "Jan 2026",
     readTime: "3 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-10",
@@ -142,7 +142,7 @@ export const BLOG_ARTICLES = [
     image: "/images/hero1.png",
     date: "Dec 2025",
     readTime: "4 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-11",
@@ -153,7 +153,7 @@ export const BLOG_ARTICLES = [
     image: "/news/design.svg",
     date: "Dec 2025",
     readTime: "4 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
   {
     id: "article-design-systems-12",
@@ -164,7 +164,7 @@ export const BLOG_ARTICLES = [
     image: "/news/performance.svg",
     date: "Dec 2025",
     readTime: "6 min",
-    href: "/blog",
+    href: "/blog/building-minimal-design-systems",
   },
 ] as const;
 
