@@ -14,10 +14,6 @@ function getYoutubeEmbedUrl(link: string) {
 export function HomeVideosSection() {
   return (
     <section className="space-y-2">
-      <Typography variant="large" className="text-base">
-        YouTube
-      </Typography>
-
       <div className="grid gap-2 md:grid-cols-3">
         {YOUTUBE_VIDEO_LINKS.map((link) => {
           const embedUrl = getYoutubeEmbedUrl(link);
