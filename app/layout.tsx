@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { SiteNavbar } from "@/components/site-navbar";
 import "./globals.css";
-
 
 export const metadata: Metadata = {
   title:
@@ -44,8 +44,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        {children}
+      <body className="min-h-dvh bg-background text-foreground antialiased">
+        <div className="mx-auto flex min-h-dvh w-full max-w-4xl flex-col px-4 py-8 sm:px-6 sm:py-10">
+          <SiteNavbar />
+          <main className="flex-1 py-8">{children}</main>
+        </div>
       </body>
     </html>
   );
