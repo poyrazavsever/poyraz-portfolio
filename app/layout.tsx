@@ -49,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-dvh bg-background text-foreground antialiased">
-        <div className="mx-auto flex w-full max-w-4xl flex-col overflow-hidden px-4 py-8 sm:px-6 sm:py-10">
+        <div className="mx-auto flex w-full max-w-4xl flex-col overflow-hidden px-4 py-4 sm:px-6">
           <SiteNavbar />
           <AnnouncementBar
             variant="branded"
