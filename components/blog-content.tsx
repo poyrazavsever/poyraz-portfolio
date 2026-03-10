@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import {
   ArticleCard,
@@ -68,6 +70,7 @@ export function BlogContent() {
               ))}
             </div>
           </Card>
+
         </div>
       </div>
 
