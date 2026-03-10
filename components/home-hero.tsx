@@ -53,7 +53,7 @@ export function HomeHero() {
             </Typography>
           </div>
           <Typography variant="small" className="text-muted-foreground">
-            A young person exploring technology.
+            Teknolojiyi keşfeden bir genç. Yazılımı seviyor sanırım. Çok fazla şey yapıyor, takip edin.
           </Typography>
         </div>
 

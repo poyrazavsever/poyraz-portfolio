@@ -12,29 +12,29 @@ export const REFERENCES: Reference[] = [
   {
     id: "ali-korkmaz",
     author: "Ali Korkmaz",
-    role: "Client - 2025",
+    role: "Müşteri - 2025",
     rating: 5,
     avatar: "/avatars/ali.png",
     quote:
-      "The website turned out exactly as I wanted. Poyraz considered the details I missed, explained every decision transparently, and delivered something even better than I expected.",
+      "Web sitesi tam olarak istediğim gibi oldu. Poyraz benim gözden kaçırdığım detayları da düşündü, her kararı şeffaf şekilde anlattı ve beklentimin üstünde bir iş teslim etti.",
   },
   {
     id: "halil-ibrahim-sabo",
     author: "Halil Ibrahim Sabo",
-    role: "Product Manager - 2024",
+    role: "Ürün Yöneticisi - 2024",
     rating: 5,
     avatar: "/avatars/halil.png",
     profileHref: "https://www.linkedin.com/in/halil-ibrahim-sabo-18a03a251/",
     quote:
-      "Poyraz is a hardworking builder with an honest, transparent approach. Collaborating with him feels effortless because he keeps everyone aligned and handles edge cases calmly.",
+      "Poyraz çalışkan, üretken ve yaklaşımında dürüst bir geliştirici. Onunla çalışmak çok rahattı; herkesi aynı hedefte tutuyor ve zor durumları sakinlikle yönetiyor.",
   },
   {
     id: "berat-arslan",
     author: "Berat Arslan",
-    role: "Graphic Designer - 2025",
+    role: "Grafik Tasarımcı - 2025",
     avatar: "/avatars/berat.png",
     profileHref: "https://www.linkedin.com/in/beratarslan21/",
     quote:
-      "A teammate who is both ambitious and deeply passionate about his craft. Working with Poyraz was a pleasure; he stayed curious, delivered reliably, and made the collaboration feel easy.",
+      "Hem hırslı hem de işine gerçekten tutkulu bir takım arkadaşı. Poyraz ile çalışmak keyifliydi; merakını hep korudu, güvenilir şekilde teslim etti ve iş birliğini kolaylaştırdı.",
   },
 ];
