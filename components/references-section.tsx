@@ -18,7 +18,7 @@ export function ReferencesSection() {
                 role={item.role}
                 avatar={item.avatar}
                 rating={item.rating}
-                className="h-full w-[280px] shrink-0 rounded-sm"
+                className="h-full w-70 shrink-0 rounded-sm"
               />
             );
 

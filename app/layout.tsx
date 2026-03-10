@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
-import { SiteNavbar } from "@/components/site-navbar";
 import "./globals.css";
+
+import { SiteNavbar } from "@/components/site-navbar";
+import { Icon } from "@iconify/react";
+import Link from "next/link";
+import { AnnouncementBar } from "poyraz-ui/organisms";
 
 export const metadata: Metadata = {
   title:
@@ -47,6 +51,23 @@ export default function RootLayout({
       <body className="h-dvh overflow-hidden bg-background text-foreground antialiased">
         <div className="mx-auto flex h-dvh w-full max-w-4xl flex-col overflow-hidden px-4 py-8 sm:px-6 sm:py-10">
           <SiteNavbar />
+          <AnnouncementBar
+            variant="branded"
+            dismissible={false}
+            icon={<Icon icon="mdi:sparkles" width={16} height={16} />}
+            action={
+              <Link
+                href="https://ui.poyrazavsever.com"
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs font-bold underline"
+              >
+                Learn More -&gt;
+              </Link>
+            }
+          >
+            New components added this week!
+          </AnnouncementBar>
           <main className="flex-1 overflow-hidden py-4">{children}</main>
         </div>
       </body>
