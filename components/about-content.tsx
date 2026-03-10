@@ -22,7 +22,7 @@ export function AboutContent() {
           </Typography>
         </Card>
 
-        <div className="p-1">
+        <div>
           <div className="grid gap-2">
             {EDUCATION.map((item) => (
               <Card key={item.id} className="rounded-sm border-border p-3">
@@ -100,7 +100,7 @@ export function AboutContent() {
           </SheetContent>
         </Sheet>
 
-        <div className="h-full p-1">
+        <div className="h-full">
           <div className="grid gap-2">
             {EXPERIENCE.map((item) => (
               <Card key={item.id} className="rounded-sm border-border p-3">
