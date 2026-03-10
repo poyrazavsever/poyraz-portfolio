@@ -2,6 +2,8 @@
 
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useMemo, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage, Separator } from "poyraz-ui/atoms";
 import {
   DropdownMenu,
@@ -10,13 +12,41 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
 } from "poyraz-ui/molecules";
 import { SearchCommand } from "@/components/search-command";
 import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/links";
 
+function getNavLinkClass(isActive: boolean) {
+  return [
+    "inline-flex border-b-2 pb-1 text-sm transition-colors",
+    isActive
+      ? "border-red-600 text-foreground"
+      : "border-transparent text-foreground/55 hover:text-foreground",
+  ].join(" ");
+}
+
 export function SiteNavbar() {
+  const pathname = usePathname();
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const shortcut = useMemo(() => {
+    if (typeof window === "undefined") return "Ctrl K";
+    const isMac = /(Mac|iPhone|iPad)/i.test(window.navigator.platform);
+    return isMac ? "Cmd K" : "Ctrl K";
+  }, []);
+
+  const isActiveLink = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4">
+    <header className="flex items-center justify-between gap-3 border-b border-border pb-4">
       <Link href="/" aria-label="Go to home" className="inline-flex items-center">
         <Avatar className="h-9 w-9 rounded-sm">
           <AvatarImage src="/logo/logo.jpeg" alt="Poyraz Avsever" />
@@ -26,18 +56,15 @@ export function SiteNavbar() {
         </Avatar>
       </Link>
 
-      <div className="flex flex-wrap items-center justify-end gap-3">
+      <div className="hidden items-center gap-3 md:flex">
         <nav aria-label="Main navigation">
-          <ul className="flex flex-wrap items-center gap-3 text-sm">
+          <ul className="flex items-center gap-3">
             {NAV_LINKS.map((item, index) => (
               <li key={item.id} className="flex items-center gap-3">
                 {index > 0 && (
                   <Separator orientation="vertical" className="h-4 bg-border" decorative />
                 )}
-                <Link
-                  href={item.href}
-                  className="text-foreground/55 transition-colors hover:text-foreground"
-                >
+                <Link href={item.href} className={getNavLinkClass(isActiveLink(item.href))}>
                   {item.label}
                 </Link>
               </li>
@@ -45,8 +72,19 @@ export function SiteNavbar() {
           </ul>
         </nav>
 
-        <Separator orientation="vertical" className="hidden h-4 bg-border sm:block" decorative />
-        <SearchCommand />
+        <Separator orientation="vertical" className="h-4 bg-border" decorative />
+        <button
+          type="button"
+          onClick={() => setSearchOpen(true)}
+          className="inline-flex h-8 w-44 cursor-pointer items-center justify-between rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:w-52"
+          aria-label="Open command palette"
+        >
+          <span className="inline-flex items-center gap-2">
+            <Icon icon="mdi:magnify" width={16} height={16} />
+            <span>Search</span>
+          </span>
+          <span className="text-xs text-muted-foreground/80">{shortcut}</span>
+        </button>
 
         <DropdownMenu>
           <DropdownMenuTrigger className="inline-flex h-8 cursor-pointer items-center gap-2 rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
@@ -72,6 +110,72 @@ export function SiteNavbar() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+
+      <div className="flex items-center gap-2 md:hidden">
+        <Sheet>
+          <SheetTrigger className="inline-flex h-8 cursor-pointer items-center gap-2 rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
+            <Icon icon="mdi:menu" width={18} height={18} />
+            <span>Menu</span>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-72 p-4">
+            <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+            <div className="flex flex-col gap-4">
+              <SheetClose asChild>
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen(true)}
+                  className="inline-flex h-9 w-full cursor-pointer items-center justify-between rounded-sm border border-border px-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label="Open command palette"
+                >
+                  <span className="inline-flex items-center gap-2">
+                    <Icon icon="mdi:magnify" width={16} height={16} />
+                    <span>Search</span>
+                  </span>
+                  <span className="text-xs text-muted-foreground/80">{shortcut}</span>
+                </button>
+              </SheetClose>
+
+              <Separator className="bg-border" decorative />
+
+              <nav aria-label="Mobile navigation">
+                <ul className="space-y-2">
+                  {NAV_LINKS.map((item) => (
+                    <li key={item.id}>
+                      <SheetClose asChild>
+                        <Link
+                          href={item.href}
+                          className={getNavLinkClass(isActiveLink(item.href))}
+                        >
+                          {item.label}
+                        </Link>
+                      </SheetClose>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+
+              <Separator className="bg-border" decorative />
+
+              <div className="grid grid-cols-2 gap-2">
+                {SOCIAL_LINKS.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-sm border border-border px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    <Icon icon={item.icon} width={14} height={14} />
+                    <span className="truncate">{item.label}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      <SearchCommand open={searchOpen} onOpenChange={setSearchOpen} />
     </header>
   );
 }

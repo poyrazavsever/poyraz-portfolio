@@ -47,7 +47,7 @@ export default function RootLayout({
       <body className="h-dvh overflow-hidden bg-background text-foreground antialiased">
         <div className="mx-auto flex h-dvh w-full max-w-4xl flex-col overflow-hidden px-4 py-8 sm:px-6 sm:py-10">
           <SiteNavbar />
-          <main className="flex-1 overflow-hidden py-8">{children}</main>
+          <main className="flex-1 overflow-hidden py-4">{children}</main>
         </div>
       </body>
     </html>

@@ -1,16 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Typography } from "poyraz-ui/atoms";
 import { TestimonialCard } from "poyraz-ui/molecules";
 import { REFERENCES } from "@/data/references";
 
 export function ReferencesSection() {
   return (
-    <section className="space-y-3">
-      <Typography variant="h3" className="text-foreground">
-        References
-      </Typography>
+    <section className="space-y-8 md:pt-12">
 
       <div className="relative overflow-hidden rounded-sm">
         <div className="flex w-max gap-3">

@@ -68,7 +68,7 @@ export function HomeHero() {
               alt="Poyraz Avsever"
               width={240}
               height={240}
-              className="absolute right-0 bottom-0 h-auto w-48 object-contain"
+              className="absolute right-0 bottom-0 h-auto w-20 md:w-48 object-contain"
             />
           </div>
         </div>

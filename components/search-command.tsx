@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import {
   CommandPalette,
   CommandPaletteContent,
@@ -13,15 +13,18 @@ import {
   CommandPaletteItem,
   CommandPaletteList,
   CommandPaletteSeparator,
-  CommandPaletteTrigger,
 } from "poyraz-ui/molecules";
 import {
   COMMAND_PALETTE_GROUPS,
   type CommandPaletteItem as PaletteItem,
 } from "@/lib/command-palette-links";
 
-export function SearchCommand() {
-  const [open, setOpen] = useState(false);
+type SearchCommandProps = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+};
+
+export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
   const router = useRouter();
 
   const shortcut = useMemo(() => {
@@ -36,15 +39,15 @@ export function SearchCommand() {
       if (!isShortcut) return;
 
       event.preventDefault();
-      setOpen((prev) => !prev);
+      onOpenChange(!open);
     };
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
+  }, [open, onOpenChange]);
 
   const handleCommandSelect = (item: PaletteItem) => {
-    setOpen(false);
+    onOpenChange(false);
 
     if (item.external) {
       window.open(item.href, "_blank", "noopener,noreferrer");
@@ -55,23 +58,12 @@ export function SearchCommand() {
   };
 
   return (
-    <CommandPalette open={open} onOpenChange={setOpen}>
-      <CommandPaletteTrigger asChild>
-        <button
-          type="button"
-          className="inline-flex h-8 w-44 cursor-pointer items-center justify-between rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:w-52"
-          aria-label="Open command palette"
-        >
-          <span className="inline-flex items-center gap-2">
-            <Icon icon="mdi:magnify" width={16} height={16} />
-            <span>Search</span>
-          </span>
-          <span className="text-xs text-muted-foreground/80">{shortcut}</span>
-        </button>
-      </CommandPaletteTrigger>
-
-      <CommandPaletteContent className="rounded-sm">
-        <CommandPaletteInput placeholder="Search pages and links..." />
+    <CommandPalette open={open} onOpenChange={onOpenChange}>
+      <CommandPaletteContent className=" rounded-none p-0 pt-3 w-72 sm:max-w-lg sm:rounded-sm sm:p-0 sm:pt-2">
+        <CommandPaletteInput
+          placeholder="Search pages and links..."
+          className="mt-2 pr-10"
+        />
         <CommandPaletteList>
           <CommandPaletteEmpty>No results found.</CommandPaletteEmpty>
           {COMMAND_PALETTE_GROUPS.map((group, index) => (
