@@ -8,9 +8,9 @@ import { AnnouncementBar } from "poyraz-ui/organisms";
 
 export const metadata: Metadata = {
   title:
-    "Poyraz Avsever - Portfolio - Freelancer - Fullstack Developer - Web Developer",
+    "Poyraz Avsever | Portfolyo | Freelancer | Full-stack Geliştirici | Web Geliştirici",
   description:
-    "Poyraz Avsever's personal portfolio website showcasing projects, skills, and services as a freelancer and fullstack web developer. A young person passionate about coding and technology.",
+    "Poyraz Avsever'in projelerini, yetkinliklerini ve hizmetlerini sergilediği kişisel portfolyo sitesi. Yazılıma ve teknolojiye tutkuyla bağlı genç bir geliştirici.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -47,7 +47,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="tr">
       <body className="min-h-dvh bg-background text-foreground antialiased">
         <div className="mx-auto flex w-full max-w-4xl flex-col overflow-hidden px-4 py-4 sm:px-6">
           <SiteNavbar />
@@ -62,11 +62,11 @@ export default function RootLayout({
                 rel="noreferrer"
                 className="text-xs font-bold underline"
               >
-                Learn More -&gt;
+                İncele -&gt;
               </Link>
             }
           >
-            New components added this week!
+            Bu hafta yeni bileşenler eklendi!
           </AnnouncementBar>
           <main className="flex-1 overflow-hidden py-4">{children}</main>
         </div>

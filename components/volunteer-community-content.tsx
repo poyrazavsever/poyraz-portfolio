@@ -9,7 +9,7 @@ export function VolunteerCommunityContent() {
         href="/about"
         className="inline-flex w-fit items-center rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
-        {"<- Back to about"}
+        {"<- Hakkımda'ya dön"}
       </Link>
 
       <div className="grid gap-3">
@@ -20,12 +20,12 @@ export function VolunteerCommunityContent() {
             </Typography>
 
             <Typography variant="small" className="mt-2 text-muted-foreground">
-              <span className="font-semibold text-foreground">Timeline:</span> {item.timeline}
+              <span className="font-semibold text-foreground">Zaman Çizelgesi:</span> {item.timeline}
             </Typography>
 
             {item.link ? (
               <Typography variant="small" className="mt-1 text-muted-foreground">
-                <span className="font-semibold text-foreground">Link:</span>{" "}
+                <span className="font-semibold text-foreground">Bağlantı:</span>{" "}
                 <Link
                   href={item.link}
                   target="_blank"
@@ -38,7 +38,7 @@ export function VolunteerCommunityContent() {
             ) : null}
 
             <Typography variant="small" className="mt-1 text-muted-foreground">
-              <span className="font-semibold text-foreground">Focus:</span> {item.focus}
+              <span className="font-semibold text-foreground">Odak:</span> {item.focus}
             </Typography>
           </Card>
         ))}

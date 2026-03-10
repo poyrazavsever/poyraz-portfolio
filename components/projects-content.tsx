@@ -69,7 +69,7 @@ export async function ProjectsContent() {
         <div className="overflow-x-auto rounded-sm">
           <Image
             src="https://ghchart.rshah.org/dc2626/poyrazavsever"
-            alt="GitHub contribution activity for poyrazavsever"
+            alt="poyrazavsever için GitHub katkı grafiği"
             width={820}
             height={120}
             className="h-auto w-full min-w-[740px]"
@@ -78,19 +78,19 @@ export async function ProjectsContent() {
         </div>
       </Card>
 
-      <ProjectSection title="Mobile Apps" items={MOBILE_APPS} />
-      <ProjectSection title="Web Apps" items={WEB_APPS} />
-      <ProjectSection title="Figma Templates" items={FIGMA_TEMPLATES} />
+      <ProjectSection title="Mobil Uygulamalar" items={MOBILE_APPS} />
+      <ProjectSection title="Web Uygulamaları" items={WEB_APPS} />
+      <ProjectSection title="Figma Şablonları" items={FIGMA_TEMPLATES} />
 
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
-          npm paketleri (@poyrazavsever)
+          npm Paketleri (@poyrazavsever)
         </Typography>
         <div className="grid gap-2 md:grid-cols-2">
           {npmPackages.length === 0 ? (
             <Card className="rounded-sm border-border p-3 md:col-span-2">
               <Typography variant="small" className="text-muted-foreground">
-                npm API response is empty right now.
+                npm API yanıtı şu anda boş.
               </Typography>
             </Card>
           ) : (
@@ -121,13 +121,13 @@ export async function ProjectsContent() {
 
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
-          GitHub Repos (@poyrazavsever)
+          GitHub Repoları (@poyrazavsever)
         </Typography>
         <div className="grid gap-2 md:grid-cols-2">
           {repos.length === 0 ? (
             <Card className="rounded-sm border-border p-3 md:col-span-2">
               <Typography variant="small" className="text-muted-foreground">
-                GitHub API response is empty right now.
+                GitHub API yanıtı şu anda boş.
               </Typography>
             </Card>
           ) : (

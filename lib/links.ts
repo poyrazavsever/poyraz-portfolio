@@ -1,17 +1,16 @@
 export const NAV_LINKS = [
-  { id: "home", label: "Home", href: "/" },
-  { id: "about", label: "About", href: "/about" },
+  { id: "about", label: "Hakkımda", href: "/about" },
   { id: "blog", label: "Blog", href: "/blog" },
-  { id: "content", label: "Content", href: "/content" },
-  { id: "newsletter", label: "Newsletter", href: "/newsletter" },
-  { id: "projects", label: "Projects", href: "/projects" },
-  { id: "contact", label: "Contact", href: "/contact" },
+  { id: "content", label: "İçerikler", href: "/content" },
+  { id: "newsletter", label: "Bülten", href: "/newsletter" },
+  { id: "projects", label: "Projeler", href: "/projects" },
+  { id: "contact", label: "İletişim", href: "/contact" },
 ] as const;
 
 export const SOCIAL_LINKS = [
   {
     id: "email",
-    label: "E-Mail",
+    label: "E-posta",
     href: "mailto:poyrazavsever@gmail.com",
     icon: "mdi:email",
   },
@@ -65,7 +64,7 @@ export const SOCIAL_LINKS = [
   },
   {
     id: "buy-me-a-coffee",
-    label: "Buy Me a Coffee",
+    label: "Bana kahve ısmarla",
     href: "https://buymeacoffee.com/poyrazavsever",
     icon: "mdi:coffee",
   },

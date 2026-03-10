@@ -46,7 +46,7 @@ function MermaidBlock({ chart }: { chart: string }) {
         }
       } catch {
         if (mounted) {
-          setError("Mermaid diagram could not be rendered.");
+          setError("Mermaid diyagramı oluşturulamadı.");
         }
       }
     };
@@ -71,7 +71,7 @@ function MermaidBlock({ chart }: { chart: string }) {
     return (
       <Card className="rounded-sm border-border p-3">
         <Typography variant="small" className="text-muted-foreground">
-          Rendering diagram...
+          Diyagram hazırlanıyor...
         </Typography>
       </Card>
     );
@@ -138,9 +138,9 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                   ...item.replies,
                   {
                     id: `reply-${Date.now()}`,
-                    author: "You (GitHub)",
+                    author: "Sen (GitHub)",
                     avatar: "/logo/logo.jpeg",
-                    date: "Just now",
+                    date: "Az önce",
                     content,
                     likes: 0,
                   },
@@ -154,9 +154,9 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
       setComments((prev) => [
         {
           id: `comment-${Date.now()}`,
-          author: "You (GitHub)",
+          author: "Sen (GitHub)",
           avatar: "/logo/logo.jpeg",
-          date: "Just now",
+          date: "Az önce",
           content,
           likes: 0,
           replies: [],
@@ -184,7 +184,7 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
             href="/blog"
             className="inline-flex items-center rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
-            {"<- Back to blog"}
+            {"<- Blog'a dön"}
           </Link>
 
           <header className="space-y-3">
@@ -216,8 +216,8 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
               variant={liked ? "default" : "outline"}
               className="h-9 w-9 rounded-sm p-0"
               onClick={toggleLike}
-              aria-label={`Like post (${likeCount})`}
-              title={`Like (${likeCount})`}
+              aria-label={`Yazıyı beğen (${likeCount})`}
+              title={`Beğen (${likeCount})`}
             >
               <Icon icon={liked ? "mdi:heart" : "mdi:heart-outline"} width={18} height={18} />
             </Button>
@@ -228,8 +228,8 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                   type="button"
                   variant="outline"
                   className="h-9 w-9 rounded-sm p-0"
-                  aria-label={`Open comments (${comments.length})`}
-                  title={`Comments (${comments.length})`}
+                  aria-label={`Yorumları aç (${comments.length})`}
+                  title={`Yorumlar (${comments.length})`}
                 >
                   <Icon icon="mdi:comment-outline" width={18} height={18} />
                 </Button>
@@ -237,7 +237,7 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
 
               <SheetContent side="right" className="flex h-dvh w-full max-w-xl flex-col p-0">
                 <div className="border-b border-border px-4 py-3">
-                  <SheetTitle>Comments</SheetTitle>
+                  <SheetTitle>Yorumlar</SheetTitle>
                 </div>
 
                 <div className="flex min-h-0 flex-1 flex-col gap-3 p-4">
@@ -265,7 +265,7 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                             </Typography>
                             <div className="mt-2 flex items-center gap-2">
                               <Button type="button" variant="outline" size="sm" className="rounded-sm">
-                                Like ({item.likes})
+                                Beğen ({item.likes})
                               </Button>
                               <Button
                                 type="button"
@@ -274,7 +274,7 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                                 className="rounded-sm"
                                 onClick={() => handleReplyClick(item.id, item.author)}
                               >
-                                Reply
+                                Yanıtla
                               </Button>
                             </div>
 
@@ -319,14 +319,14 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                   {!githubAuthed ? (
                     <Card className="rounded-sm border-border p-3">
                       <Typography variant="small" className="text-muted-foreground">
-                        You need to sign in with GitHub before posting comments.
+                        Yorum yapmadan önce GitHub ile giriş yapman gerekiyor.
                       </Typography>
                       <Button
                         type="button"
                         className="mt-2 rounded-sm"
                         onClick={() => setGithubAuthed(true)}
                       >
-                        Continue with GitHub
+                        GitHub ile devam et
                       </Button>
                     </Card>
                   ) : null}
@@ -335,7 +335,7 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                     <Card className="rounded-sm border-border p-2">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <Typography variant="small" className="text-muted-foreground">
-                          Replying to {replyTo.author}
+                          {replyTo.author} kullanıcısına yanıt yazıyorsun
                         </Typography>
                         <Button
                           type="button"
@@ -344,7 +344,7 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                           className="rounded-sm"
                           onClick={() => setReplyTo(null)}
                         >
-                          Cancel
+                          Vazgeç
                         </Button>
                       </div>
                     </Card>
@@ -354,7 +354,7 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                     <Textarea
                       value={draft}
                       onChange={(event) => setDraft(event.target.value)}
-                      placeholder={githubAuthed ? "Write your comment..." : "Sign in with GitHub first"}
+                      placeholder={githubAuthed ? "Yorumunu yaz..." : "Önce GitHub ile giriş yap"}
                       className="min-h-24 rounded-sm"
                       disabled={!githubAuthed}
                     />
@@ -365,7 +365,7 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                         onClick={handleSubmitComment}
                         disabled={!githubAuthed || !draft.trim()}
                       >
-                        Post Comment
+                        Yorumu Gönder
                       </Button>
                     </div>
                   </Card>

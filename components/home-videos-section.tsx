@@ -24,7 +24,7 @@ export function HomeVideosSection() {
                 <div className="aspect-video w-full">
                   <iframe
                     src={embedUrl}
-                    title="YouTube video player"
+                    title="YouTube video oynatıcı"
                     className="h-full w-full"
                     loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -35,7 +35,7 @@ export function HomeVideosSection() {
               ) : (
                 <div className="p-3">
                   <Typography variant="small" className="text-muted-foreground">
-                    Invalid video link.
+                    Geçersiz video bağlantısı.
                   </Typography>
                 </div>
               )}

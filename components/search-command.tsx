@@ -87,12 +87,12 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
     <CommandPalette open={open} onOpenChange={handleOpenChange}>
       <CommandPaletteContent className=" rounded-none p-0 pt-3 w-72 sm:w-full sm:max-w-xl sm:rounded-sm sm:p-0 sm:pt-2">
         <CommandPaletteInput
-          placeholder="Search pages and links..."
+          placeholder="Sayfa ve bağlantılarda ara..."
           className="mt-2 pr-10"
           onValueChange={setQuery}
         />
         <CommandPaletteList>
-          <CommandPaletteEmpty>No results found.</CommandPaletteEmpty>
+          <CommandPaletteEmpty>Sonuç bulunamadı.</CommandPaletteEmpty>
           {filteredGroups.map((group, index) => (
             <div key={group.id}>
               {index > 0 && <CommandPaletteSeparator />}
@@ -112,7 +112,7 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
           ))}
         </CommandPaletteList>
         <CommandPaletteFooter className="text-xs text-muted-foreground">
-          Press {shortcut} to open quickly
+          Hızlıca açmak için {shortcut} kullan
         </CommandPaletteFooter>
       </CommandPaletteContent>
     </CommandPalette>

@@ -31,7 +31,7 @@ export function ReferenceCards({ className }: ReferenceCardsProps) {
             href={item.profileHref}
             target="_blank"
             rel="noreferrer"
-            aria-label={`${item.author} LinkedIn profile`}
+            aria-label={`${item.author} LinkedIn profili`}
             className="block"
           >
             {card}

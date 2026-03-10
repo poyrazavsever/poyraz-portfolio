@@ -38,7 +38,7 @@ export function BlogContent() {
 
         <div className="grid gap-3 md:grid-rows-[auto_1fr]">
           <Card className="rounded-sm border-border p-4">
-            <Typography variant="large">Categories</Typography>
+            <Typography variant="large">Kategoriler</Typography>
             <div className="mt-3 flex flex-wrap gap-2">
               {BLOG_CATEGORIES.map((category, index) => (
                 <Badge
@@ -53,7 +53,7 @@ export function BlogContent() {
           </Card>
 
           <Card className="rounded-sm border-border p-4">
-            <Typography variant="large">Recent comments</Typography>
+            <Typography variant="large">Son yorumlar</Typography>
             <div className="mt-3 space-y-2">
               {RECENT_COMMENTS.map((comment) => (
                 <Card key={comment.id} className="rounded-sm border-border p-3">

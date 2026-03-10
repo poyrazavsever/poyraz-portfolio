@@ -29,7 +29,7 @@ const navigationItems: CommandPaletteItem[] = NAV_LINKS.map((item) => ({
   label: item.label,
   href: item.href,
   icon: "mdi:compass-outline",
-  keywords: [item.label, item.href, "page", "navigation"],
+  keywords: [item.label, item.href, "sayfa", "navigasyon", "page", "navigation"],
 }));
 
 const socialItems: CommandPaletteItem[] = SOCIAL_LINKS.map((item) => ({
@@ -38,7 +38,7 @@ const socialItems: CommandPaletteItem[] = SOCIAL_LINKS.map((item) => ({
   href: item.href,
   icon: item.icon,
   external: true,
-  keywords: [item.label, "social", "profile"],
+  keywords: [item.label, "sosyal", "profil", "social", "profile"],
 }));
 
 const blogItems: CommandPaletteItem[] = [
@@ -47,21 +47,21 @@ const blogItems: CommandPaletteItem[] = [
     label: item.title,
     href: `/blog/${item.slug}`,
     icon: "mdi:post-outline",
-    keywords: [item.category, item.author, item.excerpt, "blog", "article"],
+    keywords: [item.category, item.author, item.excerpt, "blog", "yazı", "article"],
   })),
   ...BLOG_ARTICLES.map((item, index) => ({
     id: `blog-article-${item.id}-${index}`,
     label: item.title,
     href: item.href,
     icon: "mdi:file-document-outline",
-    keywords: [item.category, item.excerpt, item.readTime, "blog", "article"],
+    keywords: [item.category, item.excerpt, item.readTime, "blog", "yazı", "article"],
   })),
   ...BLOG_CATEGORIES.map((item) => ({
     id: `blog-category-${item}`,
-    label: `Category: ${item}`,
+    label: `Kategori: ${item}`,
     href: "/blog",
     icon: "mdi:tag-outline",
-    keywords: [item, "blog", "category"],
+    keywords: [item, "blog", "kategori", "category"],
   })),
 ];
 
@@ -71,35 +71,35 @@ const aboutItems: CommandPaletteItem[] = [
     label: item.title,
     href: "/about",
     icon: "mdi:school-outline",
-    keywords: [item.institution, item.period, item.description, "education", "about"],
+    keywords: [item.institution, item.period, item.description, "eğitim", "education", "about"],
   })),
   ...EXPERIENCE.map((item) => ({
     id: `experience-${item.id}`,
     label: item.role,
     href: "/about",
     icon: "mdi:briefcase-outline",
-    keywords: [item.company, item.period, "experience", "about"],
+    keywords: [item.company, item.period, "deneyim", "experience", "about"],
   })),
   ...certificates.map((item, index) => ({
     id: `certificate-${index}`,
     label: item.name,
     href: "/about",
     icon: "mdi:certificate-outline",
-    keywords: [item.organization, item.date, item.category, item.description, "certificate"],
+    keywords: [item.organization, item.date, item.category, item.description, "sertifika", "certificate"],
   })),
   ...REFERENCES.map((item) => ({
     id: `reference-${item.id}`,
-    label: `Reference: ${item.author}`,
+    label: `Referans: ${item.author}`,
     href: "/about/references",
     icon: "mdi:account-voice-outline",
-    keywords: [item.role, item.quote, "reference", "testimonial"],
+    keywords: [item.role, item.quote, "referans", "yorum", "reference", "testimonial"],
   })),
   ...VOLUNTEER_COMMUNITY_ITEMS.map((item) => ({
     id: `volunteer-${item.id}`,
     label: item.title,
     href: "/about/volunteer-community",
     icon: "mdi:hand-heart-outline",
-    keywords: [item.timeline, item.focus, item.link ?? "", "volunteer", "community"],
+    keywords: [item.timeline, item.focus, item.link ?? "", "gönüllülük", "topluluk", "volunteer", "community"],
   })),
 ];
 
@@ -109,7 +109,7 @@ const projectItems: CommandPaletteItem[] = [
     label: item.title,
     href: "/projects",
     icon: "mdi:cellphone",
-    keywords: [item.description, item.badge ?? "", "mobile", "project"],
+    keywords: [item.description, item.badge ?? "", "mobil", "proje", "mobile", "project"],
   })),
   ...WEB_APPS.map((item) => ({
     id: `web-project-${item.id}`,
@@ -117,7 +117,7 @@ const projectItems: CommandPaletteItem[] = [
     href: item.href ?? "/projects",
     icon: "mdi:web",
     external: Boolean(item.href),
-    keywords: [item.description, item.badge ?? "", "web", "project"],
+    keywords: [item.description, item.badge ?? "", "web", "proje", "project"],
   })),
   ...FIGMA_TEMPLATES.map((item) => ({
     id: `figma-project-${item.id}`,
@@ -125,48 +125,48 @@ const projectItems: CommandPaletteItem[] = [
     href: item.href ?? "/projects",
     icon: "mdi:figma",
     external: Boolean(item.href),
-    keywords: [item.description, item.badge ?? "", "figma", "template"],
+    keywords: [item.description, item.badge ?? "", "figma", "şablon", "template"],
   })),
 ];
 
 const contentItems: CommandPaletteItem[] = YOUTUBE_VIDEO_LINKS.map((item, index) => ({
   id: `youtube-video-${index + 1}`,
-  label: `YouTube Video ${index + 1}`,
+  label: `YouTube Videosu ${index + 1}`,
   href: item,
   icon: "mdi:youtube",
   external: true,
-  keywords: [item, "youtube", "video", "content"],
+  keywords: [item, "youtube", "video", "içerik", "content"],
 }));
 
 export const COMMAND_PALETTE_GROUPS: CommandPaletteGroup[] = [
   {
     id: "navigation",
-    heading: "Navigation",
+    heading: "Sayfalar",
     items: navigationItems,
   },
   {
     id: "blog-data",
-    heading: "Blog Data",
+    heading: "Blog İçerikleri",
     items: blogItems,
   },
   {
     id: "about-data",
-    heading: "About Data",
+    heading: "Hakkımda",
     items: aboutItems,
   },
   {
     id: "projects-data",
-    heading: "Projects Data",
+    heading: "Projeler",
     items: projectItems,
   },
   {
     id: "content-data",
-    heading: "Content Data",
+    heading: "İçerikler",
     items: contentItems,
   },
   {
     id: "social",
-    heading: "Social",
+    heading: "Sosyal",
     items: socialItems,
   },
 ] as const;

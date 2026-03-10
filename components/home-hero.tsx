@@ -42,18 +42,20 @@ export function HomeHero() {
         ))}
       </div>
 
-      <Card className="grid grid-cols-[112px_1fr] sm:grid-cols-[168px_1fr] items-stretch gap-2 rounded-sm border-border md:h-full">
+      <Card className="grid grid-cols-[112px_1fr] items-stretch gap-2 rounded-sm border-border sm:grid-cols-[168px_1fr] md:h-full">
         <div className="flex flex-col justify-center gap-1 px-3 py-2">
           <div className="flex items-center gap-1">
             <Typography variant="h2" className="leading-tight">
               Poyraz
             </Typography>
             <Typography variant="h2" secondaryFont className="leading-tight text-red-600">
-               Avsever
+              {" "}
+              Avsever
             </Typography>
           </div>
           <Typography variant="small" className="text-muted-foreground">
-            Teknolojiyi keşfeden bir genç. Yazılımı seviyor sanırım. Çok fazla şey yapıyor, takip edin.
+            Teknolojiyi merak eden bir genç. Yazılımı seviyor, bir şeyler üretiyor ve bolca
+            deniyor. Çok fazla şey yapıyor, takipte kal.
           </Typography>
         </div>
 
@@ -68,7 +70,7 @@ export function HomeHero() {
               alt="Poyraz Avsever"
               width={240}
               height={240}
-              className="absolute right-0 bottom-0 h-auto w-20 md:w-48 object-contain"
+              className="absolute right-0 bottom-0 h-auto w-20 object-contain md:w-48"
             />
           </div>
         </div>

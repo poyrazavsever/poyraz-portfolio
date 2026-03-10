@@ -13,9 +13,9 @@ export function NewsletterContent() {
     event.preventDefault();
     if (!isValid) return;
 
-    const subject = encodeURIComponent(`Newsletter Subscription - ${name.trim()}`);
+    const subject = encodeURIComponent(`Bülten Aboneliği - ${name.trim()}`);
     const body = encodeURIComponent(
-      `Hello,\n\nI want to subscribe to the weekly "Poyraz ile Yazilim" newsletter.\n\nName: ${name.trim()}\nEmail: ${email.trim()}`,
+      `Merhaba,\n\nHaftalık "Poyraz ile Yazılım" bültenine abone olmak istiyorum.\n\nAd Soyad: ${name.trim()}\nE-posta: ${email.trim()}`,
     );
 
     window.location.href = `mailto:poyrazavsever@gmail.com?subject=${subject}&body=${body}`;
@@ -25,30 +25,30 @@ export function NewsletterContent() {
     <section className="grid gap-3 md:grid-cols-[1fr_1.2fr]">
       <Card className="rounded-sm border-border p-4">
         <Typography variant="large" className="text-base">
-          Weekly Software Newsletter
+          Haftalık Yazılım Bülteni
         </Typography>
         <Typography variant="small" className="mt-1 text-muted-foreground">
-          Mail version of Poyraz ile Yazilim.
+          Poyraz ile Yazılım&apos;ın e-posta versiyonu.
         </Typography>
 
         <div className="mt-4 space-y-3">
           <div>
             <Typography variant="small" className="text-muted-foreground">
-              Schedule
+              Yayın Günü
             </Typography>
-            <Typography variant="small">Every Sunday</Typography>
+            <Typography variant="small">Her pazar</Typography>
           </div>
           <div>
             <Typography variant="small" className="text-muted-foreground">
-              What you get
+              Seni neler bekliyor
             </Typography>
-            <Typography variant="small">Weekly software agenda and practical notes.</Typography>
+            <Typography variant="small">Haftalık yazılım gündemi ve pratik notlar.</Typography>
           </div>
           <div>
             <Typography variant="small" className="text-muted-foreground">
-              Delivery
+              Teslimat
             </Typography>
-            <Typography variant="small">Directly to your inbox.</Typography>
+            <Typography variant="small">Doğrudan e-posta kutuna.</Typography>
           </div>
         </div>
       </Card>
@@ -56,31 +56,31 @@ export function NewsletterContent() {
       <Card className="rounded-sm border-border p-4">
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="space-y-1.5">
-            <Label htmlFor="newsletter-name">Name</Label>
+            <Label htmlFor="newsletter-name">Ad Soyad</Label>
             <Input
               id="newsletter-name"
               value={name}
               onChange={(event) => setName(event.target.value)}
-              placeholder="Your name"
+              placeholder="Adın soyadın"
               className="rounded-sm"
             />
           </div>
 
           <div className="space-y-1.5">
-            <Label htmlFor="newsletter-email">Email</Label>
+            <Label htmlFor="newsletter-email">E-posta</Label>
             <Input
               id="newsletter-email"
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="you@example.com"
+              placeholder="ornek@eposta.com"
               className="rounded-sm"
             />
           </div>
 
           <div className="flex justify-end">
             <Button type="submit" className="rounded-sm" disabled={!isValid}>
-              Subscribe
+              Abone Ol
             </Button>
           </div>
         </form>

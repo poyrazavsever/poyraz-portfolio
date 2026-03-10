@@ -41,7 +41,7 @@ async function readPodcastEpisodes(kind: PodcastKind): Promise<PodcastEpisode[]>
 
       return {
         slug: file.replace(/\.md$/, ""),
-        title: data.title ?? "Untitled Episode",
+        title: data.title ?? "Başlıksız Bölüm",
         date: data.date ?? "1970-01-01",
         youtubeUrl: data.youtubeUrl ?? "",
         spotifyUrl: data.spotifyUrl ?? "",

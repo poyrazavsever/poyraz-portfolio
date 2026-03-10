@@ -46,7 +46,7 @@ const TOP_ICON_LINKS = [
   },
   {
     id: "cv",
-    label: "CV",
+    label: "Özgeçmiş",
     href: "/resume.pdf",
     icon: "mdi:file-account-outline",
     external: false,
@@ -91,7 +91,7 @@ export function SiteNavbar() {
       </div>
 
       <header className="flex items-center justify-between gap-3 border-b border-border pb-4">
-        <Link href="/" aria-label="Go to home" className="inline-flex items-center">
+        <Link href="/" aria-label="Ana sayfaya git" className="inline-flex items-center">
           <Avatar className="h-9 w-9 rounded-sm">
             <AvatarImage src="/logo/logo.jpeg" alt="Poyraz Avsever" />
             <AvatarFallback className="rounded-sm bg-muted text-xs font-semibold">
@@ -101,7 +101,7 @@ export function SiteNavbar() {
         </Link>
 
         <div className="hidden items-center gap-3 md:flex">
-          <nav aria-label="Main navigation">
+          <nav aria-label="Ana navigasyon">
             <ul className="flex items-center gap-3">
               {NAV_LINKS.map((item, index) => (
                 <li key={item.id} className="flex items-center gap-3">
@@ -121,11 +121,11 @@ export function SiteNavbar() {
             type="button"
             onClick={() => setSearchOpen(true)}
             className="inline-flex h-8 w-44 cursor-pointer items-center justify-between rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:w-52"
-            aria-label="Open command palette"
+            aria-label="Komut paletini aç"
           >
             <span className="inline-flex items-center gap-2">
               <Icon icon="mdi:magnify" width={16} height={16} />
-              <span>Search</span>
+              <span>Ara</span>
             </span>
             <span className="text-xs text-muted-foreground">{shortcut}</span>
           </button>
@@ -133,10 +133,10 @@ export function SiteNavbar() {
           <DropdownMenu>
             <DropdownMenuTrigger className="inline-flex h-8 cursor-pointer items-center gap-2 rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
               <Icon icon="mdi:share-variant" width={16} height={16} />
-              <span>Social</span>
+              <span>Sosyal</span>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-52 rounded-sm">
-              <DropdownMenuLabel>Social Links</DropdownMenuLabel>
+              <DropdownMenuLabel>Sosyal Bağlantılar</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {SOCIAL_LINKS.map((item) => (
                 <DropdownMenuItem key={item.id} asChild>
@@ -159,21 +159,21 @@ export function SiteNavbar() {
           <Sheet>
             <SheetTrigger className="inline-flex h-8 cursor-pointer items-center gap-2 rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
               <Icon icon="mdi:menu" width={18} height={18} />
-              <span>Menu</span>
+              <span>Menü</span>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 p-4">
-              <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+              <SheetTitle className="sr-only">Mobil Menü</SheetTitle>
               <div className="flex flex-col gap-4">
                 <SheetClose asChild>
                   <button
                     type="button"
                     onClick={() => setSearchOpen(true)}
                     className="inline-flex h-9 w-full cursor-pointer items-center justify-between rounded-sm border border-border px-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label="Open command palette"
+                    aria-label="Komut paletini aç"
                   >
                     <span className="inline-flex items-center gap-2">
                       <Icon icon="mdi:magnify" width={16} height={16} />
-                      <span>Search</span>
+                      <span>Ara</span>
                     </span>
                     <span className="text-xs text-muted-foreground/80">{shortcut}</span>
                   </button>
@@ -181,7 +181,7 @@ export function SiteNavbar() {
 
                 <Separator className="bg-border" decorative />
 
-                <nav aria-label="Mobile navigation">
+                <nav aria-label="Mobil navigasyon">
                   <ul className="space-y-2">
                     {NAV_LINKS.map((item) => (
                       <li key={item.id}>

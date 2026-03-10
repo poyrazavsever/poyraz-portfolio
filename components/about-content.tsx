@@ -10,7 +10,7 @@ import { EDUCATION } from "@/data/education";
 import { EXPERIENCE } from "@/data/experience";
 
 const ABOUT_TEXT =
-  "Since I was introduced to software in middle school, I've been trying to learn and improve continuously. During high school, my enthusiasm for learning grew and I had the opportunity to explore various technologies in web development. Towards the end of high school, I stepped into the mobile world. Currently, I'm actively creating, developing, and most importantly, still learning.";
+  "Ortaokulda yazılımla tanıştığımdan beri sürekli öğrenmeye ve kendimi geliştirmeye çalışıyorum. Lise yıllarında öğrenme hevesim daha da arttı ve web geliştirme tarafında farklı teknolojileri keşfetme fırsatı buldum. Lisenin sonlarına doğru mobil dünyasına da adım attım. Şu an aktif olarak üretiyor, geliştiriyor ve en önemlisi hâlâ öğrenmeye devam ediyorum.";
 
 const CERTIFICATE_PREVIEW = certificates.slice(0, 4);
 
@@ -49,7 +49,7 @@ export function AboutContent() {
             <button
               type="button"
               className="cursor-pointer text-left"
-              aria-label="Open all certificates"
+              aria-label="Tüm sertifikaları aç"
             >
               <Card className="rounded-sm border-border p-4 transition-colors hover:border-zinc-700">
                 <div className="grid grid-cols-2 gap-2">
@@ -70,7 +70,7 @@ export function AboutContent() {
           </SheetTrigger>
 
           <SheetContent side="right" className="w-full max-w-xl p-4">
-            <SheetTitle>All Certificates</SheetTitle>
+            <SheetTitle>Tüm Sertifikalar</SheetTitle>
             <div className="mt-4 grid max-h-[90dvh] gap-3 overflow-y-auto pr-1">
               {certificates.map((item) => (
                 <Card key={`${item.name}-${item.date}`} className="rounded-sm border-border p-3">
@@ -125,10 +125,10 @@ export function AboutContent() {
         <Link href="/about/references" className="block">
           <Card className="h-full rounded-sm border-border p-4 transition-colors hover:border-zinc-700">
             <Typography variant="large" className="text-base leading-tight">
-              References
+              Referanslar
             </Typography>
             <Typography variant="small" className="mt-1 text-muted-foreground">
-              Open the full reference list in a dedicated detail page.
+              Tüm referansları ayrı bir detay sayfasında görüntüle.
             </Typography>
           </Card>
         </Link>
@@ -136,10 +136,10 @@ export function AboutContent() {
         <Link href="/about/volunteer-community" className="block">
           <Card className="h-full rounded-sm border-border p-4 transition-colors hover:border-zinc-700">
             <Typography variant="large" className="text-base leading-tight">
-              Volunteer & Community
+              Gönüllülük ve Topluluk
             </Typography>
             <Typography variant="small" className="mt-1 text-muted-foreground">
-              Timeline and contribution details in a separate detail page.
+              Zaman çizelgesi ve katkı detaylarını ayrı bir detay sayfasında incele.
             </Typography>
           </Card>
         </Link>
@@ -149,21 +149,21 @@ export function AboutContent() {
             <button
               type="button"
               className="cursor-pointer text-left"
-              aria-label="Open bookmarks"
+              aria-label="Yer imlerini aç"
             >
               <Card className="h-full rounded-sm border-border p-4 transition-colors hover:border-zinc-700">
                 <Typography variant="large" className="text-base leading-tight">
-                  Bookmark
+                  Yer İmleri
                 </Typography>
                 <Typography variant="small" className="mt-1 text-muted-foreground">
-                  Quick access links in a sheet panel.
+                  Hızlı erişim bağlantılarını bir sheet içinde görüntüle.
                 </Typography>
               </Card>
             </button>
           </SheetTrigger>
 
           <SheetContent side="right" className="w-full max-w-xl p-4">
-            <SheetTitle>Bookmarks</SheetTitle>
+            <SheetTitle>Yer İmleri</SheetTitle>
             <div className="mt-4 grid max-h-[90dvh] gap-3 overflow-y-auto pr-1">
               {BOOKMARKS.map((item) => (
                 <Card key={item.id} className="rounded-sm border-border p-3">

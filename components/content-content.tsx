@@ -16,6 +16,12 @@ type ContentContentProps = {
   pdfFiles: string[];
 };
 
+function getPodcastLabel(podcast: PodcastEpisode["podcast"]) {
+  if (podcast === "yazilim") return "Yazılım";
+  if (podcast === "masa-basi") return "Masa Başı";
+  return podcast;
+}
+
 function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [failed, setFailed] = useState(false);
@@ -83,7 +89,7 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
     return (
       <div className="flex h-full w-full items-center justify-center bg-muted/20 p-2">
         <Typography variant="small" className="text-muted-foreground">
-          Preview unavailable
+          Önizleme yüklenemedi
         </Typography>
       </div>
     );
@@ -186,14 +192,14 @@ export function ContentContent({
     <section className="flex h-full flex-col gap-3 overflow-y-auto">
       <section className="grid gap-3 md:grid-cols-2">
         <PodcastColumn
-          title="Poyraz ile Yazilim"
-          subtitle="Regular schedule, every Sunday."
+          title="Poyraz ile Yazılım"
+          subtitle="Düzenli yayın, her pazar."
           episodes={yazilimEpisodes}
           onOpenEpisode={openEpisode}
         />
         <PodcastColumn
-          title="Poyraz ile Masa Basi"
-          subtitle="Irregular schedule, guest-focused."
+          title="Poyraz ile Masa Başı"
+          subtitle="Düzensiz yayın, konuk odaklı."
           episodes={masaBasiEpisodes}
           onOpenEpisode={openEpisode}
         />
@@ -201,7 +207,7 @@ export function ContentContent({
 
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
-          Latest YouTube Videos
+          Son YouTube Videoları
         </Typography>
         <div className="grid gap-2 md:grid-cols-3">
           {embeddedVideos.map((item) => (
@@ -210,7 +216,7 @@ export function ContentContent({
                 <div className="aspect-video w-full">
                   <iframe
                     src={item.embedUrl}
-                    title="YouTube video player"
+                    title="YouTube video oynatıcı"
                     className="h-full w-full"
                     loading="lazy"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -221,7 +227,7 @@ export function ContentContent({
               ) : (
                 <div className="p-3">
                   <Typography variant="small" className="text-muted-foreground">
-                    Invalid video link.
+                    Geçersiz video bağlantısı.
                   </Typography>
                 </div>
               )}
@@ -232,7 +238,7 @@ export function ContentContent({
 
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
-          LinkedIn PDF Notes
+          LinkedIn PDF Notları
         </Typography>
         <div className="grid gap-2 grid-cols-2 md:grid-cols-3">
           {pdfFiles.map((pdf, index) => (
@@ -244,7 +250,7 @@ export function ContentContent({
             >
               <Card className="overflow-hidden rounded-sm border-border p-0 transition-colors hover:border-zinc-700">
                 <div className="aspect-square w-full">
-                  <PdfFirstPagePreview src={`/pdf/${pdf}`} title={`${pdf} preview`} />
+                  <PdfFirstPagePreview src={`/pdf/${pdf}`} title={`${pdf} önizleme`} />
                 </div>
               </Card>
             </button>
@@ -255,7 +261,7 @@ export function ContentContent({
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetContent side="right" className="w-full max-w-xl p-0">
           <div className="border-b border-border px-4 py-3">
-            <SheetTitle>{selectedEpisode?.title ?? "Episode"}</SheetTitle>
+            <SheetTitle>{selectedEpisode?.title ?? "Bölüm"}</SheetTitle>
             {selectedEpisode ? (
               <Typography variant="small" className="mt-1 text-muted-foreground">
                 {selectedEpisode.date}
@@ -267,7 +273,7 @@ export function ContentContent({
             {selectedEpisode ? (
               <>
                 <div className="flex flex-wrap gap-2">
-                  <Badge className="rounded-sm">{selectedEpisode.podcast}</Badge>
+                  <Badge className="rounded-sm">{getPodcastLabel(selectedEpisode.podcast)}</Badge>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -321,7 +327,7 @@ export function ContentContent({
 
       <Modal open={pdfModalOpen} onOpenChange={setPdfModalOpen}>
         <ModalContent size="xl" className="rounded-sm p-4">
-          <ModalTitle>{activePdf ? activePdf.replace(/\.pdf$/i, "") : "PDF Note"}</ModalTitle>
+          <ModalTitle>{activePdf ? activePdf.replace(/\.pdf$/i, "") : "PDF Notu"}</ModalTitle>
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
             <Typography variant="small" className="text-muted-foreground">
@@ -335,7 +341,7 @@ export function ContentContent({
                 disabled={!canGoPrev}
                 onClick={() => setActivePdfIndex((prev) => Math.max(0, prev - 1))}
               >
-                Prev
+                Önceki
               </Button>
               <Button
                 type="button"
@@ -344,7 +350,7 @@ export function ContentContent({
                 disabled={!canGoNext}
                 onClick={() => setActivePdfIndex((prev) => Math.min(pdfFiles.length - 1, prev + 1))}
               >
-                Next
+                Sonraki
               </Button>
             </div>
           </div>
@@ -360,7 +366,7 @@ export function ContentContent({
           ) : (
             <Card className="mt-3 rounded-sm border-border p-3">
               <Typography variant="small" className="text-muted-foreground">
-                No PDF found in /public/pdf.
+                `/public/pdf` içinde PDF bulunamadı.
               </Typography>
             </Card>
           )}
