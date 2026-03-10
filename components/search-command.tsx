@@ -92,24 +92,27 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
           onValueChange={setQuery}
         />
         <CommandPaletteList>
-          <CommandPaletteEmpty>Sonuç bulunamadı.</CommandPaletteEmpty>
-          {filteredGroups.map((group, index) => (
-            <div key={group.id}>
-              {index > 0 && <CommandPaletteSeparator />}
-              <CommandPaletteGroup heading={group.heading}>
-                {group.items.map((item) => (
-                  <CommandPaletteItem
-                    key={item.id}
-                    icon={<Icon icon={item.icon} width={16} height={16} />}
-                    onClick={() => handleCommandSelect(item)}
-                    className="cursor-pointer"
-                  >
-                    {item.label}
-                  </CommandPaletteItem>
-                ))}
-              </CommandPaletteGroup>
-            </div>
-          ))}
+          {filteredGroups.length === 0 ? (
+            <CommandPaletteEmpty>Sonuç bulunamadı.</CommandPaletteEmpty>
+          ) : (
+            filteredGroups.map((group, index) => (
+              <div key={group.id}>
+                {index > 0 && <CommandPaletteSeparator />}
+                <CommandPaletteGroup heading={group.heading}>
+                  {group.items.map((item) => (
+                    <CommandPaletteItem
+                      key={item.id}
+                      icon={<Icon icon={item.icon} width={16} height={16} />}
+                      onClick={() => handleCommandSelect(item)}
+                      className="cursor-pointer"
+                    >
+                      {item.label}
+                    </CommandPaletteItem>
+                  ))}
+                </CommandPaletteGroup>
+              </div>
+            ))
+          )}
         </CommandPaletteList>
         <CommandPaletteFooter className="text-xs text-muted-foreground">
           Hızlıca açmak için {shortcut} kullan
