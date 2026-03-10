@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   CommandPalette,
   CommandPaletteContent,
@@ -28,6 +28,13 @@ type SearchCommandProps = {
 export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
   const router = useRouter();
   const shortcut = useKeyboardShortcutLabel();
+  const [query, setQuery] = useState("");
+  const handleOpenChange = useCallback((nextOpen: boolean) => {
+    if (!nextOpen) {
+      setQuery("");
+    }
+    onOpenChange(nextOpen);
+  }, [onOpenChange]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -35,15 +42,38 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
       if (!isShortcut) return;
 
       event.preventDefault();
-      onOpenChange(!open);
+      handleOpenChange(!open);
     };
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open, onOpenChange]);
+  }, [open, handleOpenChange]);
+
+  const filteredGroups = useMemo(() => {
+    const value = query.trim().toLowerCase();
+    if (!value) return COMMAND_PALETTE_GROUPS;
+
+    const tokens = value.split(/\s+/).filter(Boolean);
+
+    return COMMAND_PALETTE_GROUPS.map((group) => ({
+      ...group,
+      items: group.items.filter((item) => {
+        const haystack = [
+          item.label,
+          item.href,
+          item.icon,
+          ...(item.keywords ?? []),
+        ]
+          .join(" ")
+          .toLowerCase();
+
+        return tokens.every((token) => haystack.includes(token));
+      }),
+    })).filter((group) => group.items.length > 0);
+  }, [query]);
 
   const handleCommandSelect = (item: PaletteItem) => {
-    onOpenChange(false);
+    handleOpenChange(false);
 
     if (item.external) {
       window.open(item.href, "_blank", "noopener,noreferrer");
@@ -54,15 +84,16 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
   };
 
   return (
-    <CommandPalette open={open} onOpenChange={onOpenChange}>
+    <CommandPalette open={open} onOpenChange={handleOpenChange}>
       <CommandPaletteContent className=" rounded-none p-0 pt-3 w-72 sm:w-full sm:max-w-xl sm:rounded-sm sm:p-0 sm:pt-2">
         <CommandPaletteInput
           placeholder="Search pages and links..."
           className="mt-2 pr-10"
+          onValueChange={setQuery}
         />
         <CommandPaletteList>
           <CommandPaletteEmpty>No results found.</CommandPaletteEmpty>
-          {COMMAND_PALETTE_GROUPS.map((group, index) => (
+          {filteredGroups.map((group, index) => (
             <div key={group.id}>
               {index > 0 && <CommandPaletteSeparator />}
               <CommandPaletteGroup heading={group.heading}>
