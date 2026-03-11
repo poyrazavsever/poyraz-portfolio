@@ -12,7 +12,7 @@ export const MOBILE_APPS: ProjectItem[] = [
     id: "targiz-app",
     title: "Targiz App",
     badge: "Agritech",
-    image: "/news/performance.svg",
+    image: "/projects/targiz.png",
     href: "https://targiz.com",
     description: "Ottoqua ekibiyle birlikte geliştirdiğimiz, küçük ölçekli üreticilere sahada destek veren yapay zeka destekli tarım uygulaması."
   }
@@ -22,26 +22,26 @@ export const WEB_APPS: ProjectItem[] = [
   {
     id: "arc-foreign-trade",
     title: "ARC Foreign Trade",
-    description: "Ankara merkezli ihracat odaklı bir üretici firma için kurumsal web sitesi yenileme projesi.",
-    image: "/news/performance.svg",
     badge: "Freelance",
-    href: "https://arcforeigntrade.com"
+    image: "/projects/arc.png",
+    href: "https://arcforeigntrade.com",
+    description: "Ankara merkezli ihracat odaklı bir üretici firma için kurumsal web sitesi yenileme projesi."
   },
   {
     id: "ataturk-chronology",
     title: "Atatürk Kronolojisi",
-    description: "Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
-    image: "/news/design.svg",
     badge: "Timeline",
-    href: "https://ataturk-kronolojisi.org"
+    image: "/projects/ataturk.png",
+    href: "https://ataturk-kronolojisi.org",
+    description: "Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi."
   },
   {
     id: "mockup-factory",
     title: "Mockup Factory",
-    description: "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç.",
-    image: "/news/performance.svg",
     badge: "Open Source",
-    href: "https://mockup-factory-mu.vercel.app/"
+    image: "/projects/mockup.png",
+    href: "https://mockup-factory-mu.vercel.app/",
+    description: "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç."
   }
 ];
 
