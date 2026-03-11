@@ -1,4 +1,4 @@
-﻿# Portfolio New
+# Portfolio New
 
 Bu monorepo, Next.js tabanlı portfolyo web uygulaması ve Electron ile geliştirilen veri yönetim panelini bir arada sunar.
 

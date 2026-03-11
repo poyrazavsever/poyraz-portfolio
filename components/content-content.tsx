@@ -54,7 +54,7 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
         };
 
         const page = await pdf.getPage(1);
-        const viewport = page.getViewport({ scale: 1.2 });
+        const viewport = page.getViewport({ scale: 1 });
         const canvas = canvasRef.current;
         if (!canvas || cancelled) return;
 
@@ -64,8 +64,8 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
         const ratio = window.devicePixelRatio || 1;
         canvas.width = Math.floor(viewport.width * ratio);
         canvas.height = Math.floor(viewport.height * ratio);
-        canvas.style.width = `${viewport.width}px`;
-        canvas.style.height = `${viewport.height}px`;
+        canvas.style.width = "100%";
+        canvas.style.height = "auto";
 
         context.setTransform(ratio, 0, 0, ratio, 0, 0);
         await page.render({ canvasContext: context, viewport }).promise;
@@ -97,8 +97,8 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
   }
 
   return (
-    <div className="flex h-full w-full items-center justify-center bg-white p-2">
-      <canvas ref={canvasRef} aria-label={title} className="h-auto max-h-full w-auto max-w-full" />
+    <div className="w-full bg-white p-2">
+      <canvas ref={canvasRef} aria-label={title} className="block h-auto w-full" />
     </div>
   );
 }
@@ -231,7 +231,7 @@ export function ContentContent({
         <Typography variant="large" className="text-base">
           LinkedIn PDF Notları
         </Typography>
-        <div className="grid gap-2 grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
           {pdfFiles.map((pdf, index) => (
             <button
               key={pdf}
@@ -240,9 +240,7 @@ export function ContentContent({
               className="cursor-pointer text-left"
             >
               <Card className="overflow-hidden rounded-sm border-border p-0 transition-colors hover:border-zinc-700">
-                <div className="aspect-square w-full">
-                  <PdfFirstPagePreview src={`/pdf/${pdf}`} title={`${pdf} önizleme`} />
-                </div>
+                <PdfFirstPagePreview src={`/pdf/${pdf}`} title={`${pdf} önizleme`} />
               </Card>
             </button>
           ))}
@@ -348,11 +346,7 @@ export function ContentContent({
 
           {activePdf ? (
             <div className="mt-3 h-[70dvh] overflow-hidden rounded-sm border border-border">
-              <iframe
-                src={`/pdf/${activePdf}`}
-                title={activePdf}
-                className="h-full w-full"
-              />
+              <iframe src={`/pdf/${activePdf}`} title={activePdf} className="h-full w-full" />
             </div>
           ) : (
             <Card className="mt-3 rounded-sm border-border p-3">
