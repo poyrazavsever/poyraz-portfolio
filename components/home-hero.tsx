@@ -64,8 +64,7 @@ export function HomeHero({ news }: HomeHeroProps) {
             </Typography>
           </div>
           <Typography variant="small" className="text-muted-foreground">
-            Teknolojiyi merak eden bir genÃ§. YazÄ±lÄ±mÄ± seviyor, bir ÅŸeyler Ã¼retiyor ve bolca
-            deniyor. Ã‡ok fazla ÅŸey yapÄ±yor, takipte kal.
+            Teknolojiyi merak eden bir genç. Yazılım geliştirme, yapay zeka ve teknoloji dünyasındaki gelişmeleri takip ediyor.
           </Typography>
         </div>
 
