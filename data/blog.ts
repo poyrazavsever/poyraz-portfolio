@@ -52,6 +52,7 @@ export type BlogPageData = {
 
 const DEFAULT_IMAGE = "/news/design.svg";
 const DEFAULT_READ_TIME = "5 min";
+const BLOG_CATEGORIES = ["All", "Frontend", "UX", "Yazilim", "TypeScript", "Testing", "General"];
 
 function toTimestamp(value: string) {
   const timestamp = Date.parse(value);
@@ -126,14 +127,7 @@ export async function getBlogPageData(
   selectedCategoryParam?: string,
 ): Promise<BlogPageData> {
   const articles = await getAllBlogArticles();
-  const categories = [
-    "All",
-    ...new Set(
-      articles
-        .map((item) => item.category.trim())
-        .filter(Boolean),
-    ),
-  ];
+  const categories = BLOG_CATEGORIES;
   const categoryByNormalized = new Map(
     categories.map((category) => [normalizeCategory(category), category]),
   );
@@ -152,7 +146,7 @@ export async function getBlogPageData(
   const podcastCollections = await getPodcastCollections();
 
   return {
-    news: filteredArticles.slice(0, 4).map((item) => ({
+    news: articles.slice(0, 4).map((item) => ({
       id: `blog-news-${item.slug}`,
       title: item.title,
       category: item.category,
