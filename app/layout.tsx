@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { SiteNavbar } from "@/components/site-navbar";
+import { NekoFollower } from "@/components/neko-follower";
 import { ANNOUNCEMENT_ITEMS } from "@/data/site-settings";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
@@ -52,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className="min-h-dvh bg-background text-foreground antialiased">
+        <NekoFollower />
         <div className="mx-auto flex w-full max-w-4xl flex-col overflow-hidden px-4 py-4 sm:px-6">
           <SiteNavbar />
           {announcement ? (
