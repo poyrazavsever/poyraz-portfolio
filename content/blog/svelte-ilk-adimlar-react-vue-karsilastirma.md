@@ -4,304 +4,201 @@ category: "Frontend"
 date: "2026-02-14"
 readTime: "11 min read"
 author: "Poyraz Avsever"
-excerpt: "Öncellikle herkese merhaba. Bildiğiniz gibi frontend dünyasında çeşitli frameworkler ve kütüphanelerle tanışmak her geliştiricinin geçtiği bir süreçtir. React, Vue ve Angular gi..."
-coverImage: "/news/design.svg"
+excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+coverImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*Dx04pr9plejiCcWI.png"
 ---
 
-Öncellikle herkese merhaba. Bildiğiniz gibi frontend dünyasında çeşitli frameworkler ve kütüphanelerle tanışmak her geliştiricinin geçtiği bir süreçtir. React, Vue ve Angular gibi devlerin arasına yeni bir oyuncu olarak giren Svelte, son dönemde popülerliğini artırdı. Peki, Svelte’i diğerlerinden ayıran temel farklar neler ve neden daha hızlı? Bu yazımda, Svelte’in yapısını, performans avantajlarını ve React ile Vue’ya karşı neden daha hızlı olduğunu inceleyelim.
+Frontend dünyasında React, Vue ve Angular gibi güçlü seçenekler var. Son yıllarda bu listeye güçlü bir alternatif olarak Svelte de eklendi. Peki Svelte'i farklı yapan ne ve neden çoğu senaryoda daha hızlı hissediliyor?
 
-![Svelte ile İlk Adımlar: React ve Vue’ya Karşı Hızlı mı?](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*Dx04pr9plejiCcWI.png)
+## Svelte Nedir?
 
-Svelte Nedir ve Nasıl Çalışır?
+Svelte, geleneksel anlamda sadece bir runtime framework değil; derleme (compile-time) odaklı bir yaklaşıma sahip. Uygulama çalışmadan önce bileşenleri optimize edip tarayıcıya daha sade JavaScript gönderir.
 
-Svelte, 2016 yılında Rich Harris tarafından geliştirilmiş, modern web uygulamaları oluşturmak için kullanılan bir framework’tür. Ancak Svelte’i diğer frameworklerden ayıran temel fark, bir framework değil, bir compiler (derleyici) olmasıdır. Bu, Svelte’in çalışma zamanı kütüphanesi olmadan doğrudan tarayıcıda çalıştığı anlamına gelir.
+## Svelte'i Hızlı Yapan Unsurlar
 
-React ve Vue, tarayıcıda bir sanal DOM (Virtual DOM) kullanarak bileşenleri yönetir. Herhangi bir değişiklik olduğunda, sanal DOM ile gerçek DOM karşılaştırılır ve güncellenir. Bu işlem, her ne kadar optimize edilse de, tarayıcı üzerinde ekstra bir yük oluşturur. Svelte ise sanal DOM kullanmaz. Bunun yerine, bileşenlerin oluşturulma anında, doğrudan etkin ve optimize edilmiş JavaScript kodu üretir. Bu da onlara göre minimal bşr hız dahi olsa avantaj kazandırır.
-Svelte’i Neden Daha Hızlı Yapan Unsurlar?
+- **Compile-time optimizasyon**: İşin büyük kısmı build aşamasında çözülür.
+- **Virtual DOM yok**: Ara katman maliyetini azaltır.
+- **Daha küçük bundle**: Runtime yükü azalır.
+- **Doğal reaktivite**: Basit state güncellemeleri için ek soyutlamalara daha az ihtiyaç duyulur.
 
-    Compile-time Optimizasyonlar
-    Svelte’in en büyük avantajlarından biri, değişikliklerin compile-time’da optimize edilmesidir. Diğer frameworkler, tarayıcıda çalışma zamanı sırasında gerekli işlemleri yaparken, Svelte bu işlemleri geliştirme aşamasında yapar ve tarayıcıya doğrudan optimize edilmiş, minimal kod sunar.
-    Sanal DOM Yok
-    Svelte, sanal DOM kullanmadığı için performans kaybı yaşamaz. React ve Vue, değişiklikleri sanal DOM’da işleyip ardından gerçek DOM’a yansıtırken, Svelte bu adımı atlar ve direkt olarak gerçek DOM üzerinde çalışır. Bu da uygulamanın daha hızlı tepki vermesini sağlar.
-    Daha Küçük Bundle Boyutları
-    Svelte, framework kütüphanesini projeye dahil etmez. Bunun yerine, sadece bileşenlerde kullanılan kod derlenir ve çıktı dosyası oluşturulur. Bu sayede final bundle boyutu küçülür ve sayfa yükleme süreleri hızlanır.
-    Reaktif Yapı
-    Svelte, reaktiviteyi bir dil özelliği gibi ele alır. Bir değişkenin değerini güncellediğinizde, Svelte otomatik olarak bu değişkenin kullanıldığı bileşenleri yeniden render eder. Bu, React ve Vue’da kullanılan state management yapılarından daha hafif ve hızlıdır.
+## React ve Svelte Karşılaştırması
 
-Svelte mi, React/Vue mu?
+### 1. State Yönetimi
 
-Tabii ki de her framework’ün kendine has avantajları ve kullanım alanları vardır. React ve Vue, geniş topluluk desteği, zengin ekosistem ve olgunlaşmış bir yapıya sahiptir. Ancak performans, küçük boyutlu projeler ve basitlik öncelikli olduğunda, Svelte dikkat çeken bir seçenek haline gelir.
+React örneği:
 
-Svelte, özellikle performansın kritik olduğu projelerde (örneğin düşük performanslı cihazlarda çalışacak uygulamalarda) önemli bir fark yaratabilir. Ayrıca, minimal yapısı sayesinde öğrenmesi de oldukça kolaydır. Bu yüzden yeni başlayanlar için de ideal bir tercih olabilir. Gelin örnek olarak react ve svelte yazımında ki farklara da göz atalım.
+```jsx
+import React, { useState } from "react";
 
-![Svelte ile İlk Adımlar: React ve Vue’ya Karşı Hızlı mı?](https://miro.medium.com/v2/resize:fit:628/format:webp/0*Nn3aQE4XKug7DQuD)
-
-React vs Svelte: Bileşen Oluşturma ve State Yönetimi
-React’ta Bir Bileşen ve State Yönetimi
-
-React’ta bir bileşen oluşturmak ve state yönetmek için genellikle useState hook'u kullanılır. İşte basit bir sayaç bileşeni örneği:
-
-// React'ta sayaç bileşeni
-import React, { useState } from 'react';
 function Counter() {
- const [count, setCount] = useState(0);
-return (
- <div>
- <p>Count: {count}</p>
- <button onClick={() => setCount(count + 1)}>
- Increase
- </button>
- </div>
- );
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+    </div>
+  );
 }
-export default Counter;
+```
 
-Burada React’in useState hook'u ile state yönetimi sağlanır. onClick olayında state güncellenir ve bileşen yeniden render edilir. Peki bunu svelte ile nasıl yapıyoruz?
-Svelte’te Aynı Bileşen
+Svelte örneği:
 
-Svelte’de aynı işlevselliği elde etmek çok daha basit ve doğrudan olur. State yönetimi doğrudan JavaScript değişkenleri üzerinden yapılır ve Svelte reaktif yapısı sayesinde değişiklikler otomatik olarak bileşenleri yeniden render eder:
-
-<!-- Svelte'te sayaç bileşeni -->
+```svelte
 <script>
   let count = 0;
 </script>
 
 <div>
   <p>Count: {count}</p>
-  <button on:click={() => count += 1}>
-    Increase
-  </button>
+  <button on:click={() => (count += 1)}>Increase</button>
 </div>
+```
 
-Bu daha büyük projelerde dez avantaj yaratabilir fakat küçük çaplı projelerde sürecin hızlanmasına olanak tanır.
-React vs Svelte: Props Kullanımı
-React’ta Props Kullanımı
+### 2. Props Kullanımı
 
-React’ta bir bileşene props geçirerek veri aktarımı şu şekilde yapılır:
+React:
 
-// React'ta parent bileşen
-import React from 'react';
-import Greeting from './Greeting';
-
-function App() {
-  return <Greeting name="Svelte" />;
-}
-
-export default App;
-
-// React'ta child bileşen
+```jsx
 function Greeting({ name }) {
   return <p>Hello, {name}!</p>;
 }
+```
 
-export default Greeting;
+Svelte:
 
-Burada Greeting bileşenine props olarak name değerini geçiyoruz ve bu props'u child bileşende kullanıyoruz.
-Svelte’te Props Kullanımı
-
-Svelte’de props kullanımı ise daha basit ve doğrudandır:
-
-<!-- Svelte'te parent bileşen -->
-<script>
-  import Greeting from './Greeting.svelte';
-</script>
-
-<Greeting name="Svelte" />
-
-<!-- Svelte'te child bileşen -->
+```svelte
 <script>
   export let name;
 </script>
 
 <p>Hello, {name}!</p>
+```
 
-Svelte’de bir değişkeni export ederek dışarıdan bileşene veri aktarılabilir. Bu, React'taki props yapısına karşılık gelir ve çok daha sade bir kullanım sunar. Aslında yine aynı yere varıyoruz. Daha komplike projelerde tercih edilmeyebilir.
-React vs Svelte: Form ve Event Yönetimi
-React’ta Form ve Event Yönetimi
+### 3. Form Yönetimi
 
-React’ta formlarda state yönetimi ve event handling biraz daha karmaşık olabilir:
+React:
 
-import React, { useState } from 'react';
+```jsx
+import React, { useState } from "react";
 
 function Form() {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <div>
-      <input type="text" value={inputValue} onChange={handleChange} />
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
       <p>Input: {inputValue}</p>
     </div>
   );
 }
+```
 
-export default Form;
+Svelte:
 
-Her input değişikliğinde state güncellenir ve render tetiklenir.
-Svelte’te Form ve Event Yönetimi
-
-Svelte’de form kontrolü ve event yönetimi ise çok daha basit:
-
+```svelte
 <script>
-  let inputValue = '';
+  let inputValue = "";
 </script>
 
 <div>
   <input type="text" bind:value={inputValue} />
   <p>Input: {inputValue}</p>
 </div>
+```
 
-Svelte’de bind ifadesi ile bir input elemanını doğrudan bir değişkene bağlayabilirsiniz. Bu, iki yönlü veri bağlamayı (two-way binding) çok basit hale getirir. Gelin burada ki ana mantığı anladığımıza göre biraz daha Svelte’e odaklanalım ve Svelte’in özelliklerini daha derinlemesine inceleyelim.
-Svelte’de Lifecycle Metotları
+## Lifecycle Metotları
 
-Svelte’de lifecycle metotları, bileşenlerin yaşam döngüsü içinde belirli anlarda çalıştırmak istediğimiz kodları tanımlamamıza olanak tanır. Svelte, bu amaçla birkaç temel fonksiyon sunar:
+Svelte tarafında en sık kullanılan lifecycle fonksiyonları:
 
-    onMount: Bileşen DOM'a yerleştirildiğinde çalışır.
-    beforeUpdate: DOM güncellenmeden hemen önce çalışır.
-    afterUpdate: DOM güncellendikten hemen sonra çalışır.
-    onDestroy: Bileşen DOM'dan kaldırıldığında çalışır.
+- `onMount`
+- `beforeUpdate`
+- `afterUpdate`
+- `onDestroy`
 
-onMount Örneği:
+`onMount` örneği:
 
-Svelte’de bir bileşenin DOM’a eklenmesiyle birlikte yapılacak işlemleri onMount fonksiyonu ile tanımlayabilirsiniz:
-
+```svelte
 <script>
-  import { onMount } from 'svelte';
+  import { onMount } from "svelte";
 
   let data;
 
   onMount(async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    const res = await fetch("https://jsonplaceholder.typicode.com/todos/1");
     data = await res.json();
   });
 </script>
 
-<div>
-  {#if data}
-    <p>{data.title}</p>
-  {/if}
-</div>
+{#if data}
+  <p>{data.title}</p>
+{/if}
+```
 
-Bu örnekte onMount, bileşen DOM’a yerleştiği anda bir API çağrısı yapar ve sonuçları ekranda görüntüler.
-Svelte’de Reaktivite
+## Reaktivite
 
-Svelte’in en güçlü özelliklerinden biri reaktiviteyi doğal olarak ele almasıdır. Bir değişkenin değerinde bir değişiklik olduğunda, Svelte bu değişikliği otomatik olarak takip eder ve ilgili bileşeni yeniden render eder.
+Svelte'in en güçlü taraflarından biri, reaktif ifadeleri dil seviyesinde desteklemesi:
 
-Svelte’de reaktiviteyi tetiklemek için sadece bir değişkenin değerini güncellemek yeterlidir. Reaktif ifadeler let anahtar kelimesiyle tanımlanır ve herhangi bir ek kod yazılmasına gerek kalmaz.
-
-Reaktif İfadeler:
-
+```svelte
 <script>
   let count = 0;
-  let doubled;
-
-  // $: ifadesi, reaktif bir bloğu işaretler
   $: doubled = count * 2;
 </script>
 
 <p>Count: {count}</p>
 <p>Doubled: {doubled}</p>
 <button on:click={() => count++}>Increase</button>
+```
 
-Bu örnekte, count değişkeni her arttığında doubled reaktif olarak güncellenir ve bu değişiklik ekrana yansır.
+## Store Kullanımı
 
-![Svelte ile İlk Adımlar: React ve Vue’ya Karşı Hızlı mı?](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6oapfP2KKU3JTo8H.png)
+Bileşenler arası state paylaşımı için `store` yapısı çok kullanışlıdır.
 
-Svelte’de Store Kullanımı
+`store.js`:
 
-Svelte, küçük projeler için bileşenler arası veri paylaşımı amacıyla oldukça basit bir state yönetim sistemi sunar. Bunun için store adı verilen bir yapı kullanılır. Svelte, 3 tür store sağlar: writable, readable ve derived store’lar.
-Writable Store Örneği:
-
-Writable store, bileşenler arasında güncellenebilir bir veri paylaşımı sağlar. Aşağıda bir sayaç uygulaması için writable store kullanımını görebilirsiniz:
-
-<!-- store.js -->
-import { writable } from 'svelte/store';
+```js
+import { writable } from "svelte/store";
 
 export const count = writable(0);
+```
 
-<!-- App.svelte -->
+`App.svelte`:
+
+```svelte
 <script>
-  import { count } from './store';
+  import { count } from "./store";
 </script>
 
 <p>Count: {$count}</p>
-<button on:click={() => count.update(n => n + 1)}>Increase</button>
+<button on:click={() => count.update((n) => n + 1)}>Increase</button>
+```
 
-Store değerine erişmek için $ işaretini kullanarak reaktif bir bağlama yapabilirsiniz. Ayrıca, count.update() ile store değerini güncelleyebilirsiniz. Gördüğünüz gibi oldukça basit.
-SvelteKit: Modern Web Uygulamaları İçin Güçlü Bir Araç
+![Svelte ile İlk Adımlar: React ve Vue’ya Karşı Hızlı mı?](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*6oapfP2KKU3JTo8H.png)
 
-Svelte’in yanı sıra, SvelteKit de güçlü bir araç olarak ön plana çıkıyor. SvelteKit, Svelte’in üzerine inşa edilmiş bir framework’tür ve özellikle modern web uygulamaları geliştirmek için tasarlanmıştır. SSR (Sunucu Tarafı Rendering), statik site oluşturma, rotalama (routing) ve çok daha fazlasını kolayca entegre edebilmenizi sağlar.
-SvelteKit’in Temel Özellikleri:
+## SvelteKit Neden Önemli?
 
-    Sunucu Tarafı Rendering (SSR): SvelteKit, uygulamanın sunucu tarafında render edilmesine olanak tanır, bu da SEO dostu sayfalar ve hızlı ilk render süreleri anlamına gelir.
-    Statik Site Üretimi: Dinamik verileri çekip statik HTML dosyaları oluşturmak için kullanılabilir. Bu, SvelteKit’i hem dinamik hem de statik siteler için mükemmel bir seçim haline getirir.
-    API Route’ları: SvelteKit ile kendi API’larınızı oluşturabilirsiniz. Bu, tam anlamıyla bir full-stack uygulama geliştirmeyi mümkün kılar.
+SvelteKit, Svelte üzerine kurulu modern bir framework'tür. Özellikle şu konularda güçlüdür:
 
-Svelte’in sunduğu sadelik, reaktivite ve performans avantajları ile özellikle küçük ve orta ölçekli projeler için harika bir çözüm sunar. Sonraki adım olarak SvelteKit kullanarak, daha geniş kapsamlı projelere yönelik işlevsellikler ekleyebilirsiniz.
-Sonuç
+- SSR (Server-Side Rendering)
+- Statik site üretimi
+- Dosya tabanlı routing
+- API endpoint tanımları
 
-Svelte, modern web geliştirme dünyasında performans ve sadelik arayanlar için mükemmel bir çözüm sunuyor. React ve Vue gibi popüler framework’lere kıyasla daha basit bir yapıya sahiptir Svelte.
+Bu yapı, Svelte'i küçük projelerden ürün seviyesine taşımayı kolaylaştırır.
 
-Svelte’in en büyük avantajlarından biri, öğrenmesi kolay ve reaktif yapısının doğal olarak sade olmasıdır. Bir değişkenin değerini güncellemek bile bileşenleri yeniden render etmek için yeterli olurken, lifecycle metodları ve store yönetimi de basit ve sezgiseldir. Ayrıca, animasyonlar ve geçiş efektleri gibi işlevler için de dahili destek sunarak, harici kütüphanelere olan ihtiyacı ortadan kaldırır.
+## Sonuç
 
-Özellikle küçük ve performansın kritik olduğu projelerde, düşük bellek tüketimi ve hızlı çalışma süreleri sayesinde Svelte, dikkat çeken bir seçenek haline gelir. Ancak daha büyük projeler ve geniş ekosistem desteği gereken durumlarda React ve Vue gibi framework’ler hâlâ güçlü birer alternatif olabilir.
+Svelte, performans ve sadelik odaklı bir geliştirme deneyimi sunuyor. Küçük ve orta ölçekli projelerde çok hızlı sonuç verir; büyük projelerde ise SvelteKit ile birlikte oldukça güçlü bir seçenek haline gelir.
 
-Svelte, hem yeni başlayanlar hem de deneyimli geliştiriciler için güçlü bir araç sunarken, performans ve basitlikten ödün vermeyen bir çözüm arayanların radarında olmayı hak ediyor. Gelin şimdi “Svelte’i nasıl daha derinlemesine öğrenebiliriz bir bakalım.”
-Kaynaklar
+## Kaynaklar
 
-Svelte’i öğrenmek için birçok ücretsiz ve kaliteli kaynak bulunuyor. Aşağıda benim de kaynak olarak aldığım hem videolar hem de yazılar ile Svelte’i derinlemesine öğrenebilirsiniz.
-YouTube Videoları
-
-    Svelte Crash Course (Traversy Media)
-
-    Svelte Crash Course
-    Bu video, Svelte’in temellerini anlamak ve basit bir proje oluşturmak için mükemmel bir başlangıç noktası. React ve Vue gibi popüler framework’lere aşina olanlar için Svelte’in farklılıkları net bir şekilde açıklanıyor.
-
-2. Learn Svelte in 5 Minutes (Web Dev Simplified)
-
-    Learn Svelte in 5 Minutes
-    Svelte’in temel yapısını hızlıca öğrenmek isteyenler için kısa ve etkili bir video.
-
-3. SvelteKit Crash Course (Net Ninja)
-
-    SvelteKit Crash Course
-    Svelte’in modern web uygulamaları için geliştirilmiş framework’ü olan SvelteKit’i detaylıca incelemek ve ilk projeni geliştirmek için bu video rehber olacaktır.
-
-Yazılı Kaynaklar ve Makaleler
-
-    Svelte Resmi Dokümantasyon
-
-    Svelte Documentation
-    Svelte’in dökümanyasyonu, framework’ün her yönünü detaylıca açıklayan, başlangıç seviyesinden ileri seviyeye kadar her geliştiriciye hitap eden kapsamlı bir kaynak. Dökümanyasyon okumayı seviyorsanız başka bir kaynağa ihtiyacınız kalacağını düşünmüyorum.
-
-2. Svelte for Beginners: A Hands-On Guide (Smashing Magazine)
-
-    Svelte for Beginners
-    Smashing Magazine’in hazırladığı bu rehber, Svelte ile çalışmaya başlamak isteyenler için adım adım bir yol haritası sunuyor. Kesinlikle göz atmalısınız.
-
-3. Understanding Svelte Reactivity (Dev.to)
-
-    Understanding Svelte Reactivity
-    Svelte’in reaktif yapısını derinlemesine anlamak isteyenler için harika bir makale. Reaktiviteyi diğer framework’lerle karşılaştırarak Svelte’in farkını anlatıyor.
-
-4. Svelte vs React: What’s The Difference? (LogRocket Blog)
-
-    Svelte vs React
-    Svelte ve React arasındaki farkları daha ayrıntılı bir şekilde incelemek için bu makale, framework’lerin avantajlarını ve kullanım alanlarını karşılaştırıyor. Ben de bu yazıda ki karşılaştırmalarımda kaynak olarak burayı kullandım.
-
-Online Kurslar
-
-    Svelte.js — The Complete Guide (Udemy)
-
-    Svelte.js — The Complete Guide
-    Udemy’de yer alan bu kapsamlı kurs, Svelte’in temellerini ve ileri düzey özelliklerini öğrenmek isteyen geliştiriciler için ideal.
-
-2. Learn Svelte and Sapper from Scratch (Frontend Masters)
-
-    Learn Svelte from Scratch
-    Frontend Masters tarafından sunulan bu kurs, Svelte ve onun eski framework’ü olan Sapper üzerinde yoğunlaşarak modern uygulama geliştirmeye odaklanıyor. Bakmanızı tavsiye ederim.
+- [Svelte Documentation](https://svelte.dev/docs)
+- [Svelte Tutorial](https://svelte.dev/tutorial)
+- [SvelteKit Documentation](https://kit.svelte.dev/docs)
+- [LogRocket - Svelte vs React](https://blog.logrocket.com/svelte-vs-react/)
 
 ![Svelte ile İlk Adımlar: React ve Vue’ya Karşı Hızlı mı?](https://miro.medium.com/v2/resize:fit:1258/format:webp/0*GLNSJNWQcg9K79Xe.png)

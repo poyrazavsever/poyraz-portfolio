@@ -4,83 +4,64 @@ category: "Yazilim"
 date: "2026-02-01"
 readTime: "8 min read"
 author: "Poyraz Avsever"
-excerpt: "Yazılım geliştirme sürecinde, kod yazmanın ötesinde pek çok detayla uğraşıyoruz. Commit mesajları da bu sürecin kritik bir parçası tabii ki. Ancak commit mesajları, bazen dağını..."
-coverImage: "/news/performance.svg"
+excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+coverImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*WQOgajPE2m4aYuVC3SZoFQ.jpeg"
 ---
 
-Yazılım geliştirme sürecinde, kod yazmanın ötesinde pek çok detayla uğraşıyoruz. Commit mesajları da bu sürecin kritik bir parçası tabii ki. Ancak commit mesajları, bazen dağınık, anlaşılmaz ve düzensiz olabiliyor. İşte bu noktada “Conventional Commits” devreye giriyor.
+Yazılım geliştirme sürecinde yalnızca kod yazmıyoruz; aynı zamanda takım iletişimini ve proje geçmişini de yönetiyoruz. Commit mesajları bu süreçte kritik rol oynar. Conventional Commits, commit geçmişini daha anlaşılır ve sürdürülebilir hale getiren pratik bir standarttır.
 
-![Yazılım Projelerinde Düzen ve Verimlilik İçin: Conventional Commits Nedir?](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*WQOgajPE2m4aYuVC3SZoFQ.jpeg)
+## Conventional Commits Nedir?
 
-Conventional Commits Nedir?
+Conventional Commits, commit mesajlarını belirli bir formatta yazmayı öneren bir standarttır. Her commit'in amacı daha hızlı anlaşılır; release notları, sürümleme ve ekip içi takip süreçleri kolaylaşır.
 
-Conventional Commits, commit mesajlarınızı belirli bir formata oturtan bir yazılım standardı. Amaç, her commit’in ne yaptığını net bir şekilde ifade etmek ve proje geçmişini daha anlaşılır hale getirmek. Commit mesajlarınızı bu standarda göre yazmak, projeyi daha düzenli, takip edilebilir ve sürdürülebilir kılar. Gelin şimdi beraber inceleyelim.
-Neden Conventional Commits Kullanmalıyız?
-1. Anlaşılabilirlik
+## Neden Kullanmalıyız?
 
-Commit geçmişinin anlaşılabilir olması hepimiz için önemli. Bu standart, projede yapılan değişikliklerin kolayca takip edilmesini sağlıyor. Büyük projelerde, hangi commit’in hangi sorunu çözdüğünü veya hangi yeni özelliği eklediğini anlamak zaman zaman zorlaştığı için bu gibi standartları kullanmak yazılımcıların işini kolaylaştırıyor.
-2. İzlenebilirlik ve Şeffaflık
+### 1. Anlaşılabilirlik
 
-Commit mesajlarımızı tutarlı ve net hale getirmek, proje geçmişimizde yapılan değişikliklerin izlenmesini kolaylaştırıyor. Özellikle geriye dönük uyumluluğu bozan değişikliklerde, bu düzenlemeler büyük bir avantaj sağlıyor.
-Peki Bu Commit Mesajları Nasıl Yazılıyor?
+Commit geçmişi daha okunabilir olur. Özellikle büyük projelerde hangi commit'in neyi değiştirdiğini bulmak çok daha hızlı hale gelir.
 
-Conventional Commits’e göre, her commit mesajı üç ana bölümden oluşur:
+### 2. İzlenebilirlik ve Şeffaflık
 
-    Başlık (Summary): Mesajın türünü ve kısaca ne yaptığını belirtir.
-    Gövde (Body): Değişikliğin detaylarını açıklar. Neden yapıldığını ve nasıl yapıldığını anlatır.
-    Altbilgi (Footer): Breaking changes gibi uyumluluğu bozan değişiklikler veya kapatılan sorunlar burada belirtilir.
+Hangi değişikliğin bug fix, hangisinin yeni özellik olduğu netleşir. Geriye dönük analiz ve hata takibi kolaylaşır.
 
-    Commit Türleri
+## Commit Mesajı Yapısı
 
-Commit mesajları belirli türlerle başlar. İşte en yaygın kullanılan türler: Daha detaylı commit türlerini incelemek için tıklayın.
+Conventional Commits'te mesaj genelde üç bölümden oluşur:
 
-    feat: Yeni bir özellik eklenmesi.
-    fix: Bir hatanın düzeltilmesi.
-    docs: Sadece dokümantasyonla ilgili değişiklikler.
-    style: Kodun işleyişini değiştirmeyen biçimlendirme (boşluklar, noktalı virgüller vb.).
-    refactor: Kodda, işlevini değiştirmeyen yeniden düzenleme.
+- **Başlık (Summary)**: Tür + kısa açıklama
+- **Gövde (Body)**: Değişikliğin nedeni ve detayları
+- **Altbilgi (Footer)**: Breaking change veya issue referansları
 
-Gelin beraber örnek bir Commit Mesajını inceleyelim:
+## Sık Kullanılan Türler
 
-    feat(login): add JWT authentication
+- `feat`: Yeni özellik
+- `fix`: Hata düzeltmesi
+- `docs`: Dokümantasyon değişikliği
+- `style`: Format/stil düzeni (işlev değişmez)
+- `refactor`: Davranışı değiştirmeden kod iyileştirme
 
-    Added JWT authentication to the login process to enhance security.
-    This change involves updating the login controller and modifying the user model.
+## Örnek Commit
 
-    BREAKING CHANGE: The user model now requires a JWT token for all login operations.
+```text
+feat(login): add JWT authentication
 
-    Başlık (Summary):
+Added JWT authentication to the login process to enhance security.
+This change involves updating the login controller and modifying the user model.
 
-    feat:
-    Commit türünü belirtir. Burada feat (feature) türü kullanılmış, bu da commit'in projeye yeni bir özellik eklediğini gösterir. Başka türler de kullanılabilir, örneğin fix (bir hatayı düzeltmek), docs (dokümantasyon güncellemeleri) gibi.
-    (login):
-    Parantez içinde belirtilen bölüm, bu özelliğin veya değişikliğin hangi modülü veya bölümü etkilediğini gösterir. Burada login kullanılmış, yani yapılan değişiklik, login (giriş) süreciyle ilgilidir.
-    add JWT authentication:
-    Bu, commit'in yaptığı spesifik değişikliği kısa ve öz bir şekilde açıklar. Burada, JWT (JSON Web Token) ile kimlik doğrulamanın login sürecine eklendiği belirtiliyor.
+BREAKING CHANGE: The user model now requires a JWT token for all login operations.
+```
 
-2. Gövde (Body):
+Bu örnekte:
 
-    İlk Cümle:
-    “Added JWT authentication to the login process to enhance security.”
-    Bu cümle, yapılan değişikliğin amacını ve sonucunu açıklar. Burada, JWT kimlik doğrulamasının login sürecine eklendiği ve bunun güvenliği artırmak amacıyla yapıldığı belirtiliyor.
-    İkinci Cümle:
-    “This change involves updating the login controller and modifying the user model.”
-    Bu cümle, değişikliğin hangi dosya veya modülleri etkilediğini daha detaylı açıklar. Burada, login controller’ın güncellendiği ve user model’in değiştirildiği belirtiliyor.
+- `feat(login)` kısmı değişikliğin türünü ve kapsamını açıklar.
+- Body kısmı neyin ve neden yapıldığını anlatır.
+- `BREAKING CHANGE` ifadesi geriye dönük uyumluluğu etkileyen bir güncelleme olduğunu belirtir.
 
-3. Altbilgi (Footer):
+## Sonuç
 
-    BREAKING CHANGE:
-    Bu ifade, uyumluluğu bozan bir değişiklik olduğunu gösterir. Eğer bir commit, mevcut kodun çalışmasını bozacak bir değişiklik yapıyorsa, bu mutlaka belirtilmelidir. Bu, diğer geliştiricilerin bu değişiklikten haberdar olmasını sağlar.
-    Detay:
-    “The user model now requires a JWT token for all login operations.”
-    Bu açıklama, uyumluluğu bozan değişikliğin ne olduğunu detaylandırır. Burada, kullanıcı modelinin artık tüm giriş işlemleri için bir JWT token gerektirdiği belirtiliyor. Bu, diğer geliştiricilerin bu değişikliği uygularken dikkatli olmaları gerektiğini ifade eder.
+Conventional Commits, proje geçmişini düzenler ve ekip verimliliğini artırır. Özellikle takım çalışmasında ve sürüm yönetiminde standart bir commit dili oluşturmak için güçlü bir yöntemdir.
 
-Sonuç olarak
+## Kaynak
 
-Conventional Commits, yazılım geliştirme sürecimizi daha düzenli, anlaşılır ve verimli hale getirdi. Commit mesajlarımızı belirli bir yapıya oturtarak, proje yönetimimizi daha sürdürülebilir ve izlenebilir bir hale getirdik.
-
-Eğer siz de projelerinizde daha düzenli bir commit geçmişi istiyorsanız, Conventional Commits’i denemenizi tavsiye ederim.
-Kaynak
-
-[https://www.conventionalcommits.org/en/v1.0.0/](https://www.conventionalcommits.org/en/v1.0.0/)
-[https://developer.vonage.com/en/blog/3-reasons-why-you-should-use-conventional-commits](https://developer.vonage.com/en/blog/3-reasons-why-you-should-use-conventional-commits)
+- [Conventional Commits v1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
+- [3 reasons why you should use conventional commits](https://developer.vonage.com/en/blog/3-reasons-why-you-should-use-conventional-commits)

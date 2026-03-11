@@ -4,46 +4,41 @@ category: "TypeScript"
 date: "2026-02-18"
 readTime: "8 min read"
 author: "Poyraz Avsever"
-excerpt: "Son zamanlarda JavaScript’ten TypeScript’e geçiş yapmak üzerine yoğun bir şekilde çalışıyorum ve bu süreçte yaşadıklarımı sizlerle paylaşmak istiyorum."
-coverImage: "/news/performance.svg"
+excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+coverImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*yRK5eL_pqabAhrn7"
 ---
 
-Merhaba arkadaşlar!
+JavaScript'ten TypeScript'e geçiş, özellikle React projelerinde kod kalitesini gözle görülür şekilde artırıyor. Bu yazıda JSX'ten TSX'e geçişte yaşadığım deneyimi, zorlukları ve kazançları paylaşıyorum.
 
-![JSX’den TSX’e Geçiş: Kişisel Bir Deneyim](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*yRK5eL_pqabAhrn7)
+## Neden TypeScript?
 
-Son zamanlarda JavaScript’ten TypeScript’e geçiş yapmak üzerine yoğun bir şekilde çalışıyorum ve bu süreçte yaşadıklarımı sizlerle paylaşmak istiyorum. TypeScript, JavaScript’in sunduğu dinamik yapının üzerine statik tiplerin eklenmesiyle kod yazım sürecini bir adım ileriye taşıyor. Peki ben neden geçiyorum? Şuan bir ekiple beraber bir proje üzerinde çalışıyoruz. Ve buna karar kaldık. Bu geçişin benim için nasıl bir yolculuk olduğunu anlatmak, belki sizlere de bu konuda yardımcı olabilir.
-Başlangıç: Neden TypeScript?
+Geçiş kararının temel nedeni daha güvenli ve öngörülebilir kod yazabilmekti. Dinamik tip yapısı bazı durumlarda hızlı başlatma sağlasa da, proje büyüdükçe hata ayıklama maliyetini artırabiliyor.
 
-İlk olarak, TypeScript’e geçiş yapma kararımızın arkasında daha sağlam ve hatasız bir kod yazma isteğimiz vardı. JavaScript’te dinamik tipler bazen kafa karıştırıcı olabiliyor ve bu, büyük projelerde hata ayıklama sürecini zorlaştırıyor. TypeScript, bu sorunları çözmek için tip güvenliği ve geliştirilmiş hata ayıklama yetenekleri sunuyor.
-İlk Adımlar: JS’den TSX’e
+## Geçiş Sürecinde İzlediğim Yol
 
-Geçiş süreci, özellikle JSX’ten TSX’e geçerken bazı zorluklar getirdi. İlk başta, tip tanımlamaları ve interface’lerle ilgili kafam karışmadı değil. Ancak, bu süreçte birkaç önemli adım izlemeye başladım:
+- Temel `props` ve `state` tiplerini netleştirdim.
+- Bileşenleri tek seferde değil, kademeli şekilde TSX'e taşıdım.
+- Hata mesajlarını rehber gibi kullanıp tip sistemini adım adım oturttum.
 
-    Temel Tip Tanımlamaları: Öncelikle, projedeki temel tipleri tanımlamaya başladım. Bu, özellikle props ve state gibi yapılar için çok faydalı oldu. TypeScript ile, her bir prop ve state’in türünü belirleyerek, olası hataları erkenden yakalayabiliyorum.
-    TSX ile JSX’yi Anlama: JSX’ten TSX’e geçişte en önemli şeylerden biri, type checking (tip kontrolü) özelliğinden yararlanmak. Bu, bileşenlerin doğru tipteki verilerle çalışıp çalışmadığını kontrol etmeme yardımcı oldu.
-    Gradual Migration (Aşamalı Geçiş): Geçiş sürecini bir anda yapmadım. Bunun yerine, projeyi kademeli olarak TypeScript’e taşıdım. Bu sayede, karşılaştığım sorunları daha kolay çözebildim ve büyük değişiklikler yapmadan önce küçük parçalar üzerinde çalışabildim.
+## JSX ve TSX Karşılaştırması
 
-Gelin küçük bir karşılaştırma yapalım.
-JSX (JavaScript XML)
+### JSX Örneği
 
-JSX, React bileşenlerinde JavaScript kodunu HTML benzeri bir sözdizimi ile yazmamıza olanak tanır. Ancak, JSX’te tip kontrolü yapılmıyor.
-
-import React from 'react';
+```jsx
+import React from "react";
 
 const Greeting = ({ name }) => {
   return <h1>Hello, {name}!</h1>;
 };
 
 export default Greeting;
+```
 
-TSX (TypeScript XML)
+### TSX Örneği
 
-TSX ise, JSX’in TypeScript ile birleştirilmiş hali olup, tip kontrolü ve daha iyi hata ayıklama özellikleri sunuyor. Tip güvenliği sağlıyor ve bu, bileşenlerin beklenmedik hatalara karşı korunmasına yardımcı oluyor.
+```tsx
+import React from "react";
 
-import React from 'react';
-
-// Props için TypeScript ile tip tanımlaması
 interface GreetingProps {
   name: string;
 }
@@ -53,38 +48,37 @@ const Greeting: React.FC<GreetingProps> = ({ name }) => {
 };
 
 export default Greeting;
+```
 
-Karşılaştırma
+## Farklar
 
-    Tip Kontrolü:
+### Tip Kontrolü
 
-    JSX: Tip kontrolü yoktur.
-    TSX: Props ve state için tip tanımlamaları yapılabilir.
+- JSX: Yerleşik tip güvenliği yoktur.
+- TSX: `props` ve `state` açıkça tiplenebilir.
 
-2. Geliştirici Deneyimi:
+### Geliştirici Deneyimi
 
-    JSX: Kod tamamlama ve hata ayıklama sınırlıdır.
-    TSX: Daha iyi kod tamamlama ve erken hata tespiti sağlar.
+- JSX: IDE desteği daha sınırlı olabilir.
+- TSX: Otomatik tamamlama ve erken hata yakalama daha güçlüdür.
 
-3. Kod Güvenliği:
+### Kod Güvenliği
 
-    JSX: Tip hatalarına karşı koruma yoktur.
-    TSX: Tip hatalarını önlemeye yardımcı olur ve daha güvenli kod sağlar.
+- JSX: Runtime'da hata görme ihtimali daha yüksektir.
+- TSX: Hataların önemli kısmı derleme aşamasında yakalanır.
 
-Bu örnekler, JSX ve TSX arasındaki temel farkları gösteriyor sanırım. Kısaca TypeScript kullanarak daha sağlam ve güvenli bir kod yazabilirsiniz arkadaşlar.
-Yaşadığım Zorluklar
+## Karşılaştığım Zorluklar
 
-TypeScript’e geçiş yaparken karşılaştığım bazı zorluklar oldu. En büyük sorunlardan biri, eski JavaScript kodunun TypeScript’e uyumlu hale getirilmesiydi. Özellikle, mevcut kodlarda eksik tip tanımlamaları ve uyumsuzluklar bulmak bazen zaman alabiliyor. Düzeltiyorum, çok zaman alıyor. Ayrıca, bazı kütüphaneler ve araçlar TypeScript ile tam uyumlu olmayabiliyor, bu da ekstra uyum sorunlarına neden olabiliyor. Fakat daha sonra dönüp baktığım zaman bunlara değdini görüyorum.
-Faydalar
+- Eski JavaScript kodunu tip sistemine uyarlamak zaman aldı.
+- Bazı bağımlılıklarda ek tip tanımları gerekebildi.
+- Başlangıçta tip kuralları yavaşlatıyor gibi görünse de, orta vadede geliştirme hızını artırdı.
 
-Ancak, TypeScript’in avantajları bu zorlukları gölgede bırakıyor. İşte bu geçişten elde ettiğim bazı önemli faydalar:
+## Elde Ettiğim Kazanımlar
 
-    Daha Güvenli Kod: TypeScript sayesinde, kodumda hata yapma olasılığım azaldı. Tip güvenliği, hataları daha erken aşamada tespit etmemi sağlıyor.
-    Daha İyi Geliştirici Deneyimi: TypeScript, editörde daha iyi kod tamamlama ve hata ayıklama araçları sunuyor. Bu, geliştirme sürecimi daha verimli hale getiriyor.
-    Daha Kolay Bakım: Tip tanımlamaları ve interface’ler, kodun bakımını ve genişletilmesini kolaylaştırıyor. Bu, özellikle büyük projelerde büyük bir avantaj.
+- Daha güvenli kod tabanı
+- Daha güçlü IDE desteği
+- Daha kolay bakım ve refactor
 
-Sonuç
+## Sonuç
 
-TypeScript’e geçiş yapmak, benim için zorlu ama öğretici bir süreç oldu. Bu geçiş, uzun vadede daha sağlam ve sürdürülebilir kod yazmama yardımcı oldu. Eğer siz de JavaScript’ten TypeScript’e geçmeyi düşünüyorsanız, başlangıçta bazı zorluklar yaşayabilirsiniz ama bu çabanın karşılığını eminim uzun vadede göreceksiniz.
-
-Umarım bu yazı, TypeScript’e geçiş yapmayı düşünenler için faydalı olur. Siz de deneyimlerinizi veya sorularınızı paylaşmak isterseniz, yorumlarda buluşalım!
+JSX'ten TSX'e geçiş ilk etapta zahmetli görünse de, uzun vadede proje kalitesini artıran önemli bir yatırım. Özellikle ekipli geliştirmede TypeScript, ortak bir kalite standardı oluşturuyor.

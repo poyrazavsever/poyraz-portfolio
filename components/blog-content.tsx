@@ -106,7 +106,7 @@ export function BlogContent({ data }: BlogContentProps) {
                 date={post.date}
                 readTime={post.readTime}
                 href={post.href}
-                className="rounded-sm border-border"
+                className="rounded-sm border-border [&_h3]:line-clamp-2 [&_h3]:min-h-[2.5rem]"
                 author={{ name: post.author, avatar: "/logo/logo.jpeg" }}
               />
             ))}
