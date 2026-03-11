@@ -1,19 +1,60 @@
 # Portfolio New
 
-Poyraz Avsever icin hazirlanmis, `Next.js + poyraz-ui` tabanli portfolyo ve ayni repoda yer alan Electron tabanli veri yonetim paneli.
+Bu monorepo, Next.js tabanlı portfolyo web uygulaması ve Electron ile geliştirilen veri yönetim panelini bir arada sunar.
 
-## Monorepo Yapisi
+## Mimari
 
-```text
-.
-|- app/                  # Next.js route'lari
-|- components/           # UI component'leri
-|- content/              # Markdown icerikleri (blog, podcast)
-|- data/                 # TypeScript veri kaynaklari
-|- public/               # Statik dosyalar
-|- apps/
-|  |- data-panel/        # Electron dashboard (icerik yonetimi + publish)
+```mermaid
+flowchart TD
+  subgraph Web Uygulama (Next.js)
+    A[app/] --> B[components/]
+    A --> C[content/]
+    A --> D[data/]
+    A --> E[public/]
+    B --> F[UI Bilesenleri]
+    C --> G[Markdown Blog/Podcast]
+    D --> H[TypeScript Veri Kaynaklari]
+    E --> I[Statik Dosyalar]
+  end
+  subgraph Electron Data Panel
+    J[apps/data-panel/]
+    J --> K[renderer/]
+    J --> L[main.cjs]
+    J --> M[preload.cjs]
+    K --> N[configs.js]
+    J --> O[assets/]
+    J --> P[Electron build scripts]
+  end
+  J --> D
+  J --> E
+  J --> C
+  J --> Q[Git ile publish]
+  Q --> D
+  Q --> E
+  Q --> C
+  A -.-> E
+  A -.-> D
+  A -.-> C
 ```
+
+### Klasörler ve Akış
+
+- **app/**: Next.js route ve sayfa yapısı
+- **components/**: UI bileşenleri (React)
+- **content/**: Markdown içerikler (blog, podcast)
+- **data/**: TypeScript veri kaynakları (projeler, referanslar, eğitim vb.)
+- **public/**: Statik dosyalar (görseller, pdf, avatar)
+- **apps/data-panel/**: Electron tabanlı içerik yönetim paneli
+  - **renderer/**: Panelin arayüzü ve form konfigürasyonları
+  - **main.cjs**: Electron ana süreç, dosya ve git işlemleri
+  - **configs.js**: Koleksiyon ve form alanı yönetimi
+
+### Akış
+
+1. Web uygulaması Next.js ile çalışır, içerik ve veri dosyalarını okur.
+2. Electron paneli ile içerik (blog/podcast), veri (data/\*.ts) ve medya (public/) yönetimi yapılır.
+3. Panelde yapılan değişiklikler git ile commit/push edilerek yayınlanır.
+4. Paneldeki koleksiyonlar ve form alanları configs.js ile özelleştirilebilir.
 
 ## Gereksinimler
 
@@ -27,7 +68,7 @@ Poyraz Avsever icin hazirlanmis, `Next.js + poyraz-ui` tabanli portfolyo ve ayni
 pnpm install
 ```
 
-## Frontend Komutlari
+## Frontend Komutları
 
 ```bash
 pnpm dev        # Next.js local
@@ -36,18 +77,18 @@ pnpm build      # Production build
 pnpm start      # Production run
 ```
 
-## Electron Data Panel Komutlari
+## Electron Data Panel Komutları
 
 ```bash
 pnpm panel:dev            # Electron panel (development)
 pnpm panel:clean          # apps/data-panel/dist temizle
 pnpm panel:pack           # Paket test (unpacked)
-pnpm panel:dist           # Tum hedefler icin distributable
+pnpm panel:dist           # Tüm hedefler için distributable
 pnpm panel:dist:win       # Windows NSIS installer
 pnpm panel:dist:portable  # Windows portable exe
 ```
 
-## Icerik Kaynaklari
+## İçerik Kaynakları
 
 - Blog markdown: `content/blog/*.md`
 - Podcast markdown:
@@ -55,71 +96,66 @@ pnpm panel:dist:portable  # Windows portable exe
   - `content/podcasts/masa-basi/*.md`
 - Site verileri: `data/*.ts`
 
-## Electron Panel Neleri Yapar?
+## Electron Panel Özellikleri
 
-- Blog/podcast icerigi olusturma-guncelleme-silme
-- `data/*.ts` export dizilerini form tabanli yonetme
-- `public/` altina medya yukleme/silme
-- `git add + commit + push` ile yayinlama akisi
+- Blog/podcast içeriği oluşturma-güncelleme-silme
+- `data/*.ts` export dizilerini form tabanlı yönetme
+- `public/` altına medya yükleme/silme
+- `git add + commit + push` ile yayınlama akışı
 
-## Open-Source ve Ozellestirme Rehberi
+## Özelleştirme ve Açık Kaynak
 
-### 1) Dashboard tab/field ozellestirme
+### Dashboard tab/field özelleştirme
 
-Paneldeki koleksiyonlar ve form alanlari su dosyadan yonetilir:
+Paneldeki koleksiyonlar ve form alanları `apps/data-panel/renderer/configs.js` dosyasından yönetilir.
 
-- `apps/data-panel/renderer/configs.js`
+- Yeni tab/collection ekleyebilir
+- Alan tiplerini (`text`, `textarea`, `number`, `url`) değiştirebilir
+- Kart görünümünü özelleştirebilirsin
 
-Buradan:
+### Farklı repo kökü ile çalıştırma
 
-- yeni tab/collection ekleyebilir,
-- alan tiplerini (`text`, `textarea`, `number`, `url`) degistirebilir,
-- kart gorunumunu (`card`) ozellestirebilirsin.
+Panel varsayılan olarak bu monorepo kökünü kullanır. Farklı klasör için:
 
-### 2) Farkli repo koku ile calistirma
+- Çevresel değişken: `PORTFOLIO_WORKSPACE_ROOT`
+- veya CLI argüman: `--workspace-root=<path>`
 
-Panel varsayilan olarak bu monorepo kokunu kullanir. Farkli klasor icin:
-
-- Cevresel degisken: `PORTFOLIO_WORKSPACE_ROOT`
-- veya CLI arguman: `--workspace-root=<path>`
-
-Ornek (PowerShell):
+Örnek (PowerShell):
 
 ```powershell
 $env:PORTFOLIO_WORKSPACE_ROOT = "D:\my-portfolio-repo"
 pnpm panel:dev
 ```
 
-Ornek (packaged exe):
+Örnek (packaged exe):
 
 ```powershell
 .\apps\data-panel\dist\portfolio-data-panel-0.1.0-x64-portable.exe --workspace-root="D:\my-portfolio-repo"
 ```
 
-Panel baslarken `data`, `public`, `content/blog`, `content/podcasts` klasorlerini dogrular.
+Panel başlarken `data`, `public`, `content/blog`, `content/podcasts` klasörlerini doğrular.
 
-### 3) Publish akisini degistirme
+### Publish akışını değiştirme
 
-Git publish akisi `apps/data-panel/main.cjs` icindeki `publishChanges` fonksiyonunda.
-Varsayilan akista:
+Git publish akışı `apps/data-panel/main.cjs` içindeki `publishChanges` fonksiyonunda yönetilir.
+Varsayılan akış:
 
 - `git add data public content`
-- otomatik/manuel commit message
+- Otomatik/manuel commit message
 - `git push`
+  Branch seçimi, PR tabanlı akış veya sadece commit modları eklenebilir.
 
-Istersen branch secimi, PR tabanli akış, veya sadece commit modlari ekleyebilirsin.
-
-## Release Checklist
+## Yayın ve Kontrol Listesi
 
 1. `pnpm lint`
 2. `pnpm build`
-3. Icerik/veri kontrolu (`content/`, `data/`, `public/`)
-4. Electron panel akisi kontrolu (`pnpm panel:dev`)
-5. Gerekirse distributable kontrolu (`pnpm panel:pack` / `pnpm panel:dist`)
+3. İçerik/veri kontrolü (`content/`, `data/`, `public/`)
+4. Electron panel akışı kontrolü (`pnpm panel:dev`)
+5. Gerekirse distributable kontrolü (`pnpm panel:pack` / `pnpm panel:dist`)
 
-## Troubleshooting
+## Sorun Giderme
 
-### YouTube cookie/SameSite uyarilari
+### YouTube cookie/SameSite uyarıları
 
-Embed URL'ler `youtube-nocookie.com` formatina cekildi. Bu degisiklik cross-site cookie kaynakli konsol gurultusunu azaltir.
-Tarayici guvenlik politikasi nedeniyle bazi 3rd-party loglar tamamen sifirlanamayabilir; bu durumda uygulama davranisi etkilenmez.
+Embed URL'ler `youtube-nocookie.com` formatına çekildi. Bu değişiklik cross-site cookie kaynaklı konsol gürültüsünü azaltır.
+Tarayıcı güvenlik politikası nedeniyle bazı 3rd-party loglar tamamen sıfırlanamayabilir; bu durumda uygulama davranışı etkilenmez.

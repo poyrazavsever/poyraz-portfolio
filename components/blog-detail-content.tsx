@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -122,7 +122,7 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
             </Typography>
           </header>
 
-          <Card className="relative aspect-[16/8] overflow-hidden rounded-sm border-border">
+          <Card className="relative aspect-16/8 overflow-hidden rounded-sm border-border">
             <Image
               src={post.coverImage}
               alt={post.title}

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 
 import { SiteNavbar } from "@/components/site-navbar";
@@ -9,14 +9,53 @@ import Link from "next/link";
 import { AnnouncementBar } from "poyraz-ui/organisms";
 
 export const metadata: Metadata = {
-  title:
-    "Poyraz Avsever | Portfolyo | Freelancer | Full-stack Geliştirici | Web Geliştirici",
+  metadataBase: new URL("https://poyrazavsever.com"),
+  title: {
+    default: "Poyraz Avsever | Portfolyo",
+    template: "%s | Poyraz Avsever",
+  },
   description:
-    "Poyraz Avsever'in projelerini, yetkinliklerini ve hizmetlerini sergilediği kişisel portfolyo sitesi.",
+    "Poyraz Avsever'in projelerini, yazılım içeriklerini ve teknik çalışmalarını paylaştığı kişisel portfolyo sitesi.",
+  applicationName: "Poyraz Avsever Portfolyo",
+  alternates: {
+    canonical: "/",
+  },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo/logo.jpeg", type: "image/jpeg" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/logo/logo.jpeg",
   },
   authors: [{ name: "Poyraz Avsever" }],
+  creator: "Poyraz Avsever",
+  publisher: "Poyraz Avsever",
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    url: "https://poyrazavsever.com",
+    siteName: "Poyraz Avsever Portfolyo",
+    title: "Poyraz Avsever | Portfolyo",
+    description:
+      "Poyraz Avsever'in projelerini, yazılım içeriklerini ve teknik çalışmalarını paylaştığı kişisel portfolyo sitesi.",
+    images: [
+      {
+        url: "/logo/logo.jpeg",
+        width: 1200,
+        height: 1200,
+        alt: "Poyraz Avsever Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Poyraz Avsever | Portfolyo",
+    description:
+      "Poyraz Avsever'in projelerini, yazılım içeriklerini ve teknik çalışmalarını paylaştığı kişisel portfolyo sitesi.",
+    images: ["/logo/logo.jpeg"],
+    creator: "@poyrazavsever",
+  },
   keywords: [
     "Poyraz Avsever",
     "Portfolio",

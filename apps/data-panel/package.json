@@ -28,6 +28,7 @@
     "appId": "com.poyraz.portfolio.datapanel",
     "productName": "Portfolio Data Panel",
     "asar": true,
+    "icon": "assets/icon.png",
     "directories": {
       "output": "dist"
     },
@@ -38,6 +39,7 @@
       "package.json"
     ],
     "win": {
+      "icon": "assets/icon.ico",
       "signAndEditExecutable": false,
       "target": [
         {
@@ -51,7 +53,9 @@
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
-      "perMachine": false
+      "perMachine": false,
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico"
     }
   }
 }
