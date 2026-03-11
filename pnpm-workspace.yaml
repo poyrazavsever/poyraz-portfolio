@@ -1,3 +1,10 @@
+packages:
+  - .
+  - apps/*
+
+onlyBuiltDependencies:
+  - electron
+
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "panel:dev": "pnpm --filter @portfolio/data-panel dev",
+    "panel:start": "pnpm --filter @portfolio/data-panel dev"
   },
   "dependencies": {
     "@iconify/react": "^6.0.2",

@@ -1,0 +1,12 @@
+{
+  "name": "@portfolio/data-panel",
+  "version": "0.1.0",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {
+    "dev": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^33.2.0"
+  }
+}
