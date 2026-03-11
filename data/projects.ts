@@ -30,7 +30,7 @@ export const WEB_APPS: ProjectItem[] = [
   {
     id: "ataturk-chronology",
     title: "Atatürk Kronolojisi",
-    badge: "Timeline",
+    badge: "Open Source",
     image: "/projects/ataturk.png",
     href: "https://ataturk-kronolojisi.org",
     description: "Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi."
