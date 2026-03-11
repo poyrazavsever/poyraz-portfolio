@@ -1,5 +1,5 @@
 
-import { COLLECTION_CONFIGS, PODCAST_LABELS } from "./configs.js";
+import { BLOG_CATEGORIES, COLLECTION_CONFIGS, PODCAST_LABELS } from "./configs.js";
 
 const state = {
   activeTab: "blog",
@@ -136,6 +136,23 @@ function emptyBlogDraft() {
   };
 }
 
+function ensureBlogCategorySelect(selectedCategory = "General") {
+  const options = BLOG_CATEGORIES;
+  const normalizedSelected = String(selectedCategory || "").trim();
+  const hasSelected = options.includes(normalizedSelected);
+  const finalValue = hasSelected ? normalizedSelected : "General";
+
+  el.blogCategory.innerHTML = "";
+  for (const category of options) {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    el.blogCategory.appendChild(option);
+  }
+
+  el.blogCategory.value = finalValue;
+}
+
 function currentBlogDraft() {
   return {
     slug: el.blogSlug.value.trim(),
@@ -154,7 +171,7 @@ function fillBlogForm(post) {
   const draft = post || emptyBlogDraft();
   el.blogSlug.value = draft.slug || "";
   el.blogTitle.value = draft.title || "";
-  el.blogCategory.value = draft.category || "General";
+  ensureBlogCategorySelect(draft.category || "General");
   el.blogDate.value = draft.date || "";
   el.blogReadTime.value = draft.readTime || "";
   el.blogAuthor.value = draft.author || "Poyraz Avsever";

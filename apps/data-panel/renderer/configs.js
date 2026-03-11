@@ -1,4 +1,6 @@
 
+export const BLOG_CATEGORIES = ["Frontend", "UX", "Yazilim", "TypeScript", "Testing", "General"];
+
 export const COLLECTION_CONFIGS = {
   announcement: {
     label: "Announcement",
