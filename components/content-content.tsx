@@ -8,6 +8,7 @@ import { Icon } from "@iconify/react";
 import { Badge, Button, Card, Typography } from "poyraz-ui/atoms";
 import { Modal, ModalContent, ModalTitle, Sheet, SheetContent, SheetTitle } from "poyraz-ui/molecules";
 import type { PodcastEpisode } from "@/data/content-types";
+import { getYoutubeEmbedUrl } from "@/lib/youtube";
 
 type ContentContentProps = {
   yazilimEpisodes: PodcastEpisode[];
@@ -100,16 +101,6 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
       <canvas ref={canvasRef} aria-label={title} className="h-auto max-h-full w-auto max-w-full" />
     </div>
   );
-}
-
-function getYoutubeEmbedUrl(link: string) {
-  try {
-    const url = new URL(link);
-    const videoId = url.searchParams.get("v");
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
-  } catch {
-    return null;
-  }
 }
 
 function PodcastColumn({

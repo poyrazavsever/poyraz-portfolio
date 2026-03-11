@@ -6,11 +6,82 @@ const path = require("node:path");
 const vm = require("node:vm");
 const matter = require("gray-matter");
 
-const WORKSPACE_ROOT = path.resolve(__dirname, "../..");
-const DATA_DIR = path.join(WORKSPACE_ROOT, "data");
-const PUBLIC_DIR = path.join(WORKSPACE_ROOT, "public");
-const BLOG_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "blog");
-const PODCAST_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "podcasts");
+function getCliArgValue(flag) {
+  const exact = process.argv.find((arg) => arg.startsWith(`${flag}=`));
+  if (exact) return exact.slice(flag.length + 1);
+
+  const index = process.argv.findIndex((arg) => arg === flag);
+  if (index >= 0 && process.argv[index + 1]) {
+    return process.argv[index + 1];
+  }
+
+  return "";
+}
+
+function resolveWorkspaceRoot() {
+  const fromArg = getCliArgValue("--workspace-root");
+  const fromEnv = process.env.PORTFOLIO_WORKSPACE_ROOT || "";
+  const selected = fromArg || fromEnv;
+
+  if (selected) {
+    return path.resolve(selected);
+  }
+
+  return path.resolve(__dirname, "../..");
+}
+
+let WORKSPACE_ROOT = resolveWorkspaceRoot();
+let DATA_DIR = path.join(WORKSPACE_ROOT, "data");
+let PUBLIC_DIR = path.join(WORKSPACE_ROOT, "public");
+let BLOG_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "blog");
+let PODCAST_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "podcasts");
+
+function setWorkspaceRoot(nextRoot) {
+  WORKSPACE_ROOT = path.resolve(nextRoot);
+  DATA_DIR = path.join(WORKSPACE_ROOT, "data");
+  PUBLIC_DIR = path.join(WORKSPACE_ROOT, "public");
+  BLOG_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "blog");
+  PODCAST_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "podcasts");
+}
+
+async function pathExists(target) {
+  try {
+    await fs.access(target);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function ensureWorkspaceStructure() {
+  const checks = [
+    { label: "data", target: DATA_DIR },
+    { label: "public", target: PUBLIC_DIR },
+    { label: "content/blog", target: BLOG_CONTENT_DIR },
+    { label: "content/podcasts", target: PODCAST_CONTENT_DIR },
+  ];
+
+  const missing = [];
+  for (const check of checks) {
+    if (!(await pathExists(check.target))) {
+      missing.push(check.label);
+    }
+  }
+
+  if (!missing.length) return;
+
+  const details = [
+    `Workspace root: ${WORKSPACE_ROOT}`,
+    `Missing: ${missing.join(", ")}`,
+    "",
+    "Fix options:",
+    "1) Run panel from repository root.",
+    "2) Set PORTFOLIO_WORKSPACE_ROOT environment variable.",
+    "3) Launch app with --workspace-root=<path>.",
+  ].join("\n");
+
+  throw new Error(details);
+}
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -685,11 +756,29 @@ ipcMain.handle("media:deleteFile", async (_, relativePath) => deleteMediaFile(re
 ipcMain.handle("publish:status", async () => getPublishStatus());
 ipcMain.handle("publish:run", async (_, message) => publishChanges(message));
 
-app.whenReady().then(() => {
-  createWindow();
+app.whenReady().then(async () => {
+  try {
+    setWorkspaceRoot(resolveWorkspaceRoot());
+    await ensureWorkspaceStructure();
+    createWindow();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    dialog.showErrorBox("Portfolio Data Panel", message);
+    app.quit();
+    return;
+  }
 
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  app.on("activate", async () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      try {
+        await ensureWorkspaceStructure();
+        createWindow();
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        dialog.showErrorBox("Portfolio Data Panel", message);
+        app.quit();
+      }
+    }
   });
 });
 

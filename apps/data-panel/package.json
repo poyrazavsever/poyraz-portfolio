@@ -2,11 +2,56 @@
   "name": "@portfolio/data-panel",
   "version": "0.1.0",
   "private": true,
+  "description": "Electron dashboard for managing portfolio data/content and publishing updates.",
+  "author": "Poyraz Avsever",
   "main": "main.cjs",
   "scripts": {
-    "dev": "electron ."
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "dev": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "pnpm run dist:win && pnpm run dist:portable",
+    "dist:win": "electron-builder --win nsis --config.artifactName=portfolio-data-panel-${version}-${arch}-setup.${ext}",
+    "dist:portable": "electron-builder --win portable --config.artifactName=portfolio-data-panel-${version}-${arch}-portable.${ext}"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^3.14.2",
+    "kind-of": "^6.0.3",
+    "section-matter": "^1.0.0",
+    "strip-bom-string": "^1.0.0"
   },
   "devDependencies": {
-    "electron": "^33.2.0"
+    "electron": "^33.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.poyraz.portfolio.datapanel",
+    "productName": "Portfolio Data Panel",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "renderer/**/*",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false
+    }
   }
 }

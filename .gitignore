@@ -19,6 +19,8 @@
 
 # production
 /build
+apps/data-panel/dist
+apps/data-panel/release
 
 # misc
 .DS_Store

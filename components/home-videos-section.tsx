@@ -1,15 +1,6 @@
 import { Card, Typography } from "poyraz-ui/atoms";
 import { YOUTUBE_VIDEO_LINKS } from "@/data/youtube-videos";
-
-function getYoutubeEmbedUrl(link: string) {
-  try {
-    const url = new URL(link);
-    const videoId = url.searchParams.get("v");
-    return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
-  } catch {
-    return null;
-  }
-}
+import { getYoutubeEmbedUrl } from "@/lib/youtube";
 
 export function HomeVideosSection() {
   return (

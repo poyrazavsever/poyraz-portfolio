@@ -123,9 +123,10 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
           </header>
 
           <Card className="relative aspect-[16/8] overflow-hidden rounded-sm border-border">
-            <img
+            <Image
               src={post.coverImage}
               alt={post.title}
+              fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
