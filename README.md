@@ -1,4 +1,4 @@
-# Portfolio New
+﻿# Portfolio New
 
 Bu monorepo, Next.js tabanlı portfolyo web uygulaması ve Electron ile geliştirilen veri yönetim panelini bir arada sunar.
 
@@ -6,25 +6,26 @@ Bu monorepo, Next.js tabanlı portfolyo web uygulaması ve Electron ile gelişti
 
 ```mermaid
 flowchart TD
-  subgraph Web Uygulama (Next.js)
+  subgraph WebUygulama["Web Uygulama (Next.js)"]
     A[app/] --> B[components/]
     A --> C[content/]
     A --> D[data/]
     A --> E[public/]
-    B --> F[UI Bilesenleri]
+    B --> F[UI Bileşenleri]
     C --> G[Markdown Blog/Podcast]
-    D --> H[TypeScript Veri Kaynaklari]
+    D --> H[TypeScript Veri Kaynakları]
     E --> I[Statik Dosyalar]
   end
-  subgraph Electron Data Panel
-    J[apps/data-panel/]
-    J --> K[renderer/]
+
+  subgraph ElectronDataPanel["Electron Data Panel"]
+    J[apps/data-panel/] --> K[renderer/]
     J --> L[main.cjs]
     J --> M[preload.cjs]
     K --> N[configs.js]
     J --> O[assets/]
     J --> P[Electron build scripts]
   end
+
   J --> D
   J --> E
   J --> C
@@ -32,29 +33,26 @@ flowchart TD
   Q --> D
   Q --> E
   Q --> C
-  A -.-> E
-  A -.-> D
-  A -.-> C
 ```
 
 ### Klasörler ve Akış
 
-- **app/**: Next.js route ve sayfa yapısı
-- **components/**: UI bileşenleri (React)
-- **content/**: Markdown içerikler (blog, podcast)
-- **data/**: TypeScript veri kaynakları (projeler, referanslar, eğitim vb.)
-- **public/**: Statik dosyalar (görseller, pdf, avatar)
-- **apps/data-panel/**: Electron tabanlı içerik yönetim paneli
-  - **renderer/**: Panelin arayüzü ve form konfigürasyonları
-  - **main.cjs**: Electron ana süreç, dosya ve git işlemleri
-  - **configs.js**: Koleksiyon ve form alanı yönetimi
+- `app/`: Next.js route ve sayfa yapısı
+- `components/`: UI bileşenleri (React)
+- `content/`: Markdown içerikler (blog, podcast)
+- `data/`: TypeScript veri kaynakları (projeler, referanslar, eğitim vb.)
+- `public/`: Statik dosyalar (görseller, PDF, avatar)
+- `apps/data-panel/`: Electron tabanlı içerik yönetim paneli
+  - `renderer/`: Panelin arayüzü ve form konfigürasyonları
+  - `main.cjs`: Electron ana süreç, dosya ve git işlemleri
+  - `configs.js`: Koleksiyon ve form alanı yönetimi
 
 ### Akış
 
 1. Web uygulaması Next.js ile çalışır, içerik ve veri dosyalarını okur.
-2. Electron paneli ile içerik (blog/podcast), veri (data/\*.ts) ve medya (public/) yönetimi yapılır.
+2. Electron paneli ile içerik (blog/podcast), veri (`data/*.ts`) ve medya (`public/`) yönetimi yapılır.
 3. Panelde yapılan değişiklikler git ile commit/push edilerek yayınlanır.
-4. Paneldeki koleksiyonlar ve form alanları configs.js ile özelleştirilebilir.
+4. Paneldeki koleksiyonlar ve form alanları `configs.js` ile özelleştirilebilir.
 
 ## Gereksinimler
 
@@ -71,21 +69,21 @@ pnpm install
 ## Frontend Komutları
 
 ```bash
-pnpm dev        # Next.js local
-pnpm lint       # ESLint
-pnpm build      # Production build
-pnpm start      # Production run
+pnpm dev
+pnpm lint
+pnpm build
+pnpm start
 ```
 
 ## Electron Data Panel Komutları
 
 ```bash
-pnpm panel:dev            # Electron panel (development)
-pnpm panel:clean          # apps/data-panel/dist temizle
-pnpm panel:pack           # Paket test (unpacked)
-pnpm panel:dist           # Tüm hedefler için distributable
-pnpm panel:dist:win       # Windows NSIS installer
-pnpm panel:dist:portable  # Windows portable exe
+pnpm panel:dev
+pnpm panel:clean
+pnpm panel:pack
+pnpm panel:dist
+pnpm panel:dist:win
+pnpm panel:dist:portable
 ```
 
 ## İçerik Kaynakları
@@ -95,10 +93,11 @@ pnpm panel:dist:portable  # Windows portable exe
   - `content/podcasts/yazilim/*.md`
   - `content/podcasts/masa-basi/*.md`
 - Site verileri: `data/*.ts`
+- RSS feed: `/rss.xml` (blog yazılarından otomatik üretilir)
 
 ## Electron Panel Özellikleri
 
-- Blog/podcast içeriği oluşturma-güncelleme-silme
+- Blog/podcast içeriği oluşturma, güncelleme, silme
 - `data/*.ts` export dizilerini form tabanlı yönetme
 - `public/` altına medya yükleme/silme
 - `git add + commit + push` ile yayınlama akışı
@@ -109,8 +108,8 @@ pnpm panel:dist:portable  # Windows portable exe
 
 Paneldeki koleksiyonlar ve form alanları `apps/data-panel/renderer/configs.js` dosyasından yönetilir.
 
-- Yeni tab/collection ekleyebilir
-- Alan tiplerini (`text`, `textarea`, `number`, `url`) değiştirebilir
+- Yeni tab/collection ekleyebilirsin
+- Alan tiplerini (`text`, `textarea`, `number`, `url`) değiştirebilirsin
 - Kart görünümünü özelleştirebilirsin
 
 ### Farklı repo kökü ile çalıştırma
@@ -138,12 +137,14 @@ Panel başlarken `data`, `public`, `content/blog`, `content/podcasts` klasörler
 ### Publish akışını değiştirme
 
 Git publish akışı `apps/data-panel/main.cjs` içindeki `publishChanges` fonksiyonunda yönetilir.
+
 Varsayılan akış:
 
 - `git add data public content`
-- Otomatik/manuel commit message
+- Otomatik veya manuel commit message
 - `git push`
-  Branch seçimi, PR tabanlı akış veya sadece commit modları eklenebilir.
+
+İstersen branch seçimi, PR tabanlı akış veya sadece commit modu ekleyebilirsin.
 
 ## Yayın ve Kontrol Listesi
 
@@ -158,4 +159,4 @@ Varsayılan akış:
 ### YouTube cookie/SameSite uyarıları
 
 Embed URL'ler `youtube-nocookie.com` formatına çekildi. Bu değişiklik cross-site cookie kaynaklı konsol gürültüsünü azaltır.
-Tarayıcı güvenlik politikası nedeniyle bazı 3rd-party loglar tamamen sıfırlanamayabilir; bu durumda uygulama davranışı etkilenmez.
+Tarayıcı güvenlik politikası nedeniyle bazı üçüncü parti loglar tamamen sıfırlanamayabilir; bu durumda uygulama davranışı etkilenmez.
