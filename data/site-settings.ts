@@ -1,4 +1,4 @@
-export type AnnouncementItem = {
+﻿export type AnnouncementItem = {
   id: string;
   text: string;
   actionLabel: string;
@@ -8,8 +8,8 @@ export type AnnouncementItem = {
 export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
   {
     id: "main-announcement",
-    text: "ASLJKDAKJSDLKASDALŞSD",
+    text: "UI Kit v2 yayında.",
     actionLabel: "İncele ->",
-    actionHref: "https://ui.poyrazavsever.com"
-  }
+    actionHref: "https://ui.poyrazavsever.com",
+  },
 ];
