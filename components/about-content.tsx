@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -54,7 +54,10 @@ export function AboutContent() {
               <Card className="rounded-sm border-border p-4 transition-colors hover:border-zinc-700">
                 <div className="grid grid-cols-2 gap-2">
                   {CERTIFICATE_PREVIEW.map((item) => (
-                    <div key={item.name} className="relative aspect-4/3 overflow-hidden rounded-sm border border-border">
+                    <div
+                      key={item.name}
+                      className="relative aspect-4/3 overflow-hidden rounded-sm border border-border"
+                    >
                       <Image
                         src={item.image}
                         alt={item.name}

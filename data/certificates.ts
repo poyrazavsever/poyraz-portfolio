@@ -1,100 +1,110 @@
-
-export const certificates = [
-      {
-        "name": "React Native | Practical React Native Course",
-        "organization": "Udemy",
-        "date": "June 2025",
-        "description": "Thanks to this React Native course, I gained the competence to develop mobile applications that work on both Android and iOS. The course focused on the basic components of React Native, navigation, data management, and performance optimization.",
-        "image":"/certificates/reactnative.png",
-        "category": "mobile"
-      },
-      {
-        "name": "GDG Hackathon Participation Certificate",
-        "organization": "Google Developer Group",
-        "date": "May 2025",
-        "description": "I was part of the organization team at the hackathon event held by Google Developer Group",
-        "image": "/certificates/gdg.png",
-        "category": "hackathon"
-      },
-      {
-        "name": "National Student Congress Participation Certificate",
-        "organization": "Ostim Technical University, Faculty of Business Administration",
-        "date": "April 2025",
-        "description": "Certificate of participation for my contribution at the 1st National Student Congress ‘Sustainable Businesses in the Age of Artificial Intelligence’",
-        "image": "/certificates/ulusal.png",
-        "category": "personal"
-      },
-      {
-        "name": "HSD Core Team Participation Certificate",
-        "organization": "Huawei Student Developers",
-        "date": "January 2025",
-        "description": "I was included in the Core Team of the newly established Huawei Student Developers (HSD) community at OSTİM Technical University for the 2024–2025 term.",
-        "image": "/certificates/hsd.png",
-        "category": "personal"
-      },
-      {
-        "name": "Version Control: Git & GitHub",
-        "organization": "BTK Academy",
-        "date": "September 2024",
-        "description": "I completed the course on Git and GitHub. This course increased my knowledge of version control and taught me how to manage projects with Git. Sharing projects on GitHub highlighted the importance of collaborative work and tracking changes.",
-        "image": "/certificates/git.png",
-        "category": "software"
-      },
-      {
-        "name": "Presentation Skills & Communication Management in Entrepreneurship",
-        "organization": "BTK Academy",
-        "date": "September 2024",
-        "description": "I earned the certificate in Presentation Skills & Communication Management in Entrepreneurship. This training helped me develop effective presentation, persuasive communication, and self-expression skills in the field of entrepreneurship.",
-        "image": "/certificates/girisim.png",
-        "category": "communication"
-      },
-      {
-        "name": "Creating an Effective LinkedIn Profile",
-        "organization": "BTK Academy",
-        "date": "October 2024",
-        "description": "I completed the certificate for Creating an Effective LinkedIn Profile. This training enhanced my ability to build a professional profile, develop networking strategies, and use LinkedIn more effectively.",
-        "image": "/certificates/linkedin.png",
-        "category": "personal"
-      },
-      {
-        "name": "Web Programming with REACT",
-        "organization": "BTK Academy",
-        "date": "June 2024",
-        "description": "I earned the Web Programming with REACT certificate. This training taught me how to develop modern web applications using React, leverage component-based architecture, and build dynamic user interfaces.",
-        "image": "/certificates/react.png",
-        "category": "web"
-      },
-      {
-        "name": "Web Programming with Node.js",
-        "organization": "BTK Academy",
-        "date": "November 2024",
-        "description": "I earned the Web Programming with Node.js certificate. This training improved my skills in developing server-side applications, creating APIs, and managing backend processes using Node.js.",
-        "image": "/certificates/nodejs.png",
-        "category": "web"
-      },
-      {
-        "name": "Yeşilay National Debate Championship",
-        "organization": "Yeşilay",
-        "date": "July 2023",
-        "description": "I was a finalist in the Yeşilay National Debate Championship. During this process, I improved my communication, persuasion, and quick-thinking skills.",
-        "image": "/certificates/turkiye.png",
-        "category": "communication"
-      },
-      {
-        "name": "Yeşilay Regional Debate Tournament Championship",
-        "organization": "Yeşilay",
-        "date": "May 2023",
-        "description": "I was a finalist in the Yeşilay Regional Debate Tournament Championship. During this process, I improved my communication, persuasion, and quick-thinking skills.",
-        "image": "/certificates/bolge.png",
-        "category": "communication"
-      },
-      {
-        "name": "Python | Programming from Beginner to Advanced",
-        "organization": "Udemy",
-        "date": "November 2021",
-        "description": "I earned this certificate by working on both basic and advanced topics in Python programming, including algorithms, data structures, and object-oriented programming.",
-        "image": "/certificates/python.png",
-        "category": "software"
-      }
-]
-  
+﻿export const certificates = [
+  {
+    name: "React Native | Uygulamalı React Native Eğitimi",
+    organization: "Udemy",
+    date: "Haziran 2025",
+    description:
+      "Bu eğitimle Android ve iOS platformlarında çalışan mobil uygulamalar geliştirebilecek seviyeye geldim. Temel bileşenler, navigasyon, veri yönetimi ve performans optimizasyonu konularında pratik yaptım.",
+    image: "/certificates/reactnative.png",
+    category: "mobil",
+  },
+  {
+    name: "GDG Hackathon Katılım Sertifikası",
+    organization: "Google Developer Group",
+    date: "Mayıs 2025",
+    description:
+      "Google Developer Group tarafından düzenlenen hackathon etkinliğinde organizasyon ekibinde görev aldım.",
+    image: "/certificates/gdg.png",
+    category: "hackathon",
+  },
+  {
+    name: "Ulusal Öğrenci Kongresi Katılım Sertifikası",
+    organization: "OSTİM Teknik Üniversitesi, İşletme Fakültesi",
+    date: "Nisan 2025",
+    description:
+      "Yapay Zekâ Çağında Sürdürülebilir İşletmeler temalı 1. Ulusal Öğrenci Kongresi'ne katkım nedeniyle verilen katılım sertifikası.",
+    image: "/certificates/ulusal.png",
+    category: "kişisel",
+  },
+  {
+    name: "HSD Core Team Katılım Sertifikası",
+    organization: "Huawei Student Developers",
+    date: "Ocak 2025",
+    description:
+      "OSTİM Teknik Üniversitesi'nde 2024-2025 döneminde kurulan Huawei Student Developers topluluğunun Core Team kadrosunda yer aldım.",
+    image: "/certificates/hsd.png",
+    category: "kişisel",
+  },
+  {
+    name: "Versiyon Kontrol: Git & GitHub",
+    organization: "BTK Akademi",
+    date: "Eylül 2024",
+    description:
+      "Git ve GitHub üzerine aldığım bu eğitimde sürüm kontrol süreçleri, proje yönetimi ve ekip çalışmasında değişiklik takibi konularında yetkinliğimi artırdım.",
+    image: "/certificates/git.png",
+    category: "yazılım",
+  },
+  {
+    name: "Girişimcilikte Sunum Teknikleri ve İletişim Yönetimi",
+    organization: "BTK Akademi",
+    date: "Eylül 2024",
+    description:
+      "Bu eğitim sayesinde etkili sunum hazırlama, ikna edici iletişim kurma ve girişimcilik süreçlerinde kendini doğru ifade etme becerilerimi geliştirdim.",
+    image: "/certificates/girisim.png",
+    category: "iletişim",
+  },
+  {
+    name: "Etkili LinkedIn Profili Oluşturma",
+    organization: "BTK Akademi",
+    date: "Ekim 2024",
+    description:
+      "Profesyonel profil oluşturma, networking stratejileri geliştirme ve LinkedIn'i daha verimli kullanma konularında bilgi kazandım.",
+    image: "/certificates/linkedin.png",
+    category: "kişisel",
+  },
+  {
+    name: "REACT ile Web Programcılığı",
+    organization: "BTK Akademi",
+    date: "Haziran 2024",
+    description:
+      "React ile modern web uygulamaları geliştirme, bileşen tabanlı mimari ve dinamik kullanıcı arayüzü tasarımı konularında uygulamalı eğitim aldım.",
+    image: "/certificates/react.png",
+    category: "web",
+  },
+  {
+    name: "Node.js ile Web Programcılığı",
+    organization: "BTK Akademi",
+    date: "Kasım 2024",
+    description:
+      "Node.js kullanarak sunucu tarafı geliştirme, API oluşturma ve backend süreçlerini yönetme becerilerimi geliştirdim.",
+    image: "/certificates/nodejs.png",
+    category: "web",
+  },
+  {
+    name: "Yeşilay Türkiye Münazara Şampiyonası",
+    organization: "Yeşilay",
+    date: "Temmuz 2023",
+    description:
+      "Yeşilay Türkiye Münazara Şampiyonası'nda finalist oldum. Bu süreçte iletişim, ikna ve hızlı düşünme becerilerimi güçlendirdim.",
+    image: "/certificates/turkiye.png",
+    category: "iletişim",
+  },
+  {
+    name: "Yeşilay Bölge Münazara Turnuvası Şampiyonası",
+    organization: "Yeşilay",
+    date: "Mayıs 2023",
+    description:
+      "Yeşilay Bölge Münazara Turnuvası'nda finalist oldum ve tartışma-temelli iletişim becerilerimi geliştirdim.",
+    image: "/certificates/bolge.png",
+    category: "iletişim",
+  },
+  {
+    name: "Python | Sıfırdan İleri Seviye Programlama",
+    organization: "Udemy",
+    date: "Kasım 2021",
+    description:
+      "Algoritmalar, veri yapıları ve nesne yönelimli programlama dahil olmak üzere Python'ın temel ve ileri seviye konularında kapsamlı eğitim tamamladım.",
+    image: "/certificates/python.png",
+    category: "yazılım",
+  },
+];
