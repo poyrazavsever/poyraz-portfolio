@@ -8,8 +8,8 @@ export type AnnouncementItem = {
 export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
   {
     id: "main-announcement",
-    text: "Bu hafta yeni bileşenler eklendi!",
+    text: "ASLJKDAKJSDLKASDALŞSD",
     actionLabel: "İncele ->",
-    actionHref: "https://ui.poyrazavsever.com",
-  },
+    actionHref: "https://ui.poyrazavsever.com"
+  }
 ];
