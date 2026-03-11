@@ -1,8 +1,7 @@
-export const NAV_LINKS = [
+﻿export const NAV_LINKS = [
   { id: "about", label: "Hakkımda", href: "/about" },
   { id: "blog", label: "Blog", href: "/blog" },
   { id: "content", label: "İçerikler", href: "/content" },
-  { id: "newsletter", label: "Bülten", href: "/newsletter" },
   { id: "projects", label: "Projeler", href: "/projects" },
   { id: "contact", label: "İletişim", href: "/contact" },
 ] as const;
