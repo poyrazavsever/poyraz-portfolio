@@ -53,5 +53,13 @@ export const FIGMA_TEMPLATES: ProjectItem[] = [
     image: "/projects/hsd.png",
     href: "https://www.figma.com/community/file/1613511833232376739",
     description: "HSD Community için Web Site tasarımı. Component, dashboard, landing page, profile sayfaları"
+  },
+  {
+    id: "restaurant-menu",
+    title: "Restaurant Menu UI Design",
+    badge: "Figma",
+    image: "/projects/menu.png",
+    href: "https://www.figma.com/community/file/1613577450975840169/restaurant-menu-ui-design",
+    description: "Restaurant Menu UI Design Template for community"
   }
 ];
