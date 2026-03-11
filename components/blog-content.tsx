@@ -16,8 +16,30 @@ type BlogContentProps = {
   data: BlogPageData;
 };
 
-function pageHref(page: number) {
-  return page <= 1 ? "/blog" : `/blog?page=${page}`;
+function pageHref(page: number, category: string) {
+  const params = new URLSearchParams();
+
+  if (page > 1) {
+    params.set("page", String(page));
+  }
+
+  if (category !== "All") {
+    params.set("category", category);
+  }
+
+  const query = params.toString();
+  return query ? `/blog?${query}` : "/blog";
+}
+
+function categoryHref(category: string) {
+  if (category === "All") {
+    return "/blog";
+  }
+
+  const params = new URLSearchParams();
+  params.set("category", category);
+
+  return `/blog?${params.toString()}`;
 }
 
 export function BlogContent({ data }: BlogContentProps) {
@@ -45,14 +67,15 @@ export function BlogContent({ data }: BlogContentProps) {
           <Card className="rounded-sm border-border p-4">
             <Typography variant="large">Kategoriler</Typography>
             <div className="mt-3 flex flex-wrap gap-2">
-              {data.categories.map((category, index) => (
-                <Badge
-                  key={category}
-                  variant={index === 0 ? "default" : "outline"}
-                  className="rounded-sm"
-                >
-                  {category}
-                </Badge>
+              {data.categories.map((category) => (
+                <Link key={category} href={categoryHref(category)}>
+                  <Badge
+                    variant={category === data.selectedCategory ? "default" : "outline"}
+                    className="cursor-pointer rounded-sm"
+                  >
+                    {category}
+                  </Badge>
+                </Link>
               ))}
             </div>
           </Card>
@@ -114,7 +137,9 @@ export function BlogContent({ data }: BlogContentProps) {
         ) : (
           <Card className="rounded-sm border-border p-5">
             <Typography variant="p" className="text-muted-foreground">
-              Henüz blog yazısı bulunmuyor.
+              {data.selectedCategory === "All"
+                ? "Henüz blog yazısı bulunmuyor."
+                : `"${data.selectedCategory}" kategorisinde henüz blog yazısı bulunmuyor.`}
             </Typography>
           </Card>
         )}
@@ -123,14 +148,17 @@ export function BlogContent({ data }: BlogContentProps) {
           <PaginationContent className="justify-start">
             <PaginationItem>
               <PaginationPrevious
-                href={pageHref(Math.max(1, data.currentPage - 1))}
+                href={pageHref(Math.max(1, data.currentPage - 1), data.selectedCategory)}
                 aria-disabled={data.currentPage <= 1}
               />
             </PaginationItem>
 
             {pageNumbers.map((page) => (
               <PaginationItem key={page}>
-                <PaginationLink href={pageHref(page)} isActive={page === data.currentPage}>
+                <PaginationLink
+                  href={pageHref(page, data.selectedCategory)}
+                  isActive={page === data.currentPage}
+                >
                   {page}
                 </PaginationLink>
               </PaginationItem>
@@ -138,7 +166,7 @@ export function BlogContent({ data }: BlogContentProps) {
 
             <PaginationItem>
               <PaginationNext
-                href={pageHref(Math.min(data.totalPages, data.currentPage + 1))}
+                href={pageHref(Math.min(data.totalPages, data.currentPage + 1), data.selectedCategory)}
                 aria-disabled={data.currentPage >= data.totalPages}
               />
             </PaginationItem>

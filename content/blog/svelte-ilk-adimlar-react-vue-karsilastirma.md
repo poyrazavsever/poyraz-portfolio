@@ -4,7 +4,7 @@ category: "Frontend"
 date: "2026-02-14"
 readTime: "11 min read"
 author: "Poyraz Avsever"
-excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+excerpt: "Frontend dünyasında React, Vue ve Angular gibi güçlü seçenekler var. Son yıllarda bu listeye güçlü bir alternatif..."
 coverImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*Dx04pr9plejiCcWI.png"
 ---
 

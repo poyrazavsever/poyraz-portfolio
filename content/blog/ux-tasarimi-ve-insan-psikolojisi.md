@@ -4,7 +4,7 @@ category: "UX"
 date: "2026-02-26"
 readTime: "12 min read"
 author: "Poyraz Avsever"
-excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+excerpt: "UX (Kullanıcı Deneyimi) tasarımı, teknolojiyle etkileşime geçen herkesin deneyimini iyileştirmeye..."
 coverImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*5OUFz00g3w5ee2lV.jpg"
 ---
 

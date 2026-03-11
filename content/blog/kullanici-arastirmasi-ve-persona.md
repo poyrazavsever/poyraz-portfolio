@@ -4,7 +4,7 @@ category: "UX"
 date: "2026-02-05"
 readTime: "6 min read"
 author: "Poyraz Avsever"
-excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+excerpt: "Tasarım dünyasında, ürünlerimizin kullanıcılarımızın ihtiyaçlarını en iyi şekilde karşılamasını istemek..."
 coverImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*BEVhh2Et54wytkaA.jpg"
 ---
 

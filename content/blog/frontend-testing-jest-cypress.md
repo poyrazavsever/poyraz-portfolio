@@ -4,7 +4,7 @@ category: "Testing"
 date: "2026-02-22"
 readTime: "9 min read"
 author: "Poyraz Avsever"
-excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+excerpt: "Frontend tarafında kaliteyi korumanın en sağlam yolu testtir. Bu yazıda, farklı amaçlara hizmet eden..."
 coverImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*uNpkjRqVlaB2WbDl.png"
 ---
 

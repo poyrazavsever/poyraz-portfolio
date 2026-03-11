@@ -4,7 +4,7 @@ category: "Frontend"
 date: "2026-02-10"
 readTime: "10 min read"
 author: "Poyraz Avsever"
-excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+excerpt: "Tailwind CSS, son dönemde front-end geliştiriciler arasında çok popüler hale geldi. Klasik CSS..."
 coverImage: "/news/performance.svg"
 ---
 

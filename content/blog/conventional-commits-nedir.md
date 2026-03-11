@@ -4,7 +4,7 @@ category: "Yazilim"
 date: "2026-02-01"
 readTime: "8 min read"
 author: "Poyraz Avsever"
-excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+excerpt: "Yazılım geliştirme sürecinde yalnızca kod yazmıyoruz; aynı zamanda takım iletişimini ve proje geçmişini...."
 coverImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*WQOgajPE2m4aYuVC3SZoFQ.jpeg"
 ---
 

@@ -4,7 +4,7 @@ category: "TypeScript"
 date: "2026-02-18"
 readTime: "8 min read"
 author: "Poyraz Avsever"
-excerpt: "Bu yazida temel kavramlari, pratik ornekleri ve uygulayabileceginiz ipuclarini sade bir dille bulabilirsiniz."
+excerpt: "JavaScript'ten TypeScript'e geçiş, özellikle React projelerinde kod kalitesini gözle görülür şekilde artırıyor..."
 coverImage: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*yRK5eL_pqabAhrn7"
 ---
 

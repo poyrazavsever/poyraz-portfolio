@@ -44,6 +44,7 @@ export type BlogPageData = {
   news: BlogNewsItem[];
   articles: BlogArticleItem[];
   categories: string[];
+  selectedCategory: string;
   podcastGroups: BlogPodcastGroup[];
   totalPages: number;
   currentPage: number;
@@ -72,6 +73,10 @@ function sortByDateDesc<T extends { date: string; id: string }>(items: T[]) {
 
     return a.id.localeCompare(b.id);
   });
+}
+
+function normalizeCategory(value: string) {
+  return value.trim().toLocaleLowerCase();
 }
 
 function mapEpisodeToPodcastItem(episode: PodcastEpisode): BlogPodcastItem {
@@ -115,13 +120,12 @@ export async function getHomeBlogNews(limit = 3): Promise<BlogNewsItem[]> {
   }));
 }
 
-export async function getBlogPageData(page = 1, pageSize = 12): Promise<BlogPageData> {
+export async function getBlogPageData(
+  page = 1,
+  pageSize = 12,
+  selectedCategoryParam?: string,
+): Promise<BlogPageData> {
   const articles = await getAllBlogArticles();
-  const totalPages = Math.max(1, Math.ceil(Math.max(articles.length, 1) / pageSize));
-  const currentPage = Math.min(Math.max(1, page), totalPages);
-  const start = (currentPage - 1) * pageSize;
-  const paginated = articles.slice(start, start + pageSize);
-
   const categories = [
     "All",
     ...new Set(
@@ -130,11 +134,25 @@ export async function getBlogPageData(page = 1, pageSize = 12): Promise<BlogPage
         .filter(Boolean),
     ),
   ];
+  const categoryByNormalized = new Map(
+    categories.map((category) => [normalizeCategory(category), category]),
+  );
+  const requestedCategory = selectedCategoryParam?.trim();
+  const selectedCategory =
+    (requestedCategory && categoryByNormalized.get(normalizeCategory(requestedCategory))) || "All";
+  const filteredArticles =
+    selectedCategory === "All"
+      ? articles
+      : articles.filter((item) => normalizeCategory(item.category) === normalizeCategory(selectedCategory));
+  const totalPages = Math.max(1, Math.ceil(Math.max(filteredArticles.length, 1) / pageSize));
+  const currentPage = Math.min(Math.max(1, page), totalPages);
+  const start = (currentPage - 1) * pageSize;
+  const paginated = filteredArticles.slice(start, start + pageSize);
 
   const podcastCollections = await getPodcastCollections();
 
   return {
-    news: articles.slice(0, 4).map((item) => ({
+    news: filteredArticles.slice(0, 4).map((item) => ({
       id: `blog-news-${item.slug}`,
       title: item.title,
       category: item.category,
@@ -144,6 +162,7 @@ export async function getBlogPageData(page = 1, pageSize = 12): Promise<BlogPage
     })),
     articles: paginated,
     categories,
+    selectedCategory,
     totalPages,
     currentPage,
     podcastGroups: [
