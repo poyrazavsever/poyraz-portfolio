@@ -1,5 +1,4 @@
-"use client";
-
+import Link from "next/link";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import {
   ArticleCard,
@@ -11,19 +10,25 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "poyraz-ui/molecules";
-import {
-  BLOG_ARTICLES,
-  BLOG_CATEGORIES,
-  BLOG_NEWS,
-  RECENT_COMMENTS,
-} from "@/data/blog";
+import type { BlogPageData } from "@/data/blog";
 
-export function BlogContent() {
+type BlogContentProps = {
+  data: BlogPageData;
+};
+
+function pageHref(page: number) {
+  return page <= 1 ? "/blog" : `/blog?page=${page}`;
+}
+
+export function BlogContent({ data }: BlogContentProps) {
+  const pageNumbers = Array.from({ length: data.totalPages }, (_, index) => index + 1);
+  const hasArticles = data.articles.length > 0;
+
   return (
     <section className="flex h-full flex-col gap-3 overflow-hidden">
       <div className="grid gap-3 md:grid-cols-[1.35fr_1fr]">
         <div className="space-y-2">
-          {BLOG_NEWS.map((post) => (
+          {data.news.map((post) => (
             <NewsCard
               key={post.id}
               image={post.image}
@@ -40,7 +45,7 @@ export function BlogContent() {
           <Card className="rounded-sm border-border p-4">
             <Typography variant="large">Kategoriler</Typography>
             <div className="mt-3 flex flex-wrap gap-2">
-              {BLOG_CATEGORIES.map((category, index) => (
+              {data.categories.map((category, index) => (
                 <Badge
                   key={category}
                   variant={index === 0 ? "default" : "outline"}
@@ -53,63 +58,89 @@ export function BlogContent() {
           </Card>
 
           <Card className="rounded-sm border-border p-4">
-            <Typography variant="large">Son yorumlar</Typography>
-            <div className="mt-3 space-y-2">
-              {RECENT_COMMENTS.map((comment) => (
-                <Card key={comment.id} className="rounded-sm border-border p-3">
-                  <Typography variant="small" className="font-semibold text-foreground">
-                    {comment.author}
-                  </Typography>
-                  <Typography variant="small" className="mt-1 text-muted-foreground">
-                    {comment.text}
-                  </Typography>
-                  <Typography variant="small" className="mt-2 text-red-600">
-                    {comment.date}
-                  </Typography>
+            <Typography variant="large">Podcast İçerikleri</Typography>
+            <div className="mt-3 space-y-3">
+              {data.podcastGroups.map((group) => (
+                <Card key={group.id} className="rounded-sm border-border p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <Typography variant="small" className="font-semibold text-foreground">
+                      {group.title}
+                    </Typography>
+                    <Link
+                      href={group.href}
+                      className="text-xs text-muted-foreground underline transition-colors hover:text-foreground"
+                    >
+                      Tümünü Gör
+                    </Link>
+                  </div>
+
+                  <div className="mt-2 space-y-2">
+                    {group.items.map((episode) => (
+                      <div key={episode.id} className="rounded-sm border border-border p-2">
+                        <Typography variant="small" className="font-medium text-foreground">
+                          {episode.title}
+                        </Typography>
+                        <Typography variant="small" className="mt-0.5 text-muted-foreground">
+                          {episode.date}
+                        </Typography>
+                      </div>
+                    ))}
+                  </div>
                 </Card>
               ))}
             </div>
           </Card>
-
         </div>
       </div>
 
       <div className="space-y-3">
-        <div className="grid gap-3 md:grid-cols-3">
-          {BLOG_ARTICLES.map((post) => (
-            <ArticleCard
-              key={post.id}
-              image={post.image}
-              category={post.category}
-              title={post.title}
-              excerpt={post.excerpt}
-              date={post.date}
-              readTime={post.readTime}
-              href={post.href}
-              className="rounded-sm border-border"
-              author={{ name: "Poyraz Avsever", avatar: "/logo/logo.jpeg" }}
-            />
-          ))}
-        </div>
+        {hasArticles ? (
+          <div className="grid gap-3 md:grid-cols-3">
+            {data.articles.map((post) => (
+              <ArticleCard
+                key={post.id}
+                image={post.image}
+                category={post.category}
+                title={post.title}
+                excerpt={post.excerpt}
+                date={post.date}
+                readTime={post.readTime}
+                href={post.href}
+                className="rounded-sm border-border"
+                author={{ name: post.author, avatar: "/logo/logo.jpeg" }}
+              />
+            ))}
+          </div>
+        ) : (
+          <Card className="rounded-sm border-border p-5">
+            <Typography variant="p" className="text-muted-foreground">
+              Henüz blog yazısı bulunmuyor.
+            </Typography>
+          </Card>
+        )}
 
-        <Pagination className="mx-0 mt-4 justify-end">
+        <Pagination className="mx-0 mt-4 justify-start">
           <PaginationContent className="justify-start">
             <PaginationItem>
-              <PaginationPrevious href="/blog" />
+              <PaginationPrevious
+                href={pageHref(Math.max(1, data.currentPage - 1))}
+                aria-disabled={data.currentPage <= 1}
+              />
             </PaginationItem>
+
+            {pageNumbers.map((page) => (
+              <PaginationItem key={page}>
+                <PaginationLink href={pageHref(page)} isActive={page === data.currentPage}>
+                  {page}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+
             <PaginationItem>
-              <PaginationLink href="/blog" isActive>
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="/blog?page=2">2</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationLink href="/blog?page=3">3</PaginationLink>
-            </PaginationItem>
-            <PaginationItem>
-              <PaginationNext href="/blog?page=2" />
+              <PaginationNext
+                href={pageHref(Math.min(data.totalPages, data.currentPage + 1))}
+                aria-disabled={data.currentPage >= data.totalPages}
+              />
             </PaginationItem>
           </PaginationContent>
         </Pagination>

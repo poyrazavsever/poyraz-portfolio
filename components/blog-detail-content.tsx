@@ -5,31 +5,18 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Icon } from "@iconify/react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  Badge,
-  Button,
-  Card,
-  Textarea,
-  Typography,
-} from "poyraz-ui/atoms";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "poyraz-ui/molecules";
+import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import type { BlogDetail } from "@/data/blog-detail";
-import type { BlogComment, BlogEngagement } from "@/data/blog-engagement";
 
 type BlogDetailContentProps = {
   post: BlogDetail;
-  engagement: BlogEngagement;
 };
 
 function MermaidBlock({ chart }: { chart: string }) {
-  const [svg, setSvg] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [svg, setSvg] = useState("");
+  const [error, setError] = useState("");
   const idRef = useRef(`mermaid-${Math.random().toString(36).slice(2)}`);
 
   useEffect(() => {
@@ -40,6 +27,7 @@ function MermaidBlock({ chart }: { chart: string }) {
         const mermaid = (await import("mermaid")).default;
         mermaid.initialize({ startOnLoad: false, theme: "neutral", securityLevel: "loose" });
         const { svg: rendered } = await mermaid.render(idRef.current, chart);
+
         if (mounted) {
           setSvg(rendered);
           setError("");
@@ -84,88 +72,22 @@ function MermaidBlock({ chart }: { chart: string }) {
   );
 }
 
-export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) {
+export function BlogDetailContent({ post }: BlogDetailContentProps) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
-  const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(engagement.likes);
-  const [comments, setComments] = useState<BlogComment[]>(engagement.comments);
-  const [commentSheetOpen, setCommentSheetOpen] = useState(false);
-  const [githubAuthed, setGithubAuthed] = useState(false);
-  const [draft, setDraft] = useState("");
-  const [replyTo, setReplyTo] = useState<{ id: string; author: string } | null>(null);
-
   const progressWidth = useMemo(() => `${Math.min(100, Math.max(0, progress))}%`, [progress]);
 
   const handleScroll = () => {
-    const el = scrollerRef.current;
-    if (!el) return;
+    const element = scrollerRef.current;
+    if (!element) return;
 
-    const scrollable = el.scrollHeight - el.clientHeight;
+    const scrollable = element.scrollHeight - element.clientHeight;
     if (scrollable <= 0) {
       setProgress(100);
       return;
     }
 
-    setProgress((el.scrollTop / scrollable) * 100);
-  };
-
-  const toggleLike = () => {
-    setLiked((prev) => {
-      const next = !prev;
-      setLikeCount((count) => (next ? count + 1 : Math.max(0, count - 1)));
-      return next;
-    });
-  };
-
-  const handleReplyClick = (id: string, author: string) => {
-    setReplyTo({ id, author });
-    setCommentSheetOpen(true);
-  };
-
-  const handleSubmitComment = () => {
-    if (!githubAuthed) return;
-    const content = draft.trim();
-    if (!content) return;
-
-    if (replyTo) {
-      setComments((prev) =>
-        prev.map((item) =>
-          item.id === replyTo.id
-            ? {
-                ...item,
-                replies: [
-                  ...item.replies,
-                  {
-                    id: `reply-${Date.now()}`,
-                    author: "Sen (GitHub)",
-                    avatar: "/logo/logo.jpeg",
-                    date: "Az önce",
-                    content,
-                    likes: 0,
-                  },
-                ],
-              }
-            : item,
-        ),
-      );
-      setReplyTo(null);
-    } else {
-      setComments((prev) => [
-        {
-          id: `comment-${Date.now()}`,
-          author: "Sen (GitHub)",
-          avatar: "/logo/logo.jpeg",
-          date: "Az önce",
-          content,
-          likes: 0,
-          replies: [],
-        },
-        ...prev,
-      ]);
-    }
-
-    setDraft("");
+    setProgress((element.scrollTop / scrollable) * 100);
   };
 
   return (
@@ -210,169 +132,6 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
             />
           </Card>
 
-          <div className="flex items-center justify-end gap-2">
-            <Button
-              type="button"
-              variant={liked ? "default" : "outline"}
-              className="h-9 w-9 rounded-sm p-0"
-              onClick={toggleLike}
-              aria-label={`Yazıyı beğen (${likeCount})`}
-              title={`Beğen (${likeCount})`}
-            >
-              <Icon icon={liked ? "mdi:heart" : "mdi:heart-outline"} width={18} height={18} />
-            </Button>
-
-            <Sheet open={commentSheetOpen} onOpenChange={setCommentSheetOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-9 w-9 rounded-sm p-0"
-                  aria-label={`Yorumları aç (${comments.length})`}
-                  title={`Yorumlar (${comments.length})`}
-                >
-                  <Icon icon="mdi:comment-outline" width={18} height={18} />
-                </Button>
-              </SheetTrigger>
-
-              <SheetContent side="right" className="flex h-dvh w-full max-w-xl flex-col p-0">
-                <div className="border-b border-border px-4 py-3">
-                  <SheetTitle>Yorumlar</SheetTitle>
-                </div>
-
-                <div className="flex min-h-0 flex-1 flex-col gap-3 p-4">
-                  <div className="min-h-0 flex-1 space-y-3 overflow-y-auto pr-1">
-                    {comments.map((item) => (
-                      <Card key={item.id} className="overflow-visible rounded-sm border-border p-3">
-                        <div className="flex items-start gap-2">
-                          <Avatar className="h-8 w-8 rounded-sm">
-                            <AvatarImage src={item.avatar} alt={item.author} />
-                            <AvatarFallback className="rounded-sm bg-muted text-xs">
-                              {item.author.slice(0, 2).toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="min-w-0 flex-1">
-                            <div className="flex flex-wrap items-center gap-2">
-                              <Typography variant="small" className="font-semibold text-foreground">
-                                {item.author}
-                              </Typography>
-                              <Typography variant="small" className="text-muted-foreground">
-                                {item.date}
-                              </Typography>
-                            </div>
-                            <Typography variant="small" className="mt-1 text-muted-foreground">
-                              {item.content}
-                            </Typography>
-                            <div className="mt-2 flex items-center gap-2">
-                              <Button type="button" variant="outline" size="sm" className="rounded-sm">
-                                Beğen ({item.likes})
-                              </Button>
-                              <Button
-                                type="button"
-                                variant="outline"
-                                size="sm"
-                                className="rounded-sm"
-                                onClick={() => handleReplyClick(item.id, item.author)}
-                              >
-                                Yanıtla
-                              </Button>
-                            </div>
-
-                            {item.replies.length > 0 ? (
-                              <div className="mt-3 grid gap-2 border-l border-border pl-3">
-                                {item.replies.map((reply) => (
-                                  <Card key={reply.id} className="rounded-sm border-border p-2.5">
-                                    <div className="flex items-start gap-2">
-                                      <Avatar className="h-7 w-7 rounded-sm">
-                                        <AvatarImage src={reply.avatar} alt={reply.author} />
-                                        <AvatarFallback className="rounded-sm bg-muted text-[10px]">
-                                          {reply.author.slice(0, 2).toUpperCase()}
-                                        </AvatarFallback>
-                                      </Avatar>
-                                      <div className="min-w-0">
-                                        <div className="flex flex-wrap items-center gap-2">
-                                          <Typography
-                                            variant="small"
-                                            className="font-semibold text-foreground"
-                                          >
-                                            {reply.author}
-                                          </Typography>
-                                          <Typography variant="small" className="text-muted-foreground">
-                                            {reply.date}
-                                          </Typography>
-                                        </div>
-                                        <Typography variant="small" className="mt-1 text-muted-foreground">
-                                          {reply.content}
-                                        </Typography>
-                                      </div>
-                                    </div>
-                                  </Card>
-                                ))}
-                              </div>
-                            ) : null}
-                          </div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-
-                  {!githubAuthed ? (
-                    <Card className="rounded-sm border-border p-3">
-                      <Typography variant="small" className="text-muted-foreground">
-                        Yorum yapmadan önce GitHub ile giriş yapman gerekiyor.
-                      </Typography>
-                      <Button
-                        type="button"
-                        className="mt-2 rounded-sm"
-                        onClick={() => setGithubAuthed(true)}
-                      >
-                        GitHub ile devam et
-                      </Button>
-                    </Card>
-                  ) : null}
-
-                  {replyTo ? (
-                    <Card className="rounded-sm border-border p-2">
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <Typography variant="small" className="text-muted-foreground">
-                          {replyTo.author} kullanıcısına yanıt yazıyorsun
-                        </Typography>
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="outline"
-                          className="rounded-sm"
-                          onClick={() => setReplyTo(null)}
-                        >
-                          Vazgeç
-                        </Button>
-                      </div>
-                    </Card>
-                  ) : null}
-
-                  <Card className="rounded-sm border-border p-3">
-                    <Textarea
-                      value={draft}
-                      onChange={(event) => setDraft(event.target.value)}
-                      placeholder={githubAuthed ? "Yorumunu yaz..." : "Önce GitHub ile giriş yap"}
-                      className="min-h-24 rounded-sm"
-                      disabled={!githubAuthed}
-                    />
-                    <div className="mt-2 flex justify-end">
-                      <Button
-                        type="button"
-                        className="rounded-sm"
-                        onClick={handleSubmitComment}
-                        disabled={!githubAuthed || !draft.trim()}
-                      >
-                        Yorumu Gönder
-                      </Button>
-                    </div>
-                  </Card>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
           <section className="space-y-4">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
@@ -417,11 +176,7 @@ export function BlogDetailContent({ post, engagement }: BlogDetailContentProps) 
                   const language = match?.[1] ?? "";
 
                   if (!match) {
-                    return (
-                      <code className="rounded-sm bg-muted px-1.5 py-0.5 text-[13px]">
-                        {children}
-                      </code>
-                    );
+                    return <code className="rounded-sm bg-muted px-1.5 py-0.5 text-[13px]">{children}</code>;
                   }
 
                   if (language === "mermaid") {

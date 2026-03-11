@@ -1,5 +1,3 @@
-import { BLOG_ARTICLES, BLOG_CATEGORIES } from "@/data/blog";
-import { BLOG_DETAILS } from "@/data/blog-detail";
 import { certificates } from "@/data/certificates";
 import { EDUCATION } from "@/data/education";
 import { EXPERIENCE } from "@/data/experience";
@@ -42,27 +40,20 @@ const socialItems: CommandPaletteItem[] = SOCIAL_LINKS.map((item) => ({
 }));
 
 const blogItems: CommandPaletteItem[] = [
-  ...BLOG_DETAILS.map((item) => ({
-    id: `blog-detail-${item.slug}`,
-    label: item.title,
-    href: `/blog/${item.slug}`,
-    icon: "mdi:post-outline",
-    keywords: [item.category, item.author, item.excerpt, "blog", "yazı", "article"],
-  })),
-  ...BLOG_ARTICLES.map((item, index) => ({
-    id: `blog-article-${item.id}-${index}`,
-    label: item.title,
-    href: item.href,
-    icon: "mdi:file-document-outline",
-    keywords: [item.category, item.excerpt, item.readTime, "blog", "yazı", "article"],
-  })),
-  ...BLOG_CATEGORIES.map((item) => ({
-    id: `blog-category-${item}`,
-    label: `Kategori: ${item}`,
+  {
+    id: "blog-index",
+    label: "Blog",
     href: "/blog",
-    icon: "mdi:tag-outline",
-    keywords: [item, "blog", "kategori", "category"],
-  })),
+    icon: "mdi:file-document-outline",
+    keywords: ["blog", "yazı", "article", "post"],
+  },
+  {
+    id: "blog-content-page",
+    label: "Podcast ve İçerikler",
+    href: "/content",
+    icon: "mdi:microphone-outline",
+    keywords: ["podcast", "yazılım", "masa başı", "içerik", "content"],
+  },
 ];
 
 const aboutItems: CommandPaletteItem[] = [

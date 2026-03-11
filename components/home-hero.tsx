@@ -4,9 +4,19 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { Card, Typography } from "poyraz-ui/atoms";
 import { NewsCard } from "poyraz-ui/molecules";
-import { HOME_NEWS } from "@/lib/home-news";
 
-export function HomeHero() {
+type HomeHeroProps = {
+  news: {
+    id: string;
+    category: string;
+    title: string;
+    date: string;
+    image: string;
+    href: string;
+  }[];
+};
+
+export function HomeHero({ news }: HomeHeroProps) {
   const [frame, setFrame] = useState<1 | 2>(1);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -29,7 +39,7 @@ export function HomeHero() {
   return (
     <section className="grid gap-3 md:h-65 md:grid-cols-2">
       <div className="grid gap-2 md:grid-rows-3">
-        {HOME_NEWS.map((item) => (
+        {news.map((item) => (
           <NewsCard
             key={item.id}
             className="rounded-sm border-border md:h-full"
@@ -54,8 +64,8 @@ export function HomeHero() {
             </Typography>
           </div>
           <Typography variant="small" className="text-muted-foreground">
-            Teknolojiyi merak eden bir genç. Yazılımı seviyor, bir şeyler üretiyor ve bolca
-            deniyor. Çok fazla şey yapıyor, takipte kal.
+            Teknolojiyi merak eden bir genÃ§. YazÄ±lÄ±mÄ± seviyor, bir ÅŸeyler Ã¼retiyor ve bolca
+            deniyor. Ã‡ok fazla ÅŸey yapÄ±yor, takipte kal.
           </Typography>
         </div>
 
