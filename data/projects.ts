@@ -1,4 +1,4 @@
-export type ProjectItem = {
+﻿export type ProjectItem = {
   id: string;
   title: string;
   description: string;
@@ -9,61 +9,99 @@ export type ProjectItem = {
 
 export const MOBILE_APPS: ProjectItem[] = [
   {
-    id: "mobile-habit-flow",
-    title: "Habit Flow",
+    id: "targiz-app",
+    title: "Targiz App",
     description:
-      "A mobile-first productivity app focused on clean habit tracking, reminders, and weekly review loops.",
+      "Ottoqua ekibiyle birlikte geliştirdiğimiz, küçük ölçekli üreticilere sahada destek veren yapay zeka destekli tarım uygulaması.",
     image: "/images/hero1.png",
-    badge: "React Native",
+    badge: "Agritech",
+    href: "https://ottoqua.com",
   },
   {
-    id: "mobile-campus-connect",
-    title: "Campus Connect",
+    id: "pixel-sinav",
+    title: "Pixel Sınav",
     description:
-      "Event and club discovery app prototype for university communities with role-based content publishing.",
+      "Pixel art odaklı arayüzüyle zamanlı deneme ve soru çözümü sunan oyunlaştırılmış sınav hazırlık platformu.",
+    image: "/news/design.svg",
+    badge: "Education",
+    href: "https://github.com/poyrazavsever/PixelSinav-Frontend",
+  },
+  {
+    id: "movie-app",
+    title: "Movie Discovery App",
+    description:
+      "TMDb API kullanan, izleme listesi ve ruh haline göre filtreleme özellikleriyle film keşfini kolaylaştıran yan proje.",
     image: "/images/hero2.png",
-    badge: "Expo",
+    badge: "TMDb",
+    href: "https://movie-app-v2-zcp7.vercel.app",
   },
 ];
 
 export const WEB_APPS: ProjectItem[] = [
   {
-    id: "web-portfolio",
-    title: "Personal Portfolio",
+    id: "arc-foreign-trade",
+    title: "ARC Foreign Trade",
     description:
-      "A minimal portfolio system with blog details, command palette navigation, and reusable design system primitives.",
-    image: "/news/design.svg",
-    badge: "Next.js",
-    href: "https://poyrazavsever.com",
+      "Ankara merkezli ihracat odaklı bir üretici firma için kurumsal web sitesi yenileme projesi.",
+    image: "/news/performance.svg",
+    badge: "Freelance",
+    href: "https://arcforeigntrade.com",
   },
   {
-    id: "web-poyraz-ui-docs",
-    title: "Poyraz UI Docs",
+    id: "ataturk-chronology",
+    title: "Atatürk Kronolojisi",
     description:
-      "Documentation and showcase site for the UI kit, including component examples and implementation patterns.",
+      "Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
+    image: "/news/design.svg",
+    badge: "Timeline",
+    href: "https://ataturk-kronolojisi.org",
+  },
+  {
+    id: "urun-uncu",
+    title: "Ürün Üncü",
+    description:
+      "Dijital ürün, isteğe bağlı video ve bire bir danışmanlık satışı yapılan tam kapsamlı e-ticaret platformu.",
+    image: "/images/hero1.png",
+    badge: "Commerce",
+    href: "https://urununcu.com",
+  },
+  {
+    id: "mockup-factory",
+    title: "Mockup Factory",
+    description:
+      "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç.",
     image: "/news/performance.svg",
-    badge: "poyraz-ui",
-    href: "https://ui.poyrazavsever.com",
+    badge: "Open Source",
+    href: "https://mockup-factory-mu.vercel.app/",
   },
 ];
 
 export const FIGMA_TEMPLATES: ProjectItem[] = [
   {
-    id: "figma-minimal-saas",
-    title: "Minimal SaaS Landing Kit",
+    id: "reactive-switcher",
+    title: "Reactive Switcher",
     description:
-      "Landing page template set with token-based spacing and typography scales for fast startup launches.",
+      "React ve Tailwind v4 için type-safe, zero-runtime tema geçişi sağlayan açık kaynak paket.",
     image: "/news/design.svg",
-    badge: "Figma",
-    href: "https://www.behance.net/poyrazavsever",
+    badge: "npm",
+    href: "https://reactive-switcher-j9qb.vercel.app/",
   },
   {
-    id: "figma-dashboard-clean",
-    title: "Clean Dashboard Blocks",
+    id: "reactive-image",
+    title: "Reactive Image",
     description:
-      "Reusable dashboard cards and layout blocks designed for rapid MVP iteration and design consistency.",
+      "Statik görselleri animasyonlu ve tema uyumlu hale getiren, hero alanları için geliştirilmiş React bileşeni.",
     image: "/news/performance.svg",
-    badge: "Design System",
-    href: "https://www.behance.net/poyrazavsever",
+    badge: "React",
+    href: "https://reactive-image.vercel.app",
+  },
+  {
+    id: "readme-maker",
+    title: "README Maker",
+    description:
+      "Canlı önizleme ve dışa aktarma özellikleri sunan, GitHub profil README üretimini kolaylaştıran araç.",
+    image: "/images/hero2.png",
+    badge: "Tooling",
+    href: "https://readme-maker-eight.vercel.app",
   },
 ];

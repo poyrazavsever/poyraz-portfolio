@@ -80,7 +80,7 @@ export async function ProjectsContent() {
 
       <ProjectSection title="Mobil Uygulamalar" items={MOBILE_APPS} />
       <ProjectSection title="Web Uygulamaları" items={WEB_APPS} />
-      <ProjectSection title="Figma Şablonları" items={FIGMA_TEMPLATES} />
+      <ProjectSection title="Açık Kaynak Araçlar" items={FIGMA_TEMPLATES} />
 
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
