@@ -1,16 +1,15 @@
----
-title: "Conversations with Builders"
+﻿---
+title: "Poyraz ile Masa Başı Yakında Başlıyor"
 date: "2026-03-07"
-youtubeUrl: "https://www.youtube.com/watch?v=9JEOGCX5aSQ&t=22s"
+youtubeUrl: "https://youtube.com/@poyrazavsever"
 spotifyUrl: "https://open.spotify.com/show/placeholder-masabasi"
 podcast: "masa-basi"
 ---
 
-## Episode Notes
+## Durum
 
-Guest conversation about discipline, career direction, and making room for deep work.
+Poyraz ile Masa Başı serisi henüz başlamadı.
 
-## Sources
+## Not
 
-- Guest reading list
-- Workflow snapshots
+İlk bölüm yayınlandığında bu alandaki içerik güncellenecek.
