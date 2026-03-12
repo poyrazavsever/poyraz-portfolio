@@ -26,7 +26,7 @@ export const REFERENCES: Reference[] = [
     avatar: "/avatars/halil.png",
     profileHref: "https://www.linkedin.com/in/halil-ibrahim-sabo-18a03a251/",
     quote:
-      "Poyraz çalışkan, üretken ve yaklaşımında dürüst bir geliştirici. Onunla çalışmak çok rahattı; herkesi aynı hedefte tutuyor ve zor durumları sakinlikle yönetiyor.",
+      "Poyraz çok başarılı ve çalışkan bir genç adam. Çok dürüst ve şeffaf bir yaklaşımı var. Başarılarının devam ettiğini görmekten mutluluk duyuyorum.",
   },
   {
     id: "berat-arslan",
