@@ -105,7 +105,7 @@ export function SiteNavbar() {
               <span>Sosyal</span>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-52 rounded-sm">
-              <DropdownMenuLabel>Sosyal BaÄŸlantÄ±lar</DropdownMenuLabel>
+              <DropdownMenuLabel>Sosyal Bağlantılar</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {SOCIAL_LINKS.map((item) => (
                 <DropdownMenuItem key={item.id} asChild>
@@ -131,7 +131,7 @@ export function SiteNavbar() {
               <span>MenÃ¼</span>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 p-4">
-              <SheetTitle className="sr-only">Mobil MenÃ¼</SheetTitle>
+              <SheetTitle className="sr-only">Mobil Menü</SheetTitle>
               <div className="flex flex-col gap-4">
                 <SheetClose asChild>
                   <button
