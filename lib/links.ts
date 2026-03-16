@@ -68,3 +68,85 @@ export const SOCIAL_LINKS = [
     icon: "mdi:coffee",
   },
 ] as const;
+
+export const TOP_ICON_LINKS = [
+  {
+    id: "ui-kit",
+    label: "UI Kit",
+    href: "https://ui.poyrazavsever.com",
+    icon: "mdi:palette-swatch-outline",
+    external: true,
+  },
+  {
+    id: "52-weeks-js",
+    label: "52 Weeks of JS",
+    href: "https://js.poyrazavsever.com",
+    icon: "mdi:code-json",
+    external: true,
+  },
+  {
+    id: "rss",
+    label: "RSS",
+    href: "/rss.xml",
+    icon: "mdi:rss",
+    external: false,
+  },
+  {
+    id: "cv",
+    label: "Özgeçmiş",
+    href: "/resume.pdf",
+    icon: "mdi:file-account-outline",
+    external: false,
+  },
+] as const;
+
+export type LinkDirectoryCategory = "navigation" | "social" | "resources";
+
+export type LinkDirectoryItem = {
+  id: string;
+  label: string;
+  href: string;
+  icon: string;
+  external: boolean;
+  category: LinkDirectoryCategory;
+  keywords: string[];
+};
+
+export const LINK_DIRECTORY_CATEGORIES: ReadonlyArray<{
+  id: LinkDirectoryCategory;
+  label: string;
+}> = [
+  { id: "navigation", label: "Sayfalar" },
+  { id: "social", label: "Sosyal" },
+  { id: "resources", label: "Kaynaklar" },
+];
+
+export const LINK_DIRECTORY: LinkDirectoryItem[] = [
+  ...NAV_LINKS.map((item) => ({
+    id: item.id,
+    label: item.label,
+    href: item.href,
+    icon: "mdi:compass-outline",
+    external: false,
+    category: "navigation" as const,
+    keywords: [item.label, item.href, "sayfa", "navigasyon", "internal"],
+  })),
+  ...SOCIAL_LINKS.map((item) => ({
+    id: item.id,
+    label: item.label,
+    href: item.href,
+    icon: item.icon,
+    external: true,
+    category: "social" as const,
+    keywords: [item.label, item.href, "sosyal", "profile", "platform"],
+  })),
+  ...TOP_ICON_LINKS.map((item) => ({
+    id: item.id,
+    label: item.label,
+    href: item.href,
+    icon: item.icon,
+    external: item.external,
+    category: "resources" as const,
+    keywords: [item.label, item.href, "kaynak", "resource", "quick"],
+  })),
+];

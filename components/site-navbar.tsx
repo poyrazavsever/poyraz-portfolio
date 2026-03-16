@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Icon } from "@iconify/react";
 import Link from "next/link";
@@ -20,38 +20,7 @@ import {
 } from "poyraz-ui/molecules";
 import { SearchCommand } from "@/components/search-command";
 import { useKeyboardShortcutLabel } from "@/lib/use-keyboard-shortcut-label";
-import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/links";
-
-const TOP_ICON_LINKS = [
-  {
-    id: "ui-kit",
-    label: "UI Kit",
-    href: "https://ui.poyrazavsever.com",
-    icon: "mdi:palette-swatch-outline",
-    external: true,
-  },
-  {
-    id: "52-weeks-js",
-    label: "52 Weeks of JS",
-    href: "https://js.poyrazavsever.com",
-    icon: "mdi:code-json",
-    external: true,
-  },
-  {
-    id: "rss",
-    label: "RSS",
-    href: "/rss.xml",
-    icon: "mdi:rss",
-    external: false,
-  },
-  {
-    id: "cv",
-    label: "Özgeçmiş",
-    href: "/resume.pdf",
-    icon: "mdi:file-account-outline",
-    external: false,
-  },
-] as const;
+import { NAV_LINKS, SOCIAL_LINKS, TOP_ICON_LINKS } from "@/lib/links";
 
 function getNavLinkClass(isActive: boolean) {
   return [
@@ -121,7 +90,7 @@ export function SiteNavbar() {
             type="button"
             onClick={() => setSearchOpen(true)}
             className="inline-flex h-8 w-44 cursor-pointer items-center justify-between rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:w-52"
-            aria-label="Komut paletini aç"
+            aria-label="Komut paletini aÃ§"
           >
             <span className="inline-flex items-center gap-2">
               <Icon icon="mdi:magnify" width={16} height={16} />
@@ -136,7 +105,7 @@ export function SiteNavbar() {
               <span>Sosyal</span>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-52 rounded-sm">
-              <DropdownMenuLabel>Sosyal Bağlantılar</DropdownMenuLabel>
+              <DropdownMenuLabel>Sosyal BaÄŸlantÄ±lar</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {SOCIAL_LINKS.map((item) => (
                 <DropdownMenuItem key={item.id} asChild>
@@ -159,17 +128,17 @@ export function SiteNavbar() {
           <Sheet>
             <SheetTrigger className="inline-flex h-8 cursor-pointer items-center gap-2 rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
               <Icon icon="mdi:menu" width={18} height={18} />
-              <span>Menü</span>
+              <span>MenÃ¼</span>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 p-4">
-              <SheetTitle className="sr-only">Mobil Menü</SheetTitle>
+              <SheetTitle className="sr-only">Mobil MenÃ¼</SheetTitle>
               <div className="flex flex-col gap-4">
                 <SheetClose asChild>
                   <button
                     type="button"
                     onClick={() => setSearchOpen(true)}
                     className="inline-flex h-9 w-full cursor-pointer items-center justify-between rounded-sm border border-border px-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label="Komut paletini aç"
+                    aria-label="Komut paletini aÃ§"
                   >
                     <span className="inline-flex items-center gap-2">
                       <Icon icon="mdi:magnify" width={16} height={16} />
@@ -224,3 +193,4 @@ export function SiteNavbar() {
     </div>
   );
 }
+
