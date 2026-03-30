@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "poyraz-ui/molecules";
+import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
 import { BOOKMARKS } from "@/data/bookmarks";
 import { certificates } from "@/data/certificates";
 import { EDUCATION } from "@/data/education";
@@ -25,21 +26,23 @@ export function AboutContent() {
         </Card>
 
         <div>
-          <div className="grid gap-2">
+          <StaggerContainer className="grid gap-2">
             {EDUCATION.map((item) => (
-              <Card key={item.id} className="rounded-sm border-border p-3">
-                <Typography variant="large" className="text-base leading-tight">
-                  {item.title}
-                </Typography>
-                <Typography variant="small" className="mt-0.5 text-muted-foreground">
-                  {item.institution}
-                </Typography>
-                <Typography variant="small" className="mt-1 text-red-600">
-                  {item.period}
-                </Typography>
-              </Card>
+              <StaggerItem key={item.id}>
+                <Card className="rounded-sm border-border p-3">
+                  <Typography variant="large" className="text-base leading-tight">
+                    {item.title}
+                  </Typography>
+                  <Typography variant="small" className="mt-0.5 text-muted-foreground">
+                    {item.institution}
+                  </Typography>
+                  <Typography variant="small" className="mt-1 text-red-600">
+                    {item.period}
+                  </Typography>
+                </Card>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </div>
 
@@ -106,21 +109,23 @@ export function AboutContent() {
         </Sheet>
 
         <div className="h-full">
-          <div className="grid gap-2">
+          <StaggerContainer className="grid gap-2">
             {EXPERIENCE.map((item) => (
-              <Card key={item.id} className="rounded-sm border-border p-3">
-                <Typography variant="large" className="text-base leading-tight">
-                  {item.role}
-                </Typography>
-                <Typography variant="small" className="mt-0.5 text-muted-foreground">
-                  {item.company}
-                </Typography>
-                <Typography variant="small" className="mt-1 text-red-600">
-                  {item.period}
-                </Typography>
-              </Card>
+              <StaggerItem key={item.id}>
+                <Card className="rounded-sm border-border p-3">
+                  <Typography variant="large" className="text-base leading-tight">
+                    {item.role}
+                  </Typography>
+                  <Typography variant="small" className="mt-0.5 text-muted-foreground">
+                    {item.company}
+                  </Typography>
+                  <Typography variant="small" className="mt-1 text-red-600">
+                    {item.period}
+                  </Typography>
+                </Card>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </div>
 

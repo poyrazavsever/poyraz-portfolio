@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import {
@@ -10,6 +12,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "poyraz-ui/molecules";
+import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
 import type { BlogPageData } from "@/data/blog";
 
 type BlogContentProps = {
@@ -118,22 +121,23 @@ export function BlogContent({ data }: BlogContentProps) {
 
       <div className="space-y-3">
         {hasArticles ? (
-          <div className="grid gap-3 md:grid-cols-3">
+          <StaggerContainer className="grid gap-3 md:grid-cols-3">
             {data.articles.map((post) => (
-              <ArticleCard
-                key={post.id}
-                image={post.image}
-                category={post.category}
-                title={post.title}
-                excerpt={post.excerpt}
-                date={post.date}
-                readTime={post.readTime}
-                href={post.href}
-                className="rounded-sm border-border [&_h3]:line-clamp-2 [&_h3]:min-h-[2.5rem]"
-                author={{ name: post.author, avatar: "/logo/logo.jpeg" }}
-              />
+              <StaggerItem key={post.id}>
+                <ArticleCard
+                  image={post.image}
+                  category={post.category}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                  date={post.date}
+                  readTime={post.readTime}
+                  href={post.href}
+                  className="rounded-sm border-border [&_h3]:line-clamp-2 [&_h3]:min-h-[2.5rem]"
+                  author={{ name: post.author, avatar: "/logo/logo.jpeg" }}
+                />
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         ) : (
           <Card className="rounded-sm border-border p-5">
             <Typography variant="p" className="text-muted-foreground">

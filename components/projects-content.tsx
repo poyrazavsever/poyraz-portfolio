@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import { ImageCard } from "poyraz-ui/molecules";
+import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
 import { FIGMA_TEMPLATES, MOBILE_APPS, WEB_APPS, type ProjectItem } from "@/data/projects";
 import { getGithubRepos, getNpmPackages } from "@/lib/project-feeds";
 
@@ -43,19 +44,20 @@ function ProjectSection({ title, items }: { title: string; items: ProjectItem[] 
       <Typography variant="large" className="text-base">
         {title}
       </Typography>
-      <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+      <StaggerContainer className="grid grid-cols-2 gap-2 lg:grid-cols-4">
         {items.map((item) => (
-          <ImageCard
-            key={item.id}
-            image={item.image}
-            title={item.title}
-            description={item.description}
-            badge={item.badge}
-            href={item.href}
-            className="aspect-square rounded-sm border-border"
-          />
+          <StaggerItem key={item.id}>
+            <ImageCard
+              image={item.image}
+              title={item.title}
+              description={item.description}
+              badge={item.badge}
+              href={item.href}
+              className="aspect-square rounded-sm border-border"
+            />
+          </StaggerItem>
         ))}
-      </div>
+      </StaggerContainer>
     </section>
   );
 }
