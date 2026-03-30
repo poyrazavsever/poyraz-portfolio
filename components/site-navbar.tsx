@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Icon } from "@iconify/react";
 import Link from "next/link";
@@ -90,7 +90,7 @@ export function SiteNavbar() {
             type="button"
             onClick={() => setSearchOpen(true)}
             className="inline-flex h-8 w-44 cursor-pointer items-center justify-between rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:w-52"
-            aria-label="Komut paletini aÃ§"
+            aria-label="Komut paletini aç"
           >
             <span className="inline-flex items-center gap-2">
               <Icon icon="mdi:magnify" width={16} height={16} />
@@ -128,7 +128,7 @@ export function SiteNavbar() {
           <Sheet>
             <SheetTrigger className="inline-flex h-8 cursor-pointer items-center gap-2 rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
               <Icon icon="mdi:menu" width={18} height={18} />
-              <span>MenÃ¼</span>
+              <span>Menü</span>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 p-4">
               <SheetTitle className="sr-only">Mobil Menü</SheetTitle>
@@ -138,7 +138,7 @@ export function SiteNavbar() {
                     type="button"
                     onClick={() => setSearchOpen(true)}
                     className="inline-flex h-9 w-full cursor-pointer items-center justify-between rounded-sm border border-border px-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label="Komut paletini aÃ§"
+                    aria-label="Komut paletini aç"
                   >
                     <span className="inline-flex items-center gap-2">
                       <Icon icon="mdi:magnify" width={16} height={16} />

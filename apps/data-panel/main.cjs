@@ -35,6 +35,7 @@ let DATA_DIR = path.join(WORKSPACE_ROOT, "data");
 let PUBLIC_DIR = path.join(WORKSPACE_ROOT, "public");
 let BLOG_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "blog");
 let PODCAST_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "podcasts");
+let SNIPPETS_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "snippets");
 
 function setWorkspaceRoot(nextRoot) {
   WORKSPACE_ROOT = path.resolve(nextRoot);
@@ -42,6 +43,7 @@ function setWorkspaceRoot(nextRoot) {
   PUBLIC_DIR = path.join(WORKSPACE_ROOT, "public");
   BLOG_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "blog");
   PODCAST_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "podcasts");
+  SNIPPETS_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "snippets");
 }
 
 async function pathExists(target) {
@@ -59,6 +61,7 @@ async function ensureWorkspaceStructure() {
     { label: "public", target: PUBLIC_DIR },
     { label: "content/blog", target: BLOG_CONTENT_DIR },
     { label: "content/podcasts", target: PODCAST_CONTENT_DIR },
+    { label: "content/snippets", target: SNIPPETS_CONTENT_DIR },
   ];
 
   const missing = [];
@@ -582,6 +585,84 @@ async function deletePodcastEpisode(kind, slug) {
   return { ok: true };
 }
 
+function mapMarkdownToSnippet(fileName, raw) {
+  const parsed = matter(raw);
+  const slug = fileName.replace(/\.md$/i, "");
+  return {
+    slug,
+    title: String(parsed.data.title || slug),
+    language: String(parsed.data.language || "text"),
+    category: String(parsed.data.category || "General"),
+    description: String(parsed.data.description || ""),
+    markdown: String(parsed.content || "").trim(),
+  };
+}
+
+async function listSnippets() {
+  await fs.mkdir(SNIPPETS_CONTENT_DIR, { recursive: true });
+  const files = await fs.readdir(SNIPPETS_CONTENT_DIR, { withFileTypes: true });
+  const mdFiles = files
+    .filter((item) => item.isFile() && item.name.endsWith(".md"))
+    .map((item) => item.name)
+    .sort((a, b) => a.localeCompare(b));
+
+  const snippets = await Promise.all(
+    mdFiles.map(async (fileName) => {
+      const target = assertSafePath(SNIPPETS_CONTENT_DIR, path.join(SNIPPETS_CONTENT_DIR, fileName));
+      const raw = await fs.readFile(target, "utf8");
+      return mapMarkdownToSnippet(fileName, raw);
+    }),
+  );
+
+  return snippets;
+}
+
+async function upsertSnippet({ originalSlug, snippet }) {
+  if (!snippet || typeof snippet !== "object") {
+    throw new Error("Snippet payload is invalid.");
+  }
+
+  const slug = validateBlogSlug(snippet.slug);
+  const previousSlug = originalSlug ? validateBlogSlug(originalSlug) : null;
+
+  const frontmatter = {
+    title: String(snippet.title || slug),
+    language: String(snippet.language || "text"),
+    category: String(snippet.category || "General"),
+    description: String(snippet.description || ""),
+  };
+
+  const markdownBody = String(snippet.markdown || "").trim();
+  const raw = matter.stringify(markdownBody ? `${markdownBody}\n` : "", frontmatter);
+
+  await fs.mkdir(SNIPPETS_CONTENT_DIR, { recursive: true });
+
+  const nextPath = assertSafePath(SNIPPETS_CONTENT_DIR, path.join(SNIPPETS_CONTENT_DIR, `${slug}.md`));
+  const previousPath =
+    previousSlug && previousSlug !== slug
+      ? assertSafePath(SNIPPETS_CONTENT_DIR, path.join(SNIPPETS_CONTENT_DIR, `${previousSlug}.md`))
+      : null;
+
+  await fs.writeFile(nextPath, raw, "utf8");
+
+  if (previousPath) {
+    try {
+      await fs.unlink(previousPath);
+    } catch {
+      // ignore
+    }
+  }
+
+  return { ok: true, slug };
+}
+
+async function deleteSnippetBySlug(slug) {
+  const normalized = validateBlogSlug(slug);
+  const target = assertSafePath(SNIPPETS_CONTENT_DIR, path.join(SNIPPETS_CONTENT_DIR, `${normalized}.md`));
+  await fs.unlink(target);
+  return { ok: true };
+}
+
 async function listFoldersRecursive(baseDir, current = "") {
   const target = assertSafePath(baseDir, path.join(baseDir, current));
   const entries = await fs.readdir(target, { withFileTypes: true });
@@ -746,6 +827,10 @@ ipcMain.handle("blog:delete", async (_, slug) => deleteBlogBySlug(slug));
 ipcMain.handle("podcast:list", async (_, kind) => listPodcastEpisodes(kind));
 ipcMain.handle("podcast:upsert", async (_, payload) => upsertPodcastEpisode(payload.kind, payload));
 ipcMain.handle("podcast:delete", async (_, payload) => deletePodcastEpisode(payload.kind, payload.slug));
+
+ipcMain.handle("snippet:list", async () => listSnippets());
+ipcMain.handle("snippet:upsert", async (_, payload) => upsertSnippet(payload));
+ipcMain.handle("snippet:delete", async (_, slug) => deleteSnippetBySlug(slug));
 
 ipcMain.handle("media:listFolders", async () => listMediaFolders());
 ipcMain.handle("media:createFolder", async (_, folder) => createMediaFolder(folder));

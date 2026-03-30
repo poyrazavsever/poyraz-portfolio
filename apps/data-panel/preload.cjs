@@ -20,6 +20,11 @@ contextBridge.exposeInMainWorld("panelAPI", {
     upsert: (payload) => ipcRenderer.invoke("podcast:upsert", payload),
     delete: (payload) => ipcRenderer.invoke("podcast:delete", payload),
   },
+  snippet: {
+    list: () => ipcRenderer.invoke("snippet:list"),
+    upsert: (payload) => ipcRenderer.invoke("snippet:upsert", payload),
+    delete: (slug) => ipcRenderer.invoke("snippet:delete", slug),
+  },
   media: {
     listFolders: () => ipcRenderer.invoke("media:listFolders"),
     createFolder: (folder) => ipcRenderer.invoke("media:createFolder", folder),

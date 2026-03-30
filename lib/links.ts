@@ -1,8 +1,9 @@
-﻿export const NAV_LINKS = [
+export const NAV_LINKS = [
   { id: "about", label: "Hakkımda", href: "/about" },
   { id: "blog", label: "Blog", href: "/blog" },
   { id: "content", label: "İçerikler", href: "/content" },
   { id: "projects", label: "Projeler", href: "/projects" },
+  { id: "snippets", label: "Snippets", href: "/snippets" },
   { id: "contact", label: "İletişim", href: "/contact" },
 ] as const;
 
