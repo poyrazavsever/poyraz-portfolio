@@ -1,7 +1,8 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import "./globals.css";
 
 import { AppShell } from "@/components/app-shell";
+import { GoogleAnalytics } from "@/components/google-analytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://poyrazavsever.com"),
@@ -85,6 +86,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className="min-h-dvh bg-background text-foreground antialiased">
+        <GoogleAnalytics />
         <AppShell>{children}</AppShell>
       </body>
     </html>
