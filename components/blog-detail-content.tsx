@@ -8,10 +8,32 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import type { BlogDetail } from "@/data/blog-detail";
+import { BlogToc } from "@/components/blog-toc";
+import { GiscusComments } from "@/components/giscus-comments";
 
 type BlogDetailContentProps = {
   post: BlogDetail;
 };
+
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/\*\*/g, "")
+    .replace(/\*/g, "")
+    .replace(/[^a-zçğıöşü0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function extractText(children: React.ReactNode): string {
+  if (typeof children === "string") return children;
+  if (Array.isArray(children)) return children.map(extractText).join("");
+  if (children && typeof children === "object" && "props" in children) {
+    return extractText((children as React.ReactElement<{ children?: React.ReactNode }>).props.children);
+  }
+  return "";
+}
 
 function MermaidBlock({ chart }: { chart: string }) {
   const [svg, setSvg] = useState("");
@@ -71,6 +93,11 @@ function MermaidBlock({ chart }: { chart: string }) {
   );
 }
 
+const GISCUS_REPO = process.env.NEXT_PUBLIC_GISCUS_REPO || "";
+const GISCUS_REPO_ID = process.env.NEXT_PUBLIC_GISCUS_REPO_ID || "";
+const GISCUS_CATEGORY = process.env.NEXT_PUBLIC_GISCUS_CATEGORY || "Announcements";
+const GISCUS_CATEGORY_ID = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || "";
+
 export function BlogDetailContent({ post }: BlogDetailContentProps) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
@@ -89,119 +116,226 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
     setProgress((element.scrollTop / scrollable) * 100);
   };
 
+  const showGiscus = GISCUS_REPO && GISCUS_REPO_ID && GISCUS_CATEGORY_ID;
+
   return (
     <>
       <div className="fixed top-0 left-0 z-50 h-1 w-full bg-border/70">
         <div className="h-full bg-red-600 transition-[width] duration-100" style={{ width: progressWidth }} />
       </div>
 
-      <div
-        ref={scrollerRef}
-        onScroll={handleScroll}
-        className="relative h-full overflow-y-auto rounded-sm border border-border"
-      >
-        <article className="space-y-5 p-5 md:p-6">
-          <Link
-            href="/blog"
-            className="inline-flex items-center rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            {"<- Blog'a dön"}
-          </Link>
-
-          <header className="space-y-3">
-            <Badge className="rounded-sm">{post.category}</Badge>
-            <Typography variant="h2" className="leading-tight">
-              {post.title}
-            </Typography>
-            <Typography variant="small" className="text-muted-foreground">
-              {post.author} - {post.date} - {post.readTime}
-            </Typography>
-            <Typography variant="p" className="text-muted-foreground">
-              {post.excerpt}
-            </Typography>
-          </header>
-
-          <Card className="relative aspect-16/8 overflow-hidden rounded-sm border-border">
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </Card>
-
-          <section className="space-y-4">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              components={{
-                h2: ({ children }) => (
-                  <Typography variant="h3" className="mt-6">
-                    {children}
-                  </Typography>
-                ),
-                h3: ({ children }) => (
-                  <Typography variant="large" className="mt-4 text-foreground">
-                    {children}
-                  </Typography>
-                ),
-                p: ({ children }) => (
-                  <Typography variant="p" className="text-sm leading-relaxed">
-                    {children}
-                  </Typography>
-                ),
-                li: ({ children }) => (
-                  <li className="ml-5 list-disc text-sm leading-relaxed text-foreground">{children}</li>
-                ),
-                blockquote: ({ children }) => (
-                  <blockquote className="border-l-2 border-red-600 pl-3 text-sm text-muted-foreground">
-                    {children}
-                  </blockquote>
-                ),
-                table: ({ children }) => (
-                  <div className="my-3 overflow-x-auto rounded-sm border border-border">
-                    <table className="min-w-full border-collapse text-sm">{children}</table>
-                  </div>
-                ),
-                thead: ({ children }) => <thead className="bg-muted/40">{children}</thead>,
-                tr: ({ children }) => <tr className="border-b border-border">{children}</tr>,
-                th: ({ children }) => (
-                  <th className="px-3 py-2 text-left font-semibold text-foreground">{children}</th>
-                ),
-                td: ({ children }) => <td className="px-3 py-2 align-top text-foreground">{children}</td>,
-                code: ({ className, children }) => {
-                  const match = /language-(\w+)/.exec(className ?? "");
-                  const codeText = String(children).replace(/\n$/, "");
-                  const language = match?.[1] ?? "";
-
-                  if (!match) {
-                    return <code className="rounded-sm bg-muted px-1.5 py-0.5 text-[13px]">{children}</code>;
-                  }
-
-                  if (language === "mermaid") {
-                    return <MermaidBlock chart={codeText} />;
-                  }
-
-                  return (
-                    <SyntaxHighlighter
-                      language={language}
-                      style={vscDarkPlus}
-                      customStyle={{
-                        borderRadius: "0.25rem",
-                        marginTop: "0.5rem",
-                        marginBottom: "0.5rem",
-                      }}
-                      showLineNumbers
-                    >
-                      {codeText}
-                    </SyntaxHighlighter>
-                  );
-                },
-              }}
+      <div className="flex h-full gap-4">
+        <div
+          ref={scrollerRef}
+          onScroll={handleScroll}
+          className="relative h-full flex-1 overflow-y-auto rounded-sm border border-border"
+        >
+          <article className="space-y-5 p-5 md:p-8">
+            <Link
+              href="/blog"
+              className="inline-flex items-center rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              {post.markdown}
-            </ReactMarkdown>
-          </section>
-        </article>
+              {"<- Blog'a dön"}
+            </Link>
+
+            <header className="space-y-3">
+              <Badge className="rounded-sm">{post.category}</Badge>
+              <Typography variant="h2" className="leading-tight">
+                {post.title}
+              </Typography>
+              <Typography variant="small" className="text-muted-foreground">
+                {post.author} · {post.date} · {post.readTime}
+              </Typography>
+              <Typography variant="p" className="text-muted-foreground">
+                {post.excerpt}
+              </Typography>
+            </header>
+
+            <Card className="relative aspect-16/8 overflow-hidden rounded-sm border-border">
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </Card>
+
+            <section className="space-y-5">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  h1: ({ children }) => {
+                    const text = extractText(children);
+                    const id = slugify(text);
+                    return (
+                      <Typography variant="h2" className="mt-10 mb-3 border-b border-border pb-3" id={id}>
+                        {children}
+                      </Typography>
+                    );
+                  },
+                  h2: ({ children }) => {
+                    const text = extractText(children);
+                    const id = slugify(text);
+                    return (
+                      <Typography variant="h3" className="mt-8 mb-2 border-b border-border pb-2" id={id}>
+                        {children}
+                      </Typography>
+                    );
+                  },
+                  h3: ({ children }) => {
+                    const text = extractText(children);
+                    const id = slugify(text);
+                    return (
+                      <Typography variant="large" className="mt-6 mb-1 text-foreground" id={id}>
+                        {children}
+                      </Typography>
+                    );
+                  },
+                  h4: ({ children }) => {
+                    const text = extractText(children);
+                    const id = slugify(text);
+                    return (
+                      <Typography variant="p" className="mt-4 mb-1 font-semibold text-foreground" id={id}>
+                        {children}
+                      </Typography>
+                    );
+                  },
+                  p: ({ node, children, ...props }) => {
+                    const hasImg = node?.children?.some((c: any) => c.tagName === "img");
+                    if (hasImg) {
+                      return (
+                        <div className="text-sm leading-7 text-foreground/85 [&:not(:first-child)]:mt-6" {...props}>
+                          {children}
+                        </div>
+                      );
+                    }
+                    return (
+                      <Typography variant="p" className="text-sm leading-7 text-foreground/85" {...props}>
+                        {children}
+                      </Typography>
+                    );
+                  },
+                  ul: ({ children }) => (
+                    <ul className="my-2 space-y-1.5 pl-1">{children}</ul>
+                  ),
+                  ol: ({ children }) => (
+                    <ol className="my-2 space-y-1.5 pl-1 list-decimal list-inside">{children}</ol>
+                  ),
+                  li: ({ children }) => (
+                    <li className="flex items-start gap-2 text-sm leading-7 text-foreground/85">
+                      <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-red-600" />
+                      <span>{children}</span>
+                    </li>
+                  ),
+                  a: ({ href, children }) => (
+                    <a
+                      href={href}
+                      target={href?.startsWith("http") ? "_blank" : undefined}
+                      rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="text-red-600 underline decoration-red-600/30 underline-offset-2 transition-colors hover:decoration-red-600"
+                    >
+                      {children}
+                    </a>
+                  ),
+                  blockquote: ({ children }) => (
+                    <Card className="my-4 rounded-sm border-l-3 border-l-red-600 border-border bg-muted/30 px-4 py-3">
+                      <div className="text-sm text-muted-foreground [&_p]:text-muted-foreground">
+                        {children}
+                      </div>
+                    </Card>
+                  ),
+                  hr: () => (
+                    <div className="my-6 border-t border-border" />
+                  ),
+                  table: ({ children }) => (
+                    <Card className="my-4 overflow-hidden rounded-sm border-border">
+                      <div className="overflow-x-auto">
+                        <table className="min-w-full border-collapse text-sm">{children}</table>
+                      </div>
+                    </Card>
+                  ),
+                  thead: ({ children }) => <thead className="bg-muted/50">{children}</thead>,
+                  tr: ({ children }) => <tr className="border-b border-border">{children}</tr>,
+                  th: ({ children }) => (
+                    <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                      {children}
+                    </th>
+                  ),
+                  td: ({ children }) => (
+                    <td className="px-4 py-2.5 align-top text-sm text-foreground">{children}</td>
+                  ),
+                  img: ({ src, alt }) => (
+                    <Card className="my-4 overflow-hidden rounded-sm border-border">
+                      <img src={src} alt={alt || ""} className="w-full object-cover" />
+                      {alt && (
+                        <div className="px-3 py-2">
+                          <Typography variant="small" className="text-center text-muted-foreground">
+                            {alt}
+                          </Typography>
+                        </div>
+                      )}
+                    </Card>
+                  ),
+                  code: ({ className, children }) => {
+                    const match = /language-(\w+)/.exec(className ?? "");
+                    const codeText = String(children).replace(/\n$/, "");
+                    const language = match?.[1] ?? "";
+
+                    if (!match) {
+                      return (
+                        <code className="rounded-sm border border-border/60 bg-muted/60 px-1.5 py-0.5 text-[13px] text-red-600">
+                          {children}
+                        </code>
+                      );
+                    }
+
+                    if (language === "mermaid") {
+                      return <MermaidBlock chart={codeText} />;
+                    }
+
+                    return (
+                      <SyntaxHighlighter
+                        language={language}
+                        style={vscDarkPlus}
+                        customStyle={{
+                          borderRadius: "0.25rem",
+                          marginTop: "0.75rem",
+                          marginBottom: "0.75rem",
+                          fontSize: "0.8125rem",
+                        }}
+                        showLineNumbers
+                      >
+                        {codeText}
+                      </SyntaxHighlighter>
+                    );
+                  },
+                }}
+              >
+                {post.markdown}
+              </ReactMarkdown>
+            </section>
+
+            {showGiscus && (
+              <section className="border-t border-border pt-6">
+                <Typography variant="h3" className="mb-4">
+                  Yorumlar
+                </Typography>
+                <GiscusComments
+                  repo={GISCUS_REPO}
+                  repoId={GISCUS_REPO_ID}
+                  category={GISCUS_CATEGORY}
+                  categoryId={GISCUS_CATEGORY_ID}
+                />
+              </section>
+            )}
+          </article>
+        </div>
+
+        <aside className="hidden w-52 shrink-0 lg:block">
+          <div className="sticky top-4">
+            <BlogToc markdown={post.markdown} scrollerRef={scrollerRef} />
+          </div>
+        </aside>
       </div>
     </>
   );
