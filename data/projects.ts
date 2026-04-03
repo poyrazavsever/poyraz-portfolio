@@ -14,8 +14,9 @@ export const MOBILE_APPS: ProjectItem[] = [
     badge: "Agritech",
     image: "/projects/targiz.png",
     href: "https://targiz.com",
-    description: "Ottoqua ekibiyle birlikte geliştirdiğimiz, küçük ölçekli üreticilere sahada destek veren yapay zeka destekli tarım uygulaması."
-  }
+    description:
+      "Ottoqua ekibiyle birlikte geliştirdiğimiz, küçük ölçekli üreticilere sahada destek veren yapay zeka destekli tarım uygulaması.",
+  },
 ];
 
 export const WEB_APPS: ProjectItem[] = [
@@ -25,7 +26,8 @@ export const WEB_APPS: ProjectItem[] = [
     badge: "Freelance",
     image: "/projects/arc.png",
     href: "https://arcforeigntrade.com",
-    description: "Ankara merkezli ihracat odaklı bir üretici firma için kurumsal web sitesi yenileme projesi."
+    description:
+      "Ankara merkezli ihracat odaklı bir üretici firma için kurumsal web sitesi yenileme projesi.",
   },
   {
     id: "ataturk-chronology",
@@ -33,7 +35,8 @@ export const WEB_APPS: ProjectItem[] = [
     badge: "Open Source",
     image: "/projects/ataturk.png",
     href: "https://ataturk-kronolojisi.org",
-    description: "Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi."
+    description:
+      "Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
   },
   {
     id: "mockup-factory",
@@ -41,9 +44,12 @@ export const WEB_APPS: ProjectItem[] = [
     badge: "Open Source",
     image: "/projects/mockup.png",
     href: "https://mockup-factory-mu.vercel.app/",
-    description: "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç."
-  }
+    description:
+      "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç.",
+  },
 ];
+
+export const EXTENSIONS: ProjectItem[] = [];
 
 export const FIGMA_TEMPLATES: ProjectItem[] = [
   {
@@ -52,7 +58,8 @@ export const FIGMA_TEMPLATES: ProjectItem[] = [
     badge: "figma",
     image: "/projects/hsd.png",
     href: "https://www.figma.com/community/file/1613511833232376739",
-    description: "HSD Community için Web Site tasarımı. Component, dashboard, landing page, profile sayfaları"
+    description:
+      "HSD Community için Web Site tasarımı. Component, dashboard, landing page, profile sayfaları",
   },
   {
     id: "restaurant-menu",
@@ -60,6 +67,6 @@ export const FIGMA_TEMPLATES: ProjectItem[] = [
     badge: "Figma",
     image: "/projects/menu.png",
     href: "https://www.figma.com/community/file/1613577450975840169/restaurant-menu-ui-design",
-    description: "Restaurant Menu UI Design Template for community"
-  }
+    description: "Restaurant Menu UI Design Template for community",
+  },
 ];

@@ -10,26 +10,106 @@
     <header class="topbar">
       <div>
         <h1>Portfolio Data Panel</h1>
-        <p>Manage blog posts, dashboard collections, media files, and publish updates.</p>
+        <p>
+          Manage blog posts, dashboard collections, media files, and publish
+          updates.
+        </p>
       </div>
       <div class="chip">Electron Monorepo</div>
     </header>
 
     <nav class="tabs">
       <button class="tab-btn active" data-tab="blog">Blog</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="announcement">Announcement</button>
-      <button class="tab-btn" data-tab="podcast" data-podcast-kind="yazilim">Podcast Yazilim</button>
-      <button class="tab-btn" data-tab="podcast" data-podcast-kind="masa-basi">Podcast Masa Basi</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="bookmarks">Bookmarks</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="certificates">Certificates</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="education">Education</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="experience">Experience</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="references">References</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="projectsMobile">Projects Mobile</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="projectsWeb">Projects Web</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="projectsFigma">Projects Figma</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="community">Community</button>
-      <button class="tab-btn" data-tab="collection" data-collection-key="youtube">YouTube</button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="announcement"
+      >
+        Announcement
+      </button>
+      <button class="tab-btn" data-tab="podcast" data-podcast-kind="yazilim">
+        Podcast Yazilim
+      </button>
+      <button class="tab-btn" data-tab="podcast" data-podcast-kind="masa-basi">
+        Podcast Masa Basi
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="bookmarks"
+      >
+        Bookmarks
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="certificates"
+      >
+        Certificates
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="education"
+      >
+        Education
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="experience"
+      >
+        Experience
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="references"
+      >
+        References
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="projectsMobile"
+      >
+        Projects Mobile
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="projectsWeb"
+      >
+        Projects Web
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="projectsExtensions"
+      >
+        Projects Extensions
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="projectsFigma"
+      >
+        Projects Figma
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="community"
+      >
+        Community
+      </button>
+      <button
+        class="tab-btn"
+        data-tab="collection"
+        data-collection-key="youtube"
+      >
+        YouTube
+      </button>
       <button class="tab-btn" data-tab="media">Media</button>
       <button class="tab-btn" data-tab="publish">Publish</button>
     </nav>
@@ -40,7 +120,9 @@
           <aside class="card sidebar">
             <div class="sidebar-header">
               <h2>Blog Posts</h2>
-              <button id="refresh-blog-files" class="btn btn-ghost">Refresh</button>
+              <button id="refresh-blog-files" class="btn btn-ghost">
+                Refresh
+              </button>
             </div>
             <div id="blog-card-list" class="blog-card-list"></div>
             <button id="new-blog-file" class="btn mt-8">New Blog Post</button>
@@ -50,7 +132,9 @@
             <div class="editor-head">
               <h2 id="blog-editor-title">Create Blog Post</h2>
               <div class="row">
-                <button id="delete-blog-file" class="btn btn-danger">Delete</button>
+                <button id="delete-blog-file" class="btn btn-danger">
+                  Delete
+                </button>
                 <button id="save-blog-file" class="btn">Save</button>
               </div>
             </div>
@@ -58,11 +142,17 @@
             <div class="blog-form-grid">
               <div>
                 <label for="blog-slug">Slug</label>
-                <input id="blog-slug" placeholder="building-minimal-design-systems" />
+                <input
+                  id="blog-slug"
+                  placeholder="building-minimal-design-systems"
+                />
               </div>
               <div>
                 <label for="blog-title">Title</label>
-                <input id="blog-title" placeholder="Building Minimal Design Systems" />
+                <input
+                  id="blog-title"
+                  placeholder="Building Minimal Design Systems"
+                />
               </div>
               <div>
                 <label for="blog-category">Category</label>
@@ -86,7 +176,11 @@
               </div>
               <div class="full">
                 <label for="blog-excerpt">Excerpt</label>
-                <textarea id="blog-excerpt" class="small-editor" spellcheck="false"></textarea>
+                <textarea
+                  id="blog-excerpt"
+                  class="small-editor"
+                  spellcheck="false"
+                ></textarea>
               </div>
               <div class="full">
                 <label for="blog-editor">Markdown Content</label>
@@ -102,7 +196,9 @@
           <aside class="card sidebar">
             <div class="sidebar-header">
               <h2 id="collection-sidebar-title">Bookmarks</h2>
-              <button id="refresh-collection" class="btn btn-ghost">Refresh</button>
+              <button id="refresh-collection" class="btn btn-ghost">
+                Refresh
+              </button>
             </div>
             <div id="collection-card-list" class="blog-card-list"></div>
             <button id="new-collection-item" class="btn mt-8">New Item</button>
@@ -112,12 +208,16 @@
             <div class="editor-head">
               <h2 id="collection-editor-title">Create Item</h2>
               <div class="row">
-                <button id="delete-collection-item" class="btn btn-danger">Delete</button>
+                <button id="delete-collection-item" class="btn btn-danger">
+                  Delete
+                </button>
                 <button id="save-collection-item" class="btn">Save</button>
               </div>
             </div>
 
-            <p id="collection-helper" class="hint">Fill inputs and save to update the related data export.</p>
+            <p id="collection-helper" class="hint">
+              Fill inputs and save to update the related data export.
+            </p>
             <div id="collection-form-grid" class="blog-form-grid"></div>
           </section>
         </div>
@@ -128,7 +228,9 @@
           <aside class="card sidebar">
             <div class="sidebar-header">
               <h2 id="podcast-sidebar-title">Podcast Episodes</h2>
-              <button id="refresh-podcast-files" class="btn btn-ghost">Refresh</button>
+              <button id="refresh-podcast-files" class="btn btn-ghost">
+                Refresh
+              </button>
             </div>
             <div id="podcast-card-list" class="blog-card-list"></div>
             <button id="new-podcast-file" class="btn mt-8">New Episode</button>
@@ -138,7 +240,9 @@
             <div class="editor-head">
               <h2 id="podcast-editor-title">Create Episode</h2>
               <div class="row">
-                <button id="delete-podcast-file" class="btn btn-danger">Delete</button>
+                <button id="delete-podcast-file" class="btn btn-danger">
+                  Delete
+                </button>
                 <button id="save-podcast-file" class="btn">Save</button>
               </div>
             </div>
@@ -146,11 +250,17 @@
             <div class="blog-form-grid">
               <div>
                 <label for="podcast-slug">Slug</label>
-                <input id="podcast-slug" placeholder="2026-03-09-foundations-over-tools" />
+                <input
+                  id="podcast-slug"
+                  placeholder="2026-03-09-foundations-over-tools"
+                />
               </div>
               <div>
                 <label for="podcast-title">Title</label>
-                <input id="podcast-title" placeholder="Foundations Over Tools" />
+                <input
+                  id="podcast-title"
+                  placeholder="Foundations Over Tools"
+                />
               </div>
               <div>
                 <label for="podcast-date">Date</label>
@@ -158,11 +268,17 @@
               </div>
               <div>
                 <label for="podcast-youtube-url">YouTube URL</label>
-                <input id="podcast-youtube-url" placeholder="https://www.youtube.com/watch?v=..." />
+                <input
+                  id="podcast-youtube-url"
+                  placeholder="https://www.youtube.com/watch?v=..."
+                />
               </div>
               <div class="full">
                 <label for="podcast-spotify-url">Spotify URL</label>
-                <input id="podcast-spotify-url" placeholder="https://open.spotify.com/show/..." />
+                <input
+                  id="podcast-spotify-url"
+                  placeholder="https://open.spotify.com/show/..."
+                />
               </div>
               <div class="full">
                 <label for="podcast-editor">Markdown Content</label>
@@ -205,10 +321,15 @@
         <div class="card publish-card">
           <div class="row between">
             <h2>Publish Changes</h2>
-            <button id="refresh-status" class="btn btn-ghost">Refresh Status</button>
+            <button id="refresh-status" class="btn btn-ghost">
+              Refresh Status
+            </button>
           </div>
 
-          <p class="hint">This will stage <code>data/</code>, <code>public/</code> and <code>content/</code>, create commit, and push.</p>
+          <p class="hint">
+            This will stage <code>data/</code>, <code>public/</code> and
+            <code>content/</code>, create commit, and push.
+          </p>
 
           <label for="commit-message">Commit Message (optional)</label>
           <input id="commit-message" placeholder="Auto-generated if empty" />

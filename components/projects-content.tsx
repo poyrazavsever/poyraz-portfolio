@@ -4,17 +4,29 @@ import { Icon } from "@iconify/react";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import { ImageCard } from "poyraz-ui/molecules";
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
-import { FIGMA_TEMPLATES, MOBILE_APPS, WEB_APPS, type ProjectItem } from "@/data/projects";
+import {
+  EXTENSIONS,
+  FIGMA_TEMPLATES,
+  MOBILE_APPS,
+  WEB_APPS,
+  type ProjectItem,
+} from "@/data/projects";
 import { getGithubRepos, getNpmPackages } from "@/lib/project-feeds";
 
 function getLanguageMeta(language: string) {
   const key = language.toLowerCase();
 
   if (key.includes("typescript")) {
-    return { icon: "vscode-icons:file-type-typescript-official", color: "text-blue-600" };
+    return {
+      icon: "vscode-icons:file-type-typescript-official",
+      color: "text-blue-600",
+    };
   }
   if (key.includes("javascript")) {
-    return { icon: "vscode-icons:file-type-js-official", color: "text-amber-500" };
+    return {
+      icon: "vscode-icons:file-type-js-official",
+      color: "text-amber-500",
+    };
   }
   if (key.includes("python")) {
     return { icon: "vscode-icons:file-type-python", color: "text-yellow-600" };
@@ -38,7 +50,13 @@ function getLanguageMeta(language: string) {
   return { icon: "mdi:code-tags", color: "text-zinc-500" };
 }
 
-function ProjectSection({ title, items }: { title: string; items: ProjectItem[] }) {
+function ProjectSection({
+  title,
+  items,
+}: {
+  title: string;
+  items: ProjectItem[];
+}) {
   return (
     <section className="space-y-2">
       <Typography variant="large" className="text-base">
@@ -63,7 +81,10 @@ function ProjectSection({ title, items }: { title: string; items: ProjectItem[] 
 }
 
 export async function ProjectsContent() {
-  const [repos, npmPackages] = await Promise.all([getGithubRepos(), getNpmPackages()]);
+  const [repos, npmPackages] = await Promise.all([
+    getGithubRepos(),
+    getNpmPackages(),
+  ]);
 
   return (
     <section className="flex h-full flex-col gap-3 overflow-y-auto">
@@ -82,6 +103,7 @@ export async function ProjectsContent() {
 
       <ProjectSection title="Mobil Uygulamalar" items={MOBILE_APPS} />
       <ProjectSection title="Web Uygulamaları" items={WEB_APPS} />
+      <ProjectSection title="Extension'lar" items={EXTENSIONS} />
       <ProjectSection title="Figma Tasarımları" items={FIGMA_TEMPLATES} />
 
       <section className="space-y-2">
@@ -105,10 +127,16 @@ export async function ProjectsContent() {
                 className="block h-full no-underline text-inherit"
               >
                 <Card className="flex h-full flex-col rounded-sm border-border p-3 transition-colors hover:border-zinc-700">
-                  <Typography variant="large" className="text-base leading-tight">
+                  <Typography
+                    variant="large"
+                    className="text-base leading-tight"
+                  >
                     {pkg.name}
                   </Typography>
-                  <Typography variant="small" className="mt-1 flex-1 line-clamp-3 text-muted-foreground">
+                  <Typography
+                    variant="small"
+                    className="mt-1 flex-1 line-clamp-3 text-muted-foreground"
+                  >
                     {pkg.description}
                   </Typography>
                   <div className="mt-2">
@@ -145,10 +173,16 @@ export async function ProjectsContent() {
                   className="block h-full no-underline text-inherit"
                 >
                   <Card className="flex h-full flex-col rounded-sm border-border p-3 transition-colors hover:border-zinc-700">
-                    <Typography variant="large" className="text-base leading-tight">
+                    <Typography
+                      variant="large"
+                      className="text-base leading-tight"
+                    >
                       {repo.name}
                     </Typography>
-                    <Typography variant="small" className="mt-1 flex-1 line-clamp-4 text-muted-foreground">
+                    <Typography
+                      variant="small"
+                      className="mt-1 flex-1 line-clamp-4 text-muted-foreground"
+                    >
                       {repo.description}
                     </Typography>
                     <div className="mt-2 flex flex-wrap gap-1.5">
@@ -165,7 +199,12 @@ export async function ProjectsContent() {
                       </Badge>
                       <Badge variant="outline" className="rounded-sm">
                         <span className="inline-flex items-center gap-1">
-                          <Icon icon="mdi:star" width={14} height={14} className="text-amber-500" />
+                          <Icon
+                            icon="mdi:star"
+                            width={14}
+                            height={14}
+                            className="text-amber-500"
+                          />
                           <span>{repo.stars}</span>
                         </span>
                       </Badge>
