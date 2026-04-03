@@ -49,7 +49,24 @@ export const WEB_APPS: ProjectItem[] = [
   },
 ];
 
-export const EXTENSIONS: ProjectItem[] = [];
+export const EXTENSIONS: ProjectItem[] = [
+  {
+    id: "shortcut-injector",
+    title: "Shortcut Injector",
+    badge: "Cross-Browser",
+    image: "/projects/quick-fill.png",
+    href: "https://github.com/poyrazavsever/shortcut-injector",
+    description: "A cross-browser extension to quickly inject predefined personal data and links into web forms using custom keyboard shortcuts."
+  },
+  {
+    id: "tab-audio-relay",
+    title: "Tab Audio Relay",
+    badge: "Corss-Browser Extension",
+    image: "/projects/sound_sync",
+    href: "https://github.com/poyrazavsever/tab-audio-relay",
+    description: "A browser extension that synchronizes audio playback between tabs. Automatically plays your music when your tutorial/lecture video stops, and pauses it when you resume learning. Perfect for deep work and seamless study sessions."
+  }
+];
 
 export const FIGMA_TEMPLATES: ProjectItem[] = [
   {
