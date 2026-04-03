@@ -62,7 +62,7 @@ export const EXTENSIONS: ProjectItem[] = [
     id: "tab-audio-relay",
     title: "Tab Audio Relay",
     badge: "Corss-Browser Extension",
-    image: "/projects/sound_sync",
+    image: "/projects/sound_sync.png",
     href: "https://github.com/poyrazavsever/tab-audio-relay",
     description: "A browser extension that synchronizes audio playback between tabs. Automatically plays your music when your tutorial/lecture video stops, and pauses it when you resume learning. Perfect for deep work and seamless study sessions."
   }
