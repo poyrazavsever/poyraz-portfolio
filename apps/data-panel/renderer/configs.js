@@ -482,8 +482,3 @@ export const COLLECTION_CONFIGS = {
     }),
   },
 };
-
-export const PODCAST_LABELS = {
-  yazilim: "Podcast Yazilim",
-  "masa-basi": "Podcast Masa Basi",
-};

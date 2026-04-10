@@ -61,10 +61,10 @@ const blogItems: CommandPaletteItem[] = [
   },
   {
     id: "blog-content-page",
-    label: "Podcast ve İçerikler",
+    label: "Video ve Notlar",
     href: "/content",
-    icon: "mdi:microphone-outline",
-    keywords: ["podcast", "yazılım", "masa başı", "içerik", "content"],
+    icon: "mdi:video-outline",
+    keywords: ["video", "youtube", "not", "pdf", "içerik", "content"],
   },
 ];
 

@@ -82,40 +82,6 @@ export function BlogContent({ data }: BlogContentProps) {
               ))}
             </div>
           </Card>
-
-          <Card className="rounded-sm border-border p-4">
-            <Typography variant="large">Podcast İçerikleri</Typography>
-            <div className="mt-3 space-y-3">
-              {data.podcastGroups.map((group) => (
-                <Card key={group.id} className="rounded-sm border-border p-3">
-                  <div className="flex items-center justify-between gap-2">
-                    <Typography variant="small" className="font-semibold text-foreground">
-                      {group.title}
-                    </Typography>
-                    <Link
-                      href={group.href}
-                      className="text-xs text-muted-foreground underline transition-colors hover:text-foreground"
-                    >
-                      Tümünü Gör
-                    </Link>
-                  </div>
-
-                  <div className="mt-2 space-y-2">
-                    {group.items.map((episode) => (
-                      <div key={episode.id} className="rounded-sm border border-border p-2">
-                        <Typography variant="small" className="font-medium text-foreground">
-                          {episode.title}
-                        </Typography>
-                        <Typography variant="small" className="mt-0.5 text-muted-foreground">
-                          {episode.date}
-                        </Typography>
-                      </div>
-                    ))}
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </Card>
         </div>
       </div>
 

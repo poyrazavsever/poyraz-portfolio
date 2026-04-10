@@ -34,7 +34,6 @@ let WORKSPACE_ROOT = resolveWorkspaceRoot();
 let DATA_DIR = path.join(WORKSPACE_ROOT, "data");
 let PUBLIC_DIR = path.join(WORKSPACE_ROOT, "public");
 let BLOG_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "blog");
-let PODCAST_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "podcasts");
 let SNIPPETS_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "snippets");
 
 function setWorkspaceRoot(nextRoot) {
@@ -42,7 +41,6 @@ function setWorkspaceRoot(nextRoot) {
   DATA_DIR = path.join(WORKSPACE_ROOT, "data");
   PUBLIC_DIR = path.join(WORKSPACE_ROOT, "public");
   BLOG_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "blog");
-  PODCAST_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "podcasts");
   SNIPPETS_CONTENT_DIR = path.join(WORKSPACE_ROOT, "content", "snippets");
 }
 
@@ -60,7 +58,6 @@ async function ensureWorkspaceStructure() {
     { label: "data", target: DATA_DIR },
     { label: "public", target: PUBLIC_DIR },
     { label: "content/blog", target: BLOG_CONTENT_DIR },
-    { label: "content/podcasts", target: PODCAST_CONTENT_DIR },
     { label: "content/snippets", target: SNIPPETS_CONTENT_DIR },
   ];
 
@@ -128,18 +125,6 @@ function validateBlogSlug(slug) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(normalized)) {
     throw new Error("Slug must match: lowercase-kebab-case");
   }
-  return normalized;
-}
-
-function validatePodcastKind(kind) {
-  const normalized = String(kind || "")
-    .trim()
-    .toLowerCase();
-
-  if (normalized !== "yazilim" && normalized !== "masa-basi") {
-    throw new Error("Podcast kind must be one of: yazilim, masa-basi");
-  }
-
   return normalized;
 }
 
@@ -497,94 +482,6 @@ async function deleteBlogBySlug(slug) {
   return { ok: true };
 }
 
-function mapMarkdownToPodcast(kind, fileName, raw) {
-  const parsed = matter(raw);
-  const slug = fileName.replace(/\.md$/i, "");
-
-  return {
-    slug,
-    title: String(parsed.data.title || slug),
-    date: String(parsed.data.date || ""),
-    youtubeUrl: String(parsed.data.youtubeUrl || ""),
-    spotifyUrl: String(parsed.data.spotifyUrl || ""),
-    podcast: kind,
-    markdown: String(parsed.content || "").trim(),
-  };
-}
-
-async function listPodcastEpisodes(kind) {
-  const safeKind = validatePodcastKind(kind);
-  const podcastDir = assertSafePath(PODCAST_CONTENT_DIR, path.join(PODCAST_CONTENT_DIR, safeKind));
-
-  await fs.mkdir(podcastDir, { recursive: true });
-  const files = await fs.readdir(podcastDir, { withFileTypes: true });
-  const markdownFiles = files
-    .filter((item) => item.isFile() && item.name.endsWith(".md"))
-    .map((item) => item.name)
-    .sort((a, b) => b.localeCompare(a));
-
-  const episodes = await Promise.all(
-    markdownFiles.map(async (fileName) => {
-      const target = assertSafePath(podcastDir, path.join(podcastDir, fileName));
-      const raw = await fs.readFile(target, "utf8");
-      return mapMarkdownToPodcast(safeKind, fileName, raw);
-    }),
-  );
-
-  return episodes;
-}
-
-async function upsertPodcastEpisode(kind, { originalSlug, episode }) {
-  const safeKind = validatePodcastKind(kind);
-  if (!episode || typeof episode !== "object") {
-    throw new Error("Episode payload is invalid.");
-  }
-
-  const slug = validateBlogSlug(episode.slug);
-  const previousSlug = originalSlug ? validateBlogSlug(originalSlug) : null;
-
-  const frontmatter = {
-    title: String(episode.title || slug),
-    date: String(episode.date || ""),
-    youtubeUrl: String(episode.youtubeUrl || ""),
-    spotifyUrl: String(episode.spotifyUrl || ""),
-    podcast: safeKind,
-  };
-
-  const markdownBody = String(episode.markdown || "").trim();
-  const raw = matter.stringify(markdownBody ? `${markdownBody}\n` : "", frontmatter);
-
-  const podcastDir = assertSafePath(PODCAST_CONTENT_DIR, path.join(PODCAST_CONTENT_DIR, safeKind));
-  await fs.mkdir(podcastDir, { recursive: true });
-
-  const nextPath = assertSafePath(podcastDir, path.join(podcastDir, `${slug}.md`));
-  const previousPath =
-    previousSlug && previousSlug !== slug
-      ? assertSafePath(podcastDir, path.join(podcastDir, `${previousSlug}.md`))
-      : null;
-
-  await fs.writeFile(nextPath, raw, "utf8");
-
-  if (previousPath) {
-    try {
-      await fs.unlink(previousPath);
-    } catch {
-      // ignore missing previous file
-    }
-  }
-
-  return { ok: true, slug };
-}
-
-async function deletePodcastEpisode(kind, slug) {
-  const safeKind = validatePodcastKind(kind);
-  const normalized = validateBlogSlug(slug);
-  const podcastDir = assertSafePath(PODCAST_CONTENT_DIR, path.join(PODCAST_CONTENT_DIR, safeKind));
-  const target = assertSafePath(podcastDir, path.join(podcastDir, `${normalized}.md`));
-  await fs.unlink(target);
-  return { ok: true };
-}
-
 function mapMarkdownToSnippet(fileName, raw) {
   const parsed = matter(raw);
   const slug = fileName.replace(/\.md$/i, "");
@@ -824,9 +721,6 @@ ipcMain.handle("data:delete", async (_, fileName) => deleteDataFile(fileName));
 ipcMain.handle("blog:list", async () => listBlogs());
 ipcMain.handle("blog:upsert", async (_, payload) => upsertBlog(payload));
 ipcMain.handle("blog:delete", async (_, slug) => deleteBlogBySlug(slug));
-ipcMain.handle("podcast:list", async (_, kind) => listPodcastEpisodes(kind));
-ipcMain.handle("podcast:upsert", async (_, payload) => upsertPodcastEpisode(payload.kind, payload));
-ipcMain.handle("podcast:delete", async (_, payload) => deletePodcastEpisode(payload.kind, payload.slug));
 
 ipcMain.handle("snippet:list", async () => listSnippets());
 ipcMain.handle("snippet:upsert", async (_, payload) => upsertSnippet(payload));

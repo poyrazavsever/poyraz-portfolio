@@ -1,5 +1,5 @@
 
-import { BLOG_CATEGORIES, COLLECTION_CONFIGS, PODCAST_LABELS } from "./configs.js";
+import { BLOG_CATEGORIES, COLLECTION_CONFIGS } from "./configs.js";
 
 const state = {
   activeTab: "blog",
@@ -15,12 +15,6 @@ const state = {
     editingIndex: null,
     formInputs: {},
   },
-  podcast: {
-    kind: "yazilim",
-    episodes: [],
-    selectedSlug: "",
-    originalSlug: "",
-  },
 };
 
 const el = {
@@ -28,7 +22,6 @@ const el = {
   panels: {
     blog: document.getElementById("tab-blog"),
     collection: document.getElementById("tab-collection"),
-    podcast: document.getElementById("tab-podcast"),
     media: document.getElementById("tab-media"),
     publish: document.getElementById("tab-publish"),
   },
@@ -56,19 +49,6 @@ const el = {
   collectionEditorTitle: document.getElementById("collection-editor-title"),
   collectionHelper: document.getElementById("collection-helper"),
   collectionFormGrid: document.getElementById("collection-form-grid"),
-  podcastSidebarTitle: document.getElementById("podcast-sidebar-title"),
-  podcastCardList: document.getElementById("podcast-card-list"),
-  refreshPodcastFiles: document.getElementById("refresh-podcast-files"),
-  newPodcastFile: document.getElementById("new-podcast-file"),
-  deletePodcastFile: document.getElementById("delete-podcast-file"),
-  podcastEditorTitle: document.getElementById("podcast-editor-title"),
-  podcastSlug: document.getElementById("podcast-slug"),
-  podcastTitle: document.getElementById("podcast-title"),
-  podcastDate: document.getElementById("podcast-date"),
-  podcastYoutubeUrl: document.getElementById("podcast-youtube-url"),
-  podcastSpotifyUrl: document.getElementById("podcast-spotify-url"),
-  podcastEditor: document.getElementById("podcast-editor"),
-  savePodcastFile: document.getElementById("save-podcast-file"),
   folderSelect: document.getElementById("folder-select"),
   newFolder: document.getElementById("new-folder"),
   createFolder: document.getElementById("create-folder"),
@@ -95,17 +75,13 @@ function getCollectionConfig(key = state.collection.key) {
 function setActiveTab(tab, options = {}) {
   state.activeTab = tab;
   if (tab === "collection" && options.collectionKey) state.collection.key = options.collectionKey;
-  if (tab === "podcast" && options.podcastKind) state.podcast.kind = options.podcastKind;
 
   for (const button of el.tabs) {
     const buttonTab = button.dataset.tab;
     const isCollection = buttonTab === "collection";
-    const isPodcast = buttonTab === "podcast";
     const isActive = isCollection
       ? tab === "collection" && button.dataset.collectionKey === state.collection.key
-      : isPodcast
-        ? tab === "podcast" && button.dataset.podcastKind === state.podcast.kind
-        : buttonTab === tab;
+      : buttonTab === tab;
     button.classList.toggle("active", isActive);
   }
 
@@ -115,10 +91,6 @@ function setActiveTab(tab, options = {}) {
 
   if (tab === "collection") {
     void loadCollection(state.collection.key).catch((error) => notify(String(error.message || error)));
-  }
-
-  if (tab === "podcast") {
-    void loadPodcastFiles(state.podcast.kind).catch((error) => notify(String(error.message || error)));
   }
 }
 
@@ -271,98 +243,6 @@ async function removeBlogFile(slugArg) {
   createBlogFile();
   await loadBlogFiles();
   notify("Blog post deleted.");
-}
-
-function emptyPodcastDraft(kind = state.podcast.kind) {
-  return { slug: "", title: "", date: "", youtubeUrl: "", spotifyUrl: "", podcast: kind, markdown: "" };
-}
-
-function fillPodcastForm(episode) {
-  const draft = episode || emptyPodcastDraft();
-  el.podcastSlug.value = draft.slug || "";
-  el.podcastTitle.value = draft.title || "";
-  el.podcastDate.value = draft.date || "";
-  el.podcastYoutubeUrl.value = draft.youtubeUrl || "";
-  el.podcastSpotifyUrl.value = draft.spotifyUrl || "";
-  el.podcastEditor.value = draft.markdown || "";
-}
-
-function selectPodcast(slug) {
-  const episode = state.podcast.episodes.find((item) => item.slug === slug);
-  if (!episode) return;
-  state.podcast.selectedSlug = slug;
-  state.podcast.originalSlug = slug;
-  el.podcastEditorTitle.textContent = `Edit Episode: ${slug}`;
-  fillPodcastForm(episode);
-  renderPostCards(el.podcastCardList, state.podcast.episodes, state.podcast.selectedSlug, selectPodcast, (value) => void removePodcastFile(value));
-}
-function createPodcastFile() {
-  state.podcast.selectedSlug = "";
-  state.podcast.originalSlug = "";
-  el.podcastEditorTitle.textContent = `Create Episode (${PODCAST_LABELS[state.podcast.kind] || state.podcast.kind})`;
-  fillPodcastForm(emptyPodcastDraft(state.podcast.kind));
-  renderPostCards(el.podcastCardList, state.podcast.episodes, state.podcast.selectedSlug, selectPodcast, (slug) => void removePodcastFile(slug));
-}
-
-async function loadPodcastFiles(kind = state.podcast.kind) {
-  state.podcast.kind = kind;
-  state.podcast.episodes = await window.panelAPI.podcast.list(kind);
-  el.podcastSidebarTitle.textContent = PODCAST_LABELS[kind] || "Podcast";
-  renderPostCards(el.podcastCardList, state.podcast.episodes, state.podcast.selectedSlug, selectPodcast, (value) => void removePodcastFile(value));
-
-  const selected = state.podcast.episodes.find((item) => item.slug === state.podcast.selectedSlug);
-  if (selected) {
-    selectPodcast(selected.slug);
-  } else if (state.podcast.episodes.length > 0) {
-    selectPodcast(state.podcast.episodes[0].slug);
-  } else {
-    createPodcastFile();
-  }
-}
-
-function currentPodcastDraft() {
-  return {
-    slug: el.podcastSlug.value.trim(),
-    title: el.podcastTitle.value.trim(),
-    date: el.podcastDate.value.trim(),
-    youtubeUrl: el.podcastYoutubeUrl.value.trim(),
-    spotifyUrl: el.podcastSpotifyUrl.value.trim(),
-    podcast: state.podcast.kind,
-    markdown: el.podcastEditor.value,
-  };
-}
-
-async function savePodcastFile() {
-  const episode = currentPodcastDraft();
-  if (!episode.slug || !episode.title) {
-    notify("Slug and title are required.");
-    return;
-  }
-
-  const result = await window.panelAPI.podcast.upsert({
-    kind: state.podcast.kind,
-    originalSlug: state.podcast.originalSlug || undefined,
-    episode,
-  });
-
-  await loadPodcastFiles(state.podcast.kind);
-  state.podcast.selectedSlug = result.slug;
-  state.podcast.originalSlug = result.slug;
-  selectPodcast(result.slug);
-  notify(`Saved podcast episode: ${result.slug}`);
-}
-
-async function removePodcastFile(slugArg) {
-  const targetSlug = slugArg || state.podcast.selectedSlug;
-  if (!targetSlug) return;
-  if (!window.confirm(`Delete podcast episode ${targetSlug}?`)) return;
-
-  await window.panelAPI.podcast.delete({ kind: state.podcast.kind, slug: targetSlug });
-  state.podcast.selectedSlug = "";
-  state.podcast.originalSlug = "";
-  createPodcastFile();
-  await loadPodcastFiles(state.podcast.kind);
-  notify("Podcast episode deleted.");
 }
 
 function deserializeCollectionItem(config, rawItem) {
@@ -706,10 +586,6 @@ function bindEvents() {
         setActiveTab("collection", { collectionKey: button.dataset.collectionKey });
         return;
       }
-      if (tab === "podcast") {
-        setActiveTab("podcast", { podcastKind: button.dataset.podcastKind });
-        return;
-      }
       setActiveTab(tab);
     });
   }
@@ -725,11 +601,6 @@ function bindEvents() {
   el.newCollectionItem.addEventListener("click", () => startCollectionCreateMode(getCollectionConfig()));
   el.deleteCollectionItem.addEventListener("click", () => void removeCollectionItem().catch((error) => notify(String(error.message || error))));
   el.saveCollectionItem.addEventListener("click", () => void saveCollectionItem().catch((error) => notify(String(error.message || error))));
-
-  el.refreshPodcastFiles.addEventListener("click", () => void loadPodcastFiles(state.podcast.kind).catch((error) => notify(String(error.message || error))));
-  el.newPodcastFile.addEventListener("click", () => createPodcastFile());
-  el.deletePodcastFile.addEventListener("click", () => void removePodcastFile().catch((error) => notify(String(error.message || error))));
-  el.savePodcastFile.addEventListener("click", () => void savePodcastFile().catch((error) => notify(String(error.message || error))));
 
   el.folderSelect.addEventListener("change", () => {
     state.selectedFolder = el.folderSelect.value;
@@ -748,7 +619,6 @@ async function init() {
   await loadBlogFiles();
   if (!state.selectedBlogSlug) createBlogFile();
   await loadCollection(state.collection.key);
-  await loadPodcastFiles(state.podcast.kind);
   await loadMediaFolders();
   await refreshPublishStatus();
   setActiveTab("blog");

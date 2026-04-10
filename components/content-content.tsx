@@ -1,27 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { Icon } from "@iconify/react";
-import { Badge, Button, Card, Typography } from "poyraz-ui/atoms";
-import { Modal, ModalContent, ModalTitle, Sheet, SheetContent, SheetTitle } from "poyraz-ui/molecules";
-import type { PodcastEpisode } from "@/data/content-types";
+import { Button, Card, Typography } from "poyraz-ui/atoms";
+import { Modal, ModalContent, ModalTitle } from "poyraz-ui/molecules";
 import { getYoutubeEmbedUrl } from "@/lib/youtube";
 
 type ContentContentProps = {
-  yazilimEpisodes: PodcastEpisode[];
-  masaBasiEpisodes: PodcastEpisode[];
   youtubeLinks: readonly string[];
   pdfFiles: string[];
 };
-
-function getPodcastLabel(podcast: PodcastEpisode["podcast"]) {
-  if (podcast === "yazilim") return "Yazılım";
-  if (podcast === "masa-basi") return "Masa Başı";
-  return podcast;
-}
 
 function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -103,57 +90,10 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
   );
 }
 
-function PodcastColumn({
-  title,
-  subtitle,
-  episodes,
-  onOpenEpisode,
-}: {
-  title: string;
-  subtitle: string;
-  episodes: PodcastEpisode[];
-  onOpenEpisode: (episode: PodcastEpisode) => void;
-}) {
-  return (
-    <Card className="rounded-sm border-border p-4">
-      <Typography variant="large" className="text-base">
-        {title}
-      </Typography>
-      <Typography variant="small" className="mt-1 text-muted-foreground">
-        {subtitle}
-      </Typography>
-
-      <div className="mt-3 grid gap-2">
-        {episodes.slice(0, 3).map((episode) => (
-          <button
-            key={`${episode.podcast}-${episode.slug}`}
-            type="button"
-            onClick={() => onOpenEpisode(episode)}
-            className="cursor-pointer text-left"
-          >
-            <Card className="rounded-sm border-border p-3 transition-colors hover:border-zinc-700">
-              <Typography variant="small" className="font-semibold text-foreground">
-                {episode.title}
-              </Typography>
-              <Typography variant="small" className="mt-0.5 text-muted-foreground">
-                {episode.date}
-              </Typography>
-            </Card>
-          </button>
-        ))}
-      </div>
-    </Card>
-  );
-}
-
 export function ContentContent({
-  yazilimEpisodes,
-  masaBasiEpisodes,
   youtubeLinks,
   pdfFiles,
 }: ContentContentProps) {
-  const [selectedEpisode, setSelectedEpisode] = useState<PodcastEpisode | null>(null);
-  const [sheetOpen, setSheetOpen] = useState(false);
   const [pdfModalOpen, setPdfModalOpen] = useState(false);
   const [activePdfIndex, setActivePdfIndex] = useState(0);
 
@@ -169,11 +109,6 @@ export function ContentContent({
     [youtubeLinks],
   );
 
-  const openEpisode = (episode: PodcastEpisode) => {
-    setSelectedEpisode(episode);
-    setSheetOpen(true);
-  };
-
   const openPdfModal = (index: number) => {
     setActivePdfIndex(index);
     setPdfModalOpen(true);
@@ -181,21 +116,6 @@ export function ContentContent({
 
   return (
     <section className="flex h-full flex-col gap-3 overflow-y-auto">
-      <section className="grid gap-3 md:grid-cols-2">
-        <PodcastColumn
-          title="Poyraz ile Yazılım"
-          subtitle="Düzenli yayın, her pazar."
-          episodes={yazilimEpisodes}
-          onOpenEpisode={openEpisode}
-        />
-        <PodcastColumn
-          title="Poyraz ile Masa Başı"
-          subtitle="Düzensiz yayın, konuk odaklı."
-          episodes={masaBasiEpisodes}
-          onOpenEpisode={openEpisode}
-        />
-      </section>
-
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
           Son YouTube Videoları
@@ -246,73 +166,6 @@ export function ContentContent({
           ))}
         </div>
       </section>
-
-      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-        <SheetContent side="right" className="w-full max-w-xl p-0">
-          <div className="border-b border-border px-4 py-3">
-            <SheetTitle>{selectedEpisode?.title ?? "Bölüm"}</SheetTitle>
-            {selectedEpisode ? (
-              <Typography variant="small" className="mt-1 text-muted-foreground">
-                {selectedEpisode.date}
-              </Typography>
-            ) : null}
-          </div>
-
-          <div className="flex max-h-[calc(100dvh-64px)] flex-col gap-3 overflow-y-auto p-4">
-            {selectedEpisode ? (
-              <>
-                <div className="flex flex-wrap gap-2">
-                  <Badge className="rounded-sm">{getPodcastLabel(selectedEpisode.podcast)}</Badge>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  <Link
-                    href={selectedEpisode.youtubeUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Icon icon="mdi:youtube" width={16} height={16} className="text-red-600" />
-                    YouTube
-                  </Link>
-                  <Link
-                    href={selectedEpisode.spotifyUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <Icon icon="mdi:spotify" width={16} height={16} className="text-green-600" />
-                    Spotify
-                  </Link>
-                </div>
-
-                <Card className="rounded-sm border-border p-3">
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      h2: ({ children }) => (
-                        <Typography variant="large" className="mt-3 text-foreground first:mt-0">
-                          {children}
-                        </Typography>
-                      ),
-                      p: ({ children }) => (
-                        <Typography variant="small" className="mt-1 text-muted-foreground first:mt-0">
-                          {children}
-                        </Typography>
-                      ),
-                      li: ({ children }) => (
-                        <li className="ml-5 list-disc text-sm text-muted-foreground">{children}</li>
-                      ),
-                    }}
-                  >
-                    {selectedEpisode.markdown}
-                  </ReactMarkdown>
-                </Card>
-              </>
-            ) : null}
-          </div>
-        </SheetContent>
-      </Sheet>
 
       <Modal open={pdfModalOpen} onOpenChange={setPdfModalOpen}>
         <ModalContent size="xl" className="rounded-sm p-4">

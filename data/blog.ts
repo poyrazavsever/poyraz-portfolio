@@ -1,8 +1,6 @@
 import "server-only";
 
 import { listBlogDetails } from "@/data/blog-detail";
-import type { PodcastEpisode } from "@/data/content-types";
-import { getPodcastCollections } from "@/lib/content-page";
 
 export type BlogNewsItem = {
   id: string;
@@ -26,26 +24,11 @@ export type BlogArticleItem = {
   author: string;
 };
 
-export type BlogPodcastItem = {
-  id: string;
-  title: string;
-  date: string;
-  href: string;
-};
-
-export type BlogPodcastGroup = {
-  id: "yazilim" | "masa-basi";
-  title: string;
-  href: string;
-  items: BlogPodcastItem[];
-};
-
 export type BlogPageData = {
   news: BlogNewsItem[];
   articles: BlogArticleItem[];
   categories: string[];
   selectedCategory: string;
-  podcastGroups: BlogPodcastGroup[];
   totalPages: number;
   currentPage: number;
 };
@@ -78,15 +61,6 @@ function sortByDateDesc<T extends { date: string; id: string }>(items: T[]) {
 
 function normalizeCategory(value: string) {
   return value.trim().toLocaleLowerCase();
-}
-
-function mapEpisodeToPodcastItem(episode: PodcastEpisode): BlogPodcastItem {
-  return {
-    id: `${episode.podcast}-${episode.slug}`,
-    title: episode.title,
-    date: episode.date,
-    href: "/content",
-  };
 }
 
 export async function getAllBlogArticles(): Promise<BlogArticleItem[]> {
@@ -143,8 +117,6 @@ export async function getBlogPageData(
   const start = (currentPage - 1) * pageSize;
   const paginated = filteredArticles.slice(start, start + pageSize);
 
-  const podcastCollections = await getPodcastCollections();
-
   return {
     news: articles.slice(0, 4).map((item) => ({
       id: `blog-news-${item.slug}`,
@@ -159,19 +131,5 @@ export async function getBlogPageData(
     selectedCategory,
     totalPages,
     currentPage,
-    podcastGroups: [
-      {
-        id: "yazilim",
-        title: "Poyraz ile Yazılım",
-        href: "/content",
-        items: podcastCollections.yazilim.slice(0, 4).map(mapEpisodeToPodcastItem),
-      },
-      {
-        id: "masa-basi",
-        title: "Poyraz ile Masa Başı",
-        href: "/content",
-        items: podcastCollections.masaBasi.slice(0, 4).map(mapEpisodeToPodcastItem),
-      },
-    ],
   };
 }

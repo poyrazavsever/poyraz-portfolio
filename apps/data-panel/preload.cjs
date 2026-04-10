@@ -15,11 +15,6 @@ contextBridge.exposeInMainWorld("panelAPI", {
     upsert: (payload) => ipcRenderer.invoke("blog:upsert", payload),
     delete: (slug) => ipcRenderer.invoke("blog:delete", slug),
   },
-  podcast: {
-    list: (kind) => ipcRenderer.invoke("podcast:list", kind),
-    upsert: (payload) => ipcRenderer.invoke("podcast:upsert", payload),
-    delete: (payload) => ipcRenderer.invoke("podcast:delete", payload),
-  },
   snippet: {
     list: () => ipcRenderer.invoke("snippet:list"),
     upsert: (payload) => ipcRenderer.invoke("snippet:upsert", payload),
