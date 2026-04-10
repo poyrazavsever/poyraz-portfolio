@@ -42,40 +42,53 @@ type BlogTocProps = {
 export function BlogToc({ markdown, onNavigate }: BlogTocProps) {
   const headings = useMemo(() => parseHeadings(markdown), [markdown]);
   const [activeId, setActiveId] = useState("");
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const rafRef = useRef(0);
 
   const handleClick = useCallback((id: string) => {
     const target = document.getElementById(id);
     if (!target) return;
 
     target.scrollIntoView({ behavior: "smooth", block: "start" });
+    setActiveId(id);
     onNavigate?.();
   }, [onNavigate]);
 
   useEffect(() => {
     if (headings.length === 0) return;
 
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
+    const OFFSET = 120;
+
+    const updateActive = () => {
+      let current = "";
+
+      for (const heading of headings) {
+        const el = document.getElementById(heading.id);
+        if (!el) continue;
+
+        const top = el.getBoundingClientRect().top;
+        if (top <= OFFSET) {
+          current = heading.id;
         }
-      },
-      { root: null, rootMargin: "0px 0px -60% 0px", threshold: 0.1 },
-    );
+      }
 
-    const elements = headings
-      .map((h) => document.getElementById(h.id))
-      .filter(Boolean) as Element[];
+      if (current) {
+        setActiveId(current);
+      }
+    };
 
-    for (const el of elements) {
-      observerRef.current.observe(el);
-    }
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(updateActive);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const timer = setTimeout(updateActive, 300);
 
     return () => {
-      observerRef.current?.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafRef.current);
+      clearTimeout(timer);
     };
   }, [headings]);
 
