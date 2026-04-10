@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Icon } from "@iconify/react";
 import Link from "next/link";
@@ -24,7 +24,7 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <>
       <NekoFollower />
-      <div className="mx-auto flex w-full max-w-4xl flex-col overflow-hidden px-4 py-4 sm:px-6">
+      <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 sm:px-6">
         <SiteNavbar />
         {announcement ? (
           <AnnouncementBar
@@ -47,7 +47,7 @@ export function AppShell({ children }: AppShellProps) {
             {announcement.text}
           </AnnouncementBar>
         ) : null}
-        <main className="flex-1 overflow-hidden py-4">{children}</main>
+        <main className="flex-1 py-4">{children}</main>
       </div>
     </>
   );

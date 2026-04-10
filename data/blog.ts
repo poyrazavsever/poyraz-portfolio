@@ -2,15 +2,6 @@ import "server-only";
 
 import { listBlogDetails } from "@/data/blog-detail";
 
-export type BlogNewsItem = {
-  id: string;
-  title: string;
-  category: string;
-  image: string;
-  date: string;
-  href: string;
-};
-
 export type BlogArticleItem = {
   id: string;
   slug: string;
@@ -25,10 +16,10 @@ export type BlogArticleItem = {
 };
 
 export type BlogPageData = {
-  news: BlogNewsItem[];
   articles: BlogArticleItem[];
   categories: string[];
   selectedCategory: string;
+  searchQuery: string;
   totalPages: number;
   currentPage: number;
 };
@@ -82,7 +73,7 @@ export async function getAllBlogArticles(): Promise<BlogArticleItem[]> {
   return sortByDateDesc(articles);
 }
 
-export async function getHomeBlogNews(limit = 3): Promise<BlogNewsItem[]> {
+export async function getHomeBlogNews(limit = 3) {
   const articles = await getAllBlogArticles();
 
   return articles.slice(0, limit).map((item) => ({
@@ -99,6 +90,7 @@ export async function getBlogPageData(
   page = 1,
   pageSize = 12,
   selectedCategoryParam?: string,
+  searchQueryParam?: string,
 ): Promise<BlogPageData> {
   const articles = await getAllBlogArticles();
   const categories = BLOG_CATEGORIES;
@@ -108,27 +100,32 @@ export async function getBlogPageData(
   const requestedCategory = selectedCategoryParam?.trim();
   const selectedCategory =
     (requestedCategory && categoryByNormalized.get(normalizeCategory(requestedCategory))) || "All";
-  const filteredArticles =
+  const searchQuery = (searchQueryParam ?? "").trim();
+  const searchLower = searchQuery.toLocaleLowerCase();
+
+  let filtered =
     selectedCategory === "All"
       ? articles
       : articles.filter((item) => normalizeCategory(item.category) === normalizeCategory(selectedCategory));
-  const totalPages = Math.max(1, Math.ceil(Math.max(filteredArticles.length, 1) / pageSize));
+
+  if (searchLower) {
+    filtered = filtered.filter(
+      (item) =>
+        item.title.toLocaleLowerCase().includes(searchLower) ||
+        item.excerpt.toLocaleLowerCase().includes(searchLower),
+    );
+  }
+
+  const totalPages = Math.max(1, Math.ceil(Math.max(filtered.length, 1) / pageSize));
   const currentPage = Math.min(Math.max(1, page), totalPages);
   const start = (currentPage - 1) * pageSize;
-  const paginated = filteredArticles.slice(start, start + pageSize);
+  const paginated = filtered.slice(start, start + pageSize);
 
   return {
-    news: articles.slice(0, 4).map((item) => ({
-      id: `blog-news-${item.slug}`,
-      title: item.title,
-      category: item.category,
-      image: item.image,
-      date: item.date,
-      href: item.href,
-    })),
     articles: paginated,
     categories,
     selectedCategory,
+    searchQuery,
     totalPages,
     currentPage,
   };

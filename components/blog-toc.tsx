@@ -36,30 +36,24 @@ function parseHeadings(markdown: string): TocHeading[] {
 
 type BlogTocProps = {
   markdown: string;
-  scrollerRef: React.RefObject<HTMLDivElement | null>;
+  onNavigate?: () => void;
 };
 
-export function BlogToc({ markdown, scrollerRef }: BlogTocProps) {
+export function BlogToc({ markdown, onNavigate }: BlogTocProps) {
   const headings = useMemo(() => parseHeadings(markdown), [markdown]);
   const [activeId, setActiveId] = useState("");
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const handleClick = useCallback(
-    (id: string) => {
-      const scroller = scrollerRef.current;
-      if (!scroller) return;
+  const handleClick = useCallback((id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
 
-      const target = scroller.querySelector(`#${CSS.escape(id)}`);
-      if (!target) return;
-
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    },
-    [scrollerRef],
-  );
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    onNavigate?.();
+  }, [onNavigate]);
 
   useEffect(() => {
-    const scroller = scrollerRef.current;
-    if (!scroller || headings.length === 0) return;
+    if (headings.length === 0) return;
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -69,11 +63,11 @@ export function BlogToc({ markdown, scrollerRef }: BlogTocProps) {
           }
         }
       },
-      { root: scroller, rootMargin: "0px 0px -60% 0px", threshold: 0.1 },
+      { root: null, rootMargin: "0px 0px -60% 0px", threshold: 0.1 },
     );
 
     const elements = headings
-      .map((h) => scroller.querySelector(`#${CSS.escape(h.id)}`))
+      .map((h) => document.getElementById(h.id))
       .filter(Boolean) as Element[];
 
     for (const el of elements) {
@@ -83,7 +77,7 @@ export function BlogToc({ markdown, scrollerRef }: BlogTocProps) {
     return () => {
       observerRef.current?.disconnect();
     };
-  }, [headings, scrollerRef]);
+  }, [headings]);
 
   if (headings.length < 2) return null;
 

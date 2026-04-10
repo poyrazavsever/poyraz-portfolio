@@ -3,7 +3,8 @@
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Icon } from "@iconify/react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
@@ -99,38 +100,37 @@ const GISCUS_CATEGORY = process.env.NEXT_PUBLIC_GISCUS_CATEGORY || "Announcement
 const GISCUS_CATEGORY_ID = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || "";
 
 export function BlogDetailContent({ post }: BlogDetailContentProps) {
-  const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const [progress, setProgress] = useState(0);
-  const progressWidth = useMemo(() => `${Math.min(100, Math.max(0, progress))}%`, [progress]);
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
+  const [tocOpen, setTocOpen] = useState(false);
 
-  const handleScroll = () => {
-    const element = scrollerRef.current;
-    if (!element) return;
+  const closeToc = useCallback(() => setTocOpen(false), []);
 
-    const scrollable = element.scrollHeight - element.clientHeight;
-    if (scrollable <= 0) {
-      setProgress(100);
-      return;
-    }
+  useEffect(() => {
+    const update = () => {
+      const bar = progressBarRef.current;
+      if (!bar) return;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docHeight <= 0 ? 100 : (window.scrollY / docHeight) * 100;
+      bar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+    };
 
-    setProgress((element.scrollTop / scrollable) * 100);
-  };
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+
+    return () => window.removeEventListener("scroll", update);
+  }, []);
 
   const showGiscus = GISCUS_REPO && GISCUS_REPO_ID && GISCUS_CATEGORY_ID;
 
   return (
     <>
       <div className="fixed top-0 left-0 z-50 h-1 w-full bg-border/70">
-        <div className="h-full bg-red-600 transition-[width] duration-100" style={{ width: progressWidth }} />
+        <div ref={progressBarRef} className="h-full w-0 bg-red-600" />
       </div>
 
-      <div className="flex h-full gap-4">
-        <div
-          ref={scrollerRef}
-          onScroll={handleScroll}
-          className="relative h-full flex-1 overflow-y-auto rounded-sm border border-border"
-        >
-          <article className="space-y-5 p-5 md:p-8">
+      <div className="flex gap-4">
+        <div className="min-w-0 flex-1">
+          <article className="space-y-5 rounded-sm border border-border p-5 md:p-8">
             <Link
               href="/blog"
               className="inline-flex items-center rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -332,11 +332,44 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
         </div>
 
         <aside className="hidden w-52 shrink-0 lg:block">
-          <div className="sticky top-4">
-            <BlogToc markdown={post.markdown} scrollerRef={scrollerRef} />
+          <div className="sticky top-24">
+            <BlogToc markdown={post.markdown} />
           </div>
         </aside>
       </div>
+
+      {/* Mobil İçindekiler Butonu */}
+      <button
+        type="button"
+        onClick={() => setTocOpen(true)}
+        className="fixed right-4 bottom-6 z-40 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border bg-background shadow-lg transition-transform hover:scale-105 active:scale-95 lg:hidden"
+        aria-label="İçindekiler"
+      >
+        <Icon icon="mdi:table-of-contents" width={22} height={22} className="text-red-600" />
+      </button>
+
+      {/* Mobil İçindekiler Drawer */}
+      {tocOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden" onClick={closeToc}>
+          <div className="absolute inset-0 bg-black/40" />
+          <div
+            className="absolute right-0 bottom-0 left-0 max-h-[60vh] overflow-y-auto rounded-t-xl border-t border-border bg-background p-5 shadow-2xl animate-in slide-in-from-bottom duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-3 flex items-center justify-between">
+              <Typography variant="large">İçindekiler</Typography>
+              <button
+                type="button"
+                onClick={closeToc}
+                className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                <Icon icon="mdi:close" width={18} height={18} />
+              </button>
+            </div>
+            <BlogToc markdown={post.markdown} onNavigate={closeToc} />
+          </div>
+        </div>
+      )}
     </>
   );
 }
