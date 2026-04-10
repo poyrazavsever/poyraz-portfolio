@@ -481,4 +481,49 @@ export const COLLECTION_CONFIGS = {
       meta: [],
     }),
   },
+  gallery: {
+    label: "Gallery",
+    itemLabel: "Gallery Item",
+    fileName: "gallery.ts",
+    exportName: "GALLERY_ITEMS",
+    fields: [
+      {
+        key: "id",
+        label: "ID",
+        required: true,
+        placeholder: "gallery-1",
+      },
+      {
+        key: "title",
+        label: "Title",
+        required: true,
+        placeholder: "Project Mockup",
+      },
+      {
+        key: "category",
+        label: "Category",
+        required: true,
+        placeholder: "UI Design",
+      },
+      {
+        key: "image",
+        label: "Image URL",
+        required: true,
+        type: "url",
+        placeholder: "/gallery/mockup.png",
+      },
+      {
+        key: "description",
+        label: "Description",
+        type: "textarea",
+        full: true,
+        placeholder: "Detail about visual...",
+      },
+    ],
+    card: (item) => ({
+      title: item.title || item.id || "Untitled",
+      meta: [item.category],
+      footer: item.description,
+    }),
+  },
 };
