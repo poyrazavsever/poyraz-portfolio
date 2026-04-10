@@ -140,25 +140,10 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
 
             <header className="space-y-3">
               <Badge className="rounded-sm">{post.category}</Badge>
-              <Typography variant="h2" className="leading-tight">
-                {post.title}
-              </Typography>
-              <Typography variant="small" className="text-muted-foreground">
+              <Typography variant="small" className="block text-muted-foreground">
                 {post.author} · {post.date} · {post.readTime}
               </Typography>
-              <Typography variant="p" className="text-muted-foreground">
-                {post.excerpt}
-              </Typography>
             </header>
-
-            <Card className="relative aspect-16/8 overflow-hidden rounded-sm border-border">
-              <img
-                src={post.coverImage}
-                alt={post.title}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </Card>
 
             <section className="space-y-5">
               <ReactMarkdown

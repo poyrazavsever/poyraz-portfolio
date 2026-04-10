@@ -38,7 +38,12 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "medium-to-markdown": "^0.0.3",
+    "puppeteer": "^24.40.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "tailwindcss": "^4",
+    "turndown": "^7.2.4",
     "typescript": "^5"
   }
 }

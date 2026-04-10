@@ -1,42 +1,35 @@
-# Medium Yazılarını Kişisel Web Sitesine Taşıma Planı
+# Medium Yazılarını Arşiv Beklemeden (Hızlı) Taşıma Planı
 
-Bu plan, Medium üzerindeki içeriklerin poyrazavsever.com (poyraz-portal) altyapısına Markdown formatında, SEO dostu ve kalıcı bir şekilde aktarılması için hazırlanmıştır.
-
----
-
-## 1. Hazırlık ve Veri Edinme
-* **Arşiv Talebi:** Medium Ayarları > Güvenlik > "Download your information" sekmesinden tüm verilerin yedeğini iste.
-* **Yerel Çalışma Alanı:** Bilgisayarında `medium-migration` adlı geçici bir klasör oluştur ve gelen .zip dosyasını buraya ayıkla.
-* **İçerik Analizi:** `posts` klasöründeki HTML dosyalarını incele. Hangi yazıların taşınacağına, hangilerinin taslak olarak kalacağına karar ver.
-
-## 2. Format Dönüştürme (HTML -> Markdown)
-* **Araç Seçimi:** HTML dosyalarını Markdown'a (.md) çevirmek için bir kütüphane (Turndown vb.) veya hazır bir CLI aracı belirle.
-* **Frontmatter Yapılandırması:** Her Markdown dosyasının başına sitenin (Next.js/Astro vb.) okuyabileceği metadata bloklarını ekle:
-    * Başlık (Title)
-    * Yayın Tarihi (Date)
-    * Kategori/Etiketler (Tags)
-    * Kapak Görseli Yolu (Cover Image)
-    * Medium Orijinal Linki (Canonical URL için)
-* **Slug Temizliği:** Dosya isimlerini URL uyumlu hale getir (Örn: `yazi-basligi.md`).
-
-## 3. Medya ve Görsel Yönetimi
-* **Görsel İndirme:** Markdown içindeki Medium kaynaklı (miro.medium.com) görselleri yerel `/public/blog` klasörüne indir.
-* **Link Güncelleme:** Markdown dosyasındaki uzak görsel linklerini, kendi sitendeki yerel yollarla değiştir.
-* **Optimizasyon:** İndirilen görselleri WebP formatına çevirerek site hızını artır.
-
-## 4. İçerik ve Kod Blokları Kontrolü
-* **Kod Blokları:** Medium'daki kod bloklarının ve Gist yerleştirmelerinin Markdown'da ` ``` ` içine doğru şekilde girip girmediğini kontrol et.
-* **Dahili Linkler:** Yazıların içinde başka Medium yazılarına verdiğin linkleri, kendi sitendeki yeni linklerle güncelle.
-* **Bileşen Dönüştürme:** Eğer sitende özel UI bileşenleri kullanıyorsan (Örn: `poyraz-ui`), Markdown içindeki bazı yapıları bu bileşenlere uyarla.
-
-## 5. SEO ve Yönlendirme Stratejisi
-* **Canonical URL:** Arama motorlarının kopya içerik algılamaması için, web sitendeki yazıların `<head>` kısmına orijinal Medium linkini "canonical" olarak ekle.
-* **Medium Güncelleme:** (Opsiyonel) Medium'daki yazılarını silmek yerine, en üstüne "Bu yazı artık poyrazavsever.com adresinde güncellenmektedir" notu ve linki ekle.
-
-## 6. Yayınlama ve Test
-* **Yerel Test:** Yazıları kendi portalında (localhost) render et. Görselleri, linkleri ve kod bloklarını manuel olarak test et.
-* **Deployment:** İçerikleri GitHub repo'na pushla ve siteni yayına al.
-* **Dizin Bildirimi:** Yeni URL'leri Google Search Console üzerinden dizine eklenmesi için gönder.
+Bu plan, Medium'un "Download your information" sürecini beklemeden, yayındaki makaleleri doğrudan URL üzerinden Markdown formatına dönüştürmek için tasarlanmıştır.
 
 ---
-**Not:** Bu işlem bir kez yapıldıktan sonra, gelecekte yazacağın yazıları önce kendi sitende yayınlayıp sonra Medium'a "Import" etmen (Cross-posting) iş akışını çok daha kolaylaştıracaktır.
+
+## 1. Yöntem Seçimi ve Araç Kurulumu
+* **CLI (Toplu Çekim):** Tüm yazıları tek seferde çekmek için terminal üzerinden `medium-to-markdown` gibi araçları hazırla.
+* **Eklenti (Tekil Çekim):** Eğer yazı sayısı az ise, tarayıcıya "MarkDownload" veya "Medium to Markdown" eklentisini kur.
+* **Klasör Yapısı:** Kendi web siten (poyrazavsever.com) içinde yazılar için geçici bir `/temp-blog` klasörü oluştur.
+
+## 2. İçerikleri Otomatik Çekme
+* **Kullanıcı Yazılarını Listeleme:** Medium profilindeki (medium.com/@kullaniciadi) tüm yazı linklerini bir liste haline getir.
+* **Dönüştürme Komutunu Çalıştırma:** Terminal kullanarak tüm halka açık yazıları Markdown dosyası olarak yerel bilgisayarına indir.
+* **Kontrol:** İndirilen dosyaların `.md` uzantılı olduğunu ve içeriklerin (özellikle kod bloklarının) okunaklı olduğunu doğrula.
+
+## 3. Metadata (Frontmatter) Düzenleme
+* **Başlık ve Tarih:** Her dosyanın en üstüne sitenin tanıması için gerekli bilgileri ekle (Title, Date, Slug).
+* **Kategori Atama:** Yazıları Medium'daki etiketlerine göre klasörle veya etiket metadatalarını güncelle.
+* **Özet (Excerpt):** Yazıların giriş kısmından kısa birer özet oluşturup dosyaların başına ekle.
+
+## 4. Görsel ve Medya Optimizasyonu
+* **Görsel Kaynakları:** Markdown içindeki `https://miro.medium.com/...` ile başlayan görsel linklerini tespit et.
+* **Yerel Kaydetme:** Bu görselleri manuel veya bir script yardımıyla indirip sitendeki `/public/images/blog` klasörüne taşı.
+* **Yol Güncelleme:** Markdown dosyalarındaki görsel linklerini kendi sunucundaki yeni yollarla (`/images/blog/yazi1.jpg` gibi) değiştir.
+
+## 5. Web Sitesine Entegrasyon
+* **Dosya Transferi:** Hazırlanan `.md` dosyalarını sitenin içerik yönetim sistemine (Content klasörüne) kopyala.
+* **Link Kontrolü:** Yazı içindeki diğer Medium yazılarına giden linkleri, kendi sitendeki yeni URL yapısına göre (`/blog/yazi-adi`) güncelle.
+* **SEO Ayarı:** Her yazı için `canonical` etiketini Medium'daki orijinal linki gösterecek şekilde ayarla (Bu adım SEO için kritiktir).
+
+## 6. Yayın ve Doğrulama
+* **Local Build:** Projeyi yerelde çalıştırarak görsellerin ve stilin (UI) doğru göründüğünden emin ol.
+* **Deployment:** Değişiklikleri ana repo'na gönder ve yayına al.
+* **Yönlendirme:** (Opsiyonel) Medium profilindeki biyografi kısmına "Yazılarım artık poyrazavsever.com/blog adresinde!" notunu ekle.
