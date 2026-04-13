@@ -1,5 +1,5 @@
 import { GalleryContent } from "@/components/gallery-content";
-import { GALLERY_ITEMS } from "@/data/gallery";
+import { GALLERY_IMAGES } from "@/data/gallery";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function GalleryPage() {
-  return <GalleryContent items={GALLERY_ITEMS} />;
+  return <GalleryContent images={GALLERY_IMAGES} />;
 }
