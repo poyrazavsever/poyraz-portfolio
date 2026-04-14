@@ -8,8 +8,8 @@
 export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
   {
     id: "main-announcement",
-    text: "UI Kit v2 yayında.",
-    actionLabel: "İncele ->",
-    actionHref: "https://ui.poyrazavsever.com",
+    text: "Yeni videom yayında.",
+    actionLabel: "İzle ->",
+    actionHref: "https://www.youtube.com/watch?v=FS9F1ttC0uw&t=344s",
   },
 ];
