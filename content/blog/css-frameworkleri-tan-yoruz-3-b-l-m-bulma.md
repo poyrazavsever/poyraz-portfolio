@@ -12,7 +12,6 @@ canonicalUrl: "https://medium.com/@poyrazavsever/css-frameworkleri-tan%C4%B1yoru
 
 # CSS Frameworkleri Tanıyoruz | 3. Bölüm: Bulma
 
-
 ![](/blog/images/css-frameworkleri-tan-yoruz-3-b-l-m-bulma-img-2.jpg)
 
 Bu seride amacımız, popüler CSS framework’lerini sade bir dille tanıtmak, nasıl kullanılacaklarını göstermek ve küçük projelerle öğrenmeyi desteklemek. İlk iki bölümde **Bootstrap** ve **Foundation** ile temel yapıları öğrendik. Şimdi sırada, sadeliği ve esnekliğiyle öne çıkan **Bulma** var. Açıkçası ben uzun zamandır **Bulma’yı** incelemek istiyordum. Bugüne nasip oldu.
@@ -33,23 +32,27 @@ Bulma’nın temel felsefesi, “**kodu anlamak kolay olmalı**” yaklaşımıd
 
 Bulma’nın layout sistemi tamamen Flexbox üzerine kuruludur. Bu sayede hem yatay hem de dikey hizalama işlemleri oldukça esnektir. Karmaşık grid yapıları bile birkaç satır sınıf ile kolayca oluşturulabilir.
 
-<div class\="columns"\>  
-  <div class\="column"\>İçerik 1</div\>  
-  <div class\="column"\>İçerik 2</div\>  
+```html
+<div class\="columns"\>
+  <div class\="column"\>İçerik 1</div\>
+  <div class\="column"\>İçerik 2</div\>
 </div\>
+```
 
 ### 1.2 - Kolay Öğrenilebilir Sınıf Sistemi
 
 Sınıf isimleri açık ve anlamlıdır:
 
-*   `is-primary`, `is-success`, `is-warning` gibi görsel sınıflar, bir bakışta ne işe yaradığını belli eder.
-*   `has-text-centered`, `is-fullwidth`, `is-size-4` gibi yapılar, stil vermek için CSS yazmadan işleri halletmenizi sağlar.
+- `is-primary`, `is-success`, `is-warning` gibi görsel sınıflar, bir bakışta ne işe yaradığını belli eder.
+- `has-text-centered`, `is-fullwidth`, `is-size-4` gibi yapılar, stil vermek için CSS yazmadan işleri halletmenizi sağlar.
 
 ### 1.3 - Responsive Tasarımlarda Büyük Kolaylık
 
 Mobil öncelikli yaklaşımı benimseyen Bulma, farklı ekran boyutları için özelleştirme yapmayı oldukça kolaylaştırır. Örneğin:
 
-<div class\="column is-full-mobile is-half-tablet is-one-third-desktop"\>
+```html
+<div class\="column is-full-mobile is-half-tablet is-one-third-desktop" \></div>
+```
 
 Bu yapı, mobilde tam genişlik, tablette yarım, masaüstünde üçte bir genişlik anlamına gelir.
 
@@ -71,24 +74,33 @@ Bulma’yı en hızlı şekilde projene dahil etmek için **CDN** (Content Deliv
 
 İhtiyacın olan tek şey HTML dosyanıza şu satırı eklemek:
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"\>
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+  \
+/>
+```
 
 ### 2.2- npm ile Kurulum
 
 Projenin bir Node.js tabanlı yapısı varsa, npm ile Bulma’yı projenize dahil edebilirsin. Bu, özellikle projeyi daha profesyonel şekilde yönetmek isteyenler için iyi bir seçenek. Adımlar:
 
-
 1 — Projende npm’i başlat:
 
+```bash
 npm init -y
+```
 
 2 — Bulma’yı kur:
 
+```bash
 npm install bulma
+```
 
 3 — `node_modules` klasöründen Bulma stil dosyasını projene import et:
 
-@import 'node\_modules/bulma/css/bulma.min.css';
+@import 'node_modules/bulma/css/bulma.min.css';
 
 Bu yöntemle, projenin gereksinimlerine göre daha esnek bir kurulum yapmış olursun. Ayrıca, Bulma’nın özelleştirilmiş sürümleri için Sass kullanabilirsin.
 
@@ -98,7 +110,7 @@ Bulma, Sass ile özelleştirilebilirsin. Özellikle tasarımın bazı kısımlar
 
 1- Sass dosyasını import et:
 
-@import 'node\_modules/bulma/bulma';
+@import 'node_modules/bulma/bulma';
 
 2- Bulma’nın sunduğu değişkenleri ve mixin’leri kullanarak renk, yazı tipi, buton boyutları gibi tasarım öğelerini özelleştirebilirsin. Örneğin:
 
@@ -116,93 +128,95 @@ Bu projede, temel HTML yapısını kullanarak Bulma framework’ü ile şık bir
 
 Öncelikle, temel HTML yapısını oluşturalım. Bulma’nın sunduğu `hero` sınıfını kullanarak bir başlık bölümü ekleyeceğiz ve altında birkaç kart bileşeni olacak.
 
-<!DOCTYPE html\>  
-<html lang\="en"\>  
-<head\>  
-  <meta charset\="UTF-8"\>  
-  <meta name\="viewport" content\="width=device-width, initial-scale=1.0"\>  
-  <title\>Bulma Landing Page</title\>  
-  <link rel\="stylesheet" href\="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"\>  
-</head\>  
-<body\>  
-  
-  <!-- Hero Section -->  
-  <section class\="hero is-primary is-fullheight"\>  
-    <div class\="hero-body"\>  
-      <div class\="container"\>  
-        <h1 class\="title"\>  
-          Hoş Geldiniz  
-        </h1\>  
-        <h2 class\="subtitle"\>  
-          Bulma ile Basit Bir Landing Page Tasarımı  
-        </h2\>  
-      </div\>  
-    </div\>  
-  </section\>  
-  
-  <!-- Feature Section -->  
-  <section class\="section"\>  
-    <div class\="container"\>  
-      <div class\="columns is-multiline"\>  
-        <div class\="column is-4"\>  
-          <div class\="card"\>  
-            <div class\="card-content"\>  
-              <h3 class\="title is-4"\>Özellik 1</h3\>  
-              <p\>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p\>  
-            </div\>  
-          </div\>  
-        </div\>  
-        <div class\="column is-4"\>  
-          <div class\="card"\>  
-            <div class\="card-content"\>  
-              <h3 class\="title is-4"\>Özellik 2</h3\>  
-              <p\>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p\>  
-            </div\>  
-          </div\>  
-        </div\>  
-        <div class\="column is-4"\>  
-          <div class\="card"\>  
-            <div class\="card-content"\>  
-              <h3 class\="title is-4"\>Özellik 3</h3\>  
-              <p\>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p\>  
-            </div\>  
-          </div\>  
-        </div\>  
-      </div\>  
-    </div\>  
-  </section\>  
-  
-  <!-- Footer Section -->  
-  <footer class\="footer"\>  
-    <div class\="content has-text-centered"\>  
-      <p\>  
-        <strong\>Bulma Landing Page</strong\> by <a href\="https://github.com/yourusername"\>Your Name</a\>.  
-      </p\>  
-    </div\>  
-  </footer\>  
-  
-</body\>  
+```html
+<!DOCTYPE html\>
+<html lang\="en"\>
+<head\>
+  <meta charset\="UTF-8"\>
+  <meta name\="viewport" content\="width=device-width, initial-scale=1.0"\>
+  <title\>Bulma Landing Page</title\>
+  <link rel\="stylesheet" href\="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"\>
+</head\>
+<body\>
+
+  <!-- Hero Section -->
+  <section class\="hero is-primary is-fullheight"\>
+    <div class\="hero-body"\>
+      <div class\="container"\>
+        <h1 class\="title"\>
+          Hoş Geldiniz
+        </h1\>
+        <h2 class\="subtitle"\>
+          Bulma ile Basit Bir Landing Page Tasarımı
+        </h2\>
+      </div\>
+    </div\>
+  </section\>
+
+  <!-- Feature Section -->
+  <section class\="section"\>
+    <div class\="container"\>
+      <div class\="columns is-multiline"\>
+        <div class\="column is-4"\>
+          <div class\="card"\>
+            <div class\="card-content"\>
+              <h3 class\="title is-4"\>Özellik 1</h3\>
+              <p\>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p\>
+            </div\>
+          </div\>
+        </div\>
+        <div class\="column is-4"\>
+          <div class\="card"\>
+            <div class\="card-content"\>
+              <h3 class\="title is-4"\>Özellik 2</h3\>
+              <p\>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p\>
+            </div\>
+          </div\>
+        </div\>
+        <div class\="column is-4"\>
+          <div class\="card"\>
+            <div class\="card-content"\>
+              <h3 class\="title is-4"\>Özellik 3</h3\>
+              <p\>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p\>
+            </div\>
+          </div\>
+        </div\>
+      </div\>
+    </div\>
+  </section\>
+
+  <!-- Footer Section -->
+  <footer class\="footer"\>
+    <div class\="content has-text-centered"\>
+      <p\>
+        <strong\>Bulma Landing Page</strong\> by <a href\="https://github.com/yourusername"\>Your Name</a\>.
+      </p\>
+    </div\>
+  </footer\>
+
+</body\>
 </html\>
+```
 
 ### 2\. Açıklamalar
 
-*   **Hero Section**: Bulma’nın `hero` sınıfı ile ekranın tamamını kaplayan bir başlık bölümümüz var. Burada `is-primary` sınıfı, başlık kısmına ana renk tonunu verir
-*   **Feature Section**: Bu bölümde üç adet kart kullanıyoruz. Her kart, bir özellik tanıtımı yapacak şekilde tasarlandı. `columns` sınıfı ile kartları hizalıyoruz.
-*   **Footer Section**: Sayfanın alt kısmında, sayfa hakkında kısa bir bilgi veren basit bir footer bulunuyor.
+- **Hero Section**: Bulma’nın `hero` sınıfı ile ekranın tamamını kaplayan bir başlık bölümümüz var. Burada `is-primary` sınıfı, başlık kısmına ana renk tonunu verir
+- **Feature Section**: Bu bölümde üç adet kart kullanıyoruz. Her kart, bir özellik tanıtımı yapacak şekilde tasarlandı. `columns` sınıfı ile kartları hizalıyoruz.
+- **Footer Section**: Sayfanın alt kısmında, sayfa hakkında kısa bir bilgi veren basit bir footer bulunuyor.
 
 ### 3\. CSS Özelleştirmeleri (isteğe bağlı)
 
 Eğer özelleştirmek istersen, Bulma’nın sunduğu renkleri veya tasarım ögelerini değiştirebilirsin. Örneğin, `hero` kısmının rengini değiştirebilir veya kartların stilini özelleştirebilirsin.
 
-<section class\="hero is-link is-fullheight"\>
+```html
+<section class\="hero is-link is-fullheight" \></section>
+```
 
 ### 4\. Responsive Tasarım
 
 Bulma, mobil öncelikli tasarım sunar. Bu nedenle tasarım, mobil cihazlarda düzgün bir şekilde görüntülenir. `columns` sınıfı ve `is-multiline` sayesinde, ekran boyutuna göre kartlar düzgün bir şekilde yerleşir. Küçük ekranlarda her kart bir satıra düşer, büyük ekranlarda ise yan yana yer alırlar.
 
-
 ![](/blog/images/css-frameworkleri-tan-yoruz-3-b-l-m-bulma-img-3.jpg)
-
 
 ![](/blog/images/css-frameworkleri-tan-yoruz-3-b-l-m-bulma-img-4.jpg)
 
@@ -212,5 +226,5 @@ Bu projede, Bulma’nın **kolay kullanımı**, **responsive özellikleri** ve *
 
 ### Daha İleri Gitmek İçin
 
-*   Bulma’nın **belgelerini** ([bulma.io](https://www.bulma.io)) inceleyerek daha fazla bileşen ve özelleştirme hakkında bilgi edinebilirsin.
-*   Bulma’yı projende Sass ile kullanarak stil dosyalarını daha detaylı şekilde yönetebilirsin.
+- Bulma’nın **belgelerini** ([bulma.io](https://www.bulma.io)) inceleyerek daha fazla bileşen ve özelleştirme hakkında bilgi edinebilirsin.
+- Bulma’yı projende Sass ile kullanarak stil dosyalarını daha detaylı şekilde yönetebilirsin.

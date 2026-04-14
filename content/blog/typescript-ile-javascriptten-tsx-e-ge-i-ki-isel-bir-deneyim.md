@@ -38,6 +38,7 @@ Gelin küçük bir karşılaştırma yapalım.
 
 JSX, React bileşenlerinde JavaScript kodunu HTML benzeri bir sözdizimi ile yazmamıza olanak tanır. Ancak, JSX’te tip kontrolü yapılmıyor.
 
+```tsx
 import React from 'react';  
   
 const Greeting = ({ name }) => {  
@@ -45,14 +46,18 @@ const Greeting = ({ name }) => {
 };  
   
 export default Greeting;
+```
 
 ## TSX (TypeScript XML)
 
 TSX ise, JSX’in TypeScript ile birleştirilmiş hali olup, tip kontrolü ve daha iyi hata ayıklama özellikleri sunuyor. Tip güvenliği sağlıyor ve bu, bileşenlerin beklenmedik hatalara karşı korunmasına yardımcı oluyor.
 
+```ts
 import React from 'react';  
+```
   
 // Props için TypeScript ile tip tanımlaması  
+```tsx
 interface GreetingProps {  
   name: string;  
 }  
@@ -62,6 +67,7 @@ const Greeting: React.FC<GreetingProps\> = ({ name }) => {
 };  
   
 export default Greeting;
+```
 
 ## Karşılaştırma
 

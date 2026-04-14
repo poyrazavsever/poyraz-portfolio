@@ -38,18 +38,26 @@ Chakra UI, yalnızca **React** projeleriyle çalışır. Bu nedenle, öncelikle 
 
 ### 2.1. React projesi oluştur (Vite ile öneriyorum)
 
+```bash
 npm create vite@latest my\-chakra-app -- --template react  
+```
 cd my\-chakra-app  
+```bash
 npm install
+```
 
 veya
 
+```bash
 npx create-react-app my\-chakra-app  
+```
 cd my\-chakra-app
 
 ### 2.2. Chakra UI’yi yükle
 
+```bash
 npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion
+```
 
 Burada yüklediğimiz framer-motion doc ‘da zorunlu koşulmuyor fakat tavsiye ediyorum.
 
@@ -57,28 +65,34 @@ Burada yüklediğimiz framer-motion doc ‘da zorunlu koşulmuyor fakat tavsiye 
 
 `main.jsx` (veya `index.js`) dosyanı şu şekilde güncelle:
 
+```ts
 import React from 'react'  
 import ReactDOM from 'react-dom/client'  
 import { ChakraProvider } from '@chakra-ui/react'  
 import App from './App'  
+```
   
 ReactDOM.createRoot(document.getElementById('root')).render(  
+```html
   <React.StrictMode\>  
     <ChakraProvider\>  
       <App />  
     </ChakraProvider\>  
   </React.StrictMode\>  
+```
 )
 
 ### Artık hazırsın!
 
 Chakra UI bileşenlerini kullanmaya başlayabilirsin. Örnek:
 
+```tsx
 import { Button } from '@chakra-ui/react'  
   
 function MyButton() {  
   return <Button colorScheme\="teal"\>Merhaba Chakra!</Button\>  
 }
+```
 
 Bunun çalışıp çalışmadığını kontrol et. Eğer çalışıyorsa sağlıklı bir şekilde yüklemişsindir.
 
@@ -89,7 +103,9 @@ Bu küçük projede, Chakra UI bileşenleriyle şık ve responsive bir **profil 
 *   `Box`, `Image`, `Text`, `Stack`, `Button`, `Flex`, `Avatar`
 *   Chakra UI’nin **temaya dayalı renk sistemi** ve **spacing sistemini** kullanacağız.
 
+```ts
 import {  
+```
   Box,  
   Flex,  
   Avatar,  
@@ -99,10 +115,12 @@ import {
   useColorModeValue,  
 } from "@chakra-ui/react";  
   
+```tsx
 function ProfileCard() {  
   return (  
     <Flex align\="center" justify\="center" minH\="100vh" bg\={useColorModeValue("gray.100", "gray.900")}>  
       <Box  
+```
         maxW\="sm"  
         w\="full"  
         bg\={useColorModeValue("white", "gray.800")}  
@@ -111,6 +129,7 @@ function ProfileCard() {
         p\={6}  
         textAlign\="center"  
       >  
+```html
         <Avatar size\="xl" src\="https://i.pravatar.cc/300" mb\={4} />  
         <Text fontSize\="2xl" fontWeight\="bold"\>  
           Ayşe Yılmaz  
@@ -129,13 +148,18 @@ function ProfileCard() {
       </Box\>  
     </Flex\>  
   );  
+```
 }  
   
+```ts
 export default ProfileCard;
+```
 
 ### 1\. `Flex`
 
+```html
 <Flex align\="center" justify\="center" minH\="100vh" bg\={...}\>
+```
 
 Sayfanın tamamında kartı **ortalamak** için kullanılıyoruz.
 
@@ -146,6 +170,7 @@ Sayfanın tamamında kartı **ortalamak** için kullanılıyoruz.
 
 ### 2\. `Box`
 
+```html
 <Box  
   maxW\="sm"  
   w\="full"  
@@ -155,6 +180,7 @@ Sayfanın tamamında kartı **ortalamak** için kullanılıyoruz.
   p\={6}  
   textAlign\="center"  
 \>
+```
 
 Tüm profil kartının çerçevesini oluşturuyor bu eleman. Atr ‘ları ise:
 
@@ -167,7 +193,9 @@ Tüm profil kartının çerçevesini oluşturuyor bu eleman. Atr ‘ları ise:
 
 ### 3\. `Avatar`
 
+```html
 <Avatar size\="xl" src\="https://i.pravatar.cc/300" mb\={4} />
+```
 
 Adından da anlaşılacağı üzere kullanıcının fotoğrafını gösteriyor.
 
@@ -177,6 +205,7 @@ Adından da anlaşılacağı üzere kullanıcının fotoğrafını gösteriyor.
 
 ### 4\. `Stack` + `Button`
 
+```html
 <Stack direction\="row" spacing\={4} justify\="center"\>  
   <Button colorScheme\="teal" variant\="solid"\>  
     Takip Et  
@@ -185,6 +214,7 @@ Adından da anlaşılacağı üzere kullanıcının fotoğrafını gösteriyor.
     Mesaj Gönder  
   </Button\>  
 </Stack\>
+```
 
 `Stack`: Chakra’nın **dikey veya yatay sıralama** komponentidir.
 

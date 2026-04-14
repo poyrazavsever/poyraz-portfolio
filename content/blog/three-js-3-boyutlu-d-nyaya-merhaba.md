@@ -35,7 +35,9 @@ Three.js, **JavaScript ile tarayıcı üzerinde 3D grafikler oluşturmak için k
 
 Three.js, bir sahne (scene) oluşturmanıza olanak tanır. Sahne, 3D dünyanızı barındıran bir konteyner gibidir. İçine nesneler, ışıklar ve kameralar ekleyebilirsiniz.
 
+```ts
 const scene = new THREE.Scene();
+```
 
 ### 2\. Kameralar
 
@@ -44,16 +46,20 @@ Kameralar, 3D sahnenizi “görmeyi” sağlar. Three.js’de iki ana kamera tü
 *   **PerspectiveCamera**: İnsan gözünün görme şekline benzer. Uzak nesneler daha küçük görünür.
 *   **OrthographicCamera**: Nesneler uzaklıklarına göre boyut değiştirmez. Teknik çizimler için kullanışlıdır.
 
+```ts
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);  
+```
 camera.position.z = 5;
 
 ### 3\. Geometri ve Malzeme (Geometry & Material)
 
 Geometri, 3D dünyanızdaki nesnelerin şekillerini tanımlar: küreler, kutular, düzlemler… Malzeme ise bu şekillerin nasıl görüneceğini belirler. Örneğin, mat mı parlak mı, hangi renkte olacak?
 
+```ts
 const geometry = new THREE.BoxGeometry();  
 const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });  
 const cube = new THREE.Mesh(geometry, material);  
+```
 scene.add(cube);
 
 ### 4\. Işıklandırma (Lighting)
@@ -64,7 +70,9 @@ Işık, sahnenizi gerçekçi hale getirir. Three.js, çeşitli ışık türleri 
 *   PointLight (Nokta ışığı)
 *   DirectionalLight (Güneş gibi yönlendirilmiş ışık)
 
+```ts
 const light = new THREE.PointLight(0xffffff, 1, 100);  
+```
 light.position.set(10, 10, 10);  
 scene.add(light);
 
@@ -72,7 +80,9 @@ scene.add(light);
 
 Renderer, sahnenizi tarayıcıda görüntülemenizi sağlar. Three.js’nin WebGLRenderer’ı, GPU’nun gücünü kullanarak sahneleri hızlı bir şekilde çizer.
 
+```ts
 const renderer = new THREE.WebGLRenderer();  
+```
 renderer.setSize(window.innerWidth, window.innerHeight);  
 document.body.appendChild(renderer.domElement);
 
@@ -80,8 +90,10 @@ document.body.appendChild(renderer.domElement);
 
 Three.js ile sahnenizi canlandırabilirsiniz. Bu, genellikle bir **animasyon döngüsü** kullanılarak yapılır:
 
+```ts
 function animate() {  
     requestAnimationFrame(animate);  
+```
     cube.rotation.x += 0.01;  
     cube.rotation.y += 0.01;  
     renderer.render(scene, camera);  
@@ -97,30 +109,42 @@ animate();
 
 ### Gelin bir önreğe bakalım
 
+```ts
 import \* as THREE from 'three';  
+```
   
 // Sahne oluştur  
+```ts
 const scene = new THREE.Scene();  
+```
   
 // Kamera ve ışık  
+```ts
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);  
+```
 camera.position.z = 5;  
   
 // Renderer  
+```ts
 const renderer = new THREE.WebGLRenderer();  
+```
 renderer.setSize(window.innerWidth, window.innerHeight);  
 document.body.appendChild(renderer.domElement);  
   
 // Geometri ve malzeme  
+```ts
 const geometry = new THREE.BoxGeometry();  
 const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });  
 const cube = new THREE.Mesh(geometry, material);  
+```
   
 scene.add(cube);  
   
 // Animasyon  
+```ts
 function animate() {  
     requestAnimationFrame(animate);  
+```
     cube.rotation.x += 0.01;  
     cube.rotation.y += 0.01;  
     renderer.render(scene, camera);  

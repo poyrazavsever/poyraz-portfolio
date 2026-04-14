@@ -88,6 +88,7 @@ Aşağıdaki kategorilerden birini seçmen çoğu kullanıcı için yeterlidir. 
 Bir blog yazılarını programatik olarak RSS’e dökmek istersen, en yalın şablon aşağıdaki gibidir. (RSS 2.0 örneği)
 
 <?xml version="1.0" encoding="UTF-8"?>  
+```xml
 <rss version\="2.0"\>  
  <channel\>  
  <title\>Ornek Blog</title\>  
@@ -104,6 +105,7 @@ Bir blog yazılarını programatik olarak RSS’e dökmek istersen, en yalın ş
  </item\>  
 </channel\>  
 </rss\>
+```
 
 ### **Üretim seçenekleri:**
 
@@ -119,6 +121,7 @@ Aşağıdaki iskelet, birkaç feed’i okuyup son 7 günün başlıklarını top
 // package.json: rss-parser ve nodemailer ekleyin  
 // npm i - pnpm add - yarn i rss-parser nodemailer  
   
+```ts
 const Parser = require('rss-parser');  
 const nodemailer = require('nodemailer');  
 const parser = new Parser();  
@@ -126,8 +129,10 @@ const parser = new Parser();
 const FEEDS = \[  
   'https://ornek.site/rss.xml',  
   'https://baska.site/feed'  
+```
 \];  
   
+```ts
 async function fetchItemsLast7Days() {  
   const now = new Date();  
   const weekAgo = new Date(now.getTime() - 7\*24\*60\*60\*1000);  
@@ -138,12 +143,14 @@ async function fetchItemsLast7Days() {
     for (const item of feed.items) {  
       const d = new Date(item.isoDate || item.pubDate || 0);  
       if (d >= weekAgo) {  
+```
         items.push({ title: item.title, link: item.link, date: d, source: feed.title });  
       }  
     }  
   }  
   
   // Tarihe göre yeni → eski  
+```tsx
   return items.sort((a, b) => b.date - a.date);  
 }  
   
@@ -173,6 +180,7 @@ function renderHtml(items){
   const html = renderHtml(items);  
   if (items.length) await sendEmail(html);  
 })();
+```
 
 > P_oyraz’ın İpucusu: Bunu bir zamanlayıcıyla (cron, GitHub Actions, serverless scheduler) haftada 1 kez tetikle._
 

@@ -50,6 +50,7 @@ Svelte, özellikle performansın kritik olduğu projelerde (örneğin düşük p
 React’ta bir bileşen oluşturmak ve state yönetmek için genellikle `useState` hook'u kullanılır. İşte basit bir sayaç bileşeni örneği:
 
 // React'ta sayaç bileşeni  
+```tsx
 import React, { useState } from 'react';  
 function Counter() {  
  const \[count, setCount\] = useState(0);  
@@ -57,12 +58,17 @@ return (
  <div>  
  <p>Count: {count}</p>  
  <button onClick={() => setCount(count + 1)}>  
+```
  Increase  
+```html
  </button>  
  </div>  
+```
  );  
 }  
+```ts
 export default Counter;
+```
 
 Burada React’in `useState` hook'u ile state yönetimi sağlanır. `onClick` olayında state güncellenir ve bileşen yeniden render edilir. Peki bunu svelte ile nasıl yapıyoruz?
 
@@ -70,6 +76,7 @@ Burada React’in `useState` hook'u ile state yönetimi sağlanır. `onClick` ol
 
 Svelte’de aynı işlevselliği elde etmek çok daha basit ve doğrudan olur. State yönetimi doğrudan JavaScript değişkenleri üzerinden yapılır ve Svelte reaktif yapısı sayesinde değişiklikler otomatik olarak bileşenleri yeniden render eder:
 
+```html
 <!-- Svelte'te sayaç bileşeni -->  
 <script\>  let count = 0;</script\>  
   
@@ -79,6 +86,7 @@ Svelte’de aynı işlevselliği elde etmek çok daha basit ve doğrudan olur. S
     Increase  
   </button\>  
 </div\>
+```
 
 Bu daha büyük projelerde dez avantaj yaratabilir fakat küçük çaplı projelerde sürecin hızlanmasına olanak tanır.
 
@@ -89,6 +97,7 @@ Bu daha büyük projelerde dez avantaj yaratabilir fakat küçük çaplı projel
 React’ta bir bileşene `props` geçirerek veri aktarımı şu şekilde yapılır:
 
 // React'ta parent bileşen  
+```tsx
 import React from 'react';  
 import Greeting from './Greeting';  
   
@@ -97,13 +106,16 @@ function App() {
 }  
   
 export default App;
+```
 
 // React'ta child bileşen  
+```tsx
 function Greeting({ name }) {  
   return <p>Hello, {name}!</p>;  
 }  
   
 export default Greeting;
+```
 
 Burada `Greeting` bileşenine `props` olarak `name` değerini geçiyoruz ve bu props'u child bileşende kullanıyoruz.
 
@@ -111,6 +123,7 @@ Burada `Greeting` bileşenine `props` olarak `name` değerini geçiyoruz ve bu p
 
 Svelte’de props kullanımı ise daha basit ve doğrudandır:
 
+```html
 <!-- Svelte'te parent bileşen -->  
 <script\>  import Greeting from './Greeting.svelte';</script\>  
   
@@ -120,6 +133,7 @@ Svelte’de props kullanımı ise daha basit ve doğrudandır:
 <script\>  export let name;</script\>  
   
 <p\>Hello, {name}!</p\>
+```
 
 Svelte’de bir değişkeni `export` ederek dışarıdan bileşene veri aktarılabilir. Bu, React'taki `props` yapısına karşılık gelir ve çok daha sade bir kullanım sunar. Aslında yine aynı yere varıyoruz. Daha komplike projelerde tercih edilmeyebilir.
 
@@ -129,6 +143,7 @@ Svelte’de bir değişkeni `export` ederek dışarıdan bileşene veri aktarıl
 
 React’ta formlarda state yönetimi ve event handling biraz daha karmaşık olabilir:
 
+```tsx
 import React, { useState } from 'react';  
   
 function Form() {  
@@ -147,6 +162,7 @@ function Form() {
 }  
   
 export default Form;
+```
 
 Her input değişikliğinde state güncellenir ve render tetiklenir.
 
@@ -154,12 +170,14 @@ Her input değişikliğinde state güncellenir ve render tetiklenir.
 
 Svelte’de form kontrolü ve event yönetimi ise çok daha basit:
 
+```html
 <script\>  let inputValue = '';</script\>  
   
 <div\>  
   <input type\="text" bind:value\={inputValue} />  
   <p\>Input: {inputValue}</p\>  
 </div\>
+```
 
 Svelte’de `bind` ifadesi ile bir input elemanını doğrudan bir değişkene bağlayabilirsiniz. Bu, iki yönlü veri bağlamayı (two-way binding) çok basit hale getirir. Gelin burada ki ana mantığı anladığımıza göre biraz daha Svelte’e odaklanalım ve Svelte’in özelliklerini daha derinlemesine inceleyelim.
 
@@ -176,20 +194,26 @@ Svelte’de lifecycle metotları, bileşenlerin yaşam döngüsü içinde belirl
 
 Svelte’de bir bileşenin DOM’a eklenmesiyle birlikte yapılacak işlemleri `onMount` fonksiyonu ile tanımlayabilirsiniz:
 
+```html
 <script\>  import { onMount } from 'svelte';  
+```
   
+```ts
   let data;  
   
   onMount(async () => {  
     const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');  
+```
     data = await res.json();  
   });</script\>  
   
+```html
 <div\>  
   {#if data}  
     <p\>{data.title}</p\>  
   {/if}  
 </div\>
+```
 
 Bu örnekte `onMount`, bileşen DOM’a yerleştiği anda bir API çağrısı yapar ve sonuçları ekranda görüntüler.
 
@@ -202,15 +226,19 @@ Svelte’de reaktiviteyi tetiklemek için sadece bir değişkenin değerini gün
 
 **Reaktif İfadeler:**
 
+```html
 <script\>  let count = 0;  
   let doubled;  
+```
   
   // $: ifadesi, reaktif bir bloğu işaretler  
   $: doubled = count \* 2;</script\>  
   
+```html
 <p\>Count: {count}</p\>  
 <p\>Doubled: {doubled}</p\>  
 <button on:click\={() => count++}>Increase</button\>
+```
 
 Bu örnekte, `count` değişkeni her arttığında `doubled` reaktif olarak güncellenir ve bu değişiklik ekrana yansır.
 
@@ -225,16 +253,22 @@ Svelte, küçük projeler için bileşenler arası veri paylaşımı amacıyla o
 
 Writable store, bileşenler arasında güncellenebilir bir veri paylaşımı sağlar. Aşağıda bir sayaç uygulaması için writable store kullanımını görebilirsiniz:
 
+```html
 <!-- store.js -->  
+```
+```ts
 import { writable } from 'svelte/store';  
   
 export const count = writable(0);
+```
 
+```html
 <!-- App.svelte -->  
 <script\>  import { count } from './store';</script\>  
   
 <p\>Count: {$count}</p\>  
 <button on:click\={() => count.update(n => n + 1)}>Increase</button\>
+```
 
 Store değerine erişmek için `$` işaretini kullanarak reaktif bir bağlama yapabilirsiniz. Ayrıca, `count.update()` ile store değerini güncelleyebilirsiniz. Gördüğünüz gibi oldukça basit.
 

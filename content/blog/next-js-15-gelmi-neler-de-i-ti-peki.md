@@ -66,7 +66,9 @@ Aşağıdaki API’ler artık asenkron çalışıyor:
 
 Bu API’leri kullanırken `await` yazman şart. Yani şöyle şeyler artık gerekiyor:
 
+```ts
 const cookies = await cookies()
+```
 
 ## Nereleri etkiliyor?
 
@@ -83,7 +85,9 @@ Yani bu dosyaların içinde yukarıdaki API’leri kullanıyorsan hepsini async 
 
 Neyse ki Next.js ekibi bizi unutmamış ve bu geçişi kolaylaştırmak için bir araç sunmuş:
 
+```bash
 npx @next/codemod@latest async\-request\-apis
+```
 
 Bu komut sayesinde projenin içindeki eski kullanım biçimleriniz otomatik olarak async hale getirilebiliyor. Yine de kodu gözden geçirmek şart, çünkü her proje özelinde ufak dokunuşlar gerekebilir.
 
@@ -107,7 +111,9 @@ Bu durum, bazı projeler için performans düşüşüne neden olabilir. Ama mera
 
 Eğer bir verinin cache’lenmesini ve static hale gelmesini istiyorsan artık bunu **açıkça belirtmen gerekiyor**.
 
+```ts
 export const dynamic = 'force-static'
+```
 
 veya daha esnek bir yapı istersen, `next.config.js` dosyasına aşağıdaki gibi bir ayar da ekleyebilirsin:
 
@@ -174,7 +180,9 @@ Next.js projeni yeni sürüme geçirirken en büyük yardımcın olacak araç bu
 
 Kullanımı çok basit:
 
+```bash
 npx @next/codemod@latest async\-request\-apis
+```
 
 Sadece async dönüşümü değil, başka dönüşümler için de bu aracı kullanabilirsin. Kod tabanını hızlıca yeni sürüme uygun hale getiriyor.
 
@@ -215,11 +223,15 @@ Bu dosya, uygulamanın sunucu tarafında gerçekleşen istekleri izlemeni ve ger
 *   Hata loglama sistemleri (örn: request bazlı loglama)
 
 // instrumentation.ts  
+```ts
 export function register() {  
+```
   console.log('Server started')  
 }  
   
+```ts
 export function onRequestError(error) {  
+```
   console.error('Request error:', error)  
 }
 

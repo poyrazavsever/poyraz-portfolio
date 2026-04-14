@@ -79,11 +79,13 @@ src/
 
 *   Bir `data.js` dosyası oluşturarak mock veriler eklemek:
 
+```ts
 export cocst userData = {  
   name: "Poyraz Avsever",  
   bio: "Yazılım geliştirici ve Tasarımcı",  
   photo: "/images/profile.jpg",  
   education: \[  
+```
     { id: 1, degree: "Yazılım Mühendisliği", institution: "OSTİM Teknik Üniversitesi" },  
   \],  
   products: \[{ id: 1, name: "CRM Yazılımı", price: "$100" }\],  
@@ -99,6 +101,7 @@ export cocst userData = {
 
 ### 4.1. ProfileHeader.jsx
 
+```tsx
 const ProfileHeader = ({ name, bio, photo }) => (  
   <div className="profile-header">  
     <img src={photo} alt="Profile" />  
@@ -107,9 +110,11 @@ const ProfileHeader = ({ name, bio, photo }) => (
   </div>  
 );  
 export default ProfileHeader;
+```
 
 ### 4.2. Dinamik Liste Bileşeni: ProductsList.jsx
 
+```tsx
 const ProductsList = ({ products }) => (  
   <div className="products-list">  
     {products.map(product => (  
@@ -121,11 +126,13 @@ const ProductsList = ({ products }) => (
   </div>  
 );  
 export default ProductsList;
+```
 
 ## 5\. Veri Çekme ve Kullanıcı Arayüzünü Tamamlama
 
 *   **useEffect** ile veri çekme:
 
+```ts
 import { useState, useEffect } from "react";  
 import axios from "axios";  
   
@@ -133,6 +140,7 @@ const \[data, setData\] = useState(null);
   
 useEffect(() => {  
   axios.get("/api/user").then(response => setData(response.data));  
+```
 }, \[\])
 
 *   **Props Drilling** veya **Context API** kullanarak verilerin bileşenlere aktarımı.

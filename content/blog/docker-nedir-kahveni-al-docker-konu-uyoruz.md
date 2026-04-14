@@ -82,13 +82,17 @@ Teori güzel, ama pratik olmadan biraz anlamsız kalıyor her şey. Şimdi Docke
 
 İlk adım olarak sisteminde Docker kurulu mu kontrol et. Terminal veya komut satırına şu komutu yaz:
 
+```bash
 docker \--version
+```
 
 Eğer kurulu değilse [aha da buradan](https://www.docker.com/products/docker-desktop/) Docker Desktop’u indirip yükleyebilirsin. Kurulum sonrası bilgisayarı yeniden başlatmak gerekebilir.
 
 ### 2\. İlk Docker Komutu: Hello World
 
+```bash
 docker run hello-world
+```
 
 Bu ne yapar dersen:
 
@@ -123,11 +127,15 @@ CMD \["python", "app.py"\]
 
 Terminale şunu yaz:
 
+```bash
 docker build -t merhaba-dunya .
+```
 
 Uygulamayı çalıştır:
 
+```bash
 docker run merhaba-dunya
+```
 
 Ve boom! Terminalde şunu göreceksin:
 

@@ -55,12 +55,14 @@ Bu yaklaşım şu avantajları sağlar:
 *   **Daha iyi kullanıcı deneyimi:** Sayfalar ve API yanıtları daha hızlı yüklenir.
 *   **Global ölçeklenebilirlik:** Dünyanın her yerindeki kullanıcılar benzer hızda erişim sağlar.
 
+```ts
 export const runtime = 'edge';  
   
 export async function GET(req: Request) {  
   const country = req.headers.get('x-vercel-ip-country') || 'US';  
   
   return new Response(  
+```
     JSON.stringify({ currency: country === 'TR' ? '₺' : '$' }),  
     { headers: { 'Content-Type': 'application/json' } }  
   );  
@@ -79,10 +81,12 @@ Next.js, Edge Functions kullanmayı son derece kolay hale getiriyor sağ olsun. 
 
 Örnek olarak `app/api/hello/route.ts` dosyası oluşturalım:
 
+```ts
 export const runtime = 'edge';  
   
 export async function GET() {  
   return new Response(  
+```
     JSON.stringify({ message: 'Merhaba Edge!' }),  
     { headers: { 'Content-Type': 'application/json' } }  
   );  
@@ -100,6 +104,7 @@ Next.js middleware yapısı **varsayılan olarak edge üzerinde çalışır.**
 Örneğin kullanıcıyı oturum durumuna göre yönlendirmek için:
 
 // middleware.ts  
+```ts
 import { NextResponse } from 'next/server';  
   
 export function middleware(req: Request) {  
@@ -109,6 +114,7 @@ export function middleware(req: Request) {
   }  
   return NextResponse.next();  
 }
+```
 
 Bu middleware, kullanıcıya en yakın edge node’da çalışır, bu sayede yönlendirmeler çok daha hızlıdır.
 
@@ -130,6 +136,7 @@ Burada amaç kullanıcının ülkesi veya şehri bazında anında içerik/pref s
 
 _Örnek (app/api/prefs/route.ts):_
 
+```ts
 export const runtime = 'edge';  
   
 export async function GET(req: Request) {  
@@ -139,6 +146,7 @@ export async function GET(req: Request) {
     headers: { 'Content-Type': 'application/json' }  
   });  
 }
+```
 
 Bu kod ile Türkiye’den gelen kullanıcı **₺** görürken, ABD’den gelen kullanıcı **$** görecektir.
 
@@ -146,6 +154,7 @@ Bu kod ile Türkiye’den gelen kullanıcı **₺** görürken, ABD’den gelen 
 
 Amacımız yeni bir özelliği kullanıcıların belirli bir yüzdesine göstermek. Mesela bir şeyi test etmek istiyor ya da bölge bazlı özellik geliştirmek istiyor olabilirsiniz.
 
+```ts
 import { NextResponse } from 'next/server';  
   
 export const config = { matcher: \['/'\] };  
@@ -155,9 +164,12 @@ export function middleware(req: Request) {
   const variant = /variant=(A|B)/.exec(cookie)?.\[1\] || (Math.random() < 0.5 ? 'A' : 'B');  
   
   const res = NextResponse.next();  
+```
   res.headers.append('Set-Cookie', \`variant=${variant}; Path=/; Max-Age=2592000; SameSite=Lax\`);  
+```ts
   return res;  
 }
+```
 
 Bu örnek kullanıcıya A veya B varyantını atar ve tüm isteklerde tutarlı kalmasını sağlar.
 
@@ -165,6 +177,7 @@ Bu örnek kullanıcıya A veya B varyantını atar ve tüm isteklerde tutarlı k
 
 Burada ise amacımız yeni özellikleri %10 / %50 gibi kademelerle yayına almak. Yukarıdaki ile benzer sebeplerden bunu yapmak istiyor olabilirsiniz.
 
+```ts
 export const runtime = 'edge';  
   
 export async function GET() {  
@@ -173,6 +186,7 @@ export async function GET() {
     headers: { 'Content-Type': 'application/json' }  
   });  
 }
+```
 
 Gerçekte kullanıcı kimliğine göre hash alırsan, aynı kullanıcı her zaman aynı sonucu görür.
 
@@ -180,6 +194,7 @@ Gerçekte kullanıcı kimliğine göre hash alırsan, aynı kullanıcı her zama
 
 Okuma ağırlıklı API’leri CDN üzerinde önbelleğe almak için bu tarz bir ihtiyacınız olabilir.
 
+```ts
 export const runtime = 'edge';  
   
 export async function GET() {  
@@ -191,6 +206,7 @@ export async function GET() {
     }  
   });  
 }
+```
 
 Bu sayede kullanıcılar her istekte milisaniyeler içinde yanıt alır.
 

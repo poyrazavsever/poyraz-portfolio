@@ -31,13 +31,17 @@ Peki, Jest’i ne zaman kullanmalısın? Eğer React componentleri üzerinde ça
 
 Kurulum ise oldukça basit. Tek bir komutla Jest’i projene ekleyebilirsin:
 
+```bash
 npm install \--save-dev jest
+```
 
 Kurulumdan sonra, Jest’i kullanmaya başlamak için birkaç temel ayar yapman yeterli. Şimdi, basit bir test örneğiyle devam edelim.
 
+```ts
 function toplama(a, b) {  
   return a + b;  
 }
+```
 
 Bu fonksiyonu test etmek için Jest ile şöyle bir test yazabilirsin:
 
@@ -74,12 +78,16 @@ Bazen test ettiğin kod, dış bağımlılıklara (örneğin, API isteklerine) i
 jest.mock('axios'); // axios kütüphanesini mockladık  
   
 it('API çağrısı başarılı olursa veriyi döndürmeli', async () => {  
+```ts
   const veriler = { data: { isim: 'Ali' } };  
+```
   axios.get.mockResolvedValue(veriler); // Mock cevap  
   
+```ts
   const cevap = await apiCagir(); // Api istek atıyoruz  
   expect(cevap.isim).toBe('Ali');  
 });
+```
 
 ## Snapshot Testing
 
@@ -88,6 +96,7 @@ Snapshot testing, bileşenlerinin görsel çıktılarının kaydedilmesi ve daha
 
 Bir bileşeni snapshot ile test etmek için, şu şekilde yazabilirsin:
 
+```tsx
 import { render } from '@testing-library/react';  
 import MyComponent from './MyComponent';  
   
@@ -95,6 +104,7 @@ test('MyComponent snapshot testi', () => {
   const { asFragment } = render(<MyComponent />);  
   expect(asFragment()).toMatchSnapshot(); // Componentin çıktısını kaydediyor  
 });
+```
 
 ## Cypress Nedir?
 
@@ -107,7 +117,9 @@ Cypress ile test yazmak oldukça keyifli, çünkü her şey anlık geri bildirim
 
 Cypress’i projene eklemek de oldukça basit. Tek bir komutla kurulumunu gerçekleştirebilirsin:
 
+```bash
 npm install cypress \--save-dev
+```
 
 Kurulumdan sonra, `npx cypress open` komutunu çalıştırarak Cypress arayüzünü açabilirsin. Buradan test senaryolarını kolayca yazmaya başlayabilirsin.
 

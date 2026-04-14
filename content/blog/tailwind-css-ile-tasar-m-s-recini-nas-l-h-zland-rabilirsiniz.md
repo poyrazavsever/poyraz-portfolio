@@ -35,7 +35,9 @@ CSS de her yeni stil için bir class yazman gerekiyor. Örneğin, bir butonun ar
 
 Tailwind de ise aynı butonu şu şekilde oluşturabilirsin:
 
+```html
 <button class\="bg-blue-500 text-white p-4"\>Click Me</button\>h
+```
 
 Yani, her şey HTML içerisinde çok daha hızlı bir şekilde yönetilebiliyor. Bu da stili hızlıca oluşturmanı ve üzerinde anında değişiklik yapmanı sağlıyor. Üstelik terimler daha basite indirgendiği için kafa karışıklığından da kurtuluyoruz.
 
@@ -46,9 +48,11 @@ CSS’de büyük projelerde zamanla stil dosyaları karmaşık hale gelebilir. S
 **3- Responsive Tasarım Kolaylığı**  
 CSS de her ekran boyutu için ayrı media query yazman gerekiyor fakat Tailwind’de bu iş çok daha kolay. Örneğin:
 
+```html
 <div class\="text-sm md:text-lg lg:text-xl"\>  
   Responsive Metin  
 </div\>
+```
 
 Bu kod, küçük ekranlarda `text-sm`, orta ekranlarda `text-lg`, büyük ekranlarda `text-xl` sınıflarını uygular. Media query yazmaya gerek yok. Bana kalırsa Tailwind’in sağladığı en büyük avantajlardan birisi de bu.
 
@@ -102,9 +106,11 @@ module.exports = {
 
 Tailwind ile responsive tasarımlar oluşturmak çok basittir. Sınıfların başına `sm:`, `md:`, `lg:` gibi prefix'ler ekleyerek farklı ekran boyutlarına göre stilleri kolayca tanımlayabilirsin. Bu, mobil uyumluluğu hızla sağlamanın en etkili yollarından biri. Web sitesini tasarlamaya başlarken mobil versiyonlardan başlarsan daha rahat edersin. **Küçükten büyüğe**
 
+```html
 <div class\="text-sm md:text-lg lg:text-xl"\>  
   Responsive Metin  
 </div\>
+```
 
 6\. **Tailwind Eklentilerini Keşfet**
 
