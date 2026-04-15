@@ -5,6 +5,8 @@
   actionHref: string;
 };
 
+export const ENABLE_NEKO_FOLLOWER = false;
+
 export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
   {
     id: "main-announcement",

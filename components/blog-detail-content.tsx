@@ -1,12 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import type { BlogDetail } from "@/data/blog-detail";
 import { BlogToc } from "@/components/blog-toc";
@@ -15,6 +14,59 @@ import { GiscusComments } from "@/components/giscus-comments";
 type BlogDetailContentProps = {
   post: BlogDetail;
 };
+
+function isHttpUrl(value: string) {
+  return value.startsWith("http://") || value.startsWith("https://");
+}
+
+function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
+  if (!src) return null;
+
+  const caption = alt || "";
+  const isLocalAsset = src.startsWith("/");
+  const isExternalAsset = isHttpUrl(src);
+
+  if (!isLocalAsset && !isExternalAsset) return null;
+
+  return (
+    <Card className="my-4 overflow-hidden rounded-sm border-border">
+      {isLocalAsset ? (
+        <Image
+          src={src}
+          alt={caption}
+          width={1200}
+          height={675}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 900px"
+          loading="lazy"
+          className="h-auto w-full object-cover"
+        />
+      ) : (
+        <img
+          src={src}
+          alt={caption}
+          width={1200}
+          height={675}
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+          referrerPolicy="strict-origin-when-cross-origin"
+          className="h-auto w-full object-cover"
+        />
+      )}
+
+      {caption ? (
+        <div className="px-3 py-2">
+          <Typography
+            variant="small"
+            className="text-center text-muted-foreground"
+          >
+            {caption}
+          </Typography>
+        </div>
+      ) : null}
+    </Card>
+  );
+}
 
 function slugify(text: string) {
   return text
@@ -31,7 +83,10 @@ function extractText(children: React.ReactNode): string {
   if (typeof children === "string") return children;
   if (Array.isArray(children)) return children.map(extractText).join("");
   if (children && typeof children === "object" && "props" in children) {
-    return extractText((children as React.ReactElement<{ children?: React.ReactNode }>).props.children);
+    return extractText(
+      (children as React.ReactElement<{ children?: React.ReactNode }>).props
+        .children,
+    );
   }
   return "";
 }
@@ -47,7 +102,11 @@ function MermaidBlock({ chart }: { chart: string }) {
     const renderChart = async () => {
       try {
         const mermaid = (await import("mermaid")).default;
-        mermaid.initialize({ startOnLoad: false, theme: "neutral", securityLevel: "loose" });
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: "neutral",
+          securityLevel: "loose",
+        });
         const { svg: rendered } = await mermaid.render(idRef.current, chart);
 
         if (mounted) {
@@ -96,7 +155,8 @@ function MermaidBlock({ chart }: { chart: string }) {
 
 const GISCUS_REPO = process.env.NEXT_PUBLIC_GISCUS_REPO || "";
 const GISCUS_REPO_ID = process.env.NEXT_PUBLIC_GISCUS_REPO_ID || "";
-const GISCUS_CATEGORY = process.env.NEXT_PUBLIC_GISCUS_CATEGORY || "Announcements";
+const GISCUS_CATEGORY =
+  process.env.NEXT_PUBLIC_GISCUS_CATEGORY || "Announcements";
 const GISCUS_CATEGORY_ID = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || "";
 
 export function BlogDetailContent({ post }: BlogDetailContentProps) {
@@ -109,7 +169,9 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
     const update = () => {
       const bar = progressBarRef.current;
       if (!bar) return;
-      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const docHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
       const pct = docHeight <= 0 ? 100 : (window.scrollY / docHeight) * 100;
       bar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
     };
@@ -140,7 +202,10 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
 
             <header className="space-y-3">
               <Badge className="rounded-sm">{post.category}</Badge>
-              <Typography variant="small" className="block text-muted-foreground">
+              <Typography
+                variant="small"
+                className="block text-muted-foreground"
+              >
                 {post.author} · {post.date} · {post.readTime}
               </Typography>
             </header>
@@ -153,7 +218,11 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                     const text = extractText(children);
                     const id = slugify(text);
                     return (
-                      <Typography variant="h2" className="mt-10 mb-3 border-b border-border pb-3" id={id}>
+                      <Typography
+                        variant="h2"
+                        className="mt-10 mb-3 border-b border-border pb-3"
+                        id={id}
+                      >
                         {children}
                       </Typography>
                     );
@@ -162,7 +231,11 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                     const text = extractText(children);
                     const id = slugify(text);
                     return (
-                      <Typography variant="h3" className="mt-8 mb-2 border-b border-border pb-2" id={id}>
+                      <Typography
+                        variant="h3"
+                        className="mt-8 mb-2 border-b border-border pb-2"
+                        id={id}
+                      >
                         {children}
                       </Typography>
                     );
@@ -171,7 +244,11 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                     const text = extractText(children);
                     const id = slugify(text);
                     return (
-                      <Typography variant="large" className="mt-6 mb-1 text-foreground" id={id}>
+                      <Typography
+                        variant="large"
+                        className="mt-6 mb-1 text-foreground"
+                        id={id}
+                      >
                         {children}
                       </Typography>
                     );
@@ -180,22 +257,35 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                     const text = extractText(children);
                     const id = slugify(text);
                     return (
-                      <Typography variant="p" className="mt-4 mb-1 font-semibold text-foreground" id={id}>
+                      <Typography
+                        variant="p"
+                        className="mt-4 mb-1 font-semibold text-foreground"
+                        id={id}
+                      >
                         {children}
                       </Typography>
                     );
                   },
                   p: ({ node, children, ...props }) => {
-                    const hasImg = node?.children?.some((c: any) => c.tagName === "img");
+                    const hasImg = node?.children?.some(
+                      (c: any) => c.tagName === "img",
+                    );
                     if (hasImg) {
                       return (
-                        <div className="text-sm leading-7 text-foreground/85 [&:not(:first-child)]:mt-6" {...props}>
+                        <div
+                          className="text-sm leading-7 text-foreground/85 not-first:mt-6"
+                          {...props}
+                        >
                           {children}
                         </div>
                       );
                     }
                     return (
-                      <Typography variant="p" className="text-sm leading-7 text-foreground/85" {...props}>
+                      <Typography
+                        variant="p"
+                        className="text-sm leading-7 text-foreground/85"
+                        {...props}
+                      >
                         {children}
                       </Typography>
                     );
@@ -204,7 +294,9 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                     <ul className="my-2 space-y-1.5 pl-1">{children}</ul>
                   ),
                   ol: ({ children }) => (
-                    <ol className="my-2 space-y-1.5 pl-1 list-decimal list-inside">{children}</ol>
+                    <ol className="my-2 space-y-1.5 pl-1 list-decimal list-inside">
+                      {children}
+                    </ol>
                   ),
                   li: ({ children }) => (
                     <li className="flex items-start gap-2 text-sm leading-7 text-foreground/85">
@@ -216,7 +308,11 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                     <a
                       href={href}
                       target={href?.startsWith("http") ? "_blank" : undefined}
-                      rel={href?.startsWith("http") ? "noopener noreferrer" : undefined}
+                      rel={
+                        href?.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
                       className="text-red-600 underline decoration-red-600/30 underline-offset-2 transition-colors hover:decoration-red-600"
                     >
                       {children}
@@ -229,37 +325,37 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                       </div>
                     </Card>
                   ),
-                  hr: () => (
-                    <div className="my-6 border-t border-border" />
-                  ),
+                  hr: () => <div className="my-6 border-t border-border" />,
                   table: ({ children }) => (
                     <Card className="my-4 overflow-hidden rounded-sm border-border">
                       <div className="overflow-x-auto">
-                        <table className="min-w-full border-collapse text-sm">{children}</table>
+                        <table className="min-w-full border-collapse text-sm">
+                          {children}
+                        </table>
                       </div>
                     </Card>
                   ),
-                  thead: ({ children }) => <thead className="bg-muted/50">{children}</thead>,
-                  tr: ({ children }) => <tr className="border-b border-border">{children}</tr>,
+                  thead: ({ children }) => (
+                    <thead className="bg-muted/50">{children}</thead>
+                  ),
+                  tr: ({ children }) => (
+                    <tr className="border-b border-border">{children}</tr>
+                  ),
                   th: ({ children }) => (
                     <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                       {children}
                     </th>
                   ),
                   td: ({ children }) => (
-                    <td className="px-4 py-2.5 align-top text-sm text-foreground">{children}</td>
+                    <td className="px-4 py-2.5 align-top text-sm text-foreground">
+                      {children}
+                    </td>
                   ),
                   img: ({ src, alt }) => (
-                    <Card className="my-4 overflow-hidden rounded-sm border-border">
-                      <img src={src} alt={alt || ""} className="w-full object-cover" />
-                      {alt && (
-                        <div className="px-3 py-2">
-                          <Typography variant="small" className="text-center text-muted-foreground">
-                            {alt}
-                          </Typography>
-                        </div>
-                      )}
-                    </Card>
+                    <MarkdownImage
+                      src={typeof src === "string" ? src : undefined}
+                      alt={typeof alt === "string" ? alt : undefined}
+                    />
                   ),
                   code: ({ className, children }) => {
                     const match = /language-(\w+)/.exec(className ?? "");
@@ -279,19 +375,14 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                     }
 
                     return (
-                      <SyntaxHighlighter
-                        language={language}
-                        style={vscDarkPlus}
-                        customStyle={{
-                          borderRadius: "0.25rem",
-                          marginTop: "0.75rem",
-                          marginBottom: "0.75rem",
-                          fontSize: "0.8125rem",
-                        }}
-                        showLineNumbers
-                      >
-                        {codeText}
-                      </SyntaxHighlighter>
+                      <Card className="my-3 overflow-hidden rounded-sm border-border">
+                        <div className="border-b border-border bg-muted/40 px-3 py-1.5 text-[11px] uppercase tracking-wide text-muted-foreground">
+                          {language || "code"}
+                        </div>
+                        <pre className="overflow-x-auto bg-zinc-950/95 p-3 text-[13px] leading-6 text-zinc-100">
+                          <code>{codeText}</code>
+                        </pre>
+                      </Card>
                     );
                   },
                 }}
@@ -330,7 +421,12 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
         className="fixed right-4 bottom-6 z-40 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border bg-background shadow-lg transition-transform hover:scale-105 active:scale-95 lg:hidden"
         aria-label="İçindekiler"
       >
-        <Icon icon="mdi:table-of-contents" width={22} height={22} className="text-red-600" />
+        <Icon
+          icon="mdi:table-of-contents"
+          width={22}
+          height={22}
+          className="text-red-600"
+        />
       </button>
 
       {/* Mobil İçindekiler Drawer */}

@@ -1,10 +1,16 @@
 "use client";
 
 import { Icon } from "@iconify/react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage, Separator } from "poyraz-ui/atoms";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Separator,
+} from "poyraz-ui/atoms";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,9 +24,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "poyraz-ui/molecules";
-import { SearchCommand } from "@/components/search-command";
 import { useKeyboardShortcutLabel } from "@/lib/use-keyboard-shortcut-label";
 import { NAV_LINKS, SOCIAL_LINKS, TOP_ICON_LINKS } from "@/lib/links";
+
+const SearchCommand = dynamic(
+  () => import("@/components/search-command").then((mod) => mod.SearchCommand),
+  { ssr: false },
+);
 
 function getNavLinkClass(isActive: boolean) {
   return [
@@ -60,7 +70,11 @@ export function SiteNavbar() {
       </div>
 
       <header className="flex items-center justify-between gap-3 border-b border-border pb-4">
-        <Link href="/" aria-label="Ana sayfaya git" className="inline-flex items-center">
+        <Link
+          href="/"
+          aria-label="Ana sayfaya git"
+          className="inline-flex items-center"
+        >
           <Avatar className="h-9 w-9 rounded-sm">
             <AvatarImage src="/logo/logo.jpeg" alt="Poyraz Avsever" />
             <AvatarFallback className="rounded-sm bg-muted text-xs font-semibold">
@@ -75,9 +89,16 @@ export function SiteNavbar() {
               {NAV_LINKS.map((item, index) => (
                 <li key={item.id} className="flex items-center gap-3">
                   {index > 0 && (
-                    <Separator orientation="vertical" className="h-4 bg-border" decorative />
+                    <Separator
+                      orientation="vertical"
+                      className="h-4 bg-border"
+                      decorative
+                    />
                   )}
-                  <Link href={item.href} className={getNavLinkClass(isActiveLink(item.href))}>
+                  <Link
+                    href={item.href}
+                    className={getNavLinkClass(isActiveLink(item.href))}
+                  >
                     {item.label}
                   </Link>
                 </li>
@@ -85,7 +106,11 @@ export function SiteNavbar() {
             </ul>
           </nav>
 
-          <Separator orientation="vertical" className="h-4 bg-border" decorative />
+          <Separator
+            orientation="vertical"
+            className="h-4 bg-border"
+            decorative
+          />
           <button
             type="button"
             onClick={() => setSearchOpen(true)}
@@ -144,7 +169,9 @@ export function SiteNavbar() {
                       <Icon icon="mdi:magnify" width={16} height={16} />
                       <span>Ara</span>
                     </span>
-                    <span className="text-xs text-muted-foreground/80">{shortcut}</span>
+                    <span className="text-xs text-muted-foreground/80">
+                      {shortcut}
+                    </span>
                   </button>
                 </SheetClose>
 
@@ -193,4 +220,3 @@ export function SiteNavbar() {
     </div>
   );
 }
-

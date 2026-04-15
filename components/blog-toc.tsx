@@ -44,49 +44,66 @@ export function BlogToc({ markdown, onNavigate }: BlogTocProps) {
   const [activeId, setActiveId] = useState("");
   const rafRef = useRef(0);
 
-  const handleClick = useCallback((id: string) => {
-    const target = document.getElementById(id);
-    if (!target) return;
+  const handleClick = useCallback(
+    (id: string) => {
+      const target = document.getElementById(id);
+      if (!target) return;
 
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-    setActiveId(id);
-    onNavigate?.();
-  }, [onNavigate]);
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      setActiveId(id);
+      onNavigate?.();
+    },
+    [onNavigate],
+  );
 
   useEffect(() => {
     if (headings.length === 0) return;
 
-    const OFFSET = 120;
+    const headingElements = headings
+      .map((heading) => ({
+        id: heading.id,
+        element: document.getElementById(heading.id),
+      }))
+      .filter((item): item is { id: string; element: HTMLElement } =>
+        Boolean(item.element),
+      );
+
+    if (headingElements.length === 0) return;
 
     const updateActive = () => {
-      let current = "";
+      let current = headingElements[0].id;
 
-      for (const heading of headings) {
-        const el = document.getElementById(heading.id);
-        if (!el) continue;
-
-        const top = el.getBoundingClientRect().top;
-        if (top <= OFFSET) {
-          current = heading.id;
+      for (const item of headingElements) {
+        if (item.element.getBoundingClientRect().top <= 120) {
+          current = item.id;
+          continue;
         }
+        break;
       }
 
-      if (current) {
-        setActiveId(current);
-      }
+      setActiveId(current);
     };
 
-    const onScroll = () => {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(updateActive);
-    };
+    const observer = new IntersectionObserver(
+      () => {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = requestAnimationFrame(updateActive);
+      },
+      {
+        root: null,
+        rootMargin: "-120px 0px -65% 0px",
+        threshold: [0, 1],
+      },
+    );
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    for (const item of headingElements) {
+      observer.observe(item.element);
+    }
 
-    const timer = setTimeout(updateActive, 300);
+    const timer = setTimeout(updateActive, 200);
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      observer.disconnect();
       cancelAnimationFrame(rafRef.current);
       clearTimeout(timer);
     };
@@ -96,7 +113,10 @@ export function BlogToc({ markdown, onNavigate }: BlogTocProps) {
 
   return (
     <nav aria-label="İçindekiler" className="space-y-1">
-      <Typography variant="small" className="mb-2 font-semibold text-foreground">
+      <Typography
+        variant="small"
+        className="mb-2 font-semibold text-foreground"
+      >
         İçindekiler
       </Typography>
       {headings.map((heading, index) => (

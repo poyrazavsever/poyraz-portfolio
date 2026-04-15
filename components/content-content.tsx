@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button, Card, Typography } from "poyraz-ui/atoms";
 import { Modal, ModalContent, ModalTitle } from "poyraz-ui/molecules";
-import { getYoutubeEmbedUrl } from "@/lib/youtube";
+import { YoutubeLiteEmbed } from "@/components/youtube-lite-embed";
 
 type ContentContentProps = {
   youtubeLinks: readonly string[];
@@ -16,14 +16,20 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
 
   useEffect(() => {
     let cancelled = false;
-    let loadingTask: { promise: Promise<unknown>; destroy?: () => void } | null = null;
+    let loadingTask: {
+      promise: Promise<unknown>;
+      destroy?: () => void;
+    } | null = null;
 
     const render = async () => {
       try {
         const pdfjs = await import("pdfjs-dist");
         const lib = pdfjs as unknown as {
           version: string;
-          getDocument: (src: string) => { promise: Promise<unknown>; destroy?: () => void };
+          getDocument: (src: string) => {
+            promise: Promise<unknown>;
+            destroy?: () => void;
+          };
           GlobalWorkerOptions: { workerSrc: string };
         };
 
@@ -32,7 +38,10 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
 
         const pdf = (await loadingTask.promise) as {
           getPage: (page: number) => Promise<{
-            getViewport: (opts: { scale: number }) => { width: number; height: number };
+            getViewport: (opts: { scale: number }) => {
+              width: number;
+              height: number;
+            };
             render: (opts: {
               canvasContext: CanvasRenderingContext2D;
               viewport: { width: number; height: number };
@@ -85,7 +94,11 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
 
   return (
     <div className="w-full bg-white p-2">
-      <canvas ref={canvasRef} aria-label={title} className="block h-auto w-full" />
+      <canvas
+        ref={canvasRef}
+        aria-label={title}
+        className="block h-auto w-full"
+      />
     </div>
   );
 }
@@ -102,10 +115,7 @@ export function ContentContent({
   const canGoNext = activePdfIndex < pdfFiles.length - 1;
 
   const embeddedVideos = useMemo(
-    () =>
-      youtubeLinks
-        .map((link) => ({ link, embedUrl: getYoutubeEmbedUrl(link) }))
-        .slice(0, 3),
+    () => youtubeLinks.slice(0, 3),
     [youtubeLinks],
   );
 
@@ -121,27 +131,12 @@ export function ContentContent({
           Son YouTube Videoları
         </Typography>
         <div className="grid gap-2 md:grid-cols-3">
-          {embeddedVideos.map((item) => (
-            <Card key={item.link} className="overflow-hidden rounded-sm border-border p-0">
-              {item.embedUrl ? (
-                <div className="aspect-video w-full">
-                  <iframe
-                    src={item.embedUrl}
-                    title="YouTube video oynatıcı"
-                    className="h-full w-full"
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-              ) : (
-                <div className="p-3">
-                  <Typography variant="small" className="text-muted-foreground">
-                    Geçersiz video bağlantısı.
-                  </Typography>
-                </div>
-              )}
+          {embeddedVideos.map((link) => (
+            <Card
+              key={link}
+              className="overflow-hidden rounded-sm border-border p-0"
+            >
+              <YoutubeLiteEmbed link={link} title="YouTube video oynatici" />
             </Card>
           ))}
         </div>
@@ -160,7 +155,10 @@ export function ContentContent({
               className="cursor-pointer text-left"
             >
               <Card className="overflow-hidden rounded-sm border-border p-0 transition-colors hover:border-zinc-700">
-                <PdfFirstPagePreview src={`/pdf/${pdf}`} title={`${pdf} önizleme`} />
+                <PdfFirstPagePreview
+                  src={`/pdf/${pdf}`}
+                  title={`${pdf} önizleme`}
+                />
               </Card>
             </button>
           ))}
@@ -169,11 +167,15 @@ export function ContentContent({
 
       <Modal open={pdfModalOpen} onOpenChange={setPdfModalOpen}>
         <ModalContent size="xl" className="rounded-sm p-4">
-          <ModalTitle>{activePdf ? activePdf.replace(/\.pdf$/i, "") : "PDF Notu"}</ModalTitle>
+          <ModalTitle>
+            {activePdf ? activePdf.replace(/\.pdf$/i, "") : "PDF Notu"}
+          </ModalTitle>
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
             <Typography variant="small" className="text-muted-foreground">
-              {pdfFiles.length === 0 ? "0 / 0" : `${activePdfIndex + 1} / ${pdfFiles.length}`}
+              {pdfFiles.length === 0
+                ? "0 / 0"
+                : `${activePdfIndex + 1} / ${pdfFiles.length}`}
             </Typography>
             <div className="flex items-center gap-2">
               <Button
@@ -181,7 +183,9 @@ export function ContentContent({
                 variant="outline"
                 className="rounded-sm"
                 disabled={!canGoPrev}
-                onClick={() => setActivePdfIndex((prev) => Math.max(0, prev - 1))}
+                onClick={() =>
+                  setActivePdfIndex((prev) => Math.max(0, prev - 1))
+                }
               >
                 Önceki
               </Button>
@@ -190,7 +194,11 @@ export function ContentContent({
                 variant="outline"
                 className="rounded-sm"
                 disabled={!canGoNext}
-                onClick={() => setActivePdfIndex((prev) => Math.min(pdfFiles.length - 1, prev + 1))}
+                onClick={() =>
+                  setActivePdfIndex((prev) =>
+                    Math.min(pdfFiles.length - 1, prev + 1),
+                  )
+                }
               >
                 Sonraki
               </Button>
@@ -199,7 +207,11 @@ export function ContentContent({
 
           {activePdf ? (
             <div className="mt-3 h-[70dvh] overflow-hidden rounded-sm border border-border">
-              <iframe src={`/pdf/${activePdf}`} title={activePdf} className="h-full w-full" />
+              <iframe
+                src={`/pdf/${activePdf}`}
+                title={activePdf}
+                className="h-full w-full"
+              />
             </div>
           ) : (
             <Card className="mt-3 rounded-sm border-border p-3">

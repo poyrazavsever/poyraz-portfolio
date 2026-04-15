@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnnouncementBar } from "poyraz-ui/organisms";
 import { SiteNavbar } from "@/components/site-navbar";
 import { NekoFollower } from "@/components/neko-follower";
-import { ANNOUNCEMENT_ITEMS } from "@/data/site-settings";
+import { ANNOUNCEMENT_ITEMS, ENABLE_NEKO_FOLLOWER } from "@/data/site-settings";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -15,7 +15,8 @@ type AppShellProps = {
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
   const announcement = ANNOUNCEMENT_ITEMS[0];
-  const isStandaloneLinksPage = pathname === "/links" || pathname.startsWith("/links/");
+  const isStandaloneLinksPage =
+    pathname === "/links" || pathname.startsWith("/links/");
 
   if (isStandaloneLinksPage) {
     return children;
@@ -23,7 +24,7 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <>
-      <NekoFollower />
+      {ENABLE_NEKO_FOLLOWER ? <NekoFollower /> : null}
       <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 sm:px-6">
         <SiteNavbar />
         {announcement ? (

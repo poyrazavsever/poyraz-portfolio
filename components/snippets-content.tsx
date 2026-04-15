@@ -2,9 +2,6 @@
 
 import { useState } from "react";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
 import type { Snippet } from "@/data/snippets";
 
 type SnippetsContentProps = {
@@ -17,12 +14,16 @@ function extractCode(markdown: string) {
   return match ? match[1].trim() : markdown;
 }
 
-export function SnippetsContent({ snippets, categories }: SnippetsContentProps) {
+export function SnippetsContent({
+  snippets,
+  categories,
+}: SnippetsContentProps) {
   const [selected, setSelected] = useState("All");
 
-  const filtered = selected === "All"
-    ? snippets
-    : snippets.filter((s) => s.category === selected);
+  const filtered =
+    selected === "All"
+      ? snippets
+      : snippets.filter((s) => s.category === selected);
 
   return (
     <section className="flex h-full flex-col gap-3 overflow-y-auto">
@@ -30,7 +31,8 @@ export function SnippetsContent({ snippets, categories }: SnippetsContentProps) 
         <div className="flex items-center justify-between">
           <div>
             <Typography variant="h3">
-              Kod <span className="font-secondary text-red-600">Parçacıkları</span>
+              Kod{" "}
+              <span className="font-secondary text-red-600">Parçacıkları</span>
             </Typography>
             <Typography variant="small" className="mt-1 text-muted-foreground">
               Sıkça kullandığım, tekrar kullanılabilir kod parçacıkları.
@@ -51,16 +53,22 @@ export function SnippetsContent({ snippets, categories }: SnippetsContentProps) 
         </div>
       </Card>
 
-      <StaggerContainer className="grid gap-3 md:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-2">
         {filtered.map((snippet) => (
-          <StaggerItem key={snippet.slug}>
+          <div key={snippet.slug}>
             <Card className="flex h-full flex-col rounded-sm border-border">
               <div className="flex items-start justify-between gap-2 p-4 pb-2">
                 <div>
-                  <Typography variant="large" className="text-base leading-tight">
+                  <Typography
+                    variant="large"
+                    className="text-base leading-tight"
+                  >
                     {snippet.title}
                   </Typography>
-                  <Typography variant="small" className="mt-1 text-muted-foreground">
+                  <Typography
+                    variant="small"
+                    className="mt-1 text-muted-foreground"
+                  >
                     {snippet.description}
                   </Typography>
                 </div>
@@ -69,23 +77,19 @@ export function SnippetsContent({ snippets, categories }: SnippetsContentProps) 
                 </Badge>
               </div>
               <div className="flex-1 px-4 pb-4">
-                <SyntaxHighlighter
-                  language={snippet.language}
-                  style={vscDarkPlus}
-                  customStyle={{
-                    borderRadius: "0.25rem",
-                    margin: 0,
-                    fontSize: "0.8125rem",
-                  }}
-                  showLineNumbers
-                >
-                  {extractCode(snippet.markdown)}
-                </SyntaxHighlighter>
+                <Card className="overflow-hidden rounded-sm border-border p-0">
+                  <div className="border-b border-border bg-muted/40 px-3 py-1.5 text-[11px] uppercase tracking-wide text-muted-foreground">
+                    {snippet.language || "code"}
+                  </div>
+                  <pre className="overflow-x-auto bg-zinc-950/95 p-3 text-[13px] leading-6 text-zinc-100">
+                    <code>{extractCode(snippet.markdown)}</code>
+                  </pre>
+                </Card>
               </div>
             </Card>
-          </StaggerItem>
+          </div>
         ))}
-      </StaggerContainer>
+      </div>
 
       {filtered.length === 0 && (
         <Card className="rounded-sm border-border p-5">
