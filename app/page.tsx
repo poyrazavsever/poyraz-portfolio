@@ -1,7 +1,6 @@
 import { HomeHero } from "@/components/home-hero";
 import { HomeVideosSection } from "@/components/home-videos-section";
 import { ReferencesSection } from "@/components/references-section";
-import { HomeFooterSection } from "@/components/home-footer-section";
 import { getHomeBlogNews } from "@/data/blog";
 
 export default async function Home() {
@@ -12,7 +11,6 @@ export default async function Home() {
       <HomeHero news={homeNews} />
       <ReferencesSection />
       <HomeVideosSection />
-      <HomeFooterSection />
     </section>
   );
 }

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnnouncementBar } from "poyraz-ui/organisms";
 import { SiteNavbar } from "@/components/site-navbar";
 import { NekoFollower } from "@/components/neko-follower";
+import { AtaturkWidgetModal } from "@/components/ataturk-widget-modal";
 import { ANNOUNCEMENT_ITEMS, ENABLE_NEKO_FOLLOWER } from "@/data/site-settings";
 
 type AppShellProps = {
@@ -24,6 +25,7 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <>
+      <AtaturkWidgetModal />
       {ENABLE_NEKO_FOLLOWER ? <NekoFollower /> : null}
       <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 sm:px-6">
         <SiteNavbar />
