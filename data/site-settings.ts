@@ -1,11 +1,11 @@
-﻿export type AnnouncementItem = {
+export type AnnouncementItem = {
   id: string;
   text: string;
   actionLabel: string;
   actionHref: string;
 };
 
-export const ENABLE_NEKO_FOLLOWER = false;
+export const ENABLE_NEKO_FOLLOWER = true;
 
 export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
   {
