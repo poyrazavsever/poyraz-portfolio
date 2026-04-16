@@ -1,8 +1,8 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { Card, Typography } from "poyraz-ui/atoms";
 
-const CONTACT_LINKS = [
+export const CONTACT_LINKS = [
   {
     id: "email",
     label: "E-posta",
