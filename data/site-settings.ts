@@ -1,4 +1,4 @@
-export type AnnouncementItem = {
+﻿export type AnnouncementItem = {
   id: string;
   text: string;
   actionLabel: string;
@@ -12,6 +12,6 @@ export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
     id: "main-announcement",
     text: "Yeni videom yayında.",
     actionLabel: "İzle ->",
-    actionHref: "https://www.youtube.com/watch?v=FS9F1ttC0uw&t=344s",
+    actionHref: "https://youtu.be/7gduFQUT_20?si=5kesdltKlaoD9paS",
   },
 ];
