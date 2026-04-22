@@ -6,8 +6,13 @@ import { usePathname } from "next/navigation";
 import { AnnouncementBar } from "poyraz-ui/organisms";
 import { SiteNavbar } from "@/components/site-navbar";
 import { NekoFollower } from "@/components/neko-follower";
-import { AtaturkWidgetModal } from "@/components/ataturk-widget-modal";
 import { ANNOUNCEMENT_ITEMS, ENABLE_NEKO_FOLLOWER } from "@/data/site-settings";
+import dynamic from "next/dynamic";
+
+const AtaturkWidgetModal = dynamic(
+  () => import("@/components/ataturk-widget-modal").then((mod) => mod.AtaturkWidgetModal),
+  { ssr: false }
+);
 
 type AppShellProps = {
   children: React.ReactNode;
