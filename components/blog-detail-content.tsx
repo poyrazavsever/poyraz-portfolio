@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
@@ -379,9 +381,18 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                         <div className="border-b border-border bg-muted/40 px-3 py-1.5 text-[11px] uppercase tracking-wide text-muted-foreground">
                           {language || "code"}
                         </div>
-                        <pre className="overflow-x-auto bg-zinc-950/95 p-3 text-[13px] leading-6 text-zinc-100">
-                          <code>{codeText}</code>
-                        </pre>
+                        <SyntaxHighlighter
+                          language={language}
+                          style={oneDark}
+                          customStyle={{
+                            margin: 0,
+                            borderRadius: 0,
+                            fontSize: "13px",
+                            lineHeight: "1.6",
+                          }}
+                        >
+                          {codeText}
+                        </SyntaxHighlighter>
                       </Card>
                     );
                   },
