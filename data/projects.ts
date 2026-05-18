@@ -26,8 +26,7 @@ export const WEB_APPS: ProjectItem[] = [
     badge: "Freelance",
     image: "/projects/arc.png",
     href: "https://arcforeigntrade.com",
-    description:
-      "Ankara merkezli ihracat odaklı bir üretici firma için kurumsal web sitesi yenileme projesi.",
+    description: "Ankara merkezli ihracat odaklı bir üretici firma için kurumsal web sitesi yenileme projesi."
   },
   {
     id: "ataturk-chronology",
@@ -35,8 +34,7 @@ export const WEB_APPS: ProjectItem[] = [
     badge: "Open Source",
     image: "/projects/ataturk.png",
     href: "https://ataturk-kronolojisi.org",
-    description:
-      "Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
+    description: "Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi."
   },
   {
     id: "mockup-factory",
@@ -44,9 +42,16 @@ export const WEB_APPS: ProjectItem[] = [
     badge: "Open Source",
     image: "/projects/mockup.png",
     href: "https://mockup-factory-mu.vercel.app/",
-    description:
-      "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç.",
+    description: "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç."
   },
+  {
+    id: "ohhike",
+    title: "Ohhike Coach",
+    badge: "Next.js",
+    image: "/projects/ohhike.png",
+    href: "https://www.ohhike.com",
+    description: "An open-source, AI-powered coaching intelligence platform for sports teams. OhHike CoachOS turns athlete check-ins, training notes, smartwatch data, and session history into actionable team memory."
+  }
 ];
 
 export const EXTENSIONS: ProjectItem[] = [
