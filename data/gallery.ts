@@ -12,4 +12,5 @@ export const GALLERY_IMAGES: string[] = [
   "/gallery/10.jpeg",
   "/gallery/11.jpeg",
   "/gallery/12.jpeg",
+  "/gallery/13.jpeg",
 ];
