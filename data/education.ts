@@ -1,7 +1,7 @@
 ﻿export const EDUCATION = [
   {
     id: "ostim-university",
-    title: "Yazılım Mühendisliği (2. Sınıf)",
+    title: "Yazılım Mühendisliği (3. Sınıf)",
     institution: "OSTİM Teknik Üniversitesi",
     period: "2024 - Günümüz",
     description:
