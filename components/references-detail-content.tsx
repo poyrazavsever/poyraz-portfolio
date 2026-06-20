@@ -11,7 +11,10 @@ export function ReferencesDetailContent() {
         {"<- Hakkımda'ya dön"}
       </Link>
 
-      <ReferenceCards className="flex flex-wrap gap-3" />
+      <ReferenceCards
+        className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3"
+        cardClassName="w-full"
+      />
     </section>
   );
 }

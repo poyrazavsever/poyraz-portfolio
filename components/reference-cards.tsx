@@ -4,9 +4,10 @@ import { REFERENCES } from "@/data/references";
 
 type ReferenceCardsProps = {
   className?: string;
+  cardClassName?: string;
 };
 
-export function ReferenceCards({ className }: ReferenceCardsProps) {
+export function ReferenceCards({ className, cardClassName }: ReferenceCardsProps) {
   return (
     <div className={className}>
       {REFERENCES.map((item) => {
@@ -17,7 +18,7 @@ export function ReferenceCards({ className }: ReferenceCardsProps) {
             role={item.role}
             avatar={item.avatar}
             rating={item.rating}
-            className="h-full w-70 shrink-0 rounded-sm"
+            className={`h-full rounded-sm ${cardClassName || "w-70 shrink-0"}`}
           />
         );
 
