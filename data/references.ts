@@ -37,4 +37,12 @@ export const REFERENCES: Reference[] = [
     quote:
       "Hem hırslı hem de işine gerçekten tutkulu bir takım arkadaşı. Poyraz ile çalışmak keyifliydi; merakını hep korudu, güvenilir şekilde teslim etti ve iş birliğini kolaylaştırdı.",
   },
+  {
+    id: "bugrahan-arici",
+    author: "Buğrahan Arıcı",
+    role: "Dış Ticaret Uzmanı - 2025",
+    avatar: "/avatars/bugrahan.jpg",
+    profileHref: "https://www.linkedin.com/in/bu%C4%9Frahan-ar%C4%B1c%C4%B1-8487b6275/",
+    quote:'Poyraz ile ilk olarak kurucusu olduğum ARC Foreign Trade bünyesinde yarı zamanlı olarak çalıştık. İş ahlakı, yazılım konusundaki yetkinliği ve çözüm odaklı yapısıyla süreçlerimize büyük katkı sağladı.     Kendisinin çalışma disiplininden o kadar memnun kaldık ki, yarı zamanlı süreci bittikten sonra da ARC Spare Parts ve diğer işlerimiz için kendisiyle freelance yazılımcı olarak çalışmaya devam ettik. Verilen işi her zaman eksiksiz ve zamanında teslim eden, son derece güvenilir biridir. Kendisiyle çalışmayı düşünen herkese kesinlikle tavsiye ederim.',
+  },
 ];
