@@ -5,7 +5,7 @@ import { ReferenceCards } from "@/components/reference-cards";
 export function ReferencesSection() {
   return (
     <section className="space-y-8 pt-0 sm:pt-12">
-      <div className="relative overflow-hidden rounded-sm">
+      <div className="relative overflow-hidden rounded-sm max-h-48">
         <ReferenceCards className="flex w-max gap-3" />
         <div
           aria-hidden="true"
