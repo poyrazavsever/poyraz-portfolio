@@ -111,5 +111,9 @@
     "email": "Email",
     "linkedin": "LinkedIn",
     "instagram": "Instagram"
+  },
+  "AtaturkWidget": {
+    "title": "Atatürk's Quote of the Day",
+    "alt": "Mustafa Kemal Atatürk"
   }
 }

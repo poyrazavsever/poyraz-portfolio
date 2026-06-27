@@ -2,11 +2,13 @@
 
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/routing";
 import { AnnouncementBar } from "poyraz-ui/organisms";
 import { SiteNavbar } from "@/components/site-navbar";
 import { NekoFollower } from "@/components/neko-follower";
 import { ANNOUNCEMENT_ITEMS, ENABLE_NEKO_FOLLOWER } from "@/data/site-settings";
+import { useLocale } from "next-intl";
+import { getLocalizedValue } from "@/lib/locale";
 import dynamic from "next/dynamic";
 
 const AtaturkWidgetModal = dynamic(
@@ -20,6 +22,7 @@ type AppShellProps = {
 
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
+  const locale = useLocale();
   const announcement = ANNOUNCEMENT_ITEMS[0];
   const isStandaloneLinksPage =
     pathname === "/links" || pathname.startsWith("/links/");
@@ -27,6 +30,9 @@ export function AppShell({ children }: AppShellProps) {
   if (isStandaloneLinksPage) {
     return children;
   }
+
+  const localizedText = announcement ? getLocalizedValue(announcement.text, locale) : "";
+  const localizedActionLabel = announcement ? getLocalizedValue(announcement.actionLabel, locale) : "";
 
   return (
     <>
@@ -40,19 +46,19 @@ export function AppShell({ children }: AppShellProps) {
             dismissible={false}
             icon={<Icon icon="mdi:sparkles" width={16} height={16} />}
             action={
-              announcement.actionLabel && announcement.actionHref ? (
+              localizedActionLabel && announcement.actionHref ? (
                 <Link
                   href={announcement.actionHref}
                   target="_blank"
                   rel="noreferrer"
                   className="text-xs font-bold underline"
                 >
-                  {announcement.actionLabel}
+                  {localizedActionLabel}
                 </Link>
               ) : null
             }
           >
-            {announcement.text}
+            {localizedText}
           </AnnouncementBar>
         ) : null}
         <main className="flex-1 py-4">{children}</main>

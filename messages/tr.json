@@ -111,5 +111,9 @@
     "email": "E-posta",
     "linkedin": "LinkedIn",
     "instagram": "Instagram"
+  },
+  "AtaturkWidget": {
+    "title": "Bugünün Atatürk Sözü",
+    "alt": "Mustafa Kemal Atatürk"
   }
 }

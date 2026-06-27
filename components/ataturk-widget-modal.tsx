@@ -5,22 +5,26 @@ import Script from "next/script";
 import Image from "next/image";
 import { Modal, ModalContent, ModalTrigger, ModalTitle } from "poyraz-ui/molecules";
 import { Skeleton } from "poyraz-ui/atoms";
+import { useLocale, useTranslations } from "next-intl";
 
 export function AtaturkWidgetModal() {
   const [isLoading, setIsLoading] = useState(true);
+  const t = useTranslations("AtaturkWidget");
+  const locale = useLocale();
+
   return (
     <Modal>
       <ModalTrigger asChild>
         <button
           type="button"
-          title="Bugünün Atatürk Sözü"
+          title={t("title")}
           className="fixed bottom-4 left-4 z-50 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border-2 border-red-600 bg-background shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-          aria-label="Bugünün Atatürk Sözü"
+          aria-label={t("title")}
         >
           <div className="relative h-full w-full">
             <Image
               src="/ataturk.png"
-              alt="Mustafa Kemal Atatürk"
+              alt={t("alt")}
               fill
               sizes="56px"
               className="object-cover"
@@ -30,7 +34,7 @@ export function AtaturkWidgetModal() {
       </ModalTrigger>
 
       <ModalContent className="flex flex-col justify-center p-6 sm:max-w-[425px] min-h-[160px] transition-all duration-300">
-        <ModalTitle className="sr-only">Bugünün Atatürk Sözü</ModalTitle>
+        <ModalTitle className="sr-only">{t("title")}</ModalTitle>
         
         {isLoading && (
           <div className="flex w-full flex-col space-y-3">
@@ -44,11 +48,11 @@ export function AtaturkWidgetModal() {
         )}
 
         <div className={`w-full ${isLoading ? "hidden" : "block"}`}>
-          <div data-ataturk-quote-widget data-language="tr" data-theme="light"></div>
+          <div data-ataturk-quote-widget data-language={locale} data-theme="light"></div>
           <Script
             src="https://ataturk-kronolojisi.org/widget/quote.js"
             strategy="lazyOnload"
-            data-language="tr"
+            data-language={locale}
             data-theme="light"
             onReady={() => setIsLoading(false)}
           />

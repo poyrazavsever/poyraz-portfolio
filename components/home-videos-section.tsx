@@ -1,8 +1,11 @@
 import { Card } from "poyraz-ui/atoms";
 import { YOUTUBE_VIDEO_LINKS } from "@/data/youtube-videos";
 import { YoutubeLiteEmbed } from "@/components/youtube-lite-embed";
+import { useTranslations } from "next-intl";
 
 export function HomeVideosSection() {
+  const t = useTranslations("Content");
+
   return (
     <section className="space-y-2">
       <div className="grid gap-2 md:grid-cols-3">
@@ -11,7 +14,7 @@ export function HomeVideosSection() {
             key={link}
             className="overflow-hidden rounded-sm border-border p-0"
           >
-            <YoutubeLiteEmbed link={link} title="YouTube video oynatici" />
+            <YoutubeLiteEmbed link={link} title={t("youtubeEmbedTitle")} />
           </Card>
         ))}
       </div>
