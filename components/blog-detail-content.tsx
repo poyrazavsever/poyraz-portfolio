@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -94,6 +95,7 @@ function extractText(children: React.ReactNode): string {
 }
 
 function MermaidBlock({ chart }: { chart: string }) {
+  const t = useTranslations("Blog");
   const [svg, setSvg] = useState("");
   const [error, setError] = useState("");
   const idRef = useRef(`mermaid-${Math.random().toString(36).slice(2)}`);
@@ -117,7 +119,7 @@ function MermaidBlock({ chart }: { chart: string }) {
         }
       } catch {
         if (mounted) {
-          setError("Mermaid diyagramı oluşturulamadı.");
+          setError(t("diagramError"));
         }
       }
     };
@@ -126,7 +128,7 @@ function MermaidBlock({ chart }: { chart: string }) {
     return () => {
       mounted = false;
     };
-  }, [chart]);
+  }, [chart, t]);
 
   if (error) {
     return (
@@ -142,7 +144,7 @@ function MermaidBlock({ chart }: { chart: string }) {
     return (
       <Card className="rounded-sm border-border p-3">
         <Typography variant="small" className="text-muted-foreground">
-          Diyagram hazırlanıyor...
+          {t("diagramLoading")}
         </Typography>
       </Card>
     );
@@ -162,6 +164,7 @@ const GISCUS_CATEGORY =
 const GISCUS_CATEGORY_ID = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || "";
 
 export function BlogDetailContent({ post }: BlogDetailContentProps) {
+  const t = useTranslations("Blog");
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [tocOpen, setTocOpen] = useState(false);
 
@@ -199,7 +202,7 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
               href="/blog"
               className="inline-flex items-center rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              {"<- Blog'a dön"}
+              {t("backToBlog")}
             </Link>
 
             <header className="space-y-3">
@@ -270,7 +273,7 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
                   },
                   p: ({ node, children, ...props }) => {
                     const hasImg = node?.children?.some(
-                      (c: any) => c.tagName === "img",
+                      (c: unknown) => (c as { tagName?: string }).tagName === "img",
                     );
                     if (hasImg) {
                       return (
@@ -405,7 +408,7 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
             {showGiscus && (
               <section className="border-t border-border pt-6">
                 <Typography variant="h3" className="mb-4">
-                  Yorumlar
+                  {t("comments")}
                 </Typography>
                 <GiscusComments
                   repo={GISCUS_REPO}
@@ -430,7 +433,7 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
         type="button"
         onClick={() => setTocOpen(true)}
         className="fixed right-4 bottom-6 z-40 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border bg-background shadow-lg transition-transform hover:scale-105 active:scale-95 lg:hidden"
-        aria-label="İçindekiler"
+        aria-label={t("toc")}
       >
         <Icon
           icon="mdi:table-of-contents"
@@ -449,7 +452,7 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-3 flex items-center justify-between">
-              <Typography variant="large">İçindekiler</Typography>
+              <Typography variant="large">{t("toc")}</Typography>
               <button
                 type="button"
                 onClick={closeToc}

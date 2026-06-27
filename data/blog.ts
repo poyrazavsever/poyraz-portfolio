@@ -54,8 +54,8 @@ function normalizeCategory(value: string) {
   return value.trim().toLocaleLowerCase();
 }
 
-export async function getAllBlogArticles(): Promise<BlogArticleItem[]> {
-  const posts = await listBlogDetails();
+export async function getAllBlogArticles(locale?: string): Promise<BlogArticleItem[]> {
+  const posts = await listBlogDetails(locale);
 
   const articles = posts.map((post) => ({
     id: post.slug,
@@ -73,8 +73,8 @@ export async function getAllBlogArticles(): Promise<BlogArticleItem[]> {
   return sortByDateDesc(articles);
 }
 
-export async function getHomeBlogNews(limit = 3) {
-  const articles = await getAllBlogArticles();
+export async function getHomeBlogNews(locale?: string, limit = 3) {
+  const articles = await getAllBlogArticles(locale);
 
   return articles.slice(0, limit).map((item) => ({
     id: `home-news-${item.slug}`,
@@ -87,12 +87,13 @@ export async function getHomeBlogNews(limit = 3) {
 }
 
 export async function getBlogPageData(
+  locale?: string,
   page = 1,
   pageSize = 12,
   selectedCategoryParam?: string,
   searchQueryParam?: string,
 ): Promise<BlogPageData> {
-  const articles = await getAllBlogArticles();
+  const articles = await getAllBlogArticles(locale);
   const categories = BLOG_CATEGORIES;
   const categoryByNormalized = new Map(
     categories.map((category) => [normalizeCategory(category), category]),

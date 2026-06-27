@@ -2,10 +2,12 @@ import { BlogContent } from "@/components/blog-content";
 import { getBlogPageData } from "@/data/blog";
 
 type BlogPageProps = {
+  params: Promise<{ locale: string }>;
   searchParams?: Promise<{ page?: string | string[]; category?: string | string[]; search?: string | string[] }>;
 };
 
-export default async function BlogPage({ searchParams }: BlogPageProps) {
+export default async function BlogPage({ params, searchParams }: BlogPageProps) {
+  const { locale } = await params;
   const resolved = searchParams ? await searchParams : undefined;
   const pageParam = Array.isArray(resolved?.page) ? resolved?.page[0] : resolved?.page;
   const categoryParam = Array.isArray(resolved?.category)
@@ -14,7 +16,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const searchParam = Array.isArray(resolved?.search) ? resolved?.search[0] : resolved?.search;
   const page = Number(pageParam ?? "1");
   const currentPage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
-  const data = await getBlogPageData(currentPage, 12, categoryParam, searchParam);
+  const data = await getBlogPageData(locale, currentPage, 12, categoryParam, searchParam);
 
   return <BlogContent data={data} />;
 }

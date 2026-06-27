@@ -156,6 +156,7 @@ slug: "${slug}"
 excerpt: "${safeExcerpt}"
 coverImage: "${localCoverImageUrl}"
 canonicalUrl: "${url}"
+lang: "tr"
 ---
 
 `;

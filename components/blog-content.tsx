@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Link, useRouter } from "@/i18n/routing";
 import { Icon } from "@iconify/react";
+import { useTranslations } from "next-intl";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import {
   ArticleCard,
@@ -34,6 +34,7 @@ function buildHref(params: { page?: number; category?: string; search?: string }
 
 export function BlogContent({ data }: BlogContentProps) {
   const router = useRouter();
+  const t = useTranslations("Blog");
   const [searchInput, setSearchInput] = useState(data.searchQuery);
   const pageNumbers = Array.from({ length: data.totalPages }, (_, i) => i + 1);
   const hasArticles = data.articles.length > 0;
@@ -59,7 +60,7 @@ export function BlogContent({ data }: BlogContentProps) {
           {/* Kategoriler */}
           <div className="flex flex-wrap items-center gap-2">
             <Typography variant="small" className="mr-1 text-muted-foreground">
-              Kategori:
+              {t("categories")}:
             </Typography>
             {data.categories.map((category) => (
               <Link
@@ -92,7 +93,7 @@ export function BlogContent({ data }: BlogContentProps) {
               onKeyDown={(e) => {
                 if (e.key === "Enter") submitSearch(searchInput);
               }}
-              placeholder="Başlık veya içerikte ara..."
+              placeholder={t("searchPlaceholder")}
               className="w-full rounded-sm border border-border bg-background py-2 pr-10 pl-9 text-sm text-foreground placeholder:text-muted-foreground focus:border-red-600 focus:ring-1 focus:ring-red-600/30 focus:outline-none"
             />
             {searchInput && (
@@ -115,7 +116,7 @@ export function BlogContent({ data }: BlogContentProps) {
       {(data.searchQuery || data.selectedCategory !== "All") && (
         <div className="flex items-center gap-2">
           <Typography variant="small" className="text-muted-foreground">
-            {data.articles.length} sonuç
+            {data.articles.length} {t("results")}
             {data.searchQuery ? ` · "${data.searchQuery}"` : ""}
             {data.selectedCategory !== "All" ? ` · ${data.selectedCategory}` : ""}
           </Typography>
@@ -125,7 +126,7 @@ export function BlogContent({ data }: BlogContentProps) {
             className="inline-flex cursor-pointer items-center gap-1 rounded-sm border border-border px-2 py-0.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             <Icon icon="mdi:filter-remove-outline" width={14} height={14} />
-            Temizle
+            {t("clear")}
           </button>
         </div>
       )}
@@ -160,10 +161,10 @@ export function BlogContent({ data }: BlogContentProps) {
             />
             <Typography variant="p" className="text-muted-foreground">
               {data.searchQuery
-                ? `"${data.searchQuery}" aramasına uygun sonuç bulunamadı.`
+                ? t("noSearch", { search: data.searchQuery })
                 : data.selectedCategory === "All"
-                  ? "Henüz blog yazısı bulunmuyor."
-                  : `"${data.selectedCategory}" kategorisinde henüz blog yazısı bulunmuyor.`}
+                  ? t("empty")
+                  : t("emptyCategory", { category: data.selectedCategory })}
             </Typography>
             {(data.searchQuery || data.selectedCategory !== "All") && (
               <button
@@ -172,7 +173,7 @@ export function BlogContent({ data }: BlogContentProps) {
                 className="mt-3 inline-flex cursor-pointer items-center gap-1.5 rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 <Icon icon="mdi:filter-remove-outline" width={16} height={16} />
-                Filtreleri Temizle
+                {t("clearFilters")}
               </button>
             )}
           </Card>

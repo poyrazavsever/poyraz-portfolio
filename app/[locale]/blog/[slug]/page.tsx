@@ -7,14 +7,14 @@ import { getBlogDetailBySlug } from "@/data/blog-detail";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://poyrazavsever.com";
 
 type BlogDetailPageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 };
 
 export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = await getBlogDetailBySlug(slug);
 
-  if (!post) {
+  if (!post || post.lang !== locale) {
     return {
       title: "Yazı Bulunamadı",
     };
@@ -51,10 +51,10 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
 }
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = await getBlogDetailBySlug(slug);
 
-  if (!post) {
+  if (!post || post.lang !== locale) {
     notFound();
   }
 

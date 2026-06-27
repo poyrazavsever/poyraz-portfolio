@@ -12,6 +12,7 @@ export type BlogDetail = {
   excerpt: string;
   coverImage: string;
   markdown: string;
+  lang: "tr" | "en";
 };
 
 const BLOG_CONTENT_DIR = path.join(process.cwd(), "content", "blog");
@@ -40,10 +41,11 @@ function mapMarkdownToBlogDetail(fileName: string, raw: string): BlogDetail {
     excerpt: toSafeString(parsed.data.excerpt, ""),
     coverImage: toSafeString(parsed.data.coverImage, "/news/design.svg"),
     markdown: parsed.content.trim(),
+    lang: toSafeString(parsed.data.lang, "tr") as "tr" | "en",
   };
 }
 
-export async function listBlogDetails(): Promise<BlogDetail[]> {
+export async function listBlogDetails(locale?: string): Promise<BlogDetail[]> {
   let files: string[] = [];
   try {
     files = await fs.readdir(BLOG_CONTENT_DIR);
@@ -60,7 +62,10 @@ export async function listBlogDetails(): Promise<BlogDetail[]> {
     }),
   );
 
-  return posts.sort((a, b) => a.slug.localeCompare(b.slug));
+  const targetLang = locale || "tr";
+  return posts
+    .filter((post) => post.lang === targetLang)
+    .sort((a, b) => a.slug.localeCompare(b.slug));
 }
 
 export async function getBlogDetailBySlug(slug: string): Promise<BlogDetail | null> {
