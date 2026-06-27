@@ -159,29 +159,7 @@ export function LinksContent() {
               <div className="grid gap-2 sm:grid-cols-2">
                 {TOP_ICON_LINKS.map((item) => {
                   const href = item.id === "cv" ? `/resume-${locale}.pdf` : item.href;
-                  const isStaticOrExternal = item.external || item.id === "rss" || item.id === "cv";
-                  const CardContent = (
-                    <Card className="rounded-2xl border-border bg-muted/35 p-3 transition-all hover:-translate-y-0.5 hover:border-red-600/40 hover:bg-background">
-                      <div className="flex items-center gap-3">
-                        <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-background text-muted-foreground">
-                          <Icon icon={item.icon} width={18} height={18} />
-                        </span>
-                        <div className="min-w-0">
-                          <Typography variant="large" className="truncate text-base">
-                            {tNav.has(item.id) ? tNav(item.id) : item.label}
-                          </Typography>
-                          <Typography
-                            variant="small"
-                            className="truncate text-xs text-muted-foreground"
-                          >
-                            {formatHref(href)}
-                          </Typography>
-                        </div>
-                      </div>
-                    </Card>
-                  );
-
-                  return isStaticOrExternal ? (
+                  return (
                     <a
                       key={item.id}
                       href={href}
@@ -189,18 +167,25 @@ export function LinksContent() {
                       rel={item.id === "cv" || item.external ? "noreferrer" : undefined}
                       className="block"
                     >
-                      {CardContent}
+                      <Card className="rounded-2xl border-border bg-muted/35 p-3 transition-all hover:-translate-y-0.5 hover:border-red-600/40 hover:bg-background">
+                        <div className="flex items-center gap-3">
+                          <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-background text-muted-foreground">
+                            <Icon icon={item.icon} width={18} height={18} />
+                          </span>
+                          <div className="min-w-0">
+                            <Typography variant="large" className="truncate text-base">
+                              {tNav.has(item.id) ? tNav(item.id) : item.label}
+                            </Typography>
+                            <Typography
+                              variant="small"
+                              className="truncate text-xs text-muted-foreground"
+                            >
+                              {formatHref(href)}
+                            </Typography>
+                          </div>
+                        </div>
+                      </Card>
                     </a>
-                  ) : (
-                    <Link
-                      key={item.id}
-                      href={href}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noreferrer" : undefined}
-                      className="block"
-                    >
-                      {CardContent}
-                    </Link>
                   );
                 })}
               </div>
