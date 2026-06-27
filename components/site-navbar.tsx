@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react";
 import dynamic from "next/dynamic";
 import { Link, usePathname } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { useState } from "react";
 import {
@@ -47,6 +47,7 @@ export function SiteNavbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const shortcut = useKeyboardShortcutLabel();
   const t = useTranslations("Nav");
+  const locale = useLocale();
 
   const isActiveLink = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -56,19 +57,22 @@ export function SiteNavbar() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-end gap-2 border-b border-border pb-3">
-        {TOP_ICON_LINKS.map((item) => (
-          <Link
-            key={item.id}
-            href={item.href}
-            target={item.external ? "_blank" : undefined}
-            rel={item.external ? "noreferrer" : undefined}
-            aria-label={t.has(item.id) ? t(item.id) : item.label}
-            title={t.has(item.id) ? t(item.id) : item.label}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-sm border border-border text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <Icon icon={item.icon} width={16} height={16} />
-          </Link>
-        ))}
+        {TOP_ICON_LINKS.map((item) => {
+          const href = item.id === "cv" ? `/resume-${locale}.pdf` : item.href;
+          return (
+            <a
+              key={item.id}
+              href={href}
+              target={item.id === "cv" || item.external ? "_blank" : undefined}
+              rel={item.id === "cv" || item.external ? "noreferrer" : undefined}
+              aria-label={t.has(item.id) ? t(item.id) : item.label}
+              title={t.has(item.id) ? t(item.id) : item.label}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-sm border border-border text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Icon icon={item.icon} width={16} height={16} />
+            </a>
+          );
+        })}
         <LanguageSwitcher />
       </div>
 

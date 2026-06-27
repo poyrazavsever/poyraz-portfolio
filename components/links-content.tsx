@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import { Link } from "@/i18n/routing";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import {
   Avatar,
@@ -60,6 +60,7 @@ function formatHref(href: string) {
 export function LinksContent() {
   const t = useTranslations("Links");
   const tNav = useTranslations("Nav");
+  const locale = useLocale();
 
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
   const [query, setQuery] = useState("");
@@ -141,7 +142,7 @@ export function LinksContent() {
 
               <div className="flex flex-wrap gap-2">
                 {SOCIAL_LINKS.map((item) => (
-                  <Link
+                  <a
                     key={item.id}
                     href={item.href}
                     target="_blank"
@@ -151,19 +152,15 @@ export function LinksContent() {
                     className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-border bg-background text-muted-foreground transition-all hover:-translate-y-0.5 hover:border-red-600/40 hover:text-foreground"
                   >
                     <Icon icon={item.icon} width={18} height={18} />
-                  </Link>
+                  </a>
                 ))}
               </div>
 
               <div className="grid gap-2 sm:grid-cols-2">
-                {TOP_ICON_LINKS.map((item) => (
-                  <Link
-                    key={item.id}
-                    href={item.href}
-                    target={item.external ? "_blank" : undefined}
-                    rel={item.external ? "noreferrer" : undefined}
-                    className="block"
-                  >
+                {TOP_ICON_LINKS.map((item) => {
+                  const href = item.id === "cv" ? `/resume-${locale}.pdf` : item.href;
+                  const isStaticOrExternal = item.external || item.id === "rss" || item.id === "cv";
+                  const CardContent = (
                     <Card className="rounded-2xl border-border bg-muted/35 p-3 transition-all hover:-translate-y-0.5 hover:border-red-600/40 hover:bg-background">
                       <div className="flex items-center gap-3">
                         <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-background text-muted-foreground">
@@ -177,13 +174,35 @@ export function LinksContent() {
                             variant="small"
                             className="truncate text-xs text-muted-foreground"
                           >
-                            {formatHref(item.href)}
+                            {formatHref(href)}
                           </Typography>
                         </div>
                       </div>
                     </Card>
-                  </Link>
-                ))}
+                  );
+
+                  return isStaticOrExternal ? (
+                    <a
+                      key={item.id}
+                      href={href}
+                      target={item.id === "cv" || item.external ? "_blank" : undefined}
+                      rel={item.id === "cv" || item.external ? "noreferrer" : undefined}
+                      className="block"
+                    >
+                      {CardContent}
+                    </a>
+                  ) : (
+                    <Link
+                      key={item.id}
+                      href={href}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noreferrer" : undefined}
+                      className="block"
+                    >
+                      {CardContent}
+                    </Link>
+                  );
+                })}
               </div>
 
               <div className="space-y-3 pt-1">
@@ -223,14 +242,10 @@ export function LinksContent() {
                 </div>
 
                 <div className="grid gap-2">
-                  {filteredItems.map((item) => (
-                    <Link
-                      key={`${item.category}-${item.id}`}
-                      href={item.href}
-                      target={item.external ? "_blank" : undefined}
-                      rel={item.external ? "noreferrer" : undefined}
-                      className="block"
-                    >
+                  {filteredItems.map((item) => {
+                    const href = item.id === "cv" ? `/resume-${locale}.pdf` : item.href;
+                    const isStaticOrExternal = item.external || item.id === "rss" || item.id === "cv" || href.endsWith(".xml") || href.endsWith(".pdf");
+                    const CardContent = (
                       <Card className="rounded-2xl border-border p-3 transition-all hover:-translate-y-0.5 hover:border-red-600/40">
                         <div className="flex items-center gap-3">
                           <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-muted/35 text-muted-foreground">
@@ -251,21 +266,43 @@ export function LinksContent() {
                               variant="small"
                               className="mt-1 truncate text-xs text-muted-foreground"
                             >
-                              {formatHref(item.href)}
+                              {formatHref(href)}
                             </Typography>
                           </div>
 
                           <span className="text-muted-foreground">
                             <Icon
-                              icon={item.external ? "mdi:arrow-top-right" : "mdi:arrow-right"}
+                              icon={isStaticOrExternal ? "mdi:arrow-top-right" : "mdi:arrow-right"}
                               width={18}
                               height={18}
                             />
                           </span>
                         </div>
                       </Card>
-                    </Link>
-                  ))}
+                    );
+
+                    return isStaticOrExternal ? (
+                      <a
+                        key={`${item.category}-${item.id}`}
+                        href={href}
+                        target={item.id === "cv" || item.external ? "_blank" : undefined}
+                        rel={item.id === "cv" || item.external ? "noreferrer" : undefined}
+                        className="block"
+                      >
+                        {CardContent}
+                      </a>
+                    ) : (
+                      <Link
+                        key={`${item.category}-${item.id}`}
+                        href={href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noreferrer" : undefined}
+                        className="block"
+                      >
+                        {CardContent}
+                      </Link>
+                    );
+                  })}
 
                   {filteredItems.length === 0 ? (
                     <Card className="rounded-2xl border-border px-4 py-5">
