@@ -5,12 +5,14 @@ import { useCallback, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { Typography } from "poyraz-ui/atoms";
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
+import { useTranslations } from "next-intl";
 
 type GalleryContentProps = {
   images: string[];
 };
 
 export function GalleryContent({ images }: GalleryContentProps) {
+  const t = useTranslations("Gallery");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   // Keyboard navigation for lightbox
@@ -53,7 +55,7 @@ export function GalleryContent({ images }: GalleryContentProps) {
       <section className="flex h-full items-center justify-center">
         <div className="rounded-xl border border-dashed border-border py-20 px-10 text-center">
           <Typography variant="muted">
-            Henüz galeriye görsel eklenmemiş.
+            {t("empty")}
           </Typography>
         </div>
       </section>
@@ -95,7 +97,7 @@ export function GalleryContent({ images }: GalleryContentProps) {
             type="button"
             className="absolute top-4 right-4 z-10 flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-zinc-100 text-zinc-900 transition-colors hover:bg-zinc-200 shadow-sm border border-zinc-200"
             onClick={closeLightbox}
-            aria-label="Kapat"
+            aria-label={t("close")}
           >
             <Icon icon="mdi:close" width={24} height={24} />
           </button>
@@ -109,7 +111,7 @@ export function GalleryContent({ images }: GalleryContentProps) {
                 e.stopPropagation();
                 setLightboxIndex(lightboxIndex - 1);
               }}
-              aria-label="Önceki"
+              aria-label={t("prev")}
             >
               <Icon icon="mdi:chevron-left" width={32} height={32} />
             </button>
@@ -124,7 +126,7 @@ export function GalleryContent({ images }: GalleryContentProps) {
                 e.stopPropagation();
                 setLightboxIndex(lightboxIndex + 1);
               }}
-              aria-label="Sonraki"
+              aria-label={t("next")}
             >
               <Icon icon="mdi:chevron-right" width={32} height={32} />
             </button>

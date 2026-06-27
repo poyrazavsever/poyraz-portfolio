@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 
-import Image from "next/image";
 import { Icon } from "@iconify/react";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import {
   Avatar,
@@ -22,15 +22,6 @@ import {
 } from "@/lib/links";
 
 type CategoryFilter = "all" | LinkDirectoryCategory;
-
-const FILTER_ITEMS: ReadonlyArray<{ id: CategoryFilter; label: string }> = [
-  { id: "all", label: "Tüm kategoriler" },
-  ...LINK_DIRECTORY_CATEGORIES,
-];
-
-const CATEGORY_LABELS = Object.fromEntries(
-  LINK_DIRECTORY_CATEGORIES.map((item) => [item.id, item.label]),
-) as Record<(typeof LINK_DIRECTORY_CATEGORIES)[number]["id"], string>;
 
 const CATEGORY_ORDER = {
   resources: 0,
@@ -67,8 +58,19 @@ function formatHref(href: string) {
 }
 
 export function LinksContent() {
+  const t = useTranslations("Links");
+  const tNav = useTranslations("Nav");
+
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
   const [query, setQuery] = useState("");
+
+  const filterItems = useMemo(() => [
+    { id: "all" as const, label: t("allCategories") },
+    ...LINK_DIRECTORY_CATEGORIES.map((item) => ({
+      id: item.id,
+      label: t(`categories.${item.id}`),
+    })),
+  ], [t]);
 
   const filteredItems = useMemo(() => {
     const normalizedQuery = normalize(query.trim());
@@ -84,12 +86,17 @@ export function LinksContent() {
       }
 
       const haystack = normalize(
-        [item.label, item.href, CATEGORY_LABELS[item.category], ...item.keywords].join(" "),
+        [
+          tNav.has(item.id) ? tNav(item.id) : item.label,
+          item.href,
+          t(`categories.${item.category}`),
+          ...item.keywords,
+        ].join(" "),
       );
 
       return queryTokens.every((token) => haystack.includes(token));
     });
-  }, [activeCategory, query]);
+  }, [activeCategory, query, t, tNav]);
 
   return (
     <section className="relative isolate min-h-dvh overflow-hidden px-4 py-8 sm:px-6 sm:py-10">
@@ -128,8 +135,7 @@ export function LinksContent() {
                 </div>
 
                 <Typography variant="small" className="max-w-lg text-sm leading-6 text-muted-foreground">
-                  Burada sosyal hesaplarım, portfolyo sayfalarım ve hızlı erişim linklerimin
-                  tamamı tek yerde duruyor. Direkt açıp paylaşabilirsin.
+                  {t("desc")}
                 </Typography>
               </div>
 
@@ -165,7 +171,7 @@ export function LinksContent() {
                         </span>
                         <div className="min-w-0">
                           <Typography variant="large" className="truncate text-base">
-                            {item.label}
+                            {tNav.has(item.id) ? tNav(item.id) : item.label}
                           </Typography>
                           <Typography
                             variant="small"
@@ -183,10 +189,10 @@ export function LinksContent() {
               <div className="space-y-3 pt-1">
                 <div>
                   <Typography variant="large" className="text-base">
-                    Tüm Linkler
+                    {t("allLinks")}
                   </Typography>
                   <Typography variant="small" className="text-muted-foreground">
-                    Sayfalar, kaynaklar ve sosyal profiller
+                    {t("allLinksDesc")}
                   </Typography>
                 </div>
 
@@ -196,10 +202,10 @@ export function LinksContent() {
                     onValueChange={(value) => setActiveCategory(value as CategoryFilter)}
                   >
                     <SelectTrigger className="h-11 rounded-2xl border-border bg-background px-4 text-sm">
-                      <SelectValue placeholder="Kategori seç" />
+                      <SelectValue placeholder={t("selectCategory")} />
                     </SelectTrigger>
                     <SelectContent>
-                      {FILTER_ITEMS.map((item) => (
+                      {filterItems.map((item) => (
                         <SelectItem key={item.id} value={item.id}>
                           {item.label}
                         </SelectItem>
@@ -210,8 +216,8 @@ export function LinksContent() {
                   <Input
                     value={query}
                     onChange={(event) => setQuery(event.target.value)}
-                    placeholder="Link ara... github, medium, /blog"
-                    aria-label="Linklerde arama"
+                    placeholder={t("searchPlaceholder")}
+                    aria-label={t("allLinks")}
                     className="h-11 rounded-2xl"
                   />
                 </div>
@@ -234,10 +240,10 @@ export function LinksContent() {
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-2">
                               <Typography variant="large" className="text-base leading-tight">
-                                {item.label}
+                                {tNav.has(item.id) ? tNav(item.id) : item.label}
                               </Typography>
                               <span className="inline-flex rounded-full border border-border px-2.5 py-0.5 text-[11px] text-muted-foreground">
-                                {CATEGORY_LABELS[item.category]}
+                                {t(`categories.${item.category}`)}
                               </span>
                             </div>
 
@@ -264,7 +270,7 @@ export function LinksContent() {
                   {filteredItems.length === 0 ? (
                     <Card className="rounded-2xl border-border px-4 py-5">
                       <Typography variant="small" className="text-muted-foreground">
-                        Seçili filtreye uygun link bulunamadı.
+                        {t("empty")}
                       </Typography>
                     </Card>
                   ) : null}

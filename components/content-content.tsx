@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Button, Card, Typography } from "poyraz-ui/atoms";
 import { Modal, ModalContent, ModalTitle } from "poyraz-ui/molecules";
 import { YoutubeLiteEmbed } from "@/components/youtube-lite-embed";
+import { useTranslations } from "next-intl";
 
 type ContentContentProps = {
   youtubeLinks: readonly string[];
@@ -11,6 +12,7 @@ type ContentContentProps = {
 };
 
 function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
+  const t = useTranslations("Content");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [failed, setFailed] = useState(false);
 
@@ -86,7 +88,7 @@ function PdfFirstPagePreview({ src, title }: { src: string; title: string }) {
     return (
       <div className="flex h-full w-full items-center justify-center bg-muted/20 p-2">
         <Typography variant="small" className="text-muted-foreground">
-          Önizleme yüklenemedi
+          {t("pdfPreviewError")}
         </Typography>
       </div>
     );
@@ -107,6 +109,7 @@ export function ContentContent({
   youtubeLinks,
   pdfFiles,
 }: ContentContentProps) {
+  const t = useTranslations("Content");
   const [pdfModalOpen, setPdfModalOpen] = useState(false);
   const [activePdfIndex, setActivePdfIndex] = useState(0);
 
@@ -128,7 +131,7 @@ export function ContentContent({
     <section className="flex h-full flex-col gap-3 overflow-y-auto">
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
-          Son YouTube Videoları
+          {t("youtubeTitle")}
         </Typography>
         <div className="grid gap-2 md:grid-cols-3">
           {embeddedVideos.map((link) => (
@@ -136,7 +139,7 @@ export function ContentContent({
               key={link}
               className="overflow-hidden rounded-sm border-border p-0"
             >
-              <YoutubeLiteEmbed link={link} title="YouTube video oynatici" />
+              <YoutubeLiteEmbed link={link} title={t("youtubeEmbedTitle")} />
             </Card>
           ))}
         </div>
@@ -144,7 +147,7 @@ export function ContentContent({
 
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
-          LinkedIn PDF Notları
+          {t("pdfTitle")}
         </Typography>
         <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
           {pdfFiles.map((pdf, index) => (
@@ -157,7 +160,7 @@ export function ContentContent({
               <Card className="overflow-hidden rounded-sm border-border p-0 transition-colors hover:border-zinc-700">
                 <PdfFirstPagePreview
                   src={`/pdf/${pdf}`}
-                  title={`${pdf} önizleme`}
+                  title={t("pdfPreviewTitle", { name: pdf })}
                 />
               </Card>
             </button>
@@ -168,9 +171,9 @@ export function ContentContent({
       <Modal open={pdfModalOpen} onOpenChange={setPdfModalOpen}>
         <ModalContent size="xl" className="rounded-sm p-4">
           <ModalTitle>
-            {activePdf ? activePdf.replace(/\.pdf$/i, "") : "PDF Notu"}
+            {activePdf ? activePdf.replace(/\.pdf$/i, "") : t("pdfModalDefaultTitle")}
           </ModalTitle>
-
+ 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
             <Typography variant="small" className="text-muted-foreground">
               {pdfFiles.length === 0
@@ -187,7 +190,7 @@ export function ContentContent({
                   setActivePdfIndex((prev) => Math.max(0, prev - 1))
                 }
               >
-                Önceki
+                {t("prev")}
               </Button>
               <Button
                 type="button"
@@ -200,11 +203,11 @@ export function ContentContent({
                   )
                 }
               >
-                Sonraki
+                {t("next")}
               </Button>
             </div>
           </div>
-
+ 
           {activePdf ? (
             <div className="mt-3 h-[70dvh] overflow-hidden rounded-sm border border-border">
               <iframe
@@ -216,7 +219,7 @@ export function ContentContent({
           ) : (
             <Card className="mt-3 rounded-sm border-border p-3">
               <Typography variant="small" className="text-muted-foreground">
-                `/public/pdf` içinde PDF bulunamadı.
+                {t("pdfNotFound")}
               </Typography>
             </Card>
           )}

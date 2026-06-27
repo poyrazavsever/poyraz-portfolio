@@ -1,6 +1,7 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Icon } from "@iconify/react";
 import { Card, Typography } from "poyraz-ui/atoms";
+import { useTranslations } from "next-intl";
 
 export const CONTACT_LINKS = [
   {
@@ -27,6 +28,8 @@ export const CONTACT_LINKS = [
 ] as const;
 
 export function ContactContent() {
+  const t = useTranslations("Contact");
+
   return (
     <section className="grid gap-3 md:grid-cols-3">
       {CONTACT_LINKS.map((item) => (
@@ -42,7 +45,7 @@ export function ContactContent() {
               <Icon icon={item.icon} width={18} height={18} />
             </div>
             <Typography variant="large" className="mt-3 text-base leading-tight">
-              {item.label}
+              {t(item.id)}
             </Typography>
             <Typography variant="small" className="mt-1 text-muted-foreground">
               {item.value}

@@ -2,8 +2,9 @@
 
 import { Icon } from "@iconify/react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { useState } from "react";
 import {
   Avatar,
@@ -45,6 +46,7 @@ export function SiteNavbar() {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
   const shortcut = useKeyboardShortcutLabel();
+  const t = useTranslations("Nav");
 
   const isActiveLink = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -60,13 +62,14 @@ export function SiteNavbar() {
             href={item.href}
             target={item.external ? "_blank" : undefined}
             rel={item.external ? "noreferrer" : undefined}
-            aria-label={item.label}
-            title={item.label}
+            aria-label={t.has(item.id) ? t(item.id) : item.label}
+            title={t.has(item.id) ? t(item.id) : item.label}
             className="inline-flex h-8 w-8 items-center justify-center rounded-sm border border-border text-muted-foreground transition-colors hover:text-foreground"
           >
             <Icon icon={item.icon} width={16} height={16} />
           </Link>
         ))}
+        <LanguageSwitcher />
       </div>
 
       <header className="flex items-center justify-between gap-3 border-b border-border pb-4">
@@ -99,7 +102,7 @@ export function SiteNavbar() {
                     href={item.href}
                     className={getNavLinkClass(isActiveLink(item.href))}
                   >
-                    {item.label}
+                    {t(item.id)}
                   </Link>
                 </li>
               ))}
@@ -115,11 +118,11 @@ export function SiteNavbar() {
             type="button"
             onClick={() => setSearchOpen(true)}
             className="inline-flex h-8 w-44 cursor-pointer items-center justify-between rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:w-52"
-            aria-label="Komut paletini aç"
+            aria-label={t("search")}
           >
             <span className="inline-flex items-center gap-2">
-              <Icon icon="mdi:magnify" width={16} height={16} />
-              <span>Ara</span>
+               <Icon icon="mdi:magnify" width={16} height={16} />
+              <span>{t("search")}</span>
             </span>
             <span className="text-xs text-muted-foreground">{shortcut}</span>
           </button>
@@ -127,10 +130,10 @@ export function SiteNavbar() {
           <DropdownMenu>
             <DropdownMenuTrigger className="inline-flex h-8 cursor-pointer items-center gap-2 rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
               <Icon icon="mdi:share-variant" width={16} height={16} />
-              <span>Sosyal</span>
+              <span>{t("social")}</span>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-52 rounded-sm">
-              <DropdownMenuLabel>Sosyal Bağlantılar</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("socialLinks")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {SOCIAL_LINKS.map((item) => (
                 <DropdownMenuItem key={item.id} asChild>
@@ -153,21 +156,21 @@ export function SiteNavbar() {
           <Sheet>
             <SheetTrigger className="inline-flex h-8 cursor-pointer items-center gap-2 rounded-sm border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:text-foreground">
               <Icon icon="mdi:menu" width={18} height={18} />
-              <span>Menü</span>
+              <span>{t("menu")}</span>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 p-4">
-              <SheetTitle className="sr-only">Mobil Menü</SheetTitle>
+              <SheetTitle className="sr-only">{t("mobileMenu")}</SheetTitle>
               <div className="flex flex-col gap-4">
                 <SheetClose asChild>
                   <button
                     type="button"
                     onClick={() => setSearchOpen(true)}
                     className="inline-flex h-9 w-full cursor-pointer items-center justify-between rounded-sm border border-border px-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    aria-label="Komut paletini aç"
+                    aria-label={t("search")}
                   >
                     <span className="inline-flex items-center gap-2">
                       <Icon icon="mdi:magnify" width={16} height={16} />
-                      <span>Ara</span>
+                      <span>{t("search")}</span>
                     </span>
                     <span className="text-xs text-muted-foreground/80">
                       {shortcut}
@@ -186,7 +189,7 @@ export function SiteNavbar() {
                             href={item.href}
                             className={getNavLinkClass(isActiveLink(item.href))}
                           >
-                            {item.label}
+                            {t(item.id)}
                           </Link>
                         </SheetClose>
                       </li>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { Card, Typography } from "poyraz-ui/atoms";
 import { NewsCard } from "poyraz-ui/molecules";
+import { useTranslations } from "next-intl";
 
 type HomeHeroProps = {
   news: {
@@ -19,6 +20,7 @@ type HomeHeroProps = {
 export function HomeHero({ news }: HomeHeroProps) {
   const [frame, setFrame] = useState<1 | 2>(1);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const t = useTranslations("Home");
 
   const handleMouseEnter = () => {
     if (intervalRef.current) return;
@@ -62,8 +64,7 @@ export function HomeHero({ news }: HomeHeroProps) {
             </Typography>
           </div>
           <Typography variant="small" className="text-muted-foreground">
-            Teknolojiyi merak eden bir genç. Yazılım geliştirme, yapay zeka ve
-            teknoloji dünyasındaki gelişmeleri takip ediyor.
+            {t("role")}
           </Typography>
         </div>
 
