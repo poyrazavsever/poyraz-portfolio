@@ -1,0 +1,115 @@
+{
+  "Nav": {
+    "about": "Hakkımda",
+    "blog": "Blog",
+    "content": "İçerikler",
+    "projects": "Projeler",
+    "gallery": "Galeri",
+    "contact": "İletişim",
+    "search": "Ara",
+    "social": "Sosyal",
+    "socialLinks": "Sosyal Bağlantılar",
+    "menu": "Menü",
+    "mobileMenu": "Mobil Menü",
+    "resume": "Özgeçmiş"
+  },
+  "Home": {
+    "role": "Teknolojiyi merak eden bir genç. Yazılım geliştirme, yapay zeka ve teknoloji dünyasındaki gelişmeleri takip ediyor.",
+    "sections": {
+      "recentPosts": "Son Yazılar",
+      "references": "Referanslar",
+      "videos": "Videolar",
+      "sponsors": "Sponsorlar"
+    }
+  },
+  "About": {
+    "aboutText": "Ortaokulda yazılımla tanıştığımdan beri sürekli öğrenmeye ve kendimi geliştirmeye çalışıyorum. Lise yıllarında öğrenme hevesim daha da arttı ve web geliştirme tarafında farklı teknolojileri keşfetme fırsatı buldum. Lisenin sonlarına doğru mobil dünyasına da adım attım. Şu an aktif olarak üretiyor, geliştiriyor ve en önemlisi hâlâ öğrenmeye devam ediyorum.",
+    "allCertificates": "Tüm Sertifikalar",
+    "referencesTitle": "Referanslar",
+    "referencesDesc": "Tüm referansları ayrı bir detay sayfasında görüntüle.",
+    "volunteerTitle": "Gönüllülük ve Topluluk",
+    "volunteerDesc": "Zaman çizelgesi ve katkı detaylarını ayrı bir detay sayfasında incele.",
+    "bookmarksTitle": "Yer İmleri",
+    "bookmarksDesc": "Hızlı erişim bağlantılarını bir sheet içinde görüntüle.",
+    "timelineLabel": "Zaman Çizelgesi:",
+    "linkLabel": "Bağlantı:",
+    "focusLabel": "Odak:",
+    "backToAbout": "<- Hakkımda'ya dön"
+  },
+  "Projects": {
+    "sections": {
+      "mobileApps": "Mobil Uygulamalar",
+      "webApps": "Web Uygulamaları",
+      "extensions": "Extension'lar",
+      "figmaTemplates": "Figma Tasarımları",
+      "npmPackages": "npm Paketleri (@poyrazavsever)",
+      "githubRepos": "GitHub Repoları (@poyrazavsever)"
+    },
+    "emptyNpm": "npm API yanıtı şu anda boş.",
+    "emptyGithub": "GitHub API yanıtı şu anda boş."
+  },
+  "Blog": {
+    "recentPosts": "Son Yazılar",
+    "searchPlaceholder": "Yazılarda ara...",
+    "noPosts": "Eşleşen yazı bulunamadı.",
+    "categories": "Kategoriler",
+    "readTime": "dk okuma",
+    "backToBlog": "<- Blog'a dön",
+    "results": "sonuç",
+    "clear": "Temizle",
+    "clearFilters": "Filtreleri Temizle",
+    "empty": "Henüz blog yazısı bulunmuyor.",
+    "emptyCategory": "\"{category}\" kategorisinde henüz blog yazısı bulunmuyor.",
+    "noSearch": "\"{search}\" aramasına uygun sonuç bulunamadı.",
+    "comments": "Yorumlar",
+    "toc": "İçindekiler",
+    "diagramLoading": "Diyagram hazırlanıyor...",
+    "diagramError": "Mermaid diyagramı oluşturulamadı."
+  },
+  "Links": {
+    "desc": "Burada sosyal hesaplarım, portfolyo sayfalarım ve hızlı erişim linklerimin tamamı tek yerde duruyor. Direkt açıp paylaşabilirsin.",
+    "allLinks": "Tüm Linkler",
+    "allLinksDesc": "Sayfalar, kaynaklar ve sosyal profiller",
+    "selectCategory": "Kategori seç",
+    "allCategories": "Tüm kategoriler",
+    "searchPlaceholder": "Link ara... github, medium, /blog",
+    "empty": "Seçili filtreye uygun link bulunamadı.",
+    "categories": {
+      "navigation": "Sayfalar",
+      "social": "Sosyal",
+      "resources": "Kaynaklar"
+    }
+  },
+  "Gallery": {
+    "empty": "Henüz galeriye görsel eklenmemiş.",
+    "close": "Kapat",
+    "prev": "Önceki",
+    "next": "Sonraki"
+  },
+  "Metadata": {
+    "title": "Poyraz Avsever | Portfolyo",
+    "titleTemplate": "%s | Poyraz Avsever",
+    "description": "Poyraz Avsever'in projelerini, yazılım içeriklerini ve teknik çalışmalarını paylaştığı kişisel portfolyo sitesi."
+  },
+  "SearchCommand": {
+    "placeholder": "Sayfa ve bağlantılarda ara...",
+    "empty": "Sonuç bulunamadı.",
+    "footer": "Hızlıca açmak için {shortcut} kullan"
+  },
+  "Content": {
+    "youtubeTitle": "Son YouTube Videoları",
+    "youtubeEmbedTitle": "YouTube video oynatıcı",
+    "pdfTitle": "LinkedIn PDF Notları",
+    "pdfPreviewError": "Önizleme yüklenemedi",
+    "pdfPreviewTitle": "{name} önizleme",
+    "pdfModalDefaultTitle": "PDF Notu",
+    "prev": "Önceki",
+    "next": "Sonraki",
+    "pdfNotFound": "/public/pdf içinde PDF bulunamadı."
+  },
+  "Contact": {
+    "email": "E-posta",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram"
+  }
+}

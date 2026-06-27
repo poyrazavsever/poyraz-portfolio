@@ -1,0 +1,115 @@
+{
+  "Nav": {
+    "about": "About",
+    "blog": "Blog",
+    "content": "Content",
+    "projects": "Projects",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "search": "Search",
+    "social": "Social",
+    "socialLinks": "Social Links",
+    "menu": "Menu",
+    "mobileMenu": "Mobile Menu",
+    "resume": "Resume"
+  },
+  "Home": {
+    "role": "A young mind curious about technology. Following developments in software development, AI, and the tech world.",
+    "sections": {
+      "recentPosts": "Recent Posts",
+      "references": "References",
+      "videos": "Videos",
+      "sponsors": "Sponsors"
+    }
+  },
+  "About": {
+    "aboutText": "Ever since I met software in middle school, I've been constantly learning and improving. My passion for learning grew in high school, where I explored different web development technologies. Near the end of high school, I stepped into the mobile world. Today, I actively build, develop, and most importantly, I am still learning.",
+    "allCertificates": "All Certificates",
+    "referencesTitle": "References",
+    "referencesDesc": "View all references on a separate detail page.",
+    "volunteerTitle": "Volunteering & Community",
+    "volunteerDesc": "Inspect timeline and contribution details on a separate page.",
+    "bookmarksTitle": "Bookmarks",
+    "bookmarksDesc": "View quick access links inside a sheet.",
+    "timelineLabel": "Timeline:",
+    "linkLabel": "Link:",
+    "focusLabel": "Focus:",
+    "backToAbout": "<- Back to About"
+  },
+  "Projects": {
+    "sections": {
+      "mobileApps": "Mobile Apps",
+      "webApps": "Web Applications",
+      "extensions": "Extensions",
+      "figmaTemplates": "Figma Designs",
+      "npmPackages": "npm Packages (@poyrazavsever)",
+      "githubRepos": "GitHub Repositories (@poyrazavsever)"
+    },
+    "emptyNpm": "npm API response is currently empty.",
+    "emptyGithub": "GitHub API response is currently empty."
+  },
+  "Blog": {
+    "recentPosts": "Recent Posts",
+    "searchPlaceholder": "Search posts...",
+    "noPosts": "No posts found.",
+    "categories": "Categories",
+    "readTime": "min read",
+    "backToBlog": "<- Back to Blog",
+    "results": "results",
+    "clear": "Clear",
+    "clearFilters": "Clear Filters",
+    "empty": "No blog posts yet.",
+    "emptyCategory": "No blog posts in \"{category}\" category yet.",
+    "noSearch": "No results found for \"{search}\".",
+    "comments": "Comments",
+    "toc": "Table of Contents",
+    "diagramLoading": "Diagram rendering...",
+    "diagramError": "Could not render Mermaid diagram."
+  },
+  "Links": {
+    "desc": "Here you can find all my social accounts, portfolio pages, and quick access links in one place. Open and share directly.",
+    "allLinks": "All Links",
+    "allLinksDesc": "Pages, resources, and social profiles",
+    "selectCategory": "Select category",
+    "allCategories": "All categories",
+    "searchPlaceholder": "Search links... github, medium, /blog",
+    "empty": "No links found matching the selected filter.",
+    "categories": {
+      "navigation": "Pages",
+      "social": "Social",
+      "resources": "Resources"
+    }
+  },
+  "Gallery": {
+    "empty": "No images added to the gallery yet.",
+    "close": "Close",
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "Metadata": {
+    "title": "Poyraz Avsever | Portfolio",
+    "titleTemplate": "%s | Poyraz Avsever",
+    "description": "Poyraz Avsever's personal portfolio website sharing projects, software content, and technical works."
+  },
+  "SearchCommand": {
+    "placeholder": "Search pages and links...",
+    "empty": "No results found.",
+    "footer": "Press {shortcut} to open quickly"
+  },
+  "Content": {
+    "youtubeTitle": "Latest YouTube Videos",
+    "youtubeEmbedTitle": "YouTube video player",
+    "pdfTitle": "LinkedIn PDF Notes",
+    "pdfPreviewError": "Preview could not be loaded",
+    "pdfPreviewTitle": "{name} preview",
+    "pdfModalDefaultTitle": "PDF Note",
+    "prev": "Previous",
+    "next": "Next",
+    "pdfNotFound": "No PDF files found inside `/public/pdf`."
+  },
+  "Contact": {
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "instagram": "Instagram"
+  }
+}
