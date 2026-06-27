@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "poyraz-ui/molecules";
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
@@ -9,19 +9,19 @@ import { BOOKMARKS } from "@/data/bookmarks";
 import { certificates } from "@/data/certificates";
 import { EDUCATION } from "@/data/education";
 import { EXPERIENCE } from "@/data/experience";
-
-const ABOUT_TEXT =
-  "Ortaokulda yazılımla tanıştığımdan beri sürekli öğrenmeye ve kendimi geliştirmeye çalışıyorum. Lise yıllarında öğrenme hevesim daha da arttı ve web geliştirme tarafında farklı teknolojileri keşfetme fırsatı buldum. Lisenin sonlarına doğru mobil dünyasına da adım attım. Şu an aktif olarak üretiyor, geliştiriyor ve en önemlisi hâlâ öğrenmeye devam ediyorum.";
-
-const CERTIFICATE_PREVIEW = certificates.slice(0, 4);
+import { useTranslations, useLocale } from "next-intl";
+import { getLocalizedValue } from "@/lib/locale";
 
 export function AboutContent() {
+  const t = useTranslations("About");
+  const locale = useLocale();
+
   return (
     <section className="flex h-full flex-col gap-3 overflow-hidden">
       <div className="grid gap-3 md:grid-cols-2">
         <Card className="rounded-sm border-border p-4">
           <Typography variant="p" className="text-sm leading-relaxed text-muted-foreground">
-            {ABOUT_TEXT}
+            {t("aboutText")}
           </Typography>
         </Card>
 
@@ -31,13 +31,13 @@ export function AboutContent() {
               <StaggerItem key={item.id}>
                 <Card className="rounded-sm border-border p-3">
                   <Typography variant="large" className="text-base leading-tight">
-                    {item.title}
+                    {getLocalizedValue(item.title, locale)}
                   </Typography>
                   <Typography variant="small" className="mt-0.5 text-muted-foreground">
                     {item.institution}
                   </Typography>
                   <Typography variant="small" className="mt-1 text-red-600">
-                    {item.period}
+                    {getLocalizedValue(item.period, locale)}
                   </Typography>
                 </Card>
               </StaggerItem>
@@ -56,14 +56,14 @@ export function AboutContent() {
             >
               <Card className="rounded-sm border-border p-4 transition-colors hover:border-zinc-700">
                 <div className="grid grid-cols-2 gap-2">
-                  {CERTIFICATE_PREVIEW.map((item) => (
+                  {certificates.slice(0, 4).map((item) => (
                     <div
-                      key={item.name}
+                      key={getLocalizedValue(item.name, locale)}
                       className="relative aspect-4/3 overflow-hidden rounded-sm border border-border"
                     >
                       <Image
                         src={item.image}
-                        alt={item.name}
+                        alt={getLocalizedValue(item.name, locale)}
                         fill
                         sizes="(max-width: 768px) 45vw, 22vw"
                         className="object-cover"
@@ -76,15 +76,15 @@ export function AboutContent() {
           </SheetTrigger>
 
           <SheetContent side="right" className="w-full max-w-xl p-4">
-            <SheetTitle>Tüm Sertifikalar</SheetTitle>
+            <SheetTitle>{t("allCertificates")}</SheetTitle>
             <div className="mt-4 grid max-h-[90dvh] gap-3 overflow-y-auto pr-1">
               {certificates.map((item) => (
-                <Card key={`${item.name}-${item.date}`} className="rounded-sm border-border p-3">
+                <Card key={`${getLocalizedValue(item.name, locale)}-${getLocalizedValue(item.date, locale)}`} className="rounded-sm border-border p-3">
                   <div className="flex gap-3">
                     <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-sm border border-border">
                       <Image
                         src={item.image}
-                        alt={item.name}
+                        alt={getLocalizedValue(item.name, locale)}
                         fill
                         sizes="112px"
                         className="object-cover"
@@ -92,13 +92,13 @@ export function AboutContent() {
                     </div>
                     <div className="min-w-0">
                       <Typography variant="large" className="leading-tight">
-                        {item.name}
+                        {getLocalizedValue(item.name, locale)}
                       </Typography>
                       <Typography variant="small" className="text-muted-foreground">
                         {item.organization}
                       </Typography>
                       <Typography variant="small" className="text-red-600">
-                        {item.date}
+                        {getLocalizedValue(item.date, locale)}
                       </Typography>
                     </div>
                   </div>
@@ -114,13 +114,13 @@ export function AboutContent() {
               <StaggerItem key={item.id}>
                 <Card className="rounded-sm border-border p-3">
                   <Typography variant="large" className="text-base leading-tight">
-                    {item.role}
+                    {getLocalizedValue(item.role, locale)}
                   </Typography>
                   <Typography variant="small" className="mt-0.5 text-muted-foreground">
                     {item.company}
                   </Typography>
                   <Typography variant="small" className="mt-1 text-red-600">
-                    {item.period}
+                    {getLocalizedValue(item.period, locale)}
                   </Typography>
                 </Card>
               </StaggerItem>
@@ -133,10 +133,10 @@ export function AboutContent() {
         <Link href="/about/references" className="block">
           <Card className="h-full rounded-sm border-border p-4 transition-colors hover:border-zinc-700">
             <Typography variant="large" className="text-base leading-tight">
-              Referanslar
+              {t("referencesTitle")}
             </Typography>
             <Typography variant="small" className="mt-1 text-muted-foreground">
-              Tüm referansları ayrı bir detay sayfasında görüntüle.
+              {t("referencesDesc")}
             </Typography>
           </Card>
         </Link>
@@ -144,10 +144,10 @@ export function AboutContent() {
         <Link href="/about/volunteer-community" className="block">
           <Card className="h-full rounded-sm border-border p-4 transition-colors hover:border-zinc-700">
             <Typography variant="large" className="text-base leading-tight">
-              Gönüllülük ve Topluluk
+              {t("volunteerTitle")}
             </Typography>
             <Typography variant="small" className="mt-1 text-muted-foreground">
-              Zaman çizelgesi ve katkı detaylarını ayrı bir detay sayfasında incele.
+              {t("volunteerDesc")}
             </Typography>
           </Card>
         </Link>
@@ -161,17 +161,17 @@ export function AboutContent() {
             >
               <Card className="h-full rounded-sm border-border p-4 transition-colors hover:border-zinc-700">
                 <Typography variant="large" className="text-base leading-tight">
-                  Yer İmleri
+                  {t("bookmarksTitle")}
                 </Typography>
                 <Typography variant="small" className="mt-1 text-muted-foreground">
-                  Hızlı erişim bağlantılarını bir sheet içinde görüntüle.
+                  {t("bookmarksDesc")}
                 </Typography>
               </Card>
             </button>
           </SheetTrigger>
 
           <SheetContent side="right" className="w-full max-w-xl p-4">
-            <SheetTitle>Yer İmleri</SheetTitle>
+            <SheetTitle>{t("bookmarksTitle")}</SheetTitle>
             <div className="mt-4 grid max-h-[90dvh] gap-3 overflow-y-auto pr-1">
               {BOOKMARKS.map((item) => (
                 <Card key={item.id} className="rounded-sm border-border p-3">
@@ -184,7 +184,7 @@ export function AboutContent() {
                     </Badge>
                   </div>
                   <Typography variant="small" className="mt-1 text-muted-foreground">
-                    {item.description}
+                    {getLocalizedValue(item.description, locale)}
                   </Typography>
                   <Link
                     href={item.href}

@@ -1,26 +1,50 @@
-﻿export const EXPERIENCE = [
+export const EXPERIENCE = [
   {
     id: "omedya-part-time",
-    role: "Fullstack Developer (Part-time)",
+    role: {
+      tr: "Fullstack Developer (Part-time)",
+      en: "Fullstack Developer (Part-time)",
+    },
     company: "Omedya Bilişim A.Ş.",
-    period: "Ağustos 2025 - Günümüz",
+    period: {
+      tr: "Ağustos 2025 - Günümüz",
+      en: "August 2025 - Present",
+    },
   },
   {
     id: "omedya-intern",
-    role: "Fullstack Developer Intern",
+    role: {
+      tr: "Fullstack Developer Stajyeri",
+      en: "Fullstack Developer Intern",
+    },
     company: "Omedya Bilişim A.Ş.",
-    period: "Haziran 2025 - Ağustos 2025",
+    period: {
+      tr: "Haziran 2025 - Ağustos 2025",
+      en: "June 2025 - August 2025",
+    },
   },
   {
     id: "arc-intern",
-    role: "Fullstack Developer Intern",
+    role: {
+      tr: "Fullstack Developer Stajyeri",
+      en: "Fullstack Developer Intern",
+    },
     company: "ARC Foreign Trade",
-    period: "Şubat 2025 - Haziran 2025",
+    period: {
+      tr: "Şubat 2025 - Haziran 2025",
+      en: "February 2025 - June 2025",
+    },
   },
   {
     id: "tarvina-intern",
-    role: "Fullstack Developer Intern",
+    role: {
+      tr: "Fullstack Developer Stajyeri",
+      en: "Fullstack Developer Intern",
+    },
     company: "Tarvina Software Technologies",
-    period: "Ekim 2024 - Aralık 2024",
+    period: {
+      tr: "Ekim 2024 - Aralık 2024",
+      en: "October 2024 - December 2024",
+    },
   },
 ] as const;

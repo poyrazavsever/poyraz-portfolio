@@ -1,6 +1,8 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { TestimonialCard } from "poyraz-ui/molecules";
 import { REFERENCES } from "@/data/references";
+import { useLocale } from "next-intl";
+import { getLocalizedValue } from "@/lib/locale";
 
 type ReferenceCardsProps = {
   className?: string;
@@ -8,14 +10,16 @@ type ReferenceCardsProps = {
 };
 
 export function ReferenceCards({ className, cardClassName }: ReferenceCardsProps) {
+  const locale = useLocale();
+
   return (
     <div className={className}>
       {REFERENCES.map((item) => {
         const card = (
           <TestimonialCard
-            quote={item.quote}
+            quote={getLocalizedValue(item.quote, locale)}
             author={item.author}
-            role={item.role}
+            role={getLocalizedValue(item.role, locale)}
             avatar={item.avatar}
             rating={item.rating}
             className={`h-full rounded-sm ${cardClassName || "w-70 shrink-0"}`}

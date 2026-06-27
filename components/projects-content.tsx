@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Icon } from "@iconify/react";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import { ImageCard } from "poyraz-ui/molecules";
@@ -12,6 +12,8 @@ import {
   type ProjectItem,
 } from "@/data/projects";
 import { getGithubRepos, getNpmPackages } from "@/lib/project-feeds";
+import { getTranslations, getLocale } from "next-intl/server";
+import { getLocalizedValue } from "@/lib/locale";
 
 function getLanguageMeta(language: string) {
   const key = language.toLowerCase();
@@ -50,12 +52,21 @@ function getLanguageMeta(language: string) {
   return { icon: "mdi:code-tags", color: "text-zinc-500" };
 }
 
+type LocalizedProjectItem = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  badge?: string;
+  href?: string;
+};
+
 function ProjectSection({
   title,
   items,
 }: {
   title: string;
-  items: ProjectItem[];
+  items: LocalizedProjectItem[];
 }) {
   return (
     <section className="space-y-2">
@@ -81,10 +92,21 @@ function ProjectSection({
 }
 
 export async function ProjectsContent() {
+  const t = await getTranslations("Projects");
+  const locale = await getLocale();
+
   const [repos, npmPackages] = await Promise.all([
     getGithubRepos(),
     getNpmPackages(),
   ]);
+
+  const localizeItems = (items: ProjectItem[]): LocalizedProjectItem[] => {
+    return items.map((item) => ({
+      ...item,
+      description: getLocalizedValue(item.description, locale),
+      badge: item.badge ? getLocalizedValue(item.badge, locale) : undefined,
+    }));
+  };
 
   return (
     <section className="flex h-full flex-col gap-3 overflow-y-auto">
@@ -101,20 +123,20 @@ export async function ProjectsContent() {
         </div>
       </Card>
 
-      <ProjectSection title="Mobil Uygulamalar" items={MOBILE_APPS} />
-      <ProjectSection title="Web Uygulamaları" items={WEB_APPS} />
-      <ProjectSection title="Extension'lar" items={EXTENSIONS} />
-      <ProjectSection title="Figma Tasarımları" items={FIGMA_TEMPLATES} />
+      <ProjectSection title={t("sections.mobileApps")} items={localizeItems(MOBILE_APPS)} />
+      <ProjectSection title={t("sections.webApps")} items={localizeItems(WEB_APPS)} />
+      <ProjectSection title={t("sections.extensions")} items={localizeItems(EXTENSIONS)} />
+      <ProjectSection title={t("sections.figmaTemplates")} items={localizeItems(FIGMA_TEMPLATES)} />
 
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
-          npm Paketleri (@poyrazavsever)
+          {t("sections.npmPackages")}
         </Typography>
         <div className="grid gap-2 md:grid-cols-2">
           {npmPackages.length === 0 ? (
             <Card className="rounded-sm border-border p-3 md:col-span-2">
               <Typography variant="small" className="text-muted-foreground">
-                npm API yanıtı şu anda boş.
+                {t("emptyNpm")}
               </Typography>
             </Card>
           ) : (
@@ -151,13 +173,13 @@ export async function ProjectsContent() {
 
       <section className="space-y-2">
         <Typography variant="large" className="text-base">
-          GitHub Repoları (@poyrazavsever)
+          {t("sections.githubRepos")}
         </Typography>
         <div className="grid gap-2 md:grid-cols-2">
           {repos.length === 0 ? (
             <Card className="rounded-sm border-border p-3 md:col-span-2">
               <Typography variant="small" className="text-muted-foreground">
-                GitHub API yanıtı şu anda boş.
+                {t("emptyGithub")}
               </Typography>
             </Card>
           ) : (

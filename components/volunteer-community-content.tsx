@@ -1,15 +1,20 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Card, Typography } from "poyraz-ui/atoms";
 import { VOLUNTEER_COMMUNITY_ITEMS } from "@/data/volunteer-community";
+import { useTranslations, useLocale } from "next-intl";
+import { getLocalizedValue } from "@/lib/locale";
 
 export function VolunteerCommunityContent() {
+  const t = useTranslations("About");
+  const locale = useLocale();
+
   return (
     <section className="flex h-full flex-col gap-4 overflow-y-auto">
       <Link
         href="/about"
         className="inline-flex w-fit items-center rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
-        {"<- Hakkımda'ya dön"}
+        {t("backToAbout")}
       </Link>
 
       <div className="grid gap-3">
@@ -20,12 +25,12 @@ export function VolunteerCommunityContent() {
             </Typography>
 
             <Typography variant="small" className="mt-2 text-muted-foreground">
-              <span className="font-semibold text-foreground">Zaman Çizelgesi:</span> {item.timeline}
+              <span className="font-semibold text-foreground">{t("timelineLabel")}</span> {getLocalizedValue(item.timeline, locale)}
             </Typography>
 
             {item.link ? (
               <Typography variant="small" className="mt-1 text-muted-foreground">
-                <span className="font-semibold text-foreground">Bağlantı:</span>{" "}
+                <span className="font-semibold text-foreground">{t("linkLabel")}</span>{" "}
                 <Link
                   href={item.link}
                   target="_blank"
@@ -38,7 +43,7 @@ export function VolunteerCommunityContent() {
             ) : null}
 
             <Typography variant="small" className="mt-1 text-muted-foreground">
-              <span className="font-semibold text-foreground">Odak:</span> {item.focus}
+              <span className="font-semibold text-foreground">{t("focusLabel")}</span> {getLocalizedValue(item.focus, locale)}
             </Typography>
           </Card>
         ))}
