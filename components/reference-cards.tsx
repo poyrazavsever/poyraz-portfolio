@@ -1,5 +1,5 @@
 
-import { CustomTestimonialCard } from "@/components/custom-testimonial-card";
+import { TestimonialCard } from "poyraz-ui/molecules";
 import { REFERENCES } from "@/data/references";
 import { useLocale } from "next-intl";
 import { getLocalizedValue } from "@/lib/locale";
@@ -17,14 +17,15 @@ export function ReferenceCards({ className, cardClassName, lineClamp }: Referenc
     <div className={className}>
       {REFERENCES.map((item) => {
         const card = (
-          <CustomTestimonialCard
+          <TestimonialCard
             quote={getLocalizedValue(item.quote, locale)}
             author={item.author}
             role={getLocalizedValue(item.role, locale)}
             avatar={item.avatar}
             rating={item.rating}
-            lineClamp={lineClamp}
-            className={`h-full ${cardClassName || "w-70 shrink-0"}`}
+            className={`flex flex-col h-full rounded-sm [&>*:last-child]:mt-auto ${
+              lineClamp ? "[&>*:first-child]:line-clamp-4" : ""
+            } ${cardClassName || "w-70 shrink-0"}`}
           />
         );
 
