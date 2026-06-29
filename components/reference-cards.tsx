@@ -16,16 +16,21 @@ export function ReferenceCards({ className, cardClassName, lineClamp }: Referenc
   return (
     <div className={className}>
       {REFERENCES.map((item) => {
+        const quoteText = getLocalizedValue(item.quote, locale);
+        const quoteContent = lineClamp ? (
+          <span className="line-clamp-3">{quoteText}</span>
+        ) : (
+          quoteText
+        );
+
         const card = (
           <TestimonialCard
-            quote={getLocalizedValue(item.quote, locale)}
+            quote={quoteContent as any}
             author={item.author}
             role={getLocalizedValue(item.role, locale)}
             avatar={item.avatar}
             rating={item.rating}
-            className={`flex flex-col h-full rounded-sm [&>*:last-child]:mt-auto ${
-              lineClamp ? "[&>*:first-child]:line-clamp-4" : ""
-            } ${cardClassName || "w-70 shrink-0"}`}
+            className={`flex flex-col rounded-sm ${cardClassName || "w-70 shrink-0"}`}
           />
         );
 

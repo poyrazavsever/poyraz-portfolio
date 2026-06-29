@@ -7,9 +7,9 @@ export function ReferencesSection() {
     <section className="space-y-8 pt-0 sm:pt-12">
       <div className="relative overflow-hidden rounded-sm py-4">
         {/* We use two sets of cards for seamless infinite marquee effect */}
-        <div className="flex w-max gap-4 animate-marquee pause-on-hover">
-          <ReferenceCards className="flex gap-4 shrink-0" lineClamp={true} cardClassName="w-80" />
-          <ReferenceCards className="flex gap-4 shrink-0" lineClamp={true} cardClassName="w-80" />
+        <div className="flex items-start w-max gap-4 animate-marquee pause-on-hover">
+          <ReferenceCards className="flex items-start gap-4 shrink-0" lineClamp={true} cardClassName="w-80" />
+          <ReferenceCards className="flex items-start gap-4 shrink-0" lineClamp={true} cardClassName="w-80" />
         </div>
         
         <div
