@@ -6,7 +6,7 @@ export function ReferencesDetailContent() {
   const t = useTranslations("About");
 
   return (
-    <section className="flex h-full flex-col gap-4 overflow-y-auto">
+    <section className="flex flex-col gap-4 overflow-x-hidden">
       <Link
         href="/about"
         className="inline-flex w-fit items-center rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
