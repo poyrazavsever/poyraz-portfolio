@@ -1,5 +1,5 @@
-import { Link } from "@/i18n/routing";
-import { TestimonialCard } from "poyraz-ui/molecules";
+
+import { CustomTestimonialCard } from "@/components/custom-testimonial-card";
 import { REFERENCES } from "@/data/references";
 import { useLocale } from "next-intl";
 import { getLocalizedValue } from "@/lib/locale";
@@ -7,40 +7,44 @@ import { getLocalizedValue } from "@/lib/locale";
 type ReferenceCardsProps = {
   className?: string;
   cardClassName?: string;
+  lineClamp?: boolean;
 };
 
-export function ReferenceCards({ className, cardClassName }: ReferenceCardsProps) {
+export function ReferenceCards({ className, cardClassName, lineClamp }: ReferenceCardsProps) {
   const locale = useLocale();
 
   return (
     <div className={className}>
       {REFERENCES.map((item) => {
         const card = (
-          <TestimonialCard
+          <CustomTestimonialCard
             quote={getLocalizedValue(item.quote, locale)}
             author={item.author}
             role={getLocalizedValue(item.role, locale)}
             avatar={item.avatar}
             rating={item.rating}
-            className={`h-full rounded-sm ${cardClassName || "w-70 shrink-0"}`}
+            lineClamp={lineClamp}
+            className={`h-full ${cardClassName || "w-70 shrink-0"}`}
           />
         );
 
-        if (!item.profileHref) {
-          return <div key={item.id}>{card}</div>;
+        const href = item.documentHref || item.profileHref;
+
+        if (!href) {
+          return <div key={item.id} className="h-full">{card}</div>;
         }
 
         return (
-          <Link
+          <a
             key={item.id}
-            href={item.profileHref}
+            href={href}
             target="_blank"
             rel="noreferrer"
-            aria-label={`${item.author} LinkedIn profili`}
-            className="block"
+            aria-label={`${item.author} bağlantısı`}
+            className="block h-full transition-transform hover:scale-[1.02]"
           >
             {card}
-          </Link>
+          </a>
         );
       })}
     </div>

@@ -15,8 +15,9 @@ export function ReferencesDetailContent() {
       </Link>
 
       <ReferenceCards
-        className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3"
+        className="columns-1 gap-4 sm:columns-2 lg:columns-3 [&>a]:mb-4 [&>a]:break-inside-avoid [&>div]:mb-4 [&>div]:break-inside-avoid"
         cardClassName="w-full"
+        lineClamp={false}
       />
     </section>
   );

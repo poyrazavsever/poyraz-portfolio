@@ -12,6 +12,7 @@ export type Reference = {
   avatar: string;
   rating?: number;
   profileHref?: string;
+  documentHref?: string;
 };
 
 export const REFERENCES: Reference[] = [
@@ -83,6 +84,20 @@ export const REFERENCES: Reference[] = [
     quote: {
       tr: "Shipin'in ilk günlerinden beri Poyraz ile çalışıyorum ve profesyonelliği beni etkilemeye devam ediyor. Güçlü teknik beceriler ile başkalarına öğretme tutkusunu nadir bulunan bir şekilde birleştiriyor. Onun hakkında tek bir şey söyleyecek olsaydım, o da güvenilirliği olurdu. Asla yapabileceğinden fazlasını vaat etmez, taahhütlerini her zaman yerine getirir ve işini geliştirmek için geri bildirimleri samimiyetle uygular.",
       en: "I've been working with Poyraz since the early days of Shipin, and he continues to impress me with his professionalism. He has a rare combination of solid technical skills and passion for teaching others. If I was to say one thing about him, it would be his reliability. He never over-promises, always delivers on his commitments, and genuinely incorporates feedback to improve his work.",
+    },
+  },
+  {
+    id: "ilker-yoncaci",
+    author: "İlker Yoncacı",
+    role: {
+      tr: "Dr. Öğr. Üyesi - OSTİM Teknik Üniversitesi - VİA Bilgisayar Sistemleri Founder / CEO",
+      en: "Assist. Prof. Dr. - OSTİM Technical University - VİA Computer Systems Founder / CEO",
+    },
+    avatar: "/avatars/ilker.png",
+    documentHref: "/referances/ilker.pdf",
+    quote: {
+      tr: "Poyraz AVSEVER’le Ostim Teknik Üniversitesi bünyesinde çalışırken tanıştım. Kendisi 2025-2026 Eğitim Öğretim Yılı Bahar döneminde iki dersimi birden almış ve gayet iyi notlarla derslerimden geçmiştir. Çalıştığı süre zarfında başarılı çalışmalara imza atan Poyraz AVSEVER’in yazılı ve sözlü iletişim becerileri son derece güçlüdür. Hem bağımsız hem de bir ekiple çalışabilen Poyraz, iş disiplini ile de beğenimizi kazanmıştır. Derslerin yanısıra Poyraz, web ve mobil teknolojiler konularında pek çok süreçte görev almıştır. Öğrenmeye açık yapısı ve araştırma hevesi sayesinde temel mühendislik altyapısını iyi bir seviyeye taşımıştır. Gerek ekip arkadaşları gerekse paydaşları ile kuvvetli bir iletişim kurmayı başaran; proaktif olarak fikir ve öneri geliştirebilen Poyraz’ın kurumunuza da aynı şekilde katkı sağlayacağına inanıyorum. Disiplinli çalışması ve uyumlu karakteri göz önüne alındığında, yer alacağı çalışmalarda verimli olacağını düşünüyor ve kendisini tavsiye ediyorum. Konuyla ilgili herhangi bir sorunuz olursa benimle iletişim kurabilirsiniz.",
+      en: "I met Poyraz AVSEVER while working at Ostim Technical University. He took two of my courses in the Spring semester of the 2025-2026 Academic Year and passed them with very good grades. Poyraz AVSEVER, who has carried out successful works during his time working, has extremely strong written and verbal communication skills. Capable of working both independently and with a team, Poyraz has won our appreciation with his work discipline. In addition to courses, Poyraz took part in many processes regarding web and mobile technologies. Thanks to his openness to learning and enthusiasm for research, he has brought his basic engineering infrastructure to a good level. I believe that Poyraz, who successfully establishes strong communication with both his teammates and stakeholders and can proactively develop ideas and suggestions, will contribute to your institution in the same way. Considering his disciplined work and harmonious character, I think he will be productive in the projects he will take part in and I recommend him. If you have any questions about the subject, you can contact me.",
     },
   },
 ];
