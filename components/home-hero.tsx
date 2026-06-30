@@ -63,8 +63,12 @@ export function HomeHero({ news }: HomeHeroProps) {
               <span className="font-secondary text-red-600">Avsever</span>
             </Typography>
           </div>
-          <Typography variant="small" className="text-muted-foreground">
-            {t("role")}
+          <Typography variant="small" className="text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
+            {t.rich("role", {
+              strong: (chunks) => (
+                <strong className="font-semibold text-foreground">{chunks}</strong>
+              ),
+            })}
           </Typography>
         </div>
 
