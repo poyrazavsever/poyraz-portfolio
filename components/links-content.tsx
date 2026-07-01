@@ -14,6 +14,7 @@ import {
 } from "poyraz-ui/atoms";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "poyraz-ui/molecules";
 import {
+  getResumeHref,
   LINK_DIRECTORY,
   LINK_DIRECTORY_CATEGORIES,
   SOCIAL_LINKS,
@@ -158,7 +159,7 @@ export function LinksContent() {
 
               <div className="grid gap-2 sm:grid-cols-2">
                 {TOP_ICON_LINKS.map((item) => {
-                  const href = item.id === "cv" ? `/resume-${locale}.pdf` : item.href;
+                  const href = item.id === "cv" ? getResumeHref(locale) : item.href;
                   return (
                     <a
                       key={item.id}
@@ -228,7 +229,7 @@ export function LinksContent() {
 
                 <div className="grid gap-2">
                   {filteredItems.map((item) => {
-                    const href = item.id === "cv" ? `/resume-${locale}.pdf` : item.href;
+                    const href = item.id === "cv" ? getResumeHref(locale) : item.href;
                     const isStaticOrExternal = item.external || item.id === "rss" || item.id === "cv" || href.endsWith(".xml") || href.endsWith(".pdf");
                     const CardContent = (
                       <Card className="rounded-2xl border-border p-3 transition-all hover:-translate-y-0.5 hover:border-red-600/40">

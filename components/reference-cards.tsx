@@ -12,25 +12,22 @@ type ReferenceCardsProps = {
 
 export function ReferenceCards({ className, cardClassName, lineClamp }: ReferenceCardsProps) {
   const locale = useLocale();
+  const hoverClassName =
+    "transition-colors duration-200 group-hover:border-red-600/40 group-hover:bg-muted/30 group-hover:shadow-sm";
 
   return (
     <div className={className}>
       {REFERENCES.map((item) => {
         const quoteText = getLocalizedValue(item.quote, locale);
-        const quoteContent = lineClamp ? (
-          <span className="line-clamp-3">{quoteText}</span>
-        ) : (
-          quoteText
-        );
 
         const card = (
           <TestimonialCard
-            quote={quoteContent as any}
+            quote={quoteText}
             author={item.author}
             role={getLocalizedValue(item.role, locale)}
             avatar={item.avatar}
             rating={item.rating}
-            className={`flex flex-col rounded-sm ${cardClassName || "w-70 shrink-0"}`}
+            className={`flex flex-col rounded-sm ${lineClamp ? "[&_p]:line-clamp-3" : ""} ${hoverClassName} ${cardClassName || "w-70 shrink-0"}`}
           />
         );
 
@@ -47,7 +44,7 @@ export function ReferenceCards({ className, cardClassName, lineClamp }: Referenc
             target="_blank"
             rel="noreferrer"
             aria-label={`${item.author} bağlantısı`}
-            className="block h-full transition-transform hover:scale-[1.02]"
+            className="group block h-full"
           >
             {card}
           </a>

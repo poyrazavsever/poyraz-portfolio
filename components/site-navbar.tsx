@@ -26,7 +26,7 @@ import {
   SheetTrigger,
 } from "poyraz-ui/molecules";
 import { useKeyboardShortcutLabel } from "@/lib/use-keyboard-shortcut-label";
-import { NAV_LINKS, SOCIAL_LINKS, TOP_ICON_LINKS } from "@/lib/links";
+import { getResumeHref, NAV_LINKS, SOCIAL_LINKS, TOP_ICON_LINKS } from "@/lib/links";
 
 const SearchCommand = dynamic(
   () => import("@/components/search-command").then((mod) => mod.SearchCommand),
@@ -58,7 +58,7 @@ export function SiteNavbar() {
     <div className="space-y-3">
       <div className="flex items-center justify-end gap-2 border-b border-border pb-3">
         {TOP_ICON_LINKS.map((item) => {
-          const href = item.id === "cv" ? `/resume-${locale}.pdf` : item.href;
+          const href = item.id === "cv" ? getResumeHref(locale) : item.href;
           return (
             <a
               key={item.id}

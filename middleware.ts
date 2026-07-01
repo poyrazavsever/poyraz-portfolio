@@ -4,6 +4,6 @@ import {routing} from "./i18n/routing";
 export default createMiddleware(routing);
 
 export const config = {
-  // Match only internationalized pathnames
-  matcher: ["/", "/(tr|en)/:path*", "/((?!_next|_vercel|.*\\..*).*)"]
+  // Match pages, but skip API/internal/static files like `/tr/resume.pdf`.
+  matcher: ["/((?!api|trpc|_next|_vercel|.*\\..*).*)"],
 };

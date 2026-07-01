@@ -101,6 +101,10 @@ export const TOP_ICON_LINKS = [
   },
 ] as const;
 
+export function getResumeHref(locale: string) {
+  return `/${locale === "en" ? "en" : "tr"}/resume.pdf`;
+}
+
 export type LinkDirectoryCategory = "navigation" | "social" | "resources";
 
 export type LinkDirectoryItem = {
