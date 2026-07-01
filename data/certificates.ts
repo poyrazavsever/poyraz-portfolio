@@ -1,6 +1,57 @@
 export const certificates = [
   {
     name: {
+      tr: "HTML 101",
+      en: "HTML 101",
+    },
+    organization: "Turkcell Geleceği Yazanlar",
+    date: {
+      tr: "Haziran 2026",
+      en: "June 2026",
+    },
+    description: {
+      tr: "HTML 101 eğitimi ve sınavını başarıyla tamamlayarak temel web geliştirme becerileri kazandım.",
+      en: "I successfully completed the HTML 101 training and exam, gaining foundational web development skills.",
+    },
+    image: "/certificates/htmlTurkcell.png",
+    category: "web",
+  },
+  {
+    name: {
+      tr: "HTML CSS 201",
+      en: "HTML CSS 201",
+    },
+    organization: "Turkcell Geleceği Yazanlar",
+    date: {
+      tr: "Haziran 2026",
+      en: "June 2026",
+    },
+    description: {
+      tr: "HTML CSS 201 eğitimi ve sınavını başarıyla tamamlayarak web tasarımı, sayfa düzeni ve stil oluşturma konularında yetkinlik kazandım.",
+      en: "I successfully completed the HTML CSS 201 training and exam, gaining competence in web design, page layout, and styling.",
+    },
+    image: "/certificates/htmlcssTurkcell.png",
+    category: "web",
+  },
+  {
+    name: {
+      tr: "JavaScript 301",
+      en: "JavaScript 301",
+    },
+    organization: "Turkcell Geleceği Yazanlar",
+    date: {
+      tr: "Haziran 2026",
+      en: "June 2026",
+    },
+    description: {
+      tr: "JavaScript 301 eğitimi ve sınavını başarıyla tamamlayarak dinamik web programlama ve etkileşimli arayüz geliştirme yeteneklerimi güçlendirdim.",
+      en: "I successfully completed the JavaScript 301 training and exam, strengthening my dynamic web programming and interactive interface development skills.",
+    },
+    image: "/certificates/javascriptTurkcell.png",
+    category: "web",
+  },
+  {
+    name: {
       tr: "React Native | Uygulamalı React Native Eğitimi",
       en: "React Native | Practical React Native Training",
     },
