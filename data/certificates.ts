@@ -1,6 +1,40 @@
 export const certificates = [
   {
     name: {
+      tr: "Scrimba ile CSS Grid Öğrenimi",
+      en: "Learn CSS Grid with Scrimba",
+    },
+    organization: "Scrimba",
+    date: {
+      tr: "Temmuz 2026",
+      en: "July 2026",
+    },
+    description: {
+      tr: "Scrimba üzerindeki CSS Grid sertifikasıyla modern ve duyarlı yerleşim sistemleri kurma becerilerimi geliştirdim.",
+      en: "With this Scrimba CSS Grid certificate, I improved my ability to build modern and responsive layout systems.",
+    },
+    image: "/certificates/cssGridScrimba.png",
+    category: "web",
+  },
+  {
+    name: {
+      tr: "Scrimba ile HTML ve CSS Öğrenimi",
+      en: "Learn HTML and CSS with Scrimba",
+    },
+    organization: "Scrimba",
+    date: {
+      tr: "Temmuz 2026",
+      en: "July 2026",
+    },
+    description: {
+      tr: "Scrimba üzerindeki HTML ve CSS sertifikasıyla semantik yapı kurma ve arayüz stil verme konularında temel yetkinlik kazandım.",
+      en: "With this Scrimba HTML and CSS certificate, I gained foundational skills in semantic structure and interface styling.",
+    },
+    image: "/certificates/htmlCssScrimba.png",
+    category: "web",
+  },
+  {
+    name: {
       tr: "HTML 101",
       en: "HTML 101",
     },
