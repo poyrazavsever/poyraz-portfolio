@@ -1,6 +1,23 @@
 export const certificates = [
   {
     name: {
+      tr: "Scrimba ile CSS Animasyonları Öğrenimi",
+      en: "Learn CSS Animations with Scrimba",
+    },
+    organization: "Scrimba",
+    date: {
+      tr: "Temmuz 2026",
+      en: "July 2026",
+    },
+    description: {
+      tr: "Scrimba üzerindeki CSS Animasyonları sertifikasıyla geçişler, hareket ve etkileşimli arayüz animasyonları oluşturma becerilerimi geliştirdim.",
+      en: "With this Scrimba CSS Animations certificate, I improved my skills in transitions, motion, and interactive interface animations.",
+    },
+    image: "/certificates/cssAnimationsScrimba.png",
+    category: "web",
+  },
+  {
+    name: {
       tr: "Scrimba ile CSS Grid Öğrenimi",
       en: "Learn CSS Grid with Scrimba",
     },
