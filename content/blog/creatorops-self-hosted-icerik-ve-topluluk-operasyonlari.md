@@ -11,7 +11,7 @@ coverImage: "/blog/images/creatorops-self-hosted-icerik-ve-topluluk-operasyonlar
 
 # CreatorOps: Self-Hosted İçerik ve Topluluk Operasyonları
 
-<img src="https://images.pexels.com/photos/15555796/pexels-photo-15555796.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" width="100%" style="border-radius: 8px; margin-bottom: 20px;" alt="Çalışma alanı" />
+![Çalışma alanı](https://images.pexels.com/photos/15555796/pexels-photo-15555796.jpeg?auto=compress&cs=tinysrgb&h=650&w=940)
 
 Sosyal medya yönetimi dışarıdan bakıldığında basit duruyor: Birkaç içerik fikri bul, taslak hazırla ve yayınla. Ancak işin içine ekip arkadaşları, topluluk katkıları, onay (review) döngüleri ve medya dosyaları girince süreç hızla dağılabiliyor. İçerik fikirleri Notion'da, taslaklar Google Docs'ta, revizyonlar Slack'te, görseller ise Drive'da kayboluyor.
 
@@ -29,7 +29,7 @@ CreatorOps ile bu dağınıklığı üç aşamada çözdüm:
 2. **Topluluk Katkıları:** Dinamik form builder ile dışarıdan başvuru/içerik toplama altyapısı sunuyor.
 3. **Self-Hosted:** Verinin tamamen sizde kaldığı, tek veritabanı ve tek dosya yükleme (upload) katmanı.
 
-<img src="https://images.pexels.com/photos/7437087/pexels-photo-7437087.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" width="100%" style="border-radius: 8px; margin-bottom: 20px;" alt="Topluluk operasyonları" />
+![Topluluk operasyonları](https://images.pexels.com/photos/7437087/pexels-photo-7437087.jpeg?auto=compress&cs=tinysrgb&h=650&w=940)
 
 ## Teknik Mimari ve Kullanılan Teknolojiler
 
@@ -61,7 +61,7 @@ flowchart LR
 
 Takvim ekranı, ekibin günlük operasyon merkezi olarak çalışıyor. Hangi gün hangi içerik var, kime atanmış ve durumu ne (Draft, Pending Review, Approved) tek bir ekrandan görünüyor. Onay bekleyen içerikler listede açıkça belirtiliyor ve revizyon döngüsü tamamen bu akış üzerinden işliyor.
 
-<img src="/blog/images/creatorops-self-hosted-icerik-ve-topluluk-operasyonlari-img-1.png" width="100%" style="border-radius: 8px; margin-bottom: 20px;" alt="İçerik Takvimi" />
+![İçerik Takvimi](/blog/images/creatorops-self-hosted-icerik-ve-topluluk-operasyonlari-img-1.png)
 
 ### Public Forms ve Dinamik Form Oluşturucu
 
@@ -69,7 +69,7 @@ CreatorOps'u sadece bir iç ekip aracı olmaktan çıkaran yer burası. Yönetic
 
 Topluluktan veya dışarıdan biri bu formu doldurduğunda, veriler doğrudan CreatorOps'un içindeki operasyon akışına düşüyor. Böylece harici form araçlarına para ödemek veya entegrasyon kurgulamak gerekmiyor.
 
-<img src="/blog/images/creatorops-self-hosted-icerik-ve-topluluk-operasyonlari-img-2.png" width="100%" style="border-radius: 8px; margin-bottom: 20px;" alt="Form Builder" />
+![Form Builder](/blog/images/creatorops-self-hosted-icerik-ve-topluluk-operasyonlari-img-2.png)
 
 ### Medya Yönetimi ve Seriler
 

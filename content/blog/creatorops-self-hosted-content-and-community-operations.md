@@ -12,7 +12,7 @@ lang: "en"
 
 # CreatorOps: Self-Hosted Content and Community Operations
 
-<img src="https://images.pexels.com/photos/15555796/pexels-photo-15555796.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" width="100%" style="border-radius: 8px; margin-bottom: 20px;" alt="Workspace" />
+![Workspace](https://images.pexels.com/photos/15555796/pexels-photo-15555796.jpeg?auto=compress&cs=tinysrgb&h=650&w=940)
 
 Social media management seems simple from the outside: find a few content ideas, prepare a draft, and publish. However, when teammates, community contributions, review cycles, and media files get involved, the process can quickly become scattered. Content ideas get lost in Notion, drafts in Google Docs, revisions in Slack, and visuals in Drive.
 
@@ -30,7 +30,7 @@ With CreatorOps, I solved this clutter in three stages:
 2. **Community Contributions:** Offers an infrastructure to collect applications/content from the outside with a dynamic form builder.
 3. **Self-Hosted:** A structure where the data remains completely with you, featuring a single database and a single file upload layer.
 
-<img src="https://images.pexels.com/photos/7437087/pexels-photo-7437087.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" width="100%" style="border-radius: 8px; margin-bottom: 20px;" alt="Community operations" />
+![Community operations](https://images.pexels.com/photos/7437087/pexels-photo-7437087.jpeg?auto=compress&cs=tinysrgb&h=650&w=940)
 
 ## Technical Architecture and Technologies Used
 
@@ -62,7 +62,7 @@ flowchart LR
 
 The calendar screen works as the team's daily operation center. What content is scheduled for which day, who it's assigned to, and its status (Draft, Pending Review, Approved) can be seen from a single screen. Content pending approval is clearly indicated in the list, and the revision cycle completely runs through this flow.
 
-<img src="/blog/images/creatorops-self-hosted-icerik-ve-topluluk-operasyonlari-img-1.png" width="100%" style="border-radius: 8px; margin-bottom: 20px;" alt="Content Calendar" />
+![Content Calendar](/blog/images/creatorops-self-hosted-icerik-ve-topluluk-operasyonlari-img-1.png)
 
 ### Public Forms and Dynamic Form Builder
 
@@ -70,7 +70,7 @@ This is where CreatorOps steps out of being just an internal team tool. Managers
 
 When someone from the community or the outside fills out this form, the data drops directly into the operational flow inside CreatorOps. Thus, there is no need to pay for external form tools or set up integrations.
 
-<img src="/blog/images/creatorops-self-hosted-icerik-ve-topluluk-operasyonlari-img-2.png" width="100%" style="border-radius: 8px; margin-bottom: 20px;" alt="Form Builder" />
+![Form Builder](/blog/images/creatorops-self-hosted-icerik-ve-topluluk-operasyonlari-img-2.png)
 
 ### Media Management and Series
 
