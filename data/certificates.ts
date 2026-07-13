@@ -1,6 +1,23 @@
 export const certificates = [
   {
     name: {
+      tr: "Scrimba ile Javascript Öğrenimi",
+      en: "Learn JavaScript with Scrimba",
+    },
+    organization: "Scrimba",
+    date: {
+      tr: "Temmuz 2026",
+      en: "July 2026",
+    },
+    description: {
+      tr: "Scrimba üzerindeki JavaScript sertifikasıyla temel programlama becerilerimi geliştirdim.",
+      en: "With this Scrimba JavaScript certificate, I improved my foundational programming skills.",
+    },
+    image: "/certificates/javascriptScrimba.png",
+    category: "web",
+  },
+  {
+    name: {
       tr: "Scrimba ile CSS Animasyonları Öğrenimi",
       en: "Learn CSS Animations with Scrimba",
     },
