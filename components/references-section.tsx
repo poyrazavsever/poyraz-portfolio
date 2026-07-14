@@ -11,7 +11,7 @@ export function ReferencesSection() {
   const router = useRouter();
 
   return (
-    <section className="space-y-3 pt-0 sm:pt-8">
+    <section className="space-y-3">
       <div className="flex items-center justify-between gap-4">
         <Typography
           variant="h3"

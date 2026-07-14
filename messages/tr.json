@@ -20,6 +20,8 @@
     "downloadCv": "CV indir",
     "readMyPosts": "Yazılarımı Okudun Mu",
     "allPosts": "Tüm yazılar",
+    "projectsTitle": "Projeler",
+    "allProjects": "Tüm projeler",
     "reviewsAndReferences": "Yorumlar & Referanslar",
     "allReferences": "Tüm referanslar",
     "sections": {
@@ -105,6 +107,7 @@
   },
   "Content": {
     "youtubeTitle": "Son YouTube Videoları",
+    "youtubeChannel": "YouTube kanalım",
     "youtubeEmbedTitle": "YouTube video oynatıcı",
     "pdfTitle": "LinkedIn PDF Notları",
     "pdfPreviewError": "Önizleme yüklenemedi",

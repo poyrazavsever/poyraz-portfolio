@@ -20,6 +20,8 @@
     "downloadCv": "Download CV",
     "readMyPosts": "Have You Read My Posts?",
     "allPosts": "All posts",
+    "projectsTitle": "Projects",
+    "allProjects": "All projects",
     "reviewsAndReferences": "Reviews & References",
     "allReferences": "All references",
     "sections": {
@@ -105,6 +107,7 @@
   },
   "Content": {
     "youtubeTitle": "Latest YouTube Videos",
+    "youtubeChannel": "My YouTube channel",
     "youtubeEmbedTitle": "YouTube video player",
     "pdfTitle": "LinkedIn PDF Notes",
     "pdfPreviewError": "Preview could not be loaded",

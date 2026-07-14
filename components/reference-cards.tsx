@@ -27,7 +27,7 @@ export function ReferenceCards({ className, cardClassName, lineClamp }: Referenc
             role={getLocalizedValue(item.role, locale)}
             avatar={item.avatar}
             rating={item.rating}
-            className={`flex flex-col rounded-sm ${lineClamp ? "[&_p]:line-clamp-4" : ""} ${hoverClassName} ${cardClassName || "w-70 shrink-0"}`}
+            className={`flex flex-col rounded-sm ${lineClamp ? "[&_blockquote]:line-clamp-4" : ""} ${hoverClassName} ${cardClassName || "w-70 shrink-0"}`}
           />
         );
 
