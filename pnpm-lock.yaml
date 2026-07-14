@@ -30,8 +30,8 @@ importers:
         specifier: ^5.5.207
         version: 5.5.207
       poyraz-ui:
-        specifier: ^2.0.1
-        version: 2.0.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.71.2(react@19.2.3))(react@19.2.3)(tailwindcss@4.2.1)(zod@4.3.6)
+        specifier: ^3.0.0
+        version: 3.0.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(mermaid@11.13.0)(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.71.2(react@19.2.3))(react@19.2.3)(tailwindcss@4.2.1)(zod@4.3.6)
       react:
         specifier: 19.2.3
         version: 19.2.3
@@ -1765,6 +1765,7 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
   '@unrs/resolver-binding-android-arm-eabi@1.11.1':
     resolution: {integrity: sha512-ppLRUgHVaGRWUx0R0Ut06Mjo9gBaBkg3v/8AxusGLhsIotbBLuRk51rAzqLC8gq6NyyAojEXglNjzf6R948DNw==}
@@ -4348,11 +4349,13 @@ packages:
     resolution: {integrity: sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg==}
     engines: {node: ^10 || ^12 || >=14}
 
-  poyraz-ui@2.0.1:
-    resolution: {integrity: sha512-aTkBXorwdftdmUZAk3RkDxAK/KjP2GtXEf0PUdc+EXnH2bMszaZJsARF3dV8Imv52qLXqtZLBP1kJJQPPr0Pag==}
+  poyraz-ui@3.0.0:
+    resolution: {integrity: sha512-1gfbxuBncvjaMa129H2YCNYwwzX1hLdnqmwdoaap3la96quw7wagNVS2Q9Sm066vSQHaHl7YQtNO+Eq5MuDJ0Q==}
+    engines: {node: '>=22', pnpm: '>=11.5.1'}
     hasBin: true
     peerDependencies:
       '@hookform/resolvers': '>=3'
+      mermaid: '>=11'
       react: '>=18'
       react-dom: '>=18'
       react-hook-form: '>=7'
@@ -4361,6 +4364,8 @@ packages:
       zod: '>=3'
     peerDependenciesMeta:
       '@hookform/resolvers':
+        optional: true
+      mermaid:
         optional: true
       react-hook-form:
         optional: true
@@ -5172,7 +5177,7 @@ packages:
 
   uuid@3.4.0:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
-    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   vaul@1.1.2:
@@ -10107,7 +10112,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  poyraz-ui@2.0.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.71.2(react@19.2.3))(react@19.2.3)(tailwindcss@4.2.1)(zod@4.3.6):
+  poyraz-ui@3.0.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(mermaid@11.13.0)(react-dom@19.2.3(react@19.2.3))(react-hook-form@7.71.2(react@19.2.3))(react@19.2.3)(tailwindcss@4.2.1)(zod@4.3.6):
     dependencies:
       '@radix-ui/react-accordion': 1.2.12(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@radix-ui/react-avatar': 1.1.11(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -10136,6 +10141,7 @@ snapshots:
       tailwindcss: 4.2.1
       vaul: 1.1.2(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
     optionalDependencies:
+      mermaid: 11.13.0
       react-hook-form: 7.71.2(react@19.2.3)
       zod: 4.3.6
     transitivePeerDependencies:

@@ -2,6 +2,9 @@
   "name": "portfolio-new",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -23,7 +26,7 @@
     "next": "16.1.6",
     "next-intl": "4.13.0",
     "pdfjs-dist": "^5.5.207",
-    "poyraz-ui": "^2.0.1",
+    "poyraz-ui": "^3.0.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "^7.71.2",
