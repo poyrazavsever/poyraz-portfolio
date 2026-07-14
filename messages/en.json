@@ -15,6 +15,13 @@
   },
   "Home": {
     "role": "I build <strong>full-stack products</strong>, shape experiences with <strong>AI systems</strong>, and explain <strong>technology-design-software</strong> through practical content.",
+    "heroDescription": "I build modern web products, user-focused interfaces, and production-ready software experiences.",
+    "hireMe": "Hire him",
+    "downloadCv": "Download CV",
+    "readMyPosts": "Have You Read My Posts?",
+    "allPosts": "All posts",
+    "reviewsAndReferences": "Reviews & References",
+    "allReferences": "All references",
     "sections": {
       "recentPosts": "Recent Posts",
       "references": "References",

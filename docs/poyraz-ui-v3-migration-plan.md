@@ -35,7 +35,7 @@ Migration için avantajlı nokta: v3 tarafında kullanılan temel exportların �
 - [x] `poyraz-ui@3.0.0` Node `>=22` istediği için local/Vercel Node versiyonu doğrulanmalı.
 - [x] `pnpm-lock.yaml` v3 dependency graph ile temiz güncellenmeli.
 - [x] `poyraz-ui/preset.css` v3 tokenları mevcut layout renklerini beklenmedik şekilde değiştirebilir.
-- [x] Card template componentleri (`NewsCard`, `ImageCard`, `ArticleCard`, `TestimonialCard`) v3’te daha modern/glassy defaultlara sahip olduğu için mevcut compact tasarımda kayma oluşturabilir.
+- [x] Card template componentleri (`NewsCard`, `ImageCard`, `ArticleCard`, `TestimonialCard`) v3’te daha modern/secondaryy defaultlara sahip olduğu için mevcut compact tasarımda kayma oluşturabilir.
 - [x] `CommandPalette`, `Sheet`, `Modal`, `Select`, `DropdownMenu` gibi Radix tabanlı componentlerde overlay, focus ve portal davranışı görsel olarak kontrol edilmeli.
 
 ### Orta Öncelikli Riskler
@@ -301,7 +301,7 @@ Amaç: Mevcut portfolio düzenini v3 sonrası sayfa sayfa korumak.
 
 ### Links
 
-- [x] Profile card rounded/glass görünüm korunuyor.
+- [x] Profile card rounded/secondary görünüm korunuyor.
 - [x] `Select` ve `Input` aynı satırda düzgün.
 - [x] Link kartları hover’da layout shift yapmıyor.
 - [x] Mobile layout taşmıyor.
@@ -463,7 +463,7 @@ Amaç: Migration değişikliklerini okunabilir şekilde teslim etmek.
 
 Bu işler v3 geçişinden sonra ayrıca ele alınmalı:
 
-- [ ] Portfolio genelini daha glassy/soft v3 tarzına yaklaştırma.
+- [ ] Portfolio genelini daha secondaryy/soft v3 tarzına yaklaştırma.
 - [ ] Button hover animasyonlarını portfolio CTA’larına uygulama.
 - [ ] Typography text effectlerini hero/blog başlıklarında kullanma.
 - [ ] Card variantlarını sayfa bazlı standardize etme.

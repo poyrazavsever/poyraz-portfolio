@@ -42,9 +42,6 @@ const SearchCommand = dynamic(
   { ssr: false },
 );
 
-const glassActionClassName =
-  "!border-border/80 hover:!border-border focus-visible:!border-border data-[state=open]:!border-border";
-
 const slowShineClassName = "[--poyraz-motion-duration-deliberate:1100ms]";
 
 function getNavLinkClass(isActive: boolean) {
@@ -85,12 +82,12 @@ function ThemeToggle() {
   return (
     <Button
       type="button"
-      variant="glass"
+      variant="secondary"
       size="icon-sm"
       radius="sm"
       effect="shine"
       aria-label={label}
-      className={`cursor-pointer ${glassActionClassName} ${slowShineClassName}`}
+      className={`cursor-pointer ${slowShineClassName}`}
       onClick={() => setTheme(nextTheme)}
     >
       <Icon
@@ -134,12 +131,12 @@ export function SiteNavbar() {
                   <TooltipTrigger asChild>
                     <Button
                       asChild
-                      variant="glass"
+                      variant="secondary"
                       size="icon-sm"
                       radius="sm"
                       effect="shine"
                       aria-label={label}
-                      className={`cursor-pointer ${glassActionClassName} ${slowShineClassName}`}
+                      className={`cursor-pointer ${slowShineClassName}`}
                     >
                       <a
                         href={href}
@@ -150,7 +147,7 @@ export function SiteNavbar() {
                       </a>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" surface="glass" radius="sm" size="sm">
+                  <TooltipContent side="bottom" surface="soft" radius="sm" size="sm">
                     {label}
                   </TooltipContent>
                 </Tooltip>
@@ -161,7 +158,7 @@ export function SiteNavbar() {
               <TooltipTrigger asChild>
                 <LanguageSwitcher />
               </TooltipTrigger>
-              <TooltipContent side="bottom" surface="glass" radius="sm" size="sm">
+              <TooltipContent side="bottom" surface="soft" radius="sm" size="sm">
                 {languageLabel}
               </TooltipContent>
             </Tooltip>
@@ -170,7 +167,7 @@ export function SiteNavbar() {
               <TooltipTrigger asChild>
                 <ThemeToggle />
               </TooltipTrigger>
-              <TooltipContent side="bottom" surface="glass" radius="sm" size="sm">
+              <TooltipContent side="bottom" surface="soft" radius="sm" size="sm">
                 {locale === "tr" ? "Tema değiştir" : "Toggle theme"}
               </TooltipContent>
             </Tooltip>
@@ -234,11 +231,11 @@ export function SiteNavbar() {
           />
           <Button
             type="button"
-            variant="glass"
+            variant="secondary"
             radius="sm"
             effect="shine"
             onClick={() => setSearchOpen(true)}
-            className={`h-9 w-44 cursor-pointer justify-between px-3 text-sm sm:w-52 ${glassActionClassName} ${slowShineClassName}`}
+            className={`h-9 w-44 cursor-pointer justify-between px-3 text-sm sm:w-52 ${slowShineClassName}`}
             aria-label={t("search")}
           >
             <ButtonIcon>
@@ -252,10 +249,10 @@ export function SiteNavbar() {
             <DropdownMenuTrigger asChild>
               <Button
                 type="button"
-                variant="glass"
+                variant="secondary"
                 radius="sm"
                 effect="shine"
-                className={`h-9 cursor-pointer ${glassActionClassName} ${slowShineClassName}`}
+                className={`h-9 cursor-pointer ${slowShineClassName}`}
               >
                 <ButtonIcon>
                   <Icon icon="mdi:share-variant" width={16} height={16} />
@@ -269,7 +266,7 @@ export function SiteNavbar() {
               radius="md"
               itemSize="md"
               itemRadius="sm"
-              className="w-56 border-border bg-popover"
+              className="w-56 bg-popover"
             >
               <DropdownMenuLabel>{t("socialLinks")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -293,11 +290,11 @@ export function SiteNavbar() {
         <div className="flex items-center gap-2 md:hidden">
           <Button
             type="button"
-            variant="glass"
+            variant="secondary"
             size="icon-sm"
             radius="sm"
             effect="shine"
-            className={`cursor-pointer ${glassActionClassName} ${slowShineClassName}`}
+            className={`cursor-pointer ${slowShineClassName}`}
             aria-label={t("search")}
             onClick={() => setSearchOpen(true)}
           >
@@ -308,10 +305,10 @@ export function SiteNavbar() {
             <SheetTrigger asChild>
               <Button
                 type="button"
-                variant="glass"
+                variant="secondary"
                 radius="sm"
                 effect="shine"
-                className={`h-9 cursor-pointer ${glassActionClassName} ${slowShineClassName}`}
+                className={`h-9 cursor-pointer ${slowShineClassName}`}
               >
                 <ButtonIcon>
                   <Icon icon="mdi:menu" width={18} height={18} />
@@ -325,11 +322,11 @@ export function SiteNavbar() {
                 <SheetClose asChild>
                   <Button
                     type="button"
-                    variant="glass"
+                    variant="secondary"
                     radius="sm"
                     effect="shine"
                     onClick={() => setSearchOpen(true)}
-                    className={`w-full cursor-pointer justify-between ${glassActionClassName} ${slowShineClassName}`}
+                    className={`w-full cursor-pointer justify-between ${slowShineClassName}`}
                     aria-label={t("search")}
                   >
                     <span className="inline-flex items-center gap-2">

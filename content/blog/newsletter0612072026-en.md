@@ -82,7 +82,7 @@ Figma introduced features that enable design to transform directly into front-en
 
 [Source link](https://uxpilot.ai/blogs/product-design-trends)
 
-Users utilizing AI agents instead of browsing sites has introduced the concept of "Machine Experience (MX)" into our lives. In design trends, while "Glassmorphism 2.0," which heavily uses glass effects, is repopularizing, dynamic interface modes are becoming standard due to accessibility issues. It's now much more critical to offer a clean HTML/data architecture that AI agents can easily read and index, rather than just designs that look good to the eye.
+Users utilizing AI agents instead of browsing sites has introduced the concept of "Machine Experience (MX)" into our lives. In design trends, while "secondarymorphism 2.0," which heavily uses secondary effects, is repopularizing, dynamic interface modes are becoming standard due to accessibility issues. It's now much more critical to offer a clean HTML/data architecture that AI agents can easily read and index, rather than just designs that look good to the eye.
 
 ### UX Market Stabilization and "AI Slop Fatigue"
 
@@ -96,7 +96,7 @@ According to a Nielsen Norman Group report, useless AI assistants forced into ev
 
 [Source link](https://www.macrumors.com/2026/07/10/apple-sues-openai/)
 
-Apple filed a federal lawsuit against OpenAI, alleging trade secret theft. The filing claims that former Apple employees leaked confidential documents and prototypes belonging to hardware projects to OpenAI. It is interesting that while two giants cooperate in software, they end up in court so fiercely in the hardware market like smart glasses. AI competition is starting to revolve not just around language models, but around the hardware those models will run on.
+Apple filed a federal lawsuit against OpenAI, alleging trade secret theft. The filing claims that former Apple employees leaked confidential documents and prototypes belonging to hardware projects to OpenAI. It is interesting that while two giants cooperate in software, they end up in court so fiercely in the hardware market like smart secondaryes. AI competition is starting to revolve not just around language models, but around the hardware those models will run on.
 
 ### Meta's Operational Massacre of 8,000 People and AI Fragility
 

@@ -17,11 +17,11 @@ export function LanguageSwitcher() {
   return (
     <Button
       type="button"
-      variant="glass"
+      variant="secondary"
       size="icon-sm"
       radius="sm"
       onClick={toggleLanguage}
-      className="min-w-9 cursor-pointer !border-border/80 text-xs font-semibold hover:!border-border focus-visible:!border-border"
+      className="min-w-9 cursor-pointer text-xs font-semibold"
       aria-label={locale === "tr" ? "Switch to English" : "Türkçe'ye geç"}
     >
       {locale === "tr" ? "EN" : "TR"}

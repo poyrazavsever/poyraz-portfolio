@@ -13,7 +13,7 @@ type ReferenceCardsProps = {
 export function ReferenceCards({ className, cardClassName, lineClamp }: ReferenceCardsProps) {
   const locale = useLocale();
   const hoverClassName =
-    "transition-colors duration-200 group-hover:border-red-600/40 group-hover:bg-muted/30 group-hover:shadow-sm";
+    "transition-colors duration-200 group-hover:border-red-600/40 group-hover:bg-muted/30";
 
   return (
     <div className={className}>
@@ -27,7 +27,7 @@ export function ReferenceCards({ className, cardClassName, lineClamp }: Referenc
             role={getLocalizedValue(item.role, locale)}
             avatar={item.avatar}
             rating={item.rating}
-            className={`flex flex-col rounded-sm ${lineClamp ? "[&_p]:line-clamp-3" : ""} ${hoverClassName} ${cardClassName || "w-70 shrink-0"}`}
+            className={`flex flex-col rounded-sm ${lineClamp ? "[&_p]:line-clamp-4" : ""} ${hoverClassName} ${cardClassName || "w-70 shrink-0"}`}
           />
         );
 

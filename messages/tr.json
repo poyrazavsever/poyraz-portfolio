@@ -15,6 +15,13 @@
   },
   "Home": {
     "role": "<strong>Full-stack ürünler</strong> geliştiriyor, <strong>yapay zeka sistemleriyle</strong> deneyimler kuruyor ve <strong>teknoloji-tasarım-yazılımı</strong> uygulanabilir içeriklerle anlatıyorum.",
+    "heroDescription": "Modern web ürünleri, kullanıcı odaklı arayüzler ve üretime hazır yazılım deneyimleri geliştiriyorum.",
+    "hireMe": "İşe al",
+    "downloadCv": "CV indir",
+    "readMyPosts": "Yazılarımı Okudun Mu",
+    "allPosts": "Tüm yazılar",
+    "reviewsAndReferences": "Yorumlar & Referanslar",
+    "allReferences": "Tüm referanslar",
     "sections": {
       "recentPosts": "Son Yazılar",
       "references": "Referanslar",

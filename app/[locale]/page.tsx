@@ -10,7 +10,7 @@ export default async function Home({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const homeNews = await getHomeBlogNews(locale, 3);
+  const homeNews = await getHomeBlogNews(locale, 6);
 
   return (
     <section className="flex h-full flex-col gap-4 overflow-y-auto overflow-x-hidden">
