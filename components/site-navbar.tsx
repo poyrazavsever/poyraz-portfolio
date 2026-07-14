@@ -265,11 +265,11 @@ export function SiteNavbar() {
             </DropdownMenuTrigger>
             <DropdownMenuContent
               align="end"
-              surface="glass"
+              surface="solid"
               radius="md"
               itemSize="md"
               itemRadius="sm"
-              className="w-56"
+              className="w-56 border-border bg-popover"
             >
               <DropdownMenuLabel>{t("socialLinks")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
