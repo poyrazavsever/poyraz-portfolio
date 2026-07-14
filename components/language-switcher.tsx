@@ -2,6 +2,7 @@
 
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/routing";
+import { Button } from "poyraz-ui/atoms";
 
 export function LanguageSwitcher() {
   const locale = useLocale();
@@ -14,13 +15,16 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <button
+    <Button
+      type="button"
+      variant="glass"
+      size="icon-sm"
+      radius="sm"
       onClick={toggleLanguage}
-      className="inline-flex h-8 min-w-[36px] cursor-pointer items-center justify-center rounded-sm border border-border px-2 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground"
+      className="min-w-9 cursor-pointer !border-border/80 text-xs font-semibold hover:!border-border focus-visible:!border-border"
       aria-label={locale === "tr" ? "Switch to English" : "Türkçe'ye geç"}
-      title={locale === "tr" ? "Switch to English" : "Türkçe'ye geç"}
     >
       {locale === "tr" ? "EN" : "TR"}
-    </button>
+    </Button>
   );
 }

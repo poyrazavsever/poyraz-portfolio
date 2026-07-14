@@ -1,7 +1,6 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import Link from "next/link";
 import { usePathname } from "@/i18n/routing";
 import { AnnouncementBar } from "poyraz-ui/organisms";
 import { SiteNavbar } from "@/components/site-navbar";
@@ -32,7 +31,6 @@ export function AppShell({ children }: AppShellProps) {
   }
 
   const localizedText = announcement ? getLocalizedValue(announcement.text, locale) : "";
-  const localizedActionLabel = announcement ? getLocalizedValue(announcement.actionLabel, locale) : "";
 
   return (
     <>
@@ -45,18 +43,6 @@ export function AppShell({ children }: AppShellProps) {
             variant="branded"
             dismissible={false}
             icon={<Icon icon="mdi:sparkles" width={16} height={16} />}
-            action={
-              localizedActionLabel && announcement.actionHref ? (
-                <Link
-                  href={announcement.actionHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-xs font-bold underline"
-                >
-                  {localizedActionLabel}
-                </Link>
-              ) : null
-            }
           >
             {localizedText}
           </AnnouncementBar>
