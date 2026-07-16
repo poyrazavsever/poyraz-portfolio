@@ -32,12 +32,17 @@
     }
   },
   "About": {
+    "title": "About me",
+    "contactCta": "Contact me",
+    "educationTitle": "Education",
+    "experienceTitle": "Experience",
+    "certificatesTitle": "My certificates",
     "aboutText": "Ever since I met software in middle school, I've been constantly learning and improving. My passion for learning grew in high school, where I explored different web development technologies. Near the end of high school, I stepped into the mobile world. Today, I actively build, develop, and most importantly, I am still learning.",
     "allCertificates": "All Certificates",
     "referencesTitle": "References",
     "referencesDesc": "View all references on a separate detail page.",
     "volunteerTitle": "Volunteering & Community",
-    "volunteerDesc": "Inspect timeline and contribution details on a separate page.",
+    "volunteerDesc": "Explore my community work and timeline.",
     "bookmarksTitle": "Bookmarks",
     "bookmarksDesc": "View quick access links inside a sheet.",
     "timelineLabel": "Timeline:",
