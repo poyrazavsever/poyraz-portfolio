@@ -19,3 +19,5 @@ allowBuilds:
 
 minimumReleaseAgeExclude:
   - poyraz-ui@3.0.0
+  - poyraz-ui@3.0.1
+  - poyraz-ui@3.0.2

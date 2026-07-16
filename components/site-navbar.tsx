@@ -128,29 +128,29 @@ export function SiteNavbar() {
 
               return (
                 <Tooltip key={item.id}>
-                  <TooltipTrigger asChild>
-                    <Button
-                      asChild
-                      variant="secondary"
-                      size="icon-sm"
-                      radius="sm"
-                      effect="shine"
-                      aria-label={label}
-                      className={`cursor-pointer ${slowShineClassName}`}
-                    >
-                      <a
-                        href={href}
-                        target={item.id === "cv" || item.external ? "_blank" : undefined}
-                        rel={item.id === "cv" || item.external ? "noreferrer" : undefined}
+                    <TooltipTrigger asChild>
+                      <Button
+                        asChild
+                        variant="secondary"
+                        size="icon-sm"
+                        radius="sm"
+                        effect="shine"
+                        aria-label={label}
+                        className={`cursor-pointer ${slowShineClassName}`}
                       >
-                        <Icon icon={item.icon} width={16} height={16} />
-                      </a>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="bottom" surface="soft" radius="sm" size="sm">
-                    {label}
-                  </TooltipContent>
-                </Tooltip>
+                        <a
+                          href={href}
+                          target={item.id === "cv" || item.external ? "_blank" : undefined}
+                          rel={item.id === "cv" || item.external ? "noreferrer" : undefined}
+                        >
+                          <Icon icon={item.icon} width={16} height={16} />
+                        </a>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom" surface="soft" radius="sm" size="sm">
+                      {label}
+                    </TooltipContent>
+                  </Tooltip>
               );
             })}
 

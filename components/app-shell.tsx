@@ -36,7 +36,7 @@ export function AppShell({ children }: AppShellProps) {
     <>
       <AtaturkWidgetModal />
       {ENABLE_NEKO_FOLLOWER ? <NekoFollower /> : null}
-      <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 sm:px-6">
+      <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 ">
         <SiteNavbar />
         {announcement ? (
           <AnnouncementBar
