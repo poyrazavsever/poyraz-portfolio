@@ -10,7 +10,7 @@ export function HomeVideosSection() {
   const t = useTranslations("Content");
 
   return (
-    <section className="space-y-3">
+    <section className="space-y-3 pt-12 md:pt-14">
       <div className="flex items-center justify-between gap-4">
         <Typography
           variant="h3"

@@ -8,9 +8,15 @@ type ReferenceCardsProps = {
   className?: string;
   cardClassName?: string;
   lineClamp?: boolean;
+  showRating?: boolean;
 };
 
-export function ReferenceCards({ className, cardClassName, lineClamp }: ReferenceCardsProps) {
+export function ReferenceCards({
+  className,
+  cardClassName,
+  lineClamp,
+  showRating = true,
+}: ReferenceCardsProps) {
   const locale = useLocale();
   const hoverClassName =
     "transition-colors duration-200 group-hover:border-red-600/40 group-hover:bg-muted/30";
@@ -26,7 +32,7 @@ export function ReferenceCards({ className, cardClassName, lineClamp }: Referenc
             author={item.author}
             role={getLocalizedValue(item.role, locale)}
             avatar={item.avatar}
-            rating={item.rating}
+            rating={showRating ? item.rating : undefined}
             className={`flex flex-col rounded-sm ${lineClamp ? "[&_blockquote]:line-clamp-4" : ""} ${hoverClassName} ${cardClassName || "w-70 shrink-0"}`}
           />
         );

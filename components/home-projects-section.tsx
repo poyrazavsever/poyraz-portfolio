@@ -12,10 +12,10 @@ export function HomeProjectsSection() {
   const t = useTranslations("Home");
   const locale = useLocale();
   const router = useRouter();
-  const projects = WEB_APPS.slice(0, 4);
+  const projects = WEB_APPS.slice(0, 5);
 
   return (
-    <section className="space-y-3">
+    <section className="space-y-3 pt-12 md:pt-14">
       <div className="flex items-center justify-between gap-4">
         <Typography
           variant="h3"
@@ -41,7 +41,7 @@ export function HomeProjectsSection() {
       </div>
 
       <div className="relative overflow-hidden py-1">
-        <div className="flex w-max items-stretch gap-3">
+        <div className="flex w-max items-stretch gap-2">
           {projects.map((project) => (
             <ImageCard
               key={project.id}
@@ -54,14 +54,14 @@ export function HomeProjectsSection() {
                   : undefined
               }
               href={project.href}
-              className="aspect-square w-72 shrink-0 rounded-sm border-border"
+              className="aspect-square w-56 shrink-0 rounded-sm border-border md:w-[calc((100vw-8rem)/4)] md:max-w-56"
             />
           ))}
         </div>
 
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute top-0 right-0 h-full w-24 bg-linear-to-l from-background via-background/80 to-transparent"
+          className="pointer-events-none absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-background via-background/80 to-transparent"
         />
       </div>
     </section>
