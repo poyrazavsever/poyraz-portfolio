@@ -15,6 +15,15 @@
   },
   "Home": {
     "role": "<strong>Full-stack ürünler</strong> geliştiriyor, <strong>yapay zeka sistemleriyle</strong> deneyimler kuruyor ve <strong>teknoloji-tasarım-yazılımı</strong> uygulanabilir içeriklerle anlatıyorum.",
+    "heroDescription": "Modern web ürünleri, kullanıcı odaklı arayüzler ve üretime hazır yazılım deneyimleri geliştiriyorum.",
+    "hireMe": "İşe al",
+    "downloadCv": "CV indir",
+    "readMyPosts": "Yazılarımı Okudun Mu",
+    "allPosts": "Tüm yazılar",
+    "projectsTitle": "Projeler",
+    "allProjects": "Tüm projeler",
+    "reviewsAndReferences": "Yorumlar & Referanslar",
+    "allReferences": "Tüm referanslar",
     "sections": {
       "recentPosts": "Son Yazılar",
       "references": "Referanslar",
@@ -23,12 +32,17 @@
     }
   },
   "About": {
+    "title": "Hakkımda",
+    "contactCta": "İletişime geç",
+    "educationTitle": "Eğitim",
+    "experienceTitle": "Deneyim",
+    "certificatesTitle": "Sertifikalarım",
     "aboutText": "Ortaokulda yazılımla tanıştığımdan beri sürekli öğrenmeye ve kendimi geliştirmeye çalışıyorum. Lise yıllarında öğrenme hevesim daha da arttı ve web geliştirme tarafında farklı teknolojileri keşfetme fırsatı buldum. Lisenin sonlarına doğru mobil dünyasına da adım attım. Şu an aktif olarak üretiyor, geliştiriyor ve en önemlisi hâlâ öğrenmeye devam ediyorum.",
     "allCertificates": "Tüm Sertifikalar",
     "referencesTitle": "Referanslar",
     "referencesDesc": "Tüm referansları ayrı bir detay sayfasında görüntüle.",
     "volunteerTitle": "Gönüllülük ve Topluluk",
-    "volunteerDesc": "Zaman çizelgesi ve katkı detaylarını ayrı bir detay sayfasında incele.",
+    "volunteerDesc": "Topluluk katkılarımı ve zaman çizelgemi incele.",
     "bookmarksTitle": "Yer İmleri",
     "bookmarksDesc": "Hızlı erişim bağlantılarını bir sheet içinde görüntüle.",
     "timelineLabel": "Zaman Çizelgesi:",
@@ -98,6 +112,7 @@
   },
   "Content": {
     "youtubeTitle": "Son YouTube Videoları",
+    "youtubeChannel": "YouTube kanalım",
     "youtubeEmbedTitle": "YouTube video oynatıcı",
     "pdfTitle": "LinkedIn PDF Notları",
     "pdfPreviewError": "Önizleme yüklenemedi",

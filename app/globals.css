@@ -1,6 +1,18 @@
 @import "tailwindcss";
 @import "poyraz-ui/preset.css";
 
+@source "../node_modules/poyraz-ui/dist";
+
+@theme {
+  --font-secondary: "Nunito", ui-rounded, "Avenir Next", system-ui, sans-serif;
+}
+
+@layer base {
+  :root {
+    --poyraz-font-secondary: "Nunito", ui-rounded, "Avenir Next", system-ui, sans-serif;
+  }
+}
+
 @layer utilities {
   @keyframes marquee {
     0% { transform: translateX(0%); }
