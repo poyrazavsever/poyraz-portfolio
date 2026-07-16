@@ -10,6 +10,7 @@ export const EXPERIENCE = [
       tr: "Ağustos 2025 - Günümüz",
       en: "August 2025 - Present",
     },
+    current: true,
   },
   {
     id: "omedya-intern",

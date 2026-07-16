@@ -10,6 +10,7 @@ export const EDUCATION = [
       tr: "2024 - Günümüz",
       en: "2024 - Present",
     },
+    current: true,
     description: {
       tr: "Yazılım temelleri, ürün bakış açısı ve disiplinler arası proje geliştirme alanlarında kendimi geliştirmeye devam ediyorum.",
       en: "Continuing to develop my skills in software foundations, product perspective, and interdisciplinary project development.",
