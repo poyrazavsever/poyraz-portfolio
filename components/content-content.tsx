@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Button, Card, Typography } from "poyraz-ui/atoms";
+import { Icon } from "@iconify/react";
+import { Button, ButtonIcon, ButtonLabel, Card, Typography } from "poyraz-ui/atoms";
 import { Modal, ModalContent, ModalTitle } from "poyraz-ui/molecules";
 import { YoutubeLiteEmbed } from "@/components/youtube-lite-embed";
 import { useTranslations } from "next-intl";
@@ -130,9 +131,24 @@ export function ContentContent({
   return (
     <section className="flex h-full flex-col gap-3 overflow-y-auto">
       <section className="space-y-2">
-        <Typography variant="large" className="text-base">
-          {t("youtubeTitle")}
-        </Typography>
+        <div className="flex items-center justify-between gap-3">
+          <Typography variant="large" className="text-base">
+            {t("youtubeTitle")}
+          </Typography>
+          <Button asChild variant="outline" effect="swap" size="xs" radius="sm">
+            <a
+              href="https://youtube.com/@poyrazavsever"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t("youtubeChannel")}
+            >
+              <ButtonIcon>
+                <Icon icon="mdi:youtube" width={15} height={15} />
+              </ButtonIcon>
+              <ButtonLabel>@poyrazavsever</ButtonLabel>
+            </a>
+          </Button>
+        </div>
         <div className="grid gap-2 md:grid-cols-3">
           {embeddedVideos.map((link) => (
             <Card
@@ -146,9 +162,24 @@ export function ContentContent({
       </section>
 
       <section className="space-y-2">
-        <Typography variant="large" className="text-base">
-          {t("pdfTitle")}
-        </Typography>
+        <div className="flex items-center justify-between gap-3">
+          <Typography variant="large" className="text-base">
+            {t("pdfTitle")}
+          </Typography>
+          <Button asChild variant="outline" effect="swap" size="xs" radius="sm">
+            <a
+              href="https://www.linkedin.com/in/poyrazavsever/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t("linkedinProfile")}
+            >
+              <ButtonIcon>
+                <Icon icon="mdi:linkedin" width={15} height={15} />
+              </ButtonIcon>
+              <ButtonLabel>@poyrazavsever</ButtonLabel>
+            </a>
+          </Button>
+        </div>
         <div className="grid grid-cols-2 gap-2 lg:grid-cols-3">
           {pdfFiles.map((pdf, index) => (
             <button
