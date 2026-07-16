@@ -257,7 +257,7 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
               <DropdownMenuLabel>{t("socialLinks")}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               {SOCIAL_LINKS.map((item) => (
-                <DropdownMenuItem key={item.id} asChild interactiveMotion="shift">
+                <DropdownMenuItem key={item.id} asChild>
                   <a
                     href={item.href}
                     target="_blank"
