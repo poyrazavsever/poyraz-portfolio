@@ -56,9 +56,11 @@
       "webApps": "Web Applications",
       "extensions": "Extensions",
       "figmaTemplates": "Figma Designs",
-      "npmPackages": "npm Packages (@poyrazavsever)",
-      "githubRepos": "GitHub Repositories (@poyrazavsever)"
+      "npmPackages": "npm Packages",
+      "githubRepos": "GitHub Repositories"
     },
+    "viewNpmPackages": "View my NPM packages",
+    "visitGithub": "Visit my GitHub profile",
     "emptyNpm": "npm API response is currently empty.",
     "emptyGithub": "GitHub API response is currently empty."
   },

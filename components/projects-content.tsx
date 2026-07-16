@@ -1,7 +1,14 @@
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { Icon } from "@iconify/react";
-import { Badge, Card, Typography } from "poyraz-ui/atoms";
+import {
+  Badge,
+  Button,
+  ButtonIcon,
+  ButtonLabel,
+  Card,
+  Typography,
+} from "poyraz-ui/atoms";
 import { ImageCard } from "poyraz-ui/molecules";
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
 import {
@@ -69,7 +76,7 @@ function ProjectSection({
   items: LocalizedProjectItem[];
 }) {
   return (
-    <section className="space-y-2">
+    <section className="space-y-3">
       <Typography variant="large" className="text-base">
         {title}
       </Typography>
@@ -109,7 +116,7 @@ export async function ProjectsContent() {
   };
 
   return (
-    <section className="flex h-full flex-col gap-3 overflow-y-auto">
+    <section className="flex h-full flex-col gap-8 overflow-y-auto md:gap-10">
       <Card className="rounded-sm border-border bg-background p-2">
         <div className="overflow-x-auto rounded-sm">
           <Image
@@ -128,10 +135,24 @@ export async function ProjectsContent() {
       <ProjectSection title={t("sections.extensions")} items={localizeItems(EXTENSIONS)} />
       <ProjectSection title={t("sections.figmaTemplates")} items={localizeItems(FIGMA_TEMPLATES)} />
 
-      <section className="space-y-2">
-        <Typography variant="large" className="text-base">
-          {t("sections.npmPackages")}
-        </Typography>
+      <section className="space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <Typography variant="large" className="text-base">
+            {t("sections.npmPackages")}
+          </Typography>
+          <Button asChild variant="outline" size="xs" radius="sm">
+            <a
+              href="https://www.npmjs.com/~poyrazavsever"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ButtonIcon>
+                <Icon icon="mdi:npm" width={16} height={16} />
+              </ButtonIcon>
+              <ButtonLabel>{t("viewNpmPackages")}</ButtonLabel>
+            </a>
+          </Button>
+        </div>
         <div className="grid gap-2 md:grid-cols-2">
           {npmPackages.length === 0 ? (
             <Card className="rounded-sm border-border p-3 md:col-span-2">
@@ -171,10 +192,24 @@ export async function ProjectsContent() {
         </div>
       </section>
 
-      <section className="space-y-2">
-        <Typography variant="large" className="text-base">
-          {t("sections.githubRepos")}
-        </Typography>
+      <section className="space-y-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <Typography variant="large" className="text-base">
+            {t("sections.githubRepos")}
+          </Typography>
+          <Button asChild variant="outline" size="xs" radius="sm">
+            <a
+              href="https://github.com/poyrazavsever"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ButtonIcon>
+                <Icon icon="mdi:github" width={16} height={16} />
+              </ButtonIcon>
+              <ButtonLabel>{t("visitGithub")}</ButtonLabel>
+            </a>
+          </Button>
+        </div>
         <div className="grid gap-2 md:grid-cols-2">
           {repos.length === 0 ? (
             <Card className="rounded-sm border-border p-3 md:col-span-2">

@@ -56,9 +56,11 @@
       "webApps": "Web Uygulamaları",
       "extensions": "Extension'lar",
       "figmaTemplates": "Figma Tasarımları",
-      "npmPackages": "npm Paketleri (@poyrazavsever)",
-      "githubRepos": "GitHub Repoları (@poyrazavsever)"
+      "npmPackages": "npm Paketleri",
+      "githubRepos": "GitHub Repoları"
     },
+    "viewNpmPackages": "NPM paketlerimi gör",
+    "visitGithub": "GitHub hesabına git",
     "emptyNpm": "npm API yanıtı şu anda boş.",
     "emptyGithub": "GitHub API yanıtı şu anda boş."
   },
