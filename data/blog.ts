@@ -26,7 +26,7 @@ export type BlogPageData = {
 
 const DEFAULT_IMAGE = "/news/design.svg";
 const DEFAULT_READ_TIME = "5 min";
-const BLOG_CATEGORIES = ["All", "Frontend", "UX", "Yazilim", "TypeScript", "Testing", "General"];
+const BLOG_CATEGORIES = ["All", "Newsletter", "Frontend", "UX", "Software", "TypeScript", "Testing", "General"];
 
 function toTimestamp(value: string) {
   const timestamp = Date.parse(value);
