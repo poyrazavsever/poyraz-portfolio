@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { Link, usePathname } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Button,
   ButtonIcon,
@@ -36,6 +36,7 @@ import {
 import { NavbarTopBar, NavbarTopBarSection } from "poyraz-ui/organisms";
 import { useKeyboardShortcutLabel } from "@/lib/use-keyboard-shortcut-label";
 import { getResumeHref, NAV_LINKS, SOCIAL_LINKS, TOP_ICON_LINKS } from "@/lib/links";
+import type { ThemeMode } from "@/components/app-shell";
 
 const SearchCommand = dynamic(
   () => import("@/components/search-command").then((mod) => mod.SearchCommand),
@@ -53,31 +54,14 @@ function getNavLinkClass(isActive: boolean) {
   ].join(" ");
 }
 
-type ThemeMode = "light" | "dark";
+type ThemeToggleProps = {
+  theme: ThemeMode;
+  onThemeChange: (theme: ThemeMode) => void;
+};
 
-function applyTheme(theme: ThemeMode) {
-  document.documentElement.dataset.poyrazTheme = theme;
-  document.documentElement.style.colorScheme = theme;
-  localStorage.setItem("poyraz-theme", theme);
-}
-
-function getInitialTheme(): ThemeMode {
-  if (typeof window === "undefined") return "light";
-
-  const storedTheme = localStorage.getItem("poyraz-theme");
-  if (storedTheme === "dark" || storedTheme === "light") return storedTheme;
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-function ThemeToggle() {
-  const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
+function ThemeToggle({ theme, onThemeChange }: ThemeToggleProps) {
   const nextTheme = theme === "dark" ? "light" : "dark";
   const label = theme === "dark" ? "Light mode" : "Dark mode";
-
-  useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
 
   return (
     <Button
@@ -88,7 +72,7 @@ function ThemeToggle() {
       effect="shine"
       aria-label={label}
       className={`cursor-pointer ${slowShineClassName}`}
-      onClick={() => setTheme(nextTheme)}
+      onClick={() => onThemeChange(nextTheme)}
     >
       <Icon
         icon={theme === "dark" ? "mdi:white-balance-sunny" : "mdi:moon-waning-crescent"}
@@ -99,7 +83,9 @@ function ThemeToggle() {
   );
 }
 
-export function SiteNavbar() {
+type SiteNavbarProps = ThemeToggleProps;
+
+export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
   const shortcut = useKeyboardShortcutLabel();
@@ -165,7 +151,7 @@ export function SiteNavbar() {
 
             <Tooltip>
               <TooltipTrigger asChild>
-                <ThemeToggle />
+                <ThemeToggle theme={theme} onThemeChange={onThemeChange} />
               </TooltipTrigger>
               <TooltipContent side="bottom" surface="soft" radius="sm" size="sm">
                 {locale === "tr" ? "Tema değiştir" : "Toggle theme"}

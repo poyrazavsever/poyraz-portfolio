@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { usePathname } from "@/i18n/routing";
 import { AnnouncementBar } from "poyraz-ui/organisms";
@@ -19,12 +19,30 @@ type AppShellProps = {
   children: React.ReactNode;
 };
 
+export type ThemeMode = "light" | "dark";
+
+function getInitialTheme(): ThemeMode {
+  if (typeof window === "undefined") return "light";
+
+  const storedTheme = localStorage.getItem("poyraz-theme");
+  if (storedTheme === "dark" || storedTheme === "light") return storedTheme;
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
 export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
   const locale = useLocale();
   const announcement = ANNOUNCEMENT_ITEMS[0];
+  const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
   const isStandaloneLinksPage =
     pathname === "/links" || pathname.startsWith("/links/");
+
+  useEffect(() => {
+    document.documentElement.dataset.poyrazTheme = theme;
+    document.documentElement.style.colorScheme = theme;
+    localStorage.setItem("poyraz-theme", theme);
+  }, [theme]);
 
   if (isStandaloneLinksPage) {
     return children;
@@ -34,10 +52,10 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <>
-      <AtaturkWidgetModal />
+      <AtaturkWidgetModal theme={theme} />
       {ENABLE_NEKO_FOLLOWER ? <NekoFollower /> : null}
       <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 ">
-        <SiteNavbar />
+        <SiteNavbar theme={theme} onThemeChange={setTheme} />
         {announcement ? (
           <AnnouncementBar
             variant="branded"

@@ -6,8 +6,13 @@ import Image from "next/image";
 import { Modal, ModalContent, ModalTrigger, ModalTitle } from "poyraz-ui/molecules";
 import { Skeleton } from "poyraz-ui/atoms";
 import { useLocale, useTranslations } from "next-intl";
+import type { ThemeMode } from "@/components/app-shell";
 
-export function AtaturkWidgetModal() {
+type AtaturkWidgetModalProps = {
+  theme: ThemeMode;
+};
+
+export function AtaturkWidgetModal({ theme }: AtaturkWidgetModalProps) {
   const [isLoading, setIsLoading] = useState(true);
   const t = useTranslations("AtaturkWidget");
   const locale = useLocale();
@@ -48,12 +53,12 @@ export function AtaturkWidgetModal() {
         )}
 
         <div className={`w-full ${isLoading ? "hidden" : "block"}`}>
-          <div data-ataturk-quote-widget data-language={locale} data-theme="light"></div>
+          <div data-ataturk-quote-widget data-language={locale} data-theme={theme}></div>
           <Script
             src="https://ataturk-kronolojisi.org/widget/quote.js"
             strategy="lazyOnload"
             data-language={locale}
-            data-theme="light"
+            data-theme={theme}
             onReady={() => setIsLoading(false)}
           />
         </div>
