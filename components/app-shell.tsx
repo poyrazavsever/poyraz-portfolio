@@ -37,6 +37,8 @@ export function AppShell({ children }: AppShellProps) {
   const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
   const isStandaloneLinksPage =
     pathname === "/links" || pathname.startsWith("/links/");
+  const isStandaloneMediaKitPage =
+    pathname === "/media-kit" || pathname.startsWith("/media-kit/");
 
   useEffect(() => {
     document.documentElement.dataset.poyrazTheme = theme;
@@ -44,7 +46,7 @@ export function AppShell({ children }: AppShellProps) {
     localStorage.setItem("poyraz-theme", theme);
   }, [theme]);
 
-  if (isStandaloneLinksPage) {
+  if (isStandaloneLinksPage || isStandaloneMediaKitPage) {
     return children;
   }
 
