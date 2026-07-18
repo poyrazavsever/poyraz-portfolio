@@ -6,7 +6,7 @@ readTime: "8 min read"
 author: "Poyraz Avsever"
 slug: "nextjs-hydration-error-what-is-it-and-how-is-it-fixed"
 excerpt: "What is the Hydration Error, which is frequently encountered in Next.js projects? What causes HTML mismatches between the server and the client, and how can we solve these errors professionally?"
-coverImage: "/blog/images/nextjs-hydration-error-cover.jpg"
+coverImage: "/blog/images/nextjs-hydration-error-nedir-ve-nasil-cozulur.png"
 canonicalUrl: "https://medium.com/@poyrazavsever/nextjs-hydration-error-what-is-it-and-how-is-it-fixed-hash"
 lang: "en"
 ---

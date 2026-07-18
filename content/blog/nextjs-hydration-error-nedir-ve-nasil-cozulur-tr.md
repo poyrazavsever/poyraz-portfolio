@@ -6,7 +6,7 @@ readTime: "8 min read"
 author: "Poyraz Avsever"
 slug: "nextjs-hydration-error-nedir-ve-nasil-cozulur"
 excerpt: "Next.js projelerinde sıkça karşılaşılan Hydration Error (Rehidrasyon Hatası) nedir? Sunucu ve istemci arasındaki HTML uyumsuzlukları neden kaynaklanır ve bu hataları nasıl profesyonelce çözebiliriz?"
-coverImage: "/blog/images/nextjs-hydration-error-cover.jpg"
+coverImage: "/blog/images/nextjs-hydration-error-nedir-ve-nasil-cozulur.png"
 canonicalUrl: "https://medium.com/@poyrazavsever/nextjs-hydration-error-nedir-ve-nasil-cozulur-hash"
 lang: "tr"
 ---
