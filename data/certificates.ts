@@ -1,6 +1,23 @@
 export const certificates = [
   {
     name: {
+      tr: "Scrimba ile JavaScript'in Zor Kısımları",
+      en: "The Tricky Parts of JavaScript with Scrimba",
+    },
+    organization: "Scrimba",
+    date: {
+      tr: "Temmuz 2026",
+      en: "July 2026",
+    },
+    description: {
+      tr: "Scrimba üzerindeki JavaScript'in Zor Kısımları sertifikasıyla scope, closure, hoisting ve asenkron akış gibi temel JavaScript kavramlarını daha derinlemesine pekiştirdim.",
+      en: "With this Scrimba Tricky Parts of JavaScript certificate, I deepened my understanding of core JavaScript concepts such as scope, closures, hoisting, and asynchronous flow.",
+    },
+    image: "/certificates/trickyPartsOfJavascriptScrimba.png",
+    category: "web",
+  },
+  {
+    name: {
       tr: "Scrimba ile Javascript Öğrenimi",
       en: "Learn JavaScript with Scrimba",
     },
