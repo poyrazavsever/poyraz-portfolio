@@ -31,7 +31,7 @@ export function HomeHero({ news }: HomeHeroProps) {
   const router = useRouter();
 
   return (
-    <section className="space-y-4">
+    <section>
       <div className="relative grid min-h-[150px] overflow-hidden border-b border-border py-4 sm:grid-cols-[1fr_180px] sm:py-5">
         <div className="flex max-w-2xl flex-col justify-center gap-2">
           <Typography
@@ -105,7 +105,7 @@ export function HomeHero({ news }: HomeHeroProps) {
         </div>
       </div>
 
-      <section className="space-y-3">
+      <section className="space-y-3 pt-12 md:pt-14">
         <div className="flex items-center justify-between gap-4">
           <Typography
             variant="h3"

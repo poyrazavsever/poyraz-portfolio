@@ -11,7 +11,7 @@ export function ReferencesSection() {
   const router = useRouter();
 
   return (
-    <section className="space-y-3">
+    <section className="space-y-3 pt-12 md:pt-14">
       <div className="flex items-center justify-between gap-4">
         <Typography
           variant="h3"
@@ -39,8 +39,8 @@ export function ReferencesSection() {
       <div className="relative overflow-hidden py-1">
         {/* We use two sets of cards for seamless infinite marquee effect */}
         <div className="flex w-max items-start gap-4 animate-marquee pause-on-hover">
-          <ReferenceCards className="flex items-start gap-4 shrink-0" lineClamp={true} cardClassName="w-80" />
-          <ReferenceCards className="flex items-start gap-4 shrink-0" lineClamp={true} cardClassName="w-80" />
+          <ReferenceCards className="flex items-start gap-4 shrink-0" lineClamp={true} showRating={false} cardClassName="w-80" />
+          <ReferenceCards className="flex items-start gap-4 shrink-0" lineClamp={true} showRating={false} cardClassName="w-80" />
         </div>
         
         <div
