@@ -1,7 +1,6 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
 import {
@@ -32,7 +31,7 @@ export function HomeHero({ news }: HomeHeroProps) {
 
   return (
     <section>
-      <div className="relative grid min-h-[150px] overflow-hidden border-b border-border py-4 sm:grid-cols-[1fr_180px] sm:py-5">
+      <div className="relative min-h-[150px] overflow-hidden border-b border-border py-4 sm:py-5">
         <div className="flex max-w-2xl flex-col justify-center gap-2">
           <Typography
             variant="h2"
@@ -88,30 +87,6 @@ export function HomeHero({ news }: HomeHeroProps) {
           </div>
         </div>
 
-        <div className="hero-image-cycle absolute right-0 bottom-0 hidden h-full w-44 overflow-hidden sm:block">
-          <Image
-            src="/images/hero1.png"
-            alt="Poyraz Avsever"
-            width={220}
-            height={220}
-            sizes="180px"
-            priority
-            className="hero-image-cycle-frame hero-image-cycle-primary absolute right-0 bottom-0 h-auto w-36 object-contain"
-          />
-          <Image
-            src="/images/hero2.png"
-            alt=""
-            width={220}
-            height={220}
-            sizes="180px"
-            aria-hidden="true"
-            className="hero-image-cycle-frame hero-image-cycle-secondary absolute right-0 bottom-0 h-auto w-36 object-contain"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute right-0 bottom-0 h-px w-36 bg-border"
-          />
-        </div>
       </div>
 
       <section className="space-y-3 pt-12 md:pt-14">

@@ -27,41 +27,4 @@
     animation-play-state: paused;
   }
 
-  @keyframes hero-image-cycle-primary {
-    0%, 49.99% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
-
-  @keyframes hero-image-cycle-secondary {
-    0%, 49.99% { opacity: 0; }
-    50%, 100% { opacity: 1; }
-  }
-
-  .hero-image-cycle-frame {
-    will-change: opacity;
-  }
-
-  .hero-image-cycle-secondary {
-    opacity: 0;
-  }
-
-  .hero-image-cycle:hover .hero-image-cycle-primary {
-    animation: hero-image-cycle-primary 650ms steps(1, end) infinite;
-  }
-
-  .hero-image-cycle:hover .hero-image-cycle-secondary {
-    animation: hero-image-cycle-secondary 650ms steps(1, end) infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-image-cycle:hover .hero-image-cycle-primary {
-      animation: none;
-      opacity: 0;
-    }
-
-    .hero-image-cycle:hover .hero-image-cycle-secondary {
-      animation: none;
-      opacity: 1;
-    }
-  }
 }
