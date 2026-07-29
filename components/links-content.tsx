@@ -116,7 +116,7 @@ export function LinksContent() {
           <div className="px-5 pb-5 pt-0 sm:px-6 sm:pb-6">
             <div className="-mt-14 flex flex-col gap-4">
               <Avatar className="h-24 w-24 rounded-[28px] border-4 border-background bg-background shadow-lg sm:h-28 sm:w-28">
-                <AvatarImage src="/logo/logo.jpeg" alt="Poyraz Avsever" />
+                <AvatarImage src="/logo/logo.png" alt="Poyraz Avsever" />
                 <AvatarFallback className="rounded-3xl bg-muted text-lg font-semibold">
                   PA
                 </AvatarFallback>

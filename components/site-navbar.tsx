@@ -168,7 +168,7 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
           className="inline-flex items-center"
         >
           <Logo
-            src="/logo/logo.jpeg"
+            src="/logo/logo.png"
             alt="Poyraz Avsever"
             width={40}
             height={40}

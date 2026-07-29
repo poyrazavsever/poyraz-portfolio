@@ -185,7 +185,7 @@ export function MediaKitContent({ locale }: { locale: MediaKitLocale }) {
         <header className="flex items-center justify-between gap-4 border-b border-border pb-4">
           <a href={`/${locale}`} className="inline-flex items-center gap-3">
             <Image
-              src="/logo/logo.jpeg"
+              src="/logo/logo.png"
               alt="Poyraz Avsever"
               width={36}
               height={36}
