@@ -88,7 +88,7 @@ export function HomeHero({ news }: HomeHeroProps) {
           </div>
         </div>
 
-        <div className="hero-wave group absolute right-0 bottom-0 hidden h-full w-44 overflow-hidden sm:block">
+        <div className="hero-image-cycle absolute right-0 bottom-0 hidden h-full w-44 overflow-hidden sm:block">
           <Image
             src="/images/hero1.png"
             alt="Poyraz Avsever"
@@ -96,7 +96,7 @@ export function HomeHero({ news }: HomeHeroProps) {
             height={220}
             sizes="180px"
             priority
-            className="hero-wave-frame hero-wave-frame-primary absolute right-0 bottom-0 h-auto w-36 object-contain"
+            className="hero-image-cycle-frame hero-image-cycle-primary absolute right-0 bottom-0 h-auto w-36 object-contain"
           />
           <Image
             src="/images/hero2.png"
@@ -105,7 +105,7 @@ export function HomeHero({ news }: HomeHeroProps) {
             height={220}
             sizes="180px"
             aria-hidden="true"
-            className="hero-wave-frame hero-wave-frame-secondary absolute right-0 bottom-0 h-auto w-36 object-contain"
+            className="hero-image-cycle-frame hero-image-cycle-secondary absolute right-0 bottom-0 h-auto w-36 object-contain"
           />
           <div
             aria-hidden="true"
