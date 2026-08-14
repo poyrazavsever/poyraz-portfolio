@@ -21,4 +21,25 @@ export const SPONSORS: Sponsor[] = [
     logo: "/sponsors/testsprite.png",
     websiteUrl: "https://testsprite.com",
   },
+  {
+    id: "minimax",
+    name: "MiniMax",
+    job: "AI Video & Model Platformu",
+    logo: "/sponsors/minimax.png",
+    websiteUrl: "https://www.minimax.io",
+  },
+  {
+    id: "higgsfield",
+    name: "Higgsfield",
+    job: "AI Creative Suite",
+    logo: "/sponsors/higgsfield.png",
+    websiteUrl: "https://higgsfield.ai",
+  },
+  {
+    id: "hosting-dunyam",
+    name: "Hosting Dünyam",
+    job: "Hosting Sağlayıcısı",
+    logo: "/sponsors/hosting-dunyam.png",
+    websiteUrl: "https://hostingdunyam.com",
+  },
 ];
