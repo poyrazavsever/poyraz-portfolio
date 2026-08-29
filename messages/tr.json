@@ -89,7 +89,6 @@
     "title": "Animasyon Kaynakları",
     "description": "Web ve mobil ürünler için hazırladığım animasyonların üretim süreçleri, promptları ve uygulanabilir kodları.",
     "empty": "Henüz animasyon kaynağı eklenmedi.",
-    "itemCount": "{count} kaynak",
     "back": "Animasyon kaynaklarına dön",
     "toc": "İçindekiler",
     "closeToc": "İçindekileri kapat",

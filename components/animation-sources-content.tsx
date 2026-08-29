@@ -5,34 +5,15 @@ import type { AnimationSource } from "@/data/animation-sources";
 
 type AnimationSourcesContentProps = {
   sources: AnimationSource[];
-  labels: {
-    title: string;
-    description: string;
-    empty: string;
-    itemCount: string;
-  };
+  emptyLabel: string;
 };
 
 export function AnimationSourcesContent({
   sources,
-  labels,
+  emptyLabel,
 }: AnimationSourcesContentProps) {
   return (
-    <section className="space-y-5">
-      <header className="border-b border-border pb-4">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div className="max-w-2xl">
-            <Typography variant="h2">{labels.title}</Typography>
-            <Typography variant="p" className="mt-1 text-sm text-muted-foreground">
-              {labels.description}
-            </Typography>
-          </div>
-          <Typography variant="small" className="text-muted-foreground">
-            {labels.itemCount}
-          </Typography>
-        </div>
-      </header>
-
+    <section>
       {sources.length > 0 ? (
         <div className="space-y-3">
           {sources.map((source) => (
@@ -55,7 +36,7 @@ export function AnimationSourcesContent({
       ) : (
         <Card className="rounded-sm border-border p-6 text-center">
           <Typography variant="p" className="text-muted-foreground">
-            {labels.empty}
+            {emptyLabel}
           </Typography>
         </Card>
       )}

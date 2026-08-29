@@ -73,12 +73,7 @@ export default async function AnimationSourcesPage({
   return (
     <AnimationSourcesContent
       sources={sources}
-      labels={{
-        title: t("title"),
-        description: t("description"),
-        empty: t("empty"),
-        itemCount: t("itemCount", { count: sources.length }),
-      }}
+      emptyLabel={t("empty")}
     />
   );
 }
