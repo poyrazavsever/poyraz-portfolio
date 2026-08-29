@@ -10,7 +10,7 @@ import {
 import { REFERENCES } from "@/data/references";
 import { VOLUNTEER_COMMUNITY_ITEMS } from "@/data/volunteer-community";
 import { YOUTUBE_VIDEO_LINKS } from "@/data/youtube-videos";
-import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/links";
+import { NAV_DROPDOWN_GROUPS, NAV_LINKS, SOCIAL_LINKS } from "@/lib/links";
 import { getLocalizedValue } from "@/lib/locale";
 
 export type CommandPaletteItem = {
@@ -61,6 +61,21 @@ export function getCommandPaletteGroups(
       locale === "tr" ? "profil" : "profile",
     ],
   }));
+
+  const dropdownGroups: CommandPaletteGroup[] = NAV_DROPDOWN_GROUPS.map(
+    (group) => ({
+      id: `navigation-${group.id}`,
+      heading: tNav.has(group.id) ? tNav(group.id) : group.label,
+      items: group.items.map((item) => ({
+        id: item.id,
+        label: tNav.has(item.id) ? tNav(item.id) : item.label,
+        href: item.href,
+        icon: item.icon,
+        external: item.external,
+        keywords: [group.label, item.label, ...item.keywords],
+      })),
+    }),
+  );
 
   const blogItems: CommandPaletteItem[] = [
     {
@@ -281,6 +296,7 @@ export function getCommandPaletteGroups(
       heading: locale === "tr" ? "İçerikler" : "Contents",
       items: contentItems,
     },
+    ...dropdownGroups,
     {
       id: "social",
       heading: "Social",

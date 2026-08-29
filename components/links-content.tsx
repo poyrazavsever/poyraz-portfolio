@@ -24,6 +24,11 @@ import {
 
 type CategoryFilter = "all" | LinkDirectoryCategory;
 
+type LinksContentProps = {
+  initialCategory?: string;
+  initialQuery?: string;
+};
+
 const CATEGORY_ORDER = {
   resources: 0,
   navigation: 1,
@@ -58,13 +63,26 @@ function formatHref(href: string) {
   return href.replace(/^https?:\/\//, "").replace(/\/$/, "");
 }
 
-export function LinksContent() {
+function parseCategoryFilter(value?: string): CategoryFilter {
+  if (value === "navigation" || value === "social" || value === "resources") {
+    return value;
+  }
+
+  return "all";
+}
+
+export function LinksContent({
+  initialCategory,
+  initialQuery = "",
+}: LinksContentProps) {
   const t = useTranslations("Links");
   const tNav = useTranslations("Nav");
   const locale = useLocale();
 
-  const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
-  const [query, setQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState<CategoryFilter>(() =>
+    parseCategoryFilter(initialCategory),
+  );
+  const [query, setQuery] = useState(initialQuery);
 
   const filterItems = useMemo(() => [
     { id: "all" as const, label: t("allCategories") },

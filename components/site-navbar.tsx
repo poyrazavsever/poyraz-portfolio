@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { Link, usePathname } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { LanguageSwitcher } from "@/components/language-switcher";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import {
   Button,
   ButtonIcon,
@@ -35,7 +35,13 @@ import {
 } from "poyraz-ui/molecules";
 import { NavbarTopBar, NavbarTopBarSection } from "poyraz-ui/organisms";
 import { useKeyboardShortcutLabel } from "@/lib/use-keyboard-shortcut-label";
-import { getResumeHref, NAV_LINKS, SOCIAL_LINKS, TOP_ICON_LINKS } from "@/lib/links";
+import {
+  getResumeHref,
+  NAV_DROPDOWN_GROUPS,
+  NAV_LINKS,
+  SOCIAL_LINKS,
+  TOP_ICON_LINKS,
+} from "@/lib/links";
 import type { ThemeMode } from "@/components/app-shell";
 
 const SearchCommand = dynamic(
@@ -88,6 +94,8 @@ type SiteNavbarProps = ThemeToggleProps;
 export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuGroupId, setMobileMenuGroupId] = useState<string | null>(null);
   const shortcut = useKeyboardShortcutLabel();
   const t = useTranslations("Nav");
   const locale = useLocale();
@@ -98,14 +106,22 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
   };
 
   const activeTab = NAV_LINKS.find((item) => isActiveLink(item.href))?.id;
+  const activeMobileMenuGroup = NAV_DROPDOWN_GROUPS.find(
+    (group) => group.id === mobileMenuGroupId,
+  );
+
+  const handleMobileMenuOpenChange = (open: boolean) => {
+    setMobileMenuOpen(open);
+    if (!open) setMobileMenuGroupId(null);
+  };
   const languageLabel = locale === "tr" ? "Switch to English" : "Türkçe'ye geç";
 
   return (
-    <div className="space-y-3">
+    <div className="min-w-0 space-y-3">
       <TooltipProvider delayDuration={180}>
         <NavbarTopBar
           variant="secondary"
-          className="border-0 bg-transparent p-0 shadow-none"
+          className="border-0 bg-transparent p-0 shadow-none [&>div]:max-w-none [&>div]:px-0"
         >
           <NavbarTopBarSection align="end" className="gap-2">
             {TOP_ICON_LINKS.map((item) => {
@@ -161,11 +177,11 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
         </NavbarTopBar>
       </TooltipProvider>
 
-      <header className="flex items-center justify-between gap-3 border-b border-border pb-4">
+      <header className="flex min-w-0 items-center justify-between gap-3 border-b border-border pb-4">
         <Link
           href="/"
           aria-label="Ana sayfaya git"
-          className="inline-flex items-center"
+          className="inline-flex shrink-0 items-center"
         >
           <Logo
             src="/logo/logo.png"
@@ -179,8 +195,8 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
           />
         </Link>
 
-        <div className="hidden items-center gap-3 md:flex">
-          <Tabs value={activeTab ?? ""} className="w-auto">
+        <div className="hidden min-w-0 flex-1 items-center justify-end gap-2 min-[840px]:flex">
+          <Tabs value={activeTab ?? ""} className="w-auto shrink-0">
             <TabsList
               variant="line"
               radius="sm"
@@ -188,31 +204,94 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
               aria-label="Ana navigasyon"
             >
               {NAV_LINKS.map((item, index) => (
-                <div key={item.id} className="flex items-center gap-1.5">
-                  {index > 0 && (
-                    <Separator
-                      orientation="vertical"
-                      className="h-4 bg-border/70"
-                      decorative
-                    />
-                  )}
-                  <TabsTrigger
-                    value={item.id}
-                    asChild
-                    size="sm"
-                    radius="sm"
-                    className="cursor-pointer px-2.5"
-                  >
-                    <Link href={item.href}>{t(item.id)}</Link>
-                  </TabsTrigger>
-                </div>
+                <Fragment key={item.id}>
+                  <div className="flex items-center gap-1.5">
+                    {index > 0 && (
+                      <Separator
+                        orientation="vertical"
+                        className="h-4 bg-border/70"
+                        decorative
+                      />
+                    )}
+                    <TabsTrigger
+                      value={item.id}
+                      asChild
+                      size="sm"
+                      radius="sm"
+                      className="cursor-pointer px-2.5"
+                    >
+                      <Link href={item.href}>{t(item.id)}</Link>
+                    </TabsTrigger>
+                  </div>
+
+                  {NAV_DROPDOWN_GROUPS.filter(
+                    (group) => group.insertAfter === item.id,
+                  ).map((group) => (
+                    <div key={group.id} className="flex items-center gap-1.5">
+                      <Separator
+                        orientation="vertical"
+                        className="h-4 bg-border/70"
+                        decorative
+                      />
+                      <DropdownMenu interaction="click">
+                        <DropdownMenuTrigger asChild>
+                          <button
+                            type="button"
+                            className={`${getNavLinkClass(
+                              group.items.some(
+                                (groupItem) =>
+                                  !groupItem.external &&
+                                  isActiveLink(groupItem.href.split("?")[0]),
+                              ),
+                            )} h-9 cursor-pointer items-center gap-1 px-2.5`}
+                          >
+                            <span>{t(group.id)}</span>
+                            <Icon icon="mdi:chevron-down" width={14} height={14} />
+                          </button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          align="end"
+                          surface="solid"
+                          radius="md"
+                          itemSize="md"
+                          itemRadius="sm"
+                          className="w-56 bg-popover"
+                        >
+                          {group.items.map((groupItem) => (
+                            <DropdownMenuItem key={groupItem.id} asChild>
+                              {groupItem.external ? (
+                                <a
+                                  href={groupItem.href}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="flex items-center gap-2"
+                                >
+                                  <Icon icon={groupItem.icon} width={16} height={16} />
+                                  <span>{t(groupItem.id)}</span>
+                                </a>
+                              ) : (
+                                <Link
+                                  href={groupItem.href}
+                                  className="flex items-center gap-2"
+                                >
+                                  <Icon icon={groupItem.icon} width={16} height={16} />
+                                  <span>{t(groupItem.id)}</span>
+                                </Link>
+                              )}
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                  ))}
+                </Fragment>
               ))}
             </TabsList>
           </Tabs>
 
           <Separator
             orientation="vertical"
-            className="h-5 bg-border"
+            className="h-5 shrink-0 bg-border"
             decorative
           />
           <Button
@@ -221,7 +300,7 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
             radius="sm"
             effect="shine"
             onClick={() => setSearchOpen(true)}
-            className={`h-9 w-44 cursor-pointer justify-between px-3 text-sm sm:w-52 ${slowShineClassName}`}
+            className={`h-9 w-auto cursor-pointer px-3 text-sm ${slowShineClassName}`}
             aria-label={t("search")}
           >
             <ButtonIcon>
@@ -273,7 +352,7 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
           </DropdownMenu>
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 min-[840px]:hidden">
           <Button
             type="button"
             variant="secondary"
@@ -287,7 +366,7 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
             <Icon icon="mdi:magnify" width={16} height={16} />
           </Button>
 
-          <Sheet>
+          <Sheet open={mobileMenuOpen} onOpenChange={handleMobileMenuOpenChange}>
             <SheetTrigger asChild>
               <Button
                 type="button"
@@ -303,64 +382,156 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-72 p-4">
-              <SheetTitle className="sr-only">{t("mobileMenu")}</SheetTitle>
-              <div className="flex flex-col gap-4">
-                <SheetClose asChild>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    radius="sm"
-                    effect="shine"
-                    onClick={() => setSearchOpen(true)}
-                    className={`w-full cursor-pointer justify-between ${slowShineClassName}`}
-                    aria-label={t("search")}
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <Icon icon="mdi:magnify" width={16} height={16} />
-                      <span>{t("search")}</span>
-                    </span>
-                    <span className="text-xs text-muted-foreground/80">
-                      {shortcut}
-                    </span>
-                  </Button>
-                </SheetClose>
-
-                <Separator className="bg-border" decorative />
-
-                <nav aria-label="Mobil navigasyon">
-                  <ul className="space-y-2">
-                    {NAV_LINKS.map((item) => (
-                      <li key={item.id}>
-                        <SheetClose asChild>
-                          <Link
-                            href={item.href}
-                            className={getNavLinkClass(isActiveLink(item.href))}
-                          >
-                            {t(item.id)}
-                          </Link>
-                        </SheetClose>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-
-                <Separator className="bg-border" decorative />
-
-                <div className="grid grid-cols-2 gap-2">
-                  {SOCIAL_LINKS.map((item) => (
-                    <Link
-                      key={item.id}
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-sm border border-border px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+              {activeMobileMenuGroup ? (
+                <div className="flex flex-col gap-4">
+                  <div className="flex min-h-9 items-center gap-2 pr-9">
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="icon-sm"
+                      radius="sm"
+                      effect="shine"
+                      className={`shrink-0 cursor-pointer ${slowShineClassName}`}
+                      aria-label={t("backToMenu")}
+                      onClick={() => setMobileMenuGroupId(null)}
                     >
-                      <Icon icon={item.icon} width={14} height={14} />
-                      <span className="truncate">{item.label}</span>
-                    </Link>
-                  ))}
+                      <Icon icon="mdi:chevron-left" width={18} height={18} />
+                    </Button>
+                    <SheetTitle className="truncate text-base font-medium">
+                      {t(activeMobileMenuGroup.id)}
+                    </SheetTitle>
+                  </div>
+
+                  <Separator className="bg-border" decorative />
+
+                  <nav aria-label={t(activeMobileMenuGroup.id)}>
+                    <ul className="space-y-1">
+                      {activeMobileMenuGroup.items.map((groupItem) => (
+                        <li key={groupItem.id}>
+                          {groupItem.external ? (
+                            <SheetClose asChild>
+                              <a
+                                href={groupItem.href}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="flex min-h-10 w-full items-center gap-3 rounded-sm px-2 py-2 text-sm text-foreground/70 transition-colors hover:bg-muted hover:text-foreground"
+                              >
+                                <Icon icon={groupItem.icon} width={18} height={18} />
+                                <span>{t(groupItem.id)}</span>
+                                <Icon
+                                  icon="mdi:open-in-new"
+                                  width={14}
+                                  height={14}
+                                  className="ml-auto text-muted-foreground"
+                                />
+                              </a>
+                            </SheetClose>
+                          ) : (
+                            <SheetClose asChild>
+                              <Link
+                                href={groupItem.href}
+                                className="flex min-h-10 w-full items-center gap-3 rounded-sm px-2 py-2 text-sm text-foreground/70 transition-colors hover:bg-muted hover:text-foreground"
+                              >
+                                <Icon icon={groupItem.icon} width={18} height={18} />
+                                <span>{t(groupItem.id)}</span>
+                                <Icon
+                                  icon="mdi:chevron-right"
+                                  width={16}
+                                  height={16}
+                                  className="ml-auto text-muted-foreground"
+                                />
+                              </Link>
+                            </SheetClose>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
                 </div>
-              </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <SheetTitle className="sr-only">{t("mobileMenu")}</SheetTitle>
+
+                  <SheetClose asChild>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      radius="sm"
+                      effect="shine"
+                      onClick={() => setSearchOpen(true)}
+                      className={`w-full cursor-pointer justify-between ${slowShineClassName}`}
+                      aria-label={t("search")}
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        <Icon icon="mdi:magnify" width={16} height={16} />
+                        <span>{t("search")}</span>
+                      </span>
+                      <span className="text-xs text-muted-foreground/80">
+                        {shortcut}
+                      </span>
+                    </Button>
+                  </SheetClose>
+
+                  <Separator className="bg-border" decorative />
+
+                  <nav aria-label="Mobil navigasyon">
+                    <ul className="space-y-2">
+                      {NAV_LINKS.map((item) => (
+                        <Fragment key={item.id}>
+                          <li>
+                            <SheetClose asChild>
+                              <Link
+                                href={item.href}
+                                className={getNavLinkClass(isActiveLink(item.href))}
+                              >
+                                {t(item.id)}
+                              </Link>
+                            </SheetClose>
+                          </li>
+
+                          {NAV_DROPDOWN_GROUPS.filter(
+                            (group) => group.insertAfter === item.id,
+                          ).map((group) => (
+                            <li key={group.id}>
+                              <button
+                                type="button"
+                                className={`${getNavLinkClass(
+                                  group.items.some(
+                                    (groupItem) =>
+                                      !groupItem.external &&
+                                      isActiveLink(groupItem.href.split("?")[0]),
+                                  ),
+                                )} w-full cursor-pointer items-center justify-between gap-3 text-left`}
+                                onClick={() => setMobileMenuGroupId(group.id)}
+                              >
+                                <span>{t(group.id)}</span>
+                                <Icon icon="mdi:chevron-right" width={16} height={16} />
+                              </button>
+                            </li>
+                          ))}
+                        </Fragment>
+                      ))}
+                    </ul>
+                  </nav>
+
+                  <Separator className="bg-border" decorative />
+
+                  <div className="grid grid-cols-2 gap-2">
+                    {SOCIAL_LINKS.map((item) => (
+                      <Link
+                        key={item.id}
+                        href={item.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 rounded-sm border border-border px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+                      >
+                        <Icon icon={item.icon} width={14} height={14} />
+                        <span className="truncate">{item.label}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </SheetContent>
           </Sheet>
         </div>
