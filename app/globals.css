@@ -13,6 +13,19 @@
   }
 }
 
+html[data-poyraz-theme="light"] {
+  --poyraz-background: #ffffff;
+  background-color: #ffffff;
+}
+
+html[data-poyraz-theme="light"] body {
+  background-color: #ffffff;
+}
+
+html[data-poyraz-theme="dark"] [data-cursor-portrait] {
+  display: none;
+}
+
 @layer utilities {
   @keyframes marquee {
     0% { transform: translateX(0%); }
