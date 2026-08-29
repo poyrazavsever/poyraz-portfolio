@@ -60,6 +60,15 @@ function getNavLinkClass(isActive: boolean) {
   ].join(" ");
 }
 
+function getDesktopDropdownTriggerClass(isActive: boolean) {
+  return [
+    "relative inline-flex h-7 shrink-0 cursor-pointer items-center justify-center gap-1 whitespace-nowrap rounded-sm px-2.5 text-xs font-medium outline-none",
+    "transition-[color,background-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+    "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+    isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+  ].join(" ");
+}
+
 type ThemeToggleProps = {
   theme: ThemeMode;
   onThemeChange: (theme: ThemeMode) => void;
@@ -237,13 +246,13 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
                         <DropdownMenuTrigger asChild>
                           <button
                             type="button"
-                            className={`${getNavLinkClass(
+                            className={getDesktopDropdownTriggerClass(
                               group.items.some(
                                 (groupItem) =>
                                   !groupItem.external &&
                                   isActiveLink(groupItem.href.split("?")[0]),
                               ),
-                            )} h-9 cursor-pointer items-center gap-1 px-2.5`}
+                            )}
                           >
                             <span>{t(group.id)}</span>
                             <Icon icon="mdi:chevron-down" width={14} height={14} />

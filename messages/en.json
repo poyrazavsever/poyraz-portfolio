@@ -85,6 +85,17 @@
     "diagramLoading": "Diagram rendering...",
     "diagramError": "Could not render Mermaid diagram."
   },
+  "AnimationSources": {
+    "title": "Animation Sources",
+    "description": "Production notes, prompts, and reusable code from animations I create for web and mobile products.",
+    "empty": "No animation sources have been added yet.",
+    "itemCount": "{count} sources",
+    "back": "Back to animation sources",
+    "toc": "Table of Contents",
+    "closeToc": "Close table of contents",
+    "copy": "Copy",
+    "copied": "Copied"
+  },
   "Links": {
     "desc": "Here you can find all my social accounts, portfolio pages, and quick access links in one place. Open and share directly.",
     "allLinks": "All Links",

@@ -1,11 +1,15 @@
 import { listBlogDetails } from "@/data/blog-detail";
+import { listAnimationSources } from "@/data/animation-sources";
 import type { MetadataRoute } from "next";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://poyrazavsever.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await listBlogDetails();
+  const [posts, animationSources] = await Promise.all([
+    listBlogDetails(),
+    listAnimationSources(),
+  ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -62,6 +66,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.4,
     },
+    {
+      url: `${SITE_URL}/animation-sources`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
   ];
 
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
@@ -71,5 +81,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  const animationSourceRoutes: MetadataRoute.Sitemap = animationSources.map(
+    (source) => ({
+      url: `${SITE_URL}${source.lang === "en" ? "/en" : ""}/animation-sources/${source.slug}`,
+      lastModified: source.date ? new Date(source.date) : new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }),
+  );
+
+  return [...staticRoutes, ...blogRoutes, ...animationSourceRoutes];
 }

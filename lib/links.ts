@@ -70,33 +70,6 @@ export const SOCIAL_LINKS = [
   },
 ] as const;
 
-export const ANIMATION_RESOURCE_LINKS = [
-  {
-    id: "motion",
-    label: "Motion",
-    href: "https://motion.dev/",
-    icon: "mdi:motion-play-outline",
-  },
-  {
-    id: "gsap",
-    label: "GSAP",
-    href: "https://gsap.com/resources/",
-    icon: "mdi:lightning-bolt-outline",
-  },
-  {
-    id: "lottiefiles",
-    label: "LottieFiles",
-    href: "https://lottiefiles.com/",
-    icon: "mdi:movie-open-play-outline",
-  },
-  {
-    id: "rive",
-    label: "Rive",
-    href: "https://rive.app/",
-    icon: "mdi:vector-curve",
-  },
-] as const;
-
 export const NAV_DROPDOWN_GROUPS = [
   {
     id: "others",
@@ -107,7 +80,7 @@ export const NAV_DROPDOWN_GROUPS = [
       {
         id: "animationResources",
         label: "Animasyon Kaynakları",
-        href: "/links?category=resources&query=animation",
+        href: "/animation-sources",
         icon: "mdi:motion-play-outline",
         external: false,
         keywords: ["animasyon", "animation", "kaynak", "resource", "motion"],
@@ -190,23 +163,6 @@ export const LINK_DIRECTORY: LinkDirectoryItem[] = [
     external: true,
     category: "social" as const,
     keywords: [item.label, item.href, "sosyal", "profile", "platform"],
-  })),
-  ...ANIMATION_RESOURCE_LINKS.map((item) => ({
-    id: item.id,
-    label: item.label,
-    href: item.href,
-    icon: item.icon,
-    external: true,
-    category: "resources" as const,
-    keywords: [
-      item.label,
-      item.href,
-      "animasyon",
-      "animation",
-      "kaynak",
-      "resource",
-      "motion",
-    ],
   })),
   ...TOP_ICON_LINKS.map((item) => ({
     id: item.id,
