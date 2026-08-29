@@ -82,7 +82,10 @@ export function ArticleToc({ markdown, title, onNavigate }: ArticleTocProps) {
   if (headings.length < 2) return null;
 
   return (
-    <nav aria-label={title} className="space-y-1">
+    <nav
+      aria-label={title}
+      className="max-h-[calc(100vh-7rem)] space-y-1 overflow-y-auto overscroll-contain pr-1 [scrollbar-width:thin]"
+    >
       <Typography variant="small" className="mb-2 font-semibold text-foreground">
         {title}
       </Typography>

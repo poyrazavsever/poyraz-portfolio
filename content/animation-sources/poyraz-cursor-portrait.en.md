@@ -438,3 +438,442 @@ Five steps are enough to reuse the system:
 5. Connect the optimized video and poster to the component.
 
 The main rule is simple: do not invent motion in code that does not exist in the generated video. Treating the AI output as a controlled motion plate makes the effect more natural, deterministic, and testable.
+
+## 10. Master-frame prompt for avatars
+
+When the source is a 2D, 3D, or stylized avatar, prevent the model from reinterpreting its design language. This prompt locks the original medium and character identity.
+
+```prompt
+Use the uploaded avatar as the strict character-design reference. Recreate the
+exact same character in a clean, production-ready master frame for a
+mouse-following website animation.
+
+Preserve exactly:
+- the character's face design, head shape, hairstyle, colors, outfit,
+  accessories, proportions, material style, line style, shading language,
+  and overall visual identity;
+- the original medium and aesthetic: [[AVATAR_STYLE]];
+- all intentional asymmetries and recognizable features.
+
+Do not turn a 2D avatar into 3D, do not turn a stylized avatar into a real
+person, and do not redesign or improve the character.
+
+Composition:
+- [[ASPECT_RATIO]] frame.
+- Medium close-up from [[CROP_POINT]] upward.
+- Center the character, leaving enough space for the head to rotate up to
+  [[MAX_HEAD_ROTATION]] degrees toward [[TURN_DIRECTION]].
+- Shoulders remain stable and mostly facing forward.
+- Neutral starting pose, only [[STARTING_HEAD_ANGLE]] degrees toward
+  [[STARTING_DIRECTION]].
+- Expression: [[EXPRESSION]].
+
+Background:
+- Completely flat, seamless [[BACKGROUND_COLOR]].
+- No texture, gradient, cast shadow, props, text, logo, border, scenery, or UI.
+
+Continuity requirements:
+- Clean silhouette and stable edges.
+- Consistent eyes and facial features according to the reference design.
+- No additional accessories or design changes.
+- Produce one character and one clean master frame only.
+```
+
+## 11. Motion prompts for every placement
+
+The live example in this guide maps vertical pointer movement to a vertical gaze. The alternatives below produce frontal-to-profile clips driven by horizontal pointer movement. Reverse the turn for left-side placements so that the subject looks into the page instead of away from it.
+
+### Bottom-right: portrait turning left
+
+```prompt
+Animate the uploaded master frame into a precise motion-control plate for an
+interactive website portrait. Preserve the exact identity, face, hairstyle,
+outfit, body proportions, lighting, colors, framing, and background.
+
+Output:
+- Duration: exactly 4.0 seconds.
+- Aspect ratio: [[ASPECT_RATIO]].
+- One continuous shot with a locked, eye-level camera.
+- No zoom, crop change, pan, tilt, dolly, camera shake, speech, or audio motion.
+
+The person will appear in the bottom-right corner. Website content and the
+pointer will usually be to the person's left, so the motion must progress from
+an almost frontal pose to a clear screen-left profile.
+
+Timeline:
+- 0.00-0.25: hold the reference pose, only [[STARTING_HEAD_ANGLE]] degrees left.
+- 0.25-3.75: rotate smoothly and linearly toward screen-left.
+- Reach approximately [[MAX_HEAD_ROTATION]] degrees in a clean left profile.
+- 3.75-4.00: hold the final pose perfectly still.
+
+The eyes lead slightly. Only eyes, head, and neck move. Shoulders, torso, arms,
+clothing, scale, body position, and expression remain fixed. Keep the mouth
+closed. No talking, smiling, eyebrow movement, nodding, leaning, breathing
+motion, blinking during the turn, or secondary gestures.
+
+Preserve identity and anatomy in every frame. No morphing, face drift, hair or
+ear deformation, lighting change, clothing change, or background flicker.
+Keep a perfectly flat [[BACKGROUND_COLOR]] background with no gradient, shadow,
+texture, object, text, or logo.
+
+This is a deterministic website animation plate intended to be paused and
+scrubbed frame by frame, not a cinematic video.
+```
+
+Start with `[[MAX_HEAD_ROTATION]] = 85-90` and `[[STARTING_HEAD_ANGLE]] = 5-10` for a corner portrait.
+
+### Bottom-left: portrait turning right
+
+```prompt
+Animate the uploaded master frame into a precise motion-control plate for an
+interactive website portrait. Preserve the exact identity, face, hairstyle,
+outfit, proportions, lighting, framing, and background.
+
+The person will appear in the bottom-left corner, while most content and pointer
+movement will be to the person's right.
+
+Create exactly 4.0 seconds of one continuous, locked-off motion:
+- Start almost facing the camera, only [[STARTING_HEAD_ANGLE]] degrees right.
+- Hold the starting pose from 0.00 to 0.25 seconds.
+- From 0.25 to 3.75 seconds, rotate smoothly and linearly toward screen-right.
+- End at approximately [[MAX_HEAD_ROTATION]] degrees in a clean right profile.
+- Hold that final pose from 3.75 to 4.00 seconds.
+
+Only the eyes, head, and neck move. The eyes lead slightly and stay focused
+toward screen-right. Shoulders, torso, arms, clothing, head scale, and body
+position remain fixed. The camera is completely locked.
+
+Keep the mouth closed and [[EXPRESSION]] unchanged. No speech, smile, lip or
+eyebrow motion, nodding, leaning, blinking during the turn, breathing motion,
+or gestures. No identity drift, morphing, hair change, warped profile, ear
+deformation, lighting change, clothing change, or background flicker.
+
+The background must remain perfectly flat [[BACKGROUND_COLOR]], without
+shadows, gradients, props, text, logos, textures, or color variation. This is a
+frame-scrubbable website plate, not a cinematic video.
+```
+
+### Hero-right: looking at the headline and CTA on the left
+
+```prompt
+Animate the uploaded identity-locked master frame for a website hero section.
+The subject will be positioned on the right side; headline, copy, CTA buttons,
+and pointer will be primarily on the left.
+
+Create an exact 4.0-second locked-off motion-control clip. Start almost facing
+the viewer at [[STARTING_HEAD_ANGLE]] degrees left and hold from 0.00 to 0.25.
+From 0.25 to 3.75, smoothly rotate the eyes and head toward screen-left, ending
+at [[MAX_HEAD_ROTATION]] degrees. Hold the final pose from 3.75 to 4.00.
+
+The final pose must feel like the subject is looking at the hero headline and
+CTA, not outside the page. Eyes lead slightly; the head follows in one slow,
+continuous, linear movement.
+
+Only eyes, head, and neck move. Keep shoulders, torso, arms, clothing, position,
+scale, expression, and silhouette fixed. Mouth closed. No talking, smiling,
+blinking during the turn, nodding, leaning, gestures, body sway, or breathing.
+
+Preserve the exact person or avatar design. No face drift, morphing, hair or
+outfit changes, lighting shifts, framing changes, or warped profile. Use a fixed
+eye-level camera and a perfectly flat [[BACKGROUND_COLOR]] background.
+Aspect ratio: [[ASPECT_RATIO]]. The result must be frame-scrubbable.
+```
+
+For hero layouts, `[[MAX_HEAD_ROTATION]] = 65-75` usually looks more natural.
+
+### Hero-left: looking at the headline and CTA on the right
+
+```prompt
+Animate the uploaded identity-locked master frame for a website hero section.
+The subject will be positioned on the left side; headline, copy, CTA buttons,
+and pointer will be primarily on the right.
+
+Create an exact 4.0-second locked-off motion-control clip. Start almost facing
+the viewer at [[STARTING_HEAD_ANGLE]] degrees right and hold from 0.00 to 0.25.
+From 0.25 to 3.75, smoothly rotate the eyes and head toward screen-right, ending
+at [[MAX_HEAD_ROTATION]] degrees. Hold the final pose from 3.75 to 4.00.
+
+The final pose must feel like the subject is looking at the hero headline and
+CTA, not outside the page. Eyes lead slightly; the head follows in one slow,
+continuous, linear movement.
+
+Only eyes, head, and neck move. Keep shoulders, torso, arms, clothing, position,
+scale, expression, and silhouette fixed. Mouth closed. No talking, smiling,
+blinking during the turn, nodding, leaning, gestures, body sway, or breathing.
+
+Preserve the exact person or avatar design. No identity drift, morphing, hair or
+outfit changes, lighting shifts, framing changes, or warped profile. Use a fixed
+eye-level camera and a perfectly flat [[BACKGROUND_COLOR]] background.
+Aspect ratio: [[ASPECT_RATIO]]. The result must be frame-scrubbable.
+```
+
+### Hero-center: complete left-to-right scan
+
+```prompt
+Animate the uploaded identity-locked master frame into a symmetrical
+left-to-right head-turn calibration clip for an interactive centered hero.
+
+Output one continuous 4.0-second shot in [[ASPECT_RATIO]] with a locked,
+eye-level camera. Preserve identity or avatar design, outfit, expression,
+lighting, framing, scale, and [[BACKGROUND_COLOR]] background.
+
+Timeline:
+- 0.00-0.25: hold approximately [[LEFT_ANGLE]] degrees toward screen-left.
+- 0.25-3.75: perform the complete symmetrical left-to-right rotation.
+- Reach the exact front-facing pose at 50% of the active motion interval.
+- Continue at the same speed to [[RIGHT_ANGLE]] degrees toward screen-right.
+- 3.75-4.00: hold the final right-facing pose.
+- Keep path, speed, scale, and head height symmetrical on both sides.
+
+The eyes lead only slightly. Only eyes, head, and neck move. Shoulders, torso,
+arms, clothing, body position, scale, and expression remain fixed. Mouth closed.
+No speech, smile, blink during movement, eyebrow motion, nod, lean, gesture,
+body sway, or breathing motion.
+
+No identity drift, morphing, hairstyle change, ear deformation, warped profile,
+lighting shift, background flicker, camera movement, zoom, crop, or reframing.
+The background remains perfectly uniform [[BACKGROUND_COLOR]]. This must stay
+clean when paused and scrubbed in either direction.
+```
+
+Use `[[LEFT_ANGLE]] = 75` and `[[RIGHT_ANGLE]] = 75` as a symmetric starting point.
+
+## 12. Generic repair prompt
+
+If the camera, shoulders, or mouth move, or if the profile loses identity, describe the defect precisely in `[[OBSERVED_PROBLEMS]]`.
+
+```prompt
+Regenerate this clip as a strict technical motion plate. The previous result is
+unusable because it contains: [[OBSERVED_PROBLEMS]].
+
+Lock every property except the intended head rotation:
+- exact same identity and facial proportions in every frame;
+- fixed camera, crop, focal length, scale, head position, shoulders, torso,
+  arms, outfit, expression, lighting, and background;
+- only the eyes, head, and neck may move;
+- one slow, linear rotation from [[STARTING_DIRECTION_AND_ANGLE]] to
+  [[ENDING_DIRECTION_AND_ANGLE]];
+- closed and motionless mouth;
+- no speech, smile, blink during the turn, eyebrow movement, nod, lean, body
+  sway, breathing, camera motion, zoom, parallax, lighting shift, background
+  flicker, face morphing, hair change, ear deformation, or new objects;
+- perfectly uniform [[BACKGROUND_COLOR]] background;
+- preserve the reference identity exactly, especially in the final profile.
+
+This is a frame-scrubbing website asset, so every intermediate frame must be
+anatomically coherent and usable as a still image.
+```
+
+## 13. Coding-agent prompt for horizontal variants
+
+This prompt builds one reusable component for bottom-right, bottom-left, and hero placements. It uses `pointerX`, so treat it as an alternative to the vertical `pointerY` implementation earlier in this guide.
+
+```prompt
+Add a reusable mouse-following video portrait component to the existing
+[[FRAMEWORK]] project. Styling system: [[STYLING_SYSTEM]]. Inspect the project's
+structure, responsive rules, dependencies, and code conventions first.
+
+Assets:
+- Video: [[VIDEO_PATH]]
+- Poster: [[POSTER_PATH]]
+- Active motion: 0.25-3.75 seconds
+- Video motion: [[VIDEO_MOTION_DESCRIPTION]]
+- Placement: [[PLACEMENT]]
+
+Behavior:
+- Keep the video muted, playsInline, preload auto, paused, and without autoplay.
+- Listen to global pointermove and measure the portrait anchor when needed.
+- Map pointer position to 0-1 targetProgress, then to currentTime 0.25-3.75.
+- Use RAF with lerp/damping. Do not update React state per pointer event.
+- Limit seeks to 30-60 Hz and skip negligible time differences.
+
+Direction mapping:
+- For bottom-right or hero-right clips turning left: progress 0 near the
+  portrait and progress 1 as the pointer moves farther left.
+- For bottom-left or hero-left clips turning right: progress 0 near the
+  portrait and progress 1 as the pointer moves farther right.
+- For a hero-center clip scanning left-to-right, use pointerX / viewportWidth.
+- Clamp progress to 0-1 and prevent anatomically invalid reverse turns.
+
+Typed API:
+- src, poster
+- placement: bottom-right | bottom-left | hero-right | hero-left | hero-center
+- defaultProgress, smoothing, desktopWidth, mobileWidth
+- offsetX, offsetY, zIndex, className, decorative, invertProgress
+
+Layout and lifecycle:
+- Use fixed positioning for bottom-* and absolute positioning inside the hero
+  for hero-* variants.
+- Use object-fit contain, a reserved aspect-ratio, and [[BACKGROUND_COLOR]].
+- If decorative, use pointer-events none, user-select none, draggable false,
+  and aria-hidden true. Do not cover CTA controls or copy.
+- Run client-side. Seek to [[DEFAULT_PROGRESS]] after loadedmetadata.
+- If decoding needs it, prime muted playback on first real interaction and
+  immediately pause.
+- Do not read layout every frame. Re-measure on resize/scroll at low cost.
+- Stop RAF/seeking in hidden tabs and clean every listener and RAF on unmount.
+- Disable tracking for coarse pointers and reduced motion; use
+  [[MOBILE_BEHAVIOR]]. Show the poster after video errors.
+
+Use named constants TOTAL_DURATION=4, ACTIVE_START=0.25, ACTIVE_END=3.75.
+Do not add a heavy animation library. Add complete TypeScript types and focused
+mapping/clamp tests without refactoring unrelated files.
+
+Report changed files, direction formula, build/typecheck/lint/test results, and
+a four-item manual test checklist.
+```
+
+### Add only one new placement
+
+```prompt
+Do not break the behavior or public API of `CursorFollowerPortrait`. Add only a
+new [[NEW_PLACEMENT]] variant.
+
+Asset:
+- Video: [[NEW_VIDEO_PATH]]
+- Poster: [[NEW_POSTER_PATH]]
+- Active motion: 0.25-3.75 seconds
+- Motion: [[NEW_VIDEO_MOTION_DESCRIPTION]]
+
+Placement and mapping:
+- Placement: [[NEW_PLACEMENT]]
+- Offset: [[HORIZONTAL_OFFSET]] horizontal, [[VERTICAL_OFFSET]] vertical
+- Width: [[DESKTOP_WIDTH]] / mobile [[MOBILE_WIDTH]]
+- Anatomical direction rule: [[DIRECTION_MAPPING_RULE]]
+
+Do not change existing variants. Add a working usage example, run build,
+typecheck, and lint, then report only changed files and verification results.
+```
+
+### Debugging prompt
+
+```prompt
+`CursorFollowerPortrait` has this problem: [[BUG_DESCRIPTION]].
+
+Reproduce it first and identify the root cause with evidence. Check:
+- assigning currentTime before metadata loads;
+- slow seeking caused by codec or keyframe distance;
+- incorrect progress direction or invertProgress;
+- React renders on every pointer event;
+- duplicate RAF loops or event listeners;
+- getBoundingClientRect layout thrashing on every frame;
+- Safari/iOS video priming behavior;
+- asset path, CORS, preload, and poster fallback;
+- incorrect reduced-motion or coarse-pointer detection;
+- fixed/absolute containers and stacking contexts.
+
+Do not refactor randomly before explaining the root cause. Apply the smallest
+safe fix, preserve the public API, and report build/typecheck/lint/test results.
+```
+
+## 14. True two-axis tracking with a 3x3 grid
+
+A single video can reliably follow only the axis it contains. For horizontal and vertical gaze, generate nine aligned poses from one master frame. For a real person, start with yaw values of `-35° / 0° / +35°` and pitch values of `-18° / 0° / +18°`.
+
+| Pose | Yaw | Pitch |
+| --- | ---: | ---: |
+| Top-left | `[[YAW_LEFT]]` | `[[PITCH_UP]]` |
+| Top-center | `0` | `[[PITCH_UP]]` |
+| Top-right | `[[YAW_RIGHT]]` | `[[PITCH_UP]]` |
+| Middle-left | `[[YAW_LEFT]]` | `0` |
+| Center | `0` | `0` |
+| Middle-right | `[[YAW_RIGHT]]` | `0` |
+| Bottom-left | `[[YAW_LEFT]]` | `[[PITCH_DOWN]]` |
+| Bottom-center | `0` | `[[PITCH_DOWN]]` |
+| Bottom-right | `[[YAW_RIGHT]]` | `[[PITCH_DOWN]]` |
+
+### Nine-direction image prompt
+
+```prompt
+Using the uploaded identity-locked master frame, create one exact directional
+calibration pose for a 3x3 mouse-tracking portrait system.
+
+Preserve the exact same identity, face, hairstyle, outfit, body, framing,
+camera, focal length, lighting, scale, background, crop, and expression. This
+image must align pixel-for-pixel as closely as possible with all other poses.
+
+Change only:
+- head yaw: [[TARGET_YAW]] degrees;
+- head pitch: [[TARGET_PITCH]] degrees;
+- eye gaze: [[GAZE_DIRECTION]], aligned naturally with the head direction.
+
+Keep shoulders, torso, arms, clothing, body position, head center, and head
+scale fixed. Mouth closed. No smile, speech, blink, eyebrow movement, body
+turn, lean, camera motion, crop change, zoom, or lighting change.
+
+Maintain anatomically correct neck, ears, eyes, jaw, and facial profile. No
+morphing or identity drift. Use a perfectly flat [[BACKGROUND_COLOR]] identical
+to the master frame. Output one image only at [[OUTPUT_DIMENSIONS]].
+```
+
+### Coding-agent prompt for the nine-direction system
+
+```prompt
+Add a `DirectionalPortraitGrid` component with true two-axis pointer tracking
+to the existing [[FRAMEWORK]] project.
+
+Nine equal-size, pixel-aligned assets:
+- top-left: [[TOP_LEFT_PATH]]
+- top-center: [[TOP_CENTER_PATH]]
+- top-right: [[TOP_RIGHT_PATH]]
+- middle-left: [[MIDDLE_LEFT_PATH]]
+- center: [[CENTER_PATH]]
+- middle-right: [[MIDDLE_RIGHT_PATH]]
+- bottom-left: [[BOTTOM_LEFT_PATH]]
+- bottom-center: [[BOTTOM_CENTER_PATH]]
+- bottom-right: [[BOTTOM_RIGHT_PATH]]
+
+Normalize the pointer relative to the portrait center and clamp both axes to
+-1..1. Do not hard-switch to the nearest image. Find the surrounding four grid
+cells, calculate bilinear interpolation weights, and blend those four aligned
+images with opacity.
+
+Use RAF and damping without React renders per pointer event. Preload assets
+without blocking the page's LCP. Show the center image for reduced motion,
+coarse pointers, or loading failures. If decorative, use pointer-events none
+and aria-hidden true.
+
+Typed props: sources, placement, desktopWidth, mobileWidth, smoothing,
+maxTrackingDistance, offsetX, offsetY, className, decorative. Extract grid math
+into pure functions and test corners, center, and intermediate values. Do not
+add a heavy animation library. Add a usage example and report
+build/typecheck/lint/test results.
+```
+
+## 15. Reels planning prompt
+
+For a 55-second walkthrough, use this sequence: `0-3s` result, `3-7s` hook, `7-16s` master frame, `16-26s` motion video, `26-42s` coding, `42-51s` before/after and variant, `51-58s` CTA.
+
+```prompt
+I am a [[CREATOR_PROFILE]] software content creator. Plan an Instagram Reel for
+this interactive website effect:
+
+Effect: [[EFFECT_DESCRIPTION]]
+Character: [[REAL_PERSON_OR_AVATAR]]
+Placement: [[PLACEMENT]]
+Generation tool: [[GENERATION_TOOL]]
+Coding agent: [[CODING_AGENT]]
+Audience: [[TARGET_AUDIENCE]]
+Target duration: 55 seconds
+Tone: [[TONE]]
+
+Use this structure:
+1. Show the result in the first two seconds as a visual hook.
+2. A spoken hook of no more than ten words.
+3. A concrete promise for what the viewer will build.
+4. The reference-to-master-frame step.
+5. Only the critical lines of the placement-specific motion prompt.
+6. Only the critical technical logic from the coding prompt.
+7. One beginner-friendly sentence explaining pointer-to-currentTime mapping.
+8. A before/after scene.
+9. An open loop into the next placement variant.
+10. A short, natural CTA.
+
+For every segment, provide its time range, spoken line, screen recording,
+large on-screen text, and editing transition. Avoid exaggerated marketing,
+unnecessary jargon, long intros, claims that AI did everything, or unrealistic
+time promises. Highlight prompt fragments instead of displaying entire prompts.
+Keep the total spoken script under 120 words.
+```
+
+This library lets you produce bottom-right, bottom-left, hero-right, hero-left, hero-center, and true 3x3 tracking assets from the same master design. Name each asset together with its motion direction, placement formula, and fallback to prevent direction mistakes as the system grows.
