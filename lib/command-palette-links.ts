@@ -28,10 +28,19 @@ export type CommandPaletteGroup = {
   items: CommandPaletteItem[];
 };
 
+export type AnimationSourceSearchItem = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  platform: string;
+  tools: string[];
+};
+
 export function getCommandPaletteGroups(
   locale: string,
   tLinks: (key: string) => string,
-  tNav: { (key: string): string; has: (key: string) => boolean }
+  tNav: { (key: string): string; has: (key: string) => boolean },
+  animationSources: AnimationSourceSearchItem[] = [],
 ): CommandPaletteGroup[] {
   const navigationItems: CommandPaletteItem[] = NAV_LINKS.map((item) => {
     const label = tNav.has(item.id) ? tNav(item.id) : item.label;
@@ -74,6 +83,24 @@ export function getCommandPaletteGroups(
         external: item.external,
         keywords: [group.label, item.label, ...item.keywords],
       })),
+    }),
+  );
+
+  const animationSourceItems: CommandPaletteItem[] = animationSources.map(
+    (source) => ({
+      id: `animation-source-${source.slug}`,
+      label: source.title,
+      href: `/animation-sources/${source.slug}`,
+      icon: "mdi:motion-play-outline",
+      keywords: [
+        source.excerpt,
+        source.platform,
+        ...source.tools,
+        "animation",
+        "prompt",
+        locale === "tr" ? "animasyon" : "motion",
+        locale === "tr" ? "kaynak" : "source",
+      ],
     }),
   );
 
@@ -297,6 +324,17 @@ export function getCommandPaletteGroups(
       items: contentItems,
     },
     ...dropdownGroups,
+    ...(animationSourceItems.length > 0
+      ? [
+          {
+            id: "animation-sources-data",
+            heading: tNav.has("animationResources")
+              ? tNav("animationResources")
+              : "Animation Sources",
+            items: animationSourceItems,
+          },
+        ]
+      : []),
     {
       id: "social",
       heading: "Social",

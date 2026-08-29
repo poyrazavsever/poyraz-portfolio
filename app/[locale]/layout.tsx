@@ -8,6 +8,7 @@ import "../globals.css";
 import { AppShell } from "@/components/app-shell";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { PoyrazBottomRightFollower } from "@/components/poyraz-bottom-right-follower";
+import { listAnimationSources } from "@/data/animation-sources";
 
 export async function generateMetadata({
   params,
@@ -108,14 +109,26 @@ export default async function LocaleLayout({
   }
 
   // Provide messages for NextIntlClientProvider
-  const messages = await getMessages();
+  const [messages, animationSources] = await Promise.all([
+    getMessages(),
+    listAnimationSources(locale),
+  ]);
+  const animationSourceSearchItems = animationSources.map((source) => ({
+    slug: source.slug,
+    title: source.title,
+    excerpt: source.excerpt,
+    platform: source.platform,
+    tools: source.tools,
+  }));
 
   return (
     <html lang={locale}>
       <body className="min-h-dvh bg-background text-foreground antialiased">
         <NextIntlClientProvider messages={messages}>
           <GoogleAnalytics />
-          <AppShell>{children}</AppShell>
+          <AppShell animationSources={animationSourceSearchItems}>
+            {children}
+          </AppShell>
           <PoyrazBottomRightFollower />
         </NextIntlClientProvider>
       </body>

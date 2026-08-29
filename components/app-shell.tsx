@@ -9,6 +9,7 @@ import { ANNOUNCEMENT_ITEMS, ENABLE_NEKO_FOLLOWER } from "@/data/site-settings";
 import { useLocale } from "next-intl";
 import { getLocalizedValue } from "@/lib/locale";
 import dynamic from "next/dynamic";
+import type { AnimationSourceSearchItem } from "@/lib/command-palette-links";
 
 const AtaturkWidgetModal = dynamic(
   () => import("@/components/ataturk-widget-modal").then((mod) => mod.AtaturkWidgetModal),
@@ -17,6 +18,7 @@ const AtaturkWidgetModal = dynamic(
 
 type AppShellProps = {
   children: React.ReactNode;
+  animationSources: AnimationSourceSearchItem[];
 };
 
 export type ThemeMode = "light" | "dark";
@@ -30,7 +32,7 @@ function getInitialTheme(): ThemeMode {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-export function AppShell({ children }: AppShellProps) {
+export function AppShell({ children, animationSources }: AppShellProps) {
   const pathname = usePathname();
   const locale = useLocale();
   const announcement = ANNOUNCEMENT_ITEMS[0];
@@ -57,7 +59,11 @@ export function AppShell({ children }: AppShellProps) {
       <AtaturkWidgetModal theme={theme} />
       {ENABLE_NEKO_FOLLOWER ? <NekoFollower /> : null}
       <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 ">
-        <SiteNavbar theme={theme} onThemeChange={setTheme} />
+        <SiteNavbar
+          theme={theme}
+          onThemeChange={setTheme}
+          animationSources={animationSources}
+        />
         {announcement ? (
           <AnnouncementBar
             variant="branded"

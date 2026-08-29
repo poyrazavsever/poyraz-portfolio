@@ -43,6 +43,7 @@ import {
   TOP_ICON_LINKS,
 } from "@/lib/links";
 import type { ThemeMode } from "@/components/app-shell";
+import type { AnimationSourceSearchItem } from "@/lib/command-palette-links";
 
 const SearchCommand = dynamic(
   () => import("@/components/search-command").then((mod) => mod.SearchCommand),
@@ -98,9 +99,15 @@ function ThemeToggle({ theme, onThemeChange }: ThemeToggleProps) {
   );
 }
 
-type SiteNavbarProps = ThemeToggleProps;
+type SiteNavbarProps = ThemeToggleProps & {
+  animationSources: AnimationSourceSearchItem[];
+};
 
-export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
+export function SiteNavbar({
+  theme,
+  onThemeChange,
+  animationSources,
+}: SiteNavbarProps) {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -545,7 +552,11 @@ export function SiteNavbar({ theme, onThemeChange }: SiteNavbarProps) {
           </Sheet>
         </div>
 
-        <SearchCommand open={searchOpen} onOpenChange={setSearchOpen} />
+        <SearchCommand
+          open={searchOpen}
+          onOpenChange={setSearchOpen}
+          animationSources={animationSources}
+        />
       </header>
     </div>
   );

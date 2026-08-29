@@ -17,6 +17,7 @@ import {
 } from "poyraz-ui/molecules";
 import {
   getCommandPaletteGroups,
+  type AnimationSourceSearchItem,
   type CommandPaletteItem as PaletteItem,
 } from "@/lib/command-palette-links";
 import { useKeyboardShortcutLabel } from "@/lib/use-keyboard-shortcut-label";
@@ -24,9 +25,14 @@ import { useKeyboardShortcutLabel } from "@/lib/use-keyboard-shortcut-label";
 type SearchCommandProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  animationSources: AnimationSourceSearchItem[];
 };
 
-export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
+export function SearchCommand({
+  open,
+  onOpenChange,
+  animationSources,
+}: SearchCommandProps) {
   const router = useRouter();
   const locale = useLocale();
   const tLinks = useTranslations("Links");
@@ -36,8 +42,8 @@ export function SearchCommand({ open, onOpenChange }: SearchCommandProps) {
   const [query, setQuery] = useState("");
 
   const groups = useMemo(() => {
-    return getCommandPaletteGroups(locale, tLinks, tNav);
-  }, [locale, tLinks, tNav]);
+    return getCommandPaletteGroups(locale, tLinks, tNav, animationSources);
+  }, [animationSources, locale, tLinks, tNav]);
 
   const handleOpenChange = useCallback((nextOpen: boolean) => {
     if (!nextOpen) {

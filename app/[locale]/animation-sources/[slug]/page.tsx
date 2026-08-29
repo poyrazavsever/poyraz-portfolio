@@ -40,23 +40,36 @@ export async function generateMetadata({
   }
 
   const url = `${SITE_URL}${getLocalizedPath(locale, source.slug)}`;
+  const socialImageUrl = new URL(source.coverImage, SITE_URL).toString();
+  const turkishUrl = `${SITE_URL}${getLocalizedPath("tr", source.slug)}`;
+  const englishUrl = `${SITE_URL}${getLocalizedPath("en", source.slug)}`;
 
   return {
     title: source.title,
     description: source.excerpt,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      languages: {
+        "tr-TR": turkishUrl,
+        "en-US": englishUrl,
+      },
+    },
     openGraph: {
       title: source.title,
       description: source.excerpt,
       url,
+      siteName: "Poyraz Avsever",
       type: "article",
+      locale: locale === "en" ? "en_US" : "tr_TR",
+      alternateLocale: locale === "en" ? ["tr_TR"] : ["en_US"],
       publishedTime: source.date,
       authors: [source.author],
       images: [
         {
-          url: source.coverImage,
-          width: 720,
-          height: 720,
+          url: socialImageUrl,
+          type: "image/gif",
+          width: 480,
+          height: 480,
           alt: source.title,
         },
       ],
@@ -65,7 +78,13 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: source.title,
       description: source.excerpt,
-      images: [source.coverImage],
+      creator: "@poyrazavsever",
+      images: [
+        {
+          url: socialImageUrl,
+          alt: source.title,
+        },
+      ],
     },
   };
 }

@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { Badge, Card, Typography } from "poyraz-ui/atoms";
+import { Card, Typography } from "poyraz-ui/atoms";
+import { NewsCard } from "poyraz-ui/molecules";
 import { Link } from "@/i18n/routing";
 import type { AnimationSource } from "@/data/animation-sources";
 
@@ -34,38 +34,21 @@ export function AnimationSourcesContent({
       </header>
 
       {sources.length > 0 ? (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <div className="space-y-3">
           {sources.map((source) => (
             <Link
               key={`${source.lang}-${source.slug}`}
               href={`/animation-sources/${source.slug}`}
               data-animation-source-card
-              className="group min-w-0"
+              className="block min-w-0"
             >
-              <Card className="h-full overflow-hidden rounded-sm border-border p-0 transition-colors group-hover:border-red-600/60">
-                <div className="relative aspect-square overflow-hidden bg-white">
-                  <Image
-                    src={source.coverImage}
-                    alt=""
-                    fill
-                    unoptimized={source.coverImage.toLowerCase().endsWith(".gif")}
-                    sizes="(max-width: 640px) 50vw, 280px"
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                  />
-                </div>
-                <div className="space-y-2 border-t border-border p-3">
-                  <Badge variant="outline" className="rounded-sm">
-                    {source.platform}
-                  </Badge>
-                  <Typography
-                    variant="large"
-                    data-animation-source-title
-                    className="line-clamp-2 min-h-10 text-sm leading-5 sm:text-base"
-                  >
-                    {source.title}
-                  </Typography>
-                </div>
-              </Card>
+              <NewsCard
+                image={source.coverImage}
+                category={source.platform}
+                title={source.title}
+                date={source.date}
+                className="w-full rounded-sm border-border [&>div]:min-h-32 [&>div>div:first-child]:w-32 sm:[&>div>div:first-child]:w-40 [&_h3]:text-base"
+              />
             </Link>
           ))}
         </div>
