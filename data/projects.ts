@@ -60,6 +60,7 @@ export const WEB_APPS: ProjectItem[] = [
       en: "Corporate Portal",
     },
     image: "/projects/ostim.png",
+    href: "https://ostim.org.tr",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
       tr: "OSTİM Organize Sanayi Bölgesi ve yedi kümeye ait kurumsal içerikleri, firma ve ürün aramasını, çevrim içi işlemleri ve iletişim akışlarını tek portalda birleştiren çok bölümlü yapı.",
@@ -81,6 +82,7 @@ export const WEB_APPS: ProjectItem[] = [
       en: "Employment Portal",
     },
     image: "/projects/ostim-istihdam.png",
+    href: "https://ostimistihdam.com",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
       tr: "İŞKUR senkronizasyonu üzerine kurulu; aday, işveren, iş ve staj ilanı akışlarını yapay zekâ destekli eşleştirme katmanıyla buluşturan rol tabanlı portal mimarisi.",
@@ -102,6 +104,7 @@ export const WEB_APPS: ProjectItem[] = [
       en: "Foreign Trade Portal",
     },
     image: "/projects/ostim-dis-ticaret.png",
+    href: "https://ostimdisticaret.net",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
       tr: "Dış ticaret firmaları, ilanlar ve yabancı dil bilen öğrenciler için ayrı kayıt ve başvuru akışlarını ortak bir eşleştirme ve ilan havuzunda birleştiren çok taraflı portal mimarisi.",
