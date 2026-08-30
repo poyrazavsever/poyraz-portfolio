@@ -64,6 +64,8 @@
     },
     "viewNpmPackages": "View my NPM packages",
     "visitGithub": "Visit my GitHub profile",
+    "technologies": "Technologies",
+    "architecture": "Architecture",
     "emptyNpm": "npm API response is currently empty.",
     "emptyGithub": "GitHub API response is currently empty."
   },

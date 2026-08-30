@@ -3,13 +3,14 @@
 import { Icon } from "@iconify/react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button, ButtonIcon, ButtonLabel, Typography } from "poyraz-ui/atoms";
-import { ImageCard } from "poyraz-ui/molecules";
 import { useRouter } from "@/i18n/routing";
 import { WEB_APPS } from "@/data/projects";
 import { getLocalizedValue } from "@/lib/locale";
+import { ProjectCardWithPopover } from "@/components/project-card-with-popover";
 
 export function HomeProjectsSection() {
   const t = useTranslations("Home");
+  const tProjects = useTranslations("Projects");
   const locale = useLocale();
   const router = useRouter();
   const projects = WEB_APPS.slice(0, 5);
@@ -43,7 +44,7 @@ export function HomeProjectsSection() {
       <div className="relative overflow-hidden py-1">
         <div className="flex w-max items-stretch gap-2">
           {projects.map((project) => (
-            <ImageCard
+            <ProjectCardWithPopover
               key={project.id}
               image={project.image}
               title={project.title}
@@ -54,6 +55,10 @@ export function HomeProjectsSection() {
                   : undefined
               }
               href={project.href}
+              technologies={project.technologies}
+              architecture={getLocalizedValue(project.architecture, locale)}
+              technologiesLabel={tProjects("technologies")}
+              architectureLabel={tProjects("architecture")}
               className="aspect-square w-56 shrink-0 rounded-sm border-border md:w-[calc((100vw-8rem)/4)] md:max-w-56"
             />
           ))}

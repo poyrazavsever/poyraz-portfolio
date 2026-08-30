@@ -64,6 +64,8 @@
     },
     "viewNpmPackages": "NPM paketlerimi gör",
     "visitGithub": "GitHub hesabına git",
+    "technologies": "Teknolojiler",
+    "architecture": "Mimari",
     "emptyNpm": "npm API yanıtı şu anda boş.",
     "emptyGithub": "GitHub API yanıtı şu anda boş."
   },

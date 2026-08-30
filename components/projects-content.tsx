@@ -9,8 +9,8 @@ import {
   Card,
   Typography,
 } from "poyraz-ui/atoms";
-import { ImageCard } from "poyraz-ui/molecules";
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
+import { ProjectCardWithPopover } from "@/components/project-card-with-popover";
 import {
   EXTENSIONS,
   FIGMA_TEMPLATES,
@@ -64,6 +64,8 @@ type LocalizedProjectItem = {
   title: string;
   description: string;
   image: string;
+  technologies: string[];
+  architecture: string;
   badge?: string;
   href?: string;
 };
@@ -71,9 +73,13 @@ type LocalizedProjectItem = {
 function ProjectSection({
   title,
   items,
+  technologiesLabel,
+  architectureLabel,
 }: {
   title: string;
   items: LocalizedProjectItem[];
+  technologiesLabel: string;
+  architectureLabel: string;
 }) {
   return (
     <section className="space-y-3">
@@ -83,12 +89,16 @@ function ProjectSection({
       <StaggerContainer className="grid grid-cols-2 gap-2 lg:grid-cols-4">
         {items.map((item) => (
           <StaggerItem key={item.id}>
-            <ImageCard
+            <ProjectCardWithPopover
               image={item.image}
               title={item.title}
               description={item.description}
               badge={item.badge}
               href={item.href}
+              technologies={item.technologies}
+              architecture={item.architecture}
+              technologiesLabel={technologiesLabel}
+              architectureLabel={architectureLabel}
               className="aspect-square rounded-sm border-border"
             />
           </StaggerItem>
@@ -111,6 +121,7 @@ export async function ProjectsContent() {
     return items.map((item) => ({
       ...item,
       description: getLocalizedValue(item.description, locale),
+      architecture: getLocalizedValue(item.architecture, locale),
       badge: item.badge ? getLocalizedValue(item.badge, locale) : undefined,
     }));
   };
@@ -130,10 +141,30 @@ export async function ProjectsContent() {
         </div>
       </Card>
 
-      <ProjectSection title={t("sections.mobileApps")} items={localizeItems(MOBILE_APPS)} />
-      <ProjectSection title={t("sections.webApps")} items={localizeItems(WEB_APPS)} />
-      <ProjectSection title={t("sections.extensions")} items={localizeItems(EXTENSIONS)} />
-      <ProjectSection title={t("sections.figmaTemplates")} items={localizeItems(FIGMA_TEMPLATES)} />
+      <ProjectSection
+        title={t("sections.webApps")}
+        items={localizeItems(WEB_APPS)}
+        technologiesLabel={t("technologies")}
+        architectureLabel={t("architecture")}
+      />
+      <ProjectSection
+        title={t("sections.mobileApps")}
+        items={localizeItems(MOBILE_APPS)}
+        technologiesLabel={t("technologies")}
+        architectureLabel={t("architecture")}
+      />
+      <ProjectSection
+        title={t("sections.extensions")}
+        items={localizeItems(EXTENSIONS)}
+        technologiesLabel={t("technologies")}
+        architectureLabel={t("architecture")}
+      />
+      <ProjectSection
+        title={t("sections.figmaTemplates")}
+        items={localizeItems(FIGMA_TEMPLATES)}
+        technologiesLabel={t("technologies")}
+        architectureLabel={t("architecture")}
+      />
 
       <section className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
