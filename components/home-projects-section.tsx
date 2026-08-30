@@ -59,7 +59,8 @@ export function HomeProjectsSection() {
               architecture={getLocalizedValue(project.architecture, locale)}
               technologiesLabel={tProjects("technologies")}
               architectureLabel={tProjects("architecture")}
-              className="aspect-square w-56 shrink-0 rounded-sm border-border md:w-[calc((100vw-8rem)/4)] md:max-w-56"
+              triggerClassName="w-56 shrink-0 md:w-[calc((100vw-8rem)/4)] md:max-w-56"
+              className="aspect-square rounded-sm border-border"
             />
           ))}
         </div>

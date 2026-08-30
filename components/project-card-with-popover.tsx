@@ -20,6 +20,7 @@ type ProjectCardWithPopoverProps = {
   technologiesLabel: string;
   architectureLabel: string;
   className?: string;
+  triggerClassName?: string;
 };
 
 export function ProjectCardWithPopover({
@@ -33,6 +34,7 @@ export function ProjectCardWithPopover({
   technologiesLabel,
   architectureLabel,
   className,
+  triggerClassName,
 }: ProjectCardWithPopoverProps) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -69,6 +71,7 @@ export function ProjectCardWithPopover({
       className={className}
     />
   );
+  const triggerClasses = `block ${triggerClassName ?? ""} text-inherit outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`;
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -76,7 +79,7 @@ export function ProjectCardWithPopover({
         {href ? (
           <a
             href={href}
-            className="block text-inherit no-underline outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className={`${triggerClasses} no-underline`}
             onPointerEnter={showPopover}
             onPointerLeave={scheduleClose}
             onFocus={showPopover}
@@ -87,7 +90,7 @@ export function ProjectCardWithPopover({
         ) : (
           <button
             type="button"
-            className="block border-0 bg-transparent p-0 text-left text-inherit outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className={`${triggerClasses} border-0 bg-transparent p-0 text-left`}
             onPointerEnter={showPopover}
             onPointerLeave={scheduleClose}
             onFocus={showPopover}

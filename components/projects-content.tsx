@@ -99,6 +99,7 @@ function ProjectSection({
               architecture={item.architecture}
               technologiesLabel={technologiesLabel}
               architectureLabel={architectureLabel}
+              triggerClassName="w-full"
               className="aspect-square rounded-sm border-border"
             />
           </StaggerItem>
