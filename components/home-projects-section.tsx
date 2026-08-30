@@ -47,7 +47,7 @@ export function HomeProjectsSection() {
             <ProjectCardWithPopover
               key={project.id}
               image={project.image}
-              title={project.title}
+              title={getLocalizedValue(project.title, locale)}
               description={getLocalizedValue(project.description, locale)}
               badge={
                 project.badge

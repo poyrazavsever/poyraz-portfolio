@@ -121,6 +121,7 @@ export async function ProjectsContent() {
   const localizeItems = (items: ProjectItem[]): LocalizedProjectItem[] => {
     return items.map((item) => ({
       ...item,
+      title: getLocalizedValue(item.title, locale),
       description: getLocalizedValue(item.description, locale),
       architecture: getLocalizedValue(item.architecture, locale),
       badge: item.badge ? getLocalizedValue(item.badge, locale) : undefined,

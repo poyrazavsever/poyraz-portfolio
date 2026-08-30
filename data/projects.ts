@@ -1,6 +1,9 @@
 export type ProjectItem = {
   id: string;
-  title: string;
+  title: {
+    tr: string;
+    en: string;
+  } | string;
   description: {
     tr: string;
     en: string;
@@ -48,7 +51,10 @@ const OSTIM_TECHNOLOGIES = [
 export const WEB_APPS: ProjectItem[] = [
   {
     id: "ostim-web-portal",
-    title: "OSTİM Web Portalı",
+    title: {
+      tr: "OSTİM Web Portalı",
+      en: "OSTİM Web Portal",
+    },
     badge: {
       tr: "Kurumsal Portal",
       en: "Corporate Portal",
@@ -66,7 +72,10 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "ostim-employment",
-    title: "OSTİM İstihdam",
+    title: {
+      tr: "OSTİM İstihdam",
+      en: "OSTİM Employment",
+    },
     badge: {
       tr: "İstihdam Portalı",
       en: "Employment Portal",
@@ -84,7 +93,10 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "ostim-foreign-trade",
-    title: "OSTİM Dış Ticaret",
+    title: {
+      tr: "OSTİM Dış Ticaret",
+      en: "OSTİM Foreign Trade",
+    },
     badge: {
       tr: "Dış Ticaret Portalı",
       en: "Foreign Trade Portal",
@@ -121,7 +133,10 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "ataturk-chronology",
-    title: "Atatürk Kronolojisi",
+    title: {
+      tr: "Atatürk Kronolojisi",
+      en: "Atatürk Chronology",
+    },
     badge: {
       tr: "Açık Kaynak",
       en: "Open Source",
@@ -241,7 +256,7 @@ export const EXTENSIONS: ProjectItem[] = [
 export const FIGMA_TEMPLATES: ProjectItem[] = [
   {
     id: "hsd-website",
-    title: "HSD Community Web Site",
+    title: "HSD Community Website",
     badge: "Figma",
     image: "/projects/hsd.png",
     technologies: ["Figma"],

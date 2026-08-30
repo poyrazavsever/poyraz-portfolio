@@ -217,11 +217,12 @@ export function getCommandPaletteGroups(
 
   const projectItems: CommandPaletteItem[] = [
     ...MOBILE_APPS.map((item) => {
+      const title = getLocalizedValue(item.title, locale);
       const description = getLocalizedValue(item.description, locale);
       const badgeStr = item.badge ? getLocalizedValue(item.badge, locale) : "";
       return {
         id: `mobile-project-${item.id}`,
-        label: item.title,
+        label: title,
         href: "/projects",
         icon: "mdi:cellphone",
         keywords: [
@@ -233,11 +234,12 @@ export function getCommandPaletteGroups(
       };
     }),
     ...WEB_APPS.map((item) => {
+      const title = getLocalizedValue(item.title, locale);
       const description = getLocalizedValue(item.description, locale);
       const badgeStr = item.badge ? getLocalizedValue(item.badge, locale) : "";
       return {
         id: `web-project-${item.id}`,
-        label: item.title,
+        label: title,
         href: item.href ?? "/projects",
         icon: "mdi:web",
         external: Boolean(item.href),
@@ -250,11 +252,12 @@ export function getCommandPaletteGroups(
       };
     }),
     ...EXTENSIONS.map((item) => {
+      const title = getLocalizedValue(item.title, locale);
       const description = getLocalizedValue(item.description, locale);
       const badgeStr = item.badge ? getLocalizedValue(item.badge, locale) : "";
       return {
         id: `extension-project-${item.id}`,
-        label: item.title,
+        label: title,
         href: item.href ?? "/projects",
         icon: "mdi:puzzle-outline",
         external: Boolean(item.href),
@@ -268,11 +271,12 @@ export function getCommandPaletteGroups(
       };
     }),
     ...FIGMA_TEMPLATES.map((item) => {
+      const title = getLocalizedValue(item.title, locale);
       const description = getLocalizedValue(item.description, locale);
       const badgeStr = item.badge ? getLocalizedValue(item.badge, locale) : "";
       return {
         id: `figma-project-${item.id}`,
-        label: item.title,
+        label: title,
         href: item.href ?? "/projects",
         icon: "mdi:figma",
         external: Boolean(item.href),
