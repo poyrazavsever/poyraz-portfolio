@@ -41,7 +41,6 @@ const OSTIM_TECHNOLOGIES = [
   ".NET 10",
   "Angular",
   "Astro",
-  "Own UI Kit",
   "OMD UI Kit",
   "Tailwind CSS",
 ];
