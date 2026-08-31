@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { AnimationSourcesContent } from "@/components/animation-sources-content";
 import { listAnimationSources } from "@/data/animation-sources";
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://poyrazavsever.com";
+import {
+  createAlternates,
+  getAbsoluteUrl,
+  getLocalizedUrl,
+  type SiteLocale,
+} from "@/lib/seo";
 
 type AnimationSourcesPageProps = {
   params: Promise<{ locale: string }>;
@@ -14,27 +17,18 @@ export async function generateMetadata({
   params,
 }: AnimationSourcesPageProps): Promise<Metadata> {
   const { locale } = await params;
-  const [t, sources] = await Promise.all([
-    getTranslations({ locale, namespace: "AnimationSources" }),
-    listAnimationSources(locale),
-  ]);
-  const localizedPath = locale === "en" ? "/en/animation-sources" : "/animation-sources";
-  const url = `${SITE_URL}${localizedPath}`;
-  const socialImagePath = sources[0]?.coverImage ?? "/logo/logo.webp";
-  const socialImageUrl = new URL(socialImagePath, SITE_URL).toString();
-  const isGif = socialImagePath.toLowerCase().endsWith(".gif");
+  const t = await getTranslations({ locale, namespace: "AnimationSources" });
+  const siteLocale = locale as SiteLocale;
+  const url = getLocalizedUrl(siteLocale, "/animation-sources");
+  const socialImageUrl = getAbsoluteUrl("/og.png");
 
   return {
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: url,
-      languages: {
-        "tr-TR": `${SITE_URL}/animation-sources`,
-        "en-US": `${SITE_URL}/en/animation-sources`,
-        "x-default": `${SITE_URL}/animation-sources`,
-      },
-    },
+    alternates: createAlternates(siteLocale, {
+      tr: "/animation-sources",
+      en: "/animation-sources",
+    }),
     openGraph: {
       title: t("title"),
       description: t("description"),
@@ -45,9 +39,9 @@ export async function generateMetadata({
       images: [
         {
           url: socialImageUrl,
-          type: isGif ? "image/gif" : "image/png",
-          width: isGif ? 480 : 1200,
-          height: isGif ? 480 : 1200,
+          type: "image/png",
+          width: 1200,
+          height: 630,
           alt: t("title"),
         },
       ],

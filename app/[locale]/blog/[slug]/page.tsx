@@ -43,6 +43,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       description: post.excerpt,
       url,
       type: "article",
+      siteName: "Poyraz Avsever",
       locale: locale === "en" ? "en_US" : "tr_TR",
       alternateLocale:
         translations.length > 1
@@ -64,6 +65,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       title: post.title,
       description: post.excerpt,
       images: [post.coverImage],
+      creator: "@poyrazavsever",
     },
   };
 }
@@ -77,8 +79,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   }
 
   if (isNewsletterCategory(post.category)) {
-    const localePrefix = locale === "tr" ? "" : `/${locale}`;
-    permanentRedirect(`${localePrefix}/agenda/${post.slug}`);
+    permanentRedirect(`/${locale}/agenda/${post.slug}`);
   }
 
   return (

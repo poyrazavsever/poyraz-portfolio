@@ -171,7 +171,8 @@
   "Metadata": {
     "title": "Poyraz Avsever | Portfolyo",
     "titleTemplate": "%s | Poyraz Avsever",
-    "description": "Poyraz Avsever'in projelerini, yazılım içeriklerini ve teknik çalışmalarını paylaştığı kişisel portfolyo sitesi."
+    "description": "Poyraz Avsever'in projelerini, yazılım içeriklerini ve teknik çalışmalarını paylaştığı kişisel portfolyo sitesi.",
+    "socialImageAlt": "Poyraz Avsever portfolyo paylaşım görseli"
   },
   "SearchCommand": {
     "placeholder": "Sayfa ve bağlantılarda ara...",

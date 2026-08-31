@@ -171,7 +171,8 @@
   "Metadata": {
     "title": "Poyraz Avsever | Portfolio",
     "titleTemplate": "%s | Poyraz Avsever",
-    "description": "Poyraz Avsever's personal portfolio website sharing projects, software content, and technical works."
+    "description": "Poyraz Avsever's personal portfolio website sharing projects, software content, and technical works.",
+    "socialImageAlt": "Poyraz Avsever portfolio social preview"
   },
   "SearchCommand": {
     "placeholder": "Search pages and links...",

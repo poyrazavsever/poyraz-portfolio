@@ -43,6 +43,7 @@ export async function generateMetadata({
       description: post.excerpt,
       url,
       type: "article",
+      siteName: "Poyraz Avsever",
       locale: locale === "en" ? "en_US" : "tr_TR",
       alternateLocale:
         translations.length > 1
@@ -64,6 +65,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       images: [post.coverImage],
+      creator: "@poyrazavsever",
     },
   };
 }

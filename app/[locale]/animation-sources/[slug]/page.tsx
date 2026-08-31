@@ -6,18 +6,16 @@ import {
   getAnimationSourceBySlug,
   listAnimationSources,
 } from "@/data/animation-sources";
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://poyrazavsever.com";
+import {
+  createAlternates,
+  getAbsoluteUrl,
+  getLocalizedUrl,
+  type SiteLocale,
+} from "@/lib/seo";
 
 type AnimationSourceDetailPageProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
-
-function getLocalizedPath(locale: string, slug: string) {
-  const localePrefix = locale === "tr" ? "" : `/${locale}`;
-  return `${localePrefix}/animation-sources/${slug}`;
-}
 
 export async function generateStaticParams() {
   const sources = await listAnimationSources();
@@ -39,22 +37,15 @@ export async function generateMetadata({
     return { title: locale === "en" ? "Source not found" : "Kaynak bulunamadı" };
   }
 
-  const url = `${SITE_URL}${getLocalizedPath(locale, source.slug)}`;
-  const socialImageUrl = new URL(source.coverImage, SITE_URL).toString();
-  const turkishUrl = `${SITE_URL}${getLocalizedPath("tr", source.slug)}`;
-  const englishUrl = `${SITE_URL}${getLocalizedPath("en", source.slug)}`;
+  const siteLocale = locale as SiteLocale;
+  const path = `/animation-sources/${source.slug}`;
+  const url = getLocalizedUrl(siteLocale, path);
+  const socialImageUrl = getAbsoluteUrl(source.coverImage);
 
   return {
     title: source.title,
     description: source.excerpt,
-    alternates: {
-      canonical: url,
-      languages: {
-        "tr-TR": turkishUrl,
-        "en-US": englishUrl,
-        "x-default": turkishUrl,
-      },
-    },
+    alternates: createAlternates(siteLocale, { tr: path, en: path }),
     openGraph: {
       title: source.title,
       description: source.excerpt,
@@ -68,7 +59,7 @@ export async function generateMetadata({
       images: [
         {
           url: socialImageUrl,
-          type: "image/gif",
+          type: "image/webp",
           width: 480,
           height: 480,
           alt: source.title,
@@ -98,7 +89,10 @@ export default async function AnimationSourceDetailPage({
 
   if (!source) notFound();
 
-  const url = `${SITE_URL}${getLocalizedPath(locale, source.slug)}`;
+  const url = getLocalizedUrl(
+    locale as SiteLocale,
+    `/animation-sources/${source.slug}`,
+  );
 
   return (
     <>

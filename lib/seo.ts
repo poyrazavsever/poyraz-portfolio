@@ -28,9 +28,9 @@ function normalizePath(path: string) {
 
 export function getLocalizedPath(locale: SiteLocale, path: string) {
   const normalizedPath = normalizePath(path);
-
-  if (locale === "tr") return normalizedPath;
-  return normalizedPath === "/" ? "/en" : `/en${normalizedPath}`;
+  return normalizedPath === "/"
+    ? `/${locale}`
+    : `/${locale}${normalizedPath}`;
 }
 
 export function getAbsoluteUrl(path: string) {
@@ -88,17 +88,27 @@ export function createPageMetadata({
     alternates: createAlternates(locale, { tr: path, en: path }),
     openGraph: {
       type: "website",
+      siteName: "Poyraz Avsever",
       locale: locale === "tr" ? "tr_TR" : "en_US",
       alternateLocale: locale === "tr" ? ["en_US"] : ["tr_TR"],
       url,
       title,
       description,
+      images: [
+        {
+          url: "/og.png",
+          width: 1200,
+          height: 630,
+          alt: "Poyraz Avsever",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
       creator: "@poyrazavsever",
+      images: ["/og.png"],
     },
   };
 }

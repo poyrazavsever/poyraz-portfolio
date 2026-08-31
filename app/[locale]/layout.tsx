@@ -41,6 +41,17 @@ export async function generateMetadata({
     authors: [{ name: "Poyraz Avsever" }],
     creator: "Poyraz Avsever",
     publisher: "Poyraz Avsever",
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     openGraph: {
       type: "website",
       locale: locale === "tr" ? "tr_TR" : "en_US",
@@ -49,10 +60,10 @@ export async function generateMetadata({
       description: description,
       images: [
         {
-          url: "/logo/logo.webp",
+          url: "/og.png",
           width: 1200,
-          height: 1200,
-          alt: "Poyraz Avsever Logo",
+          height: 630,
+          alt: t("socialImageAlt"),
         },
       ],
     },
@@ -60,7 +71,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: title,
       description: description,
-      images: ["/logo/logo.webp"],
+      images: ["/og.png"],
       creator: "@poyrazavsever",
     },
     keywords: [
