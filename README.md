@@ -75,6 +75,16 @@ pnpm build
 pnpm start
 ```
 
+## Canlı medya kiti verileri
+
+Medya kiti, YouTube kanalının herkese açık abone, toplam görüntülenme ve video
+sayılarını YouTube Data API üzerinden saatlik olarak yenileyebilir. Yayın ortamına
+`YOUTUBE_API_KEY` eklemek yeterlidir. İsteğe bağlı olarak `YOUTUBE_CHANNEL_ID`
+tanımlanabilir; tanımlanmadığında `@poyrazavsever` kullanıcı adı kullanılır.
+
+API anahtarı yoksa veya YouTube isteği başarısız olursa sayfa, `data/media-kit.ts`
+içindeki son doğrulanmış YouTube Studio verilerine otomatik olarak geri döner.
+
 ## Electron Data Panel Komutları
 
 ```bash
