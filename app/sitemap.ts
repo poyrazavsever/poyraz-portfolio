@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { listAnimationSources } from "@/data/animation-sources";
 import { isNewsletterCategory } from "@/data/blog";
 import { listBlogDetails } from "@/data/blog-detail";
+import { listProjectCaseStudies } from "@/data/project-case-studies";
 import {
   getAbsoluteUrl,
   getLocalizedUrl,
@@ -127,5 +128,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   );
 
-  return [...staticRoutes, ...blogRoutes, ...animationSourceRoutes];
+  const projectCaseStudyRoutes: MetadataRoute.Sitemap = LOCALES.flatMap(
+    (locale) =>
+      listProjectCaseStudies(locale).map((project) => {
+        const path = `/projects/${project.slug}`;
+        const paths = { tr: path, en: path };
+
+        return {
+          url: getLocalizedUrl(locale, path),
+          changeFrequency: "monthly" as const,
+          priority: 0.8,
+          alternates: { languages: getLanguageLinks(paths) },
+          images: [getAbsoluteUrl(project.image)],
+        };
+      }),
+  );
+
+  return [
+    ...staticRoutes,
+    ...projectCaseStudyRoutes,
+    ...blogRoutes,
+    ...animationSourceRoutes,
+  ];
 }

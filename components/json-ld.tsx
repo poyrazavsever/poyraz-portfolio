@@ -144,6 +144,57 @@ export function ProjectsJsonLd({
   );
 }
 
+export function ProjectCaseStudyJsonLd({
+  name,
+  description,
+  url,
+  liveUrl,
+  image,
+  locale,
+  applicationCategory,
+  technologies,
+  features,
+}: {
+  name: string;
+  description: string;
+  url: string;
+  liveUrl: string;
+  image: string;
+  locale: "tr" | "en";
+  applicationCategory: string;
+  technologies: string[];
+  features: string[];
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `${url}#software-application`,
+    name,
+    description,
+    url,
+    sameAs: liveUrl,
+    image: image.startsWith("http") ? image : `${SITE_URL}${image}`,
+    inLanguage: locale === "tr" ? "tr-TR" : "en-US",
+    applicationCategory,
+    operatingSystem: "Web",
+    keywords: technologies,
+    featureList: features,
+    author: {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: "Poyraz Avsever",
+      url: SITE_URL,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
+    />
+  );
+}
+
 export type ArticleJsonLdProps = {
   title: string;
   description: string;

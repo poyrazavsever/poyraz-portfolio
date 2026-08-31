@@ -68,6 +68,7 @@ type LocalizedProjectItem = {
   architecture: string;
   badge?: string;
   href?: string;
+  caseStudySlug?: string;
 };
 
 function ProjectSection({
@@ -75,11 +76,13 @@ function ProjectSection({
   items,
   technologiesLabel,
   architectureLabel,
+  caseStudyLabel,
 }: {
   title: string;
   items: LocalizedProjectItem[];
   technologiesLabel: string;
   architectureLabel: string;
+  caseStudyLabel: string;
 }) {
   return (
     <section className="space-y-3">
@@ -95,6 +98,12 @@ function ProjectSection({
               description={item.description}
               badge={item.badge}
               href={item.href}
+              caseStudyHref={
+                item.caseStudySlug
+                  ? `/projects/${item.caseStudySlug}`
+                  : undefined
+              }
+              caseStudyLabel={caseStudyLabel}
               technologies={item.technologies}
               architecture={item.architecture}
               technologiesLabel={technologiesLabel}
@@ -148,24 +157,28 @@ export async function ProjectsContent() {
         items={localizeItems(WEB_APPS)}
         technologiesLabel={t("technologies")}
         architectureLabel={t("architecture")}
+        caseStudyLabel={t("viewCaseStudy")}
       />
       <ProjectSection
         title={t("sections.mobileApps")}
         items={localizeItems(MOBILE_APPS)}
         technologiesLabel={t("technologies")}
         architectureLabel={t("architecture")}
+        caseStudyLabel={t("viewCaseStudy")}
       />
       <ProjectSection
         title={t("sections.extensions")}
         items={localizeItems(EXTENSIONS)}
         technologiesLabel={t("technologies")}
         architectureLabel={t("architecture")}
+        caseStudyLabel={t("viewCaseStudy")}
       />
       <ProjectSection
         title={t("sections.figmaTemplates")}
         items={localizeItems(FIGMA_TEMPLATES)}
         technologiesLabel={t("technologies")}
         architectureLabel={t("architecture")}
+        caseStudyLabel={t("viewCaseStudy")}
       />
 
       <section className="space-y-3">

@@ -19,6 +19,7 @@ export type ProjectItem = {
     en: string;
   } | string;
   href?: string;
+  caseStudySlug?: string;
 };
 
 export const MOBILE_APPS: ProjectItem[] = [
@@ -27,15 +28,22 @@ export const MOBILE_APPS: ProjectItem[] = [
     title: "Targiz App",
     badge: "Agritech",
     image: "/projects/targiz.png",
-    technologies: ["Next.js", "Supabase"],
+    technologies: [
+      "React Native",
+      "Next.js",
+      "Express.js",
+      "Supabase",
+      "Tailwind CSS",
+    ],
     architecture: {
-      tr: "Atomic Design yaklaşımıyla oluşturulmuş, Supabase tabanlı modüler uygulama mimarisi.",
-      en: "A modular, Supabase-backed application architecture built with the Atomic Design approach.",
+      tr: "React Native ve Next.js istemcilerini; Express.js servisleri, Supabase veri katmanı ve yapay zekâ destekli modüllerle birleştiren çapraz platform mimarisi.",
+      en: "A cross-platform architecture combining React Native and Next.js clients with Express.js services, a Supabase data layer, and AI-assisted modules.",
     },
     href: "https://targiz.com",
+    caseStudySlug: "targiz",
     description: {
-      tr: "Ottoqua ekibiyle birlikte geliştirdiğimiz, küçük ölçekli üreticilere sahada destek veren yapay zeka destekli tarım uygulaması.",
-      en: "An AI-powered agricultural application we developed with the Ottoqua team to support small-scale producers in the field.",
+      tr: "Üç kişilik ekipte yazılım liderliği ve full-stack geliştirme sorumluluğunu üstlendiğim; üreticilere hastalık tespiti, lojistik ve pazar erişimi sunan mobil öncelikli tarım platformu.",
+      en: "A mobile-first agriculture platform for disease diagnosis, logistics, and market access, where I led a three-person software team while contributing as a full-stack developer.",
     },
   },
 ];
@@ -61,6 +69,7 @@ export const WEB_APPS: ProjectItem[] = [
     },
     image: "/projects/ostim.webp",
     href: "https://ostim.org.tr",
+    caseStudySlug: "ostim-web-portali",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
       tr: "OSTİM Organize Sanayi Bölgesi ve yedi kümeye ait kurumsal içerikleri, firma ve ürün aramasını, çevrim içi işlemleri ve iletişim akışlarını tek portalda birleştiren çok bölümlü yapı.",
@@ -83,6 +92,7 @@ export const WEB_APPS: ProjectItem[] = [
     },
     image: "/projects/ostim-istihdam.webp",
     href: "https://ostimistihdam.com",
+    caseStudySlug: "ostim-istihdam",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
       tr: "İŞKUR senkronizasyonu üzerine kurulu; aday, işveren, iş ve staj ilanı akışlarını yapay zekâ destekli eşleştirme katmanıyla buluşturan rol tabanlı portal mimarisi.",
@@ -152,8 +162,8 @@ export const WEB_APPS: ProjectItem[] = [
     },
     href: "https://ataturk-kronolojisi.org",
     description: {
-      tr: "Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
-      en: "A web experience presenting important events, speeches, and reforms in Atatürk's life with an interactive timeline.",
+      tr: "Açık kaynak katkıcısı olarak yer aldığım; Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
+      en: "An interactive timeline of key events, speeches, and reforms in Atatürk's life, to which I contributed as an open-source contributor.",
     },
   },
   {
@@ -177,40 +187,50 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "ohhike",
-    title: "Ohhike Coach",
+    title: "OhHike",
     badge: {
-      tr: "Açık Kaynak",
-      en: "Open Source",
+      tr: "Self-hosted",
+      en: "Self-hosted",
     },
     image: "/projects/ohhike.png",
-    technologies: ["React", "Express.js", "Better Auth", "better-sqlite3"],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Express.js",
+      "Better Auth",
+      "SQLite",
+      "Drizzle ORM",
+    ],
     architecture: {
-      tr: "Landing page, uygulama ve API katmanlarını aynı çalışma alanında yöneten; React arayüzü ve Express API'sinden oluşan monorepo.",
-      en: "A monorepo managing the landing page, application, and API in one workspace, with a React interface and Express API.",
+      tr: "pnpm/Turborepo monorepo içinde React/Vite arayüzü ve modüler monolit Express API; SQLite, Drizzle ORM, gerçek servis testleri ve Docker tabanlı self-hosted dağıtım.",
+      en: "A React/Vite frontend and modular-monolith Express API in a pnpm/Turborepo monorepo, with SQLite, Drizzle ORM, real-service tests, and Docker-based self-hosted deployment.",
     },
     href: "https://www.ohhike.com",
+    caseStudySlug: "ohhike",
     description: {
-      tr: "Spor takımları için açık kaynaklı, yapay zekâ destekli antrenörlük zekâ platformu. OhHike CoachOS; sporcu check-in'lerini, antrenman notlarını, akıllı saat verilerini ve antrenman geçmişini aksiyona geçirilebilir bir takım hafızasına dönüştürür.",
-      en: "An open-source, AI-powered coaching intelligence platform for sports teams. OhHike CoachOS turns athlete check-ins, training notes, smartwatch data, and session history into actionable team memory.",
+      tr: "Masa başında çalışan geliştiriciler için aktivite, haftalık sağlık planı, beslenme ve kalori takibini bir araya getiren self-hosted uygulama.",
+      en: "A self-hosted activity, weekly health planning, nutrition, and calorie tracking application for desk-bound developers.",
     },
   },
   {
     id: "neta",
     title: "Take Neta",
     badge: {
-      tr: "Açık Kaynak",
-      en: "Open Source",
+      tr: "Self-hosted",
+      en: "Self-hosted",
     },
     image: "/projects/neta.png",
-    technologies: ["Next.js", "Express.js"],
+    technologies: ["Next.js", "TypeScript", "Express.js", "AI Integrations"],
     architecture: {
       tr: "Landing page, uygulama ve API paketlerini birlikte yöneten Next.js ve Express.js tabanlı monorepo mimarisi.",
       en: "A Next.js and Express.js monorepo architecture managing landing page, application, and API packages together.",
     },
     href: "https://www.takeneta.com",
+    caseStudySlug: "take-neta",
     description: {
-      tr: "Dijital ikinci beyniniz. Bilinçli üretkenlik ve yaşam takibi için hepsi bir arada kişisel işletim sistemi. Yerel öncelikli, yapay zekâ entegrasyonlu ve açık kaynaklı.",
-      en: "Your digital second brain. An all-in-one personal operating system for mindful productivity and life-tracking. Local-first, AI-integrated, and open-source.",
+      tr: "Freelancer'lar için görev, proje, müşteri, finans, yapay zekâ ve müşteri portalı akışlarını birleştiren self-hosted işletim sistemi.",
+      en: "A self-hosted operating system for freelancers that unifies tasks, projects, clients, finance, AI, and client portal workflows.",
     },
   },
 ];

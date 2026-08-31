@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Icon } from "@iconify/react";
 import { Badge, Typography } from "poyraz-ui/atoms";
 import {
   ImageCard,
@@ -8,6 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "poyraz-ui/molecules";
+import { Link } from "@/i18n/routing";
 
 type ProjectCardWithPopoverProps = {
   title: string;
@@ -15,6 +17,8 @@ type ProjectCardWithPopoverProps = {
   image: string;
   badge?: string;
   href?: string;
+  caseStudyHref?: string;
+  caseStudyLabel?: string;
   technologies: string[];
   architecture: string;
   technologiesLabel: string;
@@ -29,6 +33,8 @@ export function ProjectCardWithPopover({
   image,
   badge,
   href,
+  caseStudyHref,
+  caseStudyLabel,
   technologies,
   architecture,
   technologiesLabel,
@@ -76,7 +82,18 @@ export function ProjectCardWithPopover({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        {href ? (
+        {caseStudyHref ? (
+          <Link
+            href={caseStudyHref}
+            className={`${triggerClasses} no-underline`}
+            onPointerEnter={showPopover}
+            onPointerLeave={scheduleClose}
+            onFocus={showPopover}
+            onBlur={scheduleClose}
+          >
+            {card}
+          </Link>
+        ) : href ? (
           <a
             href={href}
             className={`${triggerClasses} no-underline`}
@@ -145,6 +162,17 @@ export function ProjectCardWithPopover({
               {architecture}
             </Typography>
           </div>
+
+          {caseStudyHref && caseStudyLabel ? (
+            <Link
+              href={caseStudyHref}
+              onClick={() => setOpen(false)}
+              className="flex items-center justify-between border-t border-border pt-3 text-xs font-semibold text-foreground transition-colors hover:text-red-600"
+            >
+              <span>{caseStudyLabel}</span>
+              <Icon icon="mdi:arrow-right" width={15} height={15} aria-hidden="true" />
+            </Link>
+          ) : null}
         </div>
       </PopoverContent>
     </Popover>
