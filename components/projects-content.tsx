@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { Icon } from "@iconify/react";
 import {
@@ -10,6 +9,7 @@ import {
   Typography,
 } from "poyraz-ui/atoms";
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
+import { GithubContributionGraph } from "@/components/github-contribution-graph";
 import { ProjectCardWithPopover } from "@/components/project-card-with-popover";
 import {
   EXTENSIONS,
@@ -18,7 +18,11 @@ import {
   WEB_APPS,
   type ProjectItem,
 } from "@/data/projects";
-import { getGithubRepos, getNpmPackages } from "@/lib/project-feeds";
+import {
+  getGithubContributions,
+  getGithubRepos,
+  getNpmPackages,
+} from "@/lib/project-feeds";
 import { getTranslations, getLocale } from "next-intl/server";
 import { getLocalizedValue } from "@/lib/locale";
 
@@ -122,9 +126,10 @@ export async function ProjectsContent() {
   const t = await getTranslations("Projects");
   const locale = await getLocale();
 
-  const [repos, npmPackages] = await Promise.all([
+  const [repos, npmPackages, contributions] = await Promise.all([
     getGithubRepos(),
     getNpmPackages(),
+    getGithubContributions(),
   ]);
 
   const localizeItems = (items: ProjectItem[]): LocalizedProjectItem[] => {
@@ -140,16 +145,17 @@ export async function ProjectsContent() {
   return (
     <section className="flex h-full flex-col gap-8 overflow-y-auto md:gap-10">
       <Card className="rounded-sm border-border bg-background p-2">
-        <div className="overflow-x-auto rounded-sm">
-          <Image
-            src="https://ghchart.rshah.org/dc2626/poyrazavsever"
-            alt="poyrazavsever için GitHub katkı grafiği"
-            width={820}
-            height={120}
-            className="h-auto w-full min-w-[740px]"
-            unoptimized
-          />
-        </div>
+        <GithubContributionGraph
+          days={contributions}
+          locale={locale}
+          labels={{
+            calendar: t("contributionCalendar"),
+            unavailable: t("contributionUnavailable"),
+            none: t("noContributions"),
+            singular: t("contributionSingular"),
+            plural: t("contributionPlural"),
+          }}
+        />
       </Card>
 
       <ProjectSection

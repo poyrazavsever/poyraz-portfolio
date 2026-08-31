@@ -68,6 +68,11 @@
     "technologies": "Teknolojiler",
     "architecture": "Mimari",
     "viewCaseStudy": "Vaka çalışmasını incele",
+    "contributionCalendar": "poyrazavsever GitHub katkı takvimi",
+    "contributionUnavailable": "GitHub katkı verisi şu anda alınamıyor.",
+    "noContributions": "Katkı yok",
+    "contributionSingular": "katkı",
+    "contributionPlural": "katkı",
     "emptyNpm": "npm API yanıtı şu anda boş.",
     "emptyGithub": "GitHub API yanıtı şu anda boş."
   },

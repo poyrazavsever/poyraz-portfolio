@@ -24,6 +24,12 @@ export type GithubActivity = {
   createdAt: string;
 };
 
+export type GithubContributionDay = {
+  date: string;
+  count: number;
+  level: 0 | 1 | 2 | 3 | 4;
+};
+
 type GithubRepoApi = {
   id: number;
   name: string;
@@ -132,6 +138,57 @@ export async function getGithubActivity(): Promise<GithubActivity[]> {
       repo: event.repo?.name ?? "unknown-repo",
       createdAt: event.created_at,
     }));
+  } catch {
+    return [];
+  }
+}
+
+export function parseGithubContributions(
+  html: string,
+): GithubContributionDay[] {
+  const contributions: GithubContributionDay[] = [];
+  const cellPattern =
+    /<td\b([^>]*\bdata-date="[^"]+"[^>]*)><\/td>\s*<tool-tip\b[^>]*>([\s\S]*?)<\/tool-tip>/g;
+
+  for (const match of html.matchAll(cellPattern)) {
+    const attributes = match[1];
+    const tooltip = match[2].replace(/<[^>]+>/g, "").trim();
+    const date = attributes.match(/data-date="([^"]+)"/)?.[1];
+    const levelValue = attributes.match(/data-level="([0-4])"/)?.[1];
+    const countValue = tooltip.match(/^([\d,]+)\s+contributions?\b/i)?.[1];
+
+    if (!date || levelValue === undefined) continue;
+
+    contributions.push({
+      date,
+      count: countValue ? Number(countValue.replaceAll(",", "")) : 0,
+      level: Number(levelValue) as GithubContributionDay["level"],
+    });
+  }
+
+  return contributions.sort((first, second) =>
+    first.date.localeCompare(second.date),
+  );
+}
+
+export async function getGithubContributions(): Promise<
+  GithubContributionDay[]
+> {
+  try {
+    const response = await fetch(
+      `https://github.com/users/${USERNAME}/contributions`,
+      {
+        next: { revalidate: 3600 },
+        headers: {
+          Accept: "text/html",
+          "User-Agent": "portfolio-new",
+        },
+      },
+    );
+
+    if (!response.ok) return [];
+
+    return parseGithubContributions(await response.text());
   } catch {
     return [];
   }

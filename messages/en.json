@@ -68,6 +68,11 @@
     "technologies": "Technologies",
     "architecture": "Architecture",
     "viewCaseStudy": "View case study",
+    "contributionCalendar": "poyrazavsever GitHub contribution calendar",
+    "contributionUnavailable": "GitHub contribution data is currently unavailable.",
+    "noContributions": "No contributions",
+    "contributionSingular": "contribution",
+    "contributionPlural": "contributions",
     "emptyNpm": "npm API response is currently empty.",
     "emptyGithub": "GitHub API response is currently empty."
   },
