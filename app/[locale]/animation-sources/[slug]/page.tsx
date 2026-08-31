@@ -109,6 +109,7 @@ export default async function AnimationSourceDetailPage({
         image={source.coverImage}
         datePublished={source.date}
         authorName={source.author}
+        locale={locale === "en" ? "en" : "tr"}
       />
       <AnimationSourceDetailContent source={source} />
     </>

@@ -1,6 +1,7 @@
 import { AboutContent } from "@/components/about-content";
-import { PersonJsonLd } from "@/components/json-ld";
-import { getStaticPageMetadata } from "@/lib/seo";
+import { ProfilePageJsonLd } from "@/components/json-ld";
+import { getLocalizedUrl, getStaticPageMetadata } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -11,10 +12,25 @@ export async function generateMetadata({
   return getStaticPageMetadata({ locale, page: "about", path: "/about" });
 }
 
-export default function AboutPage() {
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const siteLocale = locale === "en" ? "en" : "tr";
+  const t = await getTranslations({
+    locale: siteLocale,
+    namespace: "Seo.about",
+  });
+
   return (
     <>
-      <PersonJsonLd
+      <ProfilePageJsonLd
+        pageUrl={getLocalizedUrl(siteLocale, "/about")}
+        pageName={t("title")}
+        description={t("description")}
+        locale={siteLocale}
         name="Poyraz Avsever"
         jobTitle="Fullstack Developer"
         sameAs={[

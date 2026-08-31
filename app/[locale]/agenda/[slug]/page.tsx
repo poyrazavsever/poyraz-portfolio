@@ -90,6 +90,7 @@ export default async function AgendaDetailPage({ params }: AgendaDetailPageProps
         image={post.coverImage}
         datePublished={post.date}
         authorName={post.author}
+        locale={locale as SiteLocale}
       />
       <BlogDetailContent post={post} section="agenda" />
     </>

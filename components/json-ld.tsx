@@ -1,5 +1,9 @@
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://poyrazavsever.com";
 
+function serializeJsonLd(data: object) {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}
+
 export type PersonJsonLdProps = {
   name: string;
   url?: string;
@@ -28,7 +32,114 @@ export function PersonJsonLd({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
+    />
+  );
+}
+
+export type ProfilePageJsonLdProps = PersonJsonLdProps & {
+  pageUrl: string;
+  pageName: string;
+  description: string;
+  locale: "tr" | "en";
+};
+
+export function ProfilePageJsonLd({
+  pageUrl,
+  pageName,
+  description,
+  locale,
+  name,
+  url = SITE_URL,
+  image = `${SITE_URL}/logo/logo.webp`,
+  jobTitle = "Fullstack Developer",
+  sameAs = [],
+}: ProfilePageJsonLdProps) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${pageUrl}#profile-page`,
+    url: pageUrl,
+    name: pageName,
+    description,
+    inLanguage: locale === "tr" ? "tr-TR" : "en-US",
+    mainEntity: {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name,
+      url,
+      image,
+      jobTitle,
+      sameAs,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
+    />
+  );
+}
+
+export type ProjectsJsonLdItem = {
+  name: string;
+  description: string;
+  image: string;
+  url?: string;
+  technologies: string[];
+};
+
+export function ProjectsJsonLd({
+  name,
+  description,
+  url,
+  locale,
+  projects,
+}: {
+  name: string;
+  description: string;
+  url: string;
+  locale: "tr" | "en";
+  projects: ProjectsJsonLdItem[];
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${url}#projects`,
+    url,
+    name,
+    description,
+    inLanguage: locale === "tr" ? "tr-TR" : "en-US",
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: projects.length,
+      itemListElement: projects.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "CreativeWork",
+          name: project.name,
+          description: project.description,
+          image: project.image.startsWith("http")
+            ? project.image
+            : `${SITE_URL}${project.image}`,
+          url: project.url,
+          keywords: project.technologies,
+          creator: {
+            "@type": "Person",
+            "@id": `${SITE_URL}/#person`,
+            name: "Poyraz Avsever",
+          },
+        },
+      })),
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }
@@ -40,6 +151,7 @@ export type ArticleJsonLdProps = {
   image: string;
   datePublished: string;
   authorName?: string;
+  locale?: "tr" | "en";
 };
 
 export function ArticleJsonLd({
@@ -49,6 +161,7 @@ export function ArticleJsonLd({
   image,
   datePublished,
   authorName = "Poyraz Avsever",
+  locale = "tr",
 }: ArticleJsonLdProps) {
   const data = {
     "@context": "https://schema.org",
@@ -56,8 +169,11 @@ export function ArticleJsonLd({
     headline: title,
     description,
     url,
+    mainEntityOfPage: url,
     image: image.startsWith("http") ? image : `${SITE_URL}${image}`,
     datePublished,
+    dateModified: datePublished,
+    inLanguage: locale === "tr" ? "tr-TR" : "en-US",
     author: {
       "@type": "Person",
       name: authorName,
@@ -66,17 +182,15 @@ export function ArticleJsonLd({
     publisher: {
       "@type": "Person",
       name: authorName,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/logo/logo.webp`,
-      },
+      url: SITE_URL,
+      image: `${SITE_URL}/logo/logo.webp`,
     },
   };
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }
