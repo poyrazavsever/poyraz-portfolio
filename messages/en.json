@@ -33,6 +33,13 @@
     "allProjects": "All projects",
     "reviewsAndReferences": "Reviews & References",
     "allReferences": "All references",
+    "technologiesTitle": "Technologies I use",
+    "technologyCategories": {
+      "frontend": "Front End",
+      "backend": "Back End",
+      "languages": "Programming Languages",
+      "designTools": "Design & Tools"
+    },
     "sections": {
       "recentPosts": "Recent Posts",
       "references": "References",

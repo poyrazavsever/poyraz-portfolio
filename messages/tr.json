@@ -33,6 +33,13 @@
     "allProjects": "Tüm projeler",
     "reviewsAndReferences": "Yorumlar & Referanslar",
     "allReferences": "Tüm referanslar",
+    "technologiesTitle": "Ben bu teknolojileri kullanıyorum",
+    "technologyCategories": {
+      "frontend": "Ön Yüz",
+      "backend": "Arka Yüz",
+      "languages": "Programlama Dilleri",
+      "designTools": "Tasarım ve Araçlar"
+    },
     "sections": {
       "recentPosts": "Son Yazılar",
       "references": "Referanslar",

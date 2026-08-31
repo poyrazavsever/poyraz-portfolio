@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { Icon } from "@iconify/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
@@ -10,10 +11,11 @@ import {
   TextEffect,
   Typography,
 } from "poyraz-ui/atoms";
-import { NewsCard } from "poyraz-ui/molecules";
 import { getResumeHref } from "@/lib/links";
+import { HomeNewsCard } from "@/components/home-news-card";
 
 type HomeHeroProps = {
+  children?: ReactNode;
   news: {
     id: string;
     category: string;
@@ -24,7 +26,7 @@ type HomeHeroProps = {
   }[];
 };
 
-export function HomeHero({ news }: HomeHeroProps) {
+export function HomeHero({ children, news }: HomeHeroProps) {
   const t = useTranslations("Home");
   const locale = useLocale();
   const router = useRouter();
@@ -89,6 +91,8 @@ export function HomeHero({ news }: HomeHeroProps) {
 
       </div>
 
+      {children}
+
       <section className="space-y-3 pt-12 md:pt-14">
         <div className="flex items-center justify-between gap-4">
           <Typography
@@ -116,15 +120,15 @@ export function HomeHero({ news }: HomeHeroProps) {
 
         <div className="relative overflow-hidden py-1">
           <div className="flex w-max items-stretch gap-3">
-            {news.map((item) => (
-              <NewsCard
+            {news.map((item, index) => (
+              <HomeNewsCard
                 key={item.id}
-                className="w-72 shrink-0 rounded-sm border-border"
                 category={item.category}
                 title={item.title}
                 date={item.date}
                 image={item.image}
                 href={item.href}
+                priority={index === 0}
               />
             ))}
           </div>
