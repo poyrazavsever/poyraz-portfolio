@@ -10,6 +10,12 @@
 @layer base {
   :root {
     --poyraz-font-secondary: "Nunito", ui-rounded, "Avenir Next", system-ui, sans-serif;
+    --github-contribution-empty: #ebedf0;
+  }
+
+  .dark,
+  [data-poyraz-theme="dark"] {
+    --github-contribution-empty: #27272a;
   }
 }
 
@@ -23,6 +29,10 @@ html[data-poyraz-theme="light"] body {
 }
 
 @layer utilities {
+  .github-contribution-empty {
+    fill: var(--github-contribution-empty);
+  }
+
   @keyframes marquee {
     0% { transform: translateX(0%); }
     100% { transform: translateX(-50%); }

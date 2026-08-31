@@ -12,7 +12,7 @@ const GRAPH_HEIGHT = 104;
 const DAY_IN_MS = 24 * 60 * 60 * 1000;
 
 const LEVEL_CLASSES: Record<GithubContributionDay["level"], string> = {
-  0: "fill-zinc-200 dark:fill-zinc-800",
+  0: "github-contribution-empty",
   1: "fill-[#ff7373]",
   2: "fill-[#ff5959]",
   3: "fill-[#dc2626]",
