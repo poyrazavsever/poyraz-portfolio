@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type KeyboardEvent } from "react";
+import { useEffect, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -29,6 +29,8 @@ export type LayoutContentPromo = {
 };
 
 type PromoRailSide = "left" | "right";
+
+const PROMO_ROTATION_INTERVAL_MS = 8_000;
 
 function RailButton({
   href,
@@ -213,6 +215,7 @@ function PromoRail({
   const t = useTranslations("LayoutPromos");
   const reduceMotion = useReducedMotion();
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const direction = side === "left" ? -1 : 1;
   const activeCards = slides[activeSlide] ?? slides[0];
   const railId = `${side}-promo-rail`;
@@ -220,6 +223,16 @@ function PromoRail({
   const selectAdjacentSlide = (step: number) => {
     setActiveSlide((current) => (current + step + slides.length) % slides.length);
   };
+
+  useEffect(() => {
+    if (reduceMotion || isPaused || slides.length < 2) return;
+
+    const timer = window.setTimeout(() => {
+      setActiveSlide((current) => (current + 1) % slides.length);
+    }, PROMO_ROTATION_INTERVAL_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [activeSlide, isPaused, reduceMotion, slides.length]);
 
   const handleNavigationKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
@@ -231,6 +244,10 @@ function PromoRail({
   return (
     <aside
       aria-label={t(side === "left" ? "leftRailLabel" : "rightRailLabel")}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={() => setIsPaused(false)}
       className="relative z-50 hidden min-[1420px]:block"
     >
       <div className="sticky top-4 py-4">
