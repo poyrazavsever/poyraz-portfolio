@@ -30,9 +30,6 @@ export async function generateMetadata({
     },
     description: description,
     applicationName: "Poyraz Avsever Portfolyo",
-    alternates: {
-      canonical: "/",
-    },
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
@@ -47,7 +44,6 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       locale: locale === "tr" ? "tr_TR" : "en_US",
-      url: "https://poyrazavsever.com",
       siteName: title,
       title: title,
       description: description,

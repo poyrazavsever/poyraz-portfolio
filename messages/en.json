@@ -126,6 +126,48 @@
     "prev": "Previous",
     "next": "Next"
   },
+  "Seo": {
+    "home": {
+      "title": "Poyraz Avsever | Portfolio",
+      "description": "The portfolio of Poyraz Avsever, featuring full-stack products, AI systems, modern web projects, and practical software content."
+    },
+    "about": {
+      "title": "About",
+      "description": "Explore Poyraz Avsever's software journey, professional experience, education, certificates, and community work."
+    },
+    "references": {
+      "title": "References",
+      "description": "Read professional testimonials and references from people who have worked with Poyraz Avsever."
+    },
+    "volunteerCommunity": {
+      "title": "Volunteering and Community",
+      "description": "Explore Poyraz Avsever's volunteer work, technology community contributions, and event experience."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Technical articles about frontend development, JavaScript, web architecture, user experience, and software engineering."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Explore Poyraz Avsever's web applications, mobile products, open-source tools, browser extensions, and design work."
+    },
+    "content": {
+      "title": "Content",
+      "description": "Poyraz Avsever's YouTube videos, LinkedIn PDF notes, and JavaScript Anatomy video series."
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "Selected images from Poyraz Avsever's events, presentations, projects, and community work."
+    },
+    "links": {
+      "title": "Links",
+      "description": "Access Poyraz Avsever's social profiles, projects, content, and essential links from one page."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Contact Poyraz Avsever by email or social media for projects, collaborations, and professional opportunities."
+    }
+  },
   "Metadata": {
     "title": "Poyraz Avsever | Portfolio",
     "titleTemplate": "%s | Poyraz Avsever",

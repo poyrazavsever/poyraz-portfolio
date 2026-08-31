@@ -62,10 +62,19 @@ export async function listBlogDetails(locale?: string): Promise<BlogDetail[]> {
     }),
   );
 
-  const targetLang = locale || "tr";
   return posts
-    .filter((post) => post.lang === targetLang)
+    .filter((post) => !locale || post.lang === locale)
     .sort((a, b) => a.slug.localeCompare(b.slug));
+}
+
+export async function getBlogTranslations(post: BlogDetail) {
+  const posts = await listBlogDetails();
+
+  return posts.filter(
+    (candidate) =>
+      candidate.coverImage === post.coverImage &&
+      candidate.category.toLocaleLowerCase() === post.category.toLocaleLowerCase(),
+  );
 }
 
 export async function getBlogDetailBySlug(slug: string): Promise<BlogDetail | null> {

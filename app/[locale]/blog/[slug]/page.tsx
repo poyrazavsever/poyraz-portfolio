@@ -2,10 +2,13 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { Metadata } from "next";
 import { BlogDetailContent } from "@/components/blog-detail-content";
 import { ArticleJsonLd } from "@/components/json-ld";
-import { getBlogDetailBySlug } from "@/data/blog-detail";
+import { getBlogDetailBySlug, getBlogTranslations } from "@/data/blog-detail";
 import { isNewsletterCategory } from "@/data/blog";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://poyrazavsever.com";
+import {
+  createAlternates,
+  getLocalizedUrl,
+  type SiteLocale,
+} from "@/lib/seo";
 
 type BlogDetailPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -21,16 +24,30 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
     };
   }
 
-  const url = `${SITE_URL}/blog/${post.slug}`;
+  const siteLocale = locale as SiteLocale;
+  const translations = await getBlogTranslations(post);
+  const paths = Object.fromEntries(
+    translations.map((translation) => [
+      translation.lang,
+      `/blog/${translation.slug}`,
+    ]),
+  );
+  const url = getLocalizedUrl(siteLocale, `/blog/${post.slug}`);
 
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: createAlternates(siteLocale, paths),
     openGraph: {
       title: post.title,
       description: post.excerpt,
       url,
       type: "article",
+      locale: locale === "en" ? "en_US" : "tr_TR",
+      alternateLocale:
+        translations.length > 1
+          ? [locale === "en" ? "tr_TR" : "en_US"]
+          : undefined,
       publishedTime: post.date,
       authors: [post.author],
       images: [
@@ -69,7 +86,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
       <ArticleJsonLd
         title={post.title}
         description={post.excerpt}
-        url={`${SITE_URL}/blog/${post.slug}`}
+        url={getLocalizedUrl(locale as SiteLocale, `/blog/${post.slug}`)}
         image={post.coverImage}
         datePublished={post.date}
         authorName={post.author}

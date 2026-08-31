@@ -126,6 +126,48 @@
     "prev": "Önceki",
     "next": "Sonraki"
   },
+  "Seo": {
+    "home": {
+      "title": "Poyraz Avsever | Portfolyo",
+      "description": "Full-stack ürünler, yapay zeka sistemleri, modern web projeleri ve uygulanabilir yazılım içerikleri üreten Poyraz Avsever'in portfolyosu."
+    },
+    "about": {
+      "title": "Hakkımda",
+      "description": "Poyraz Avsever'in yazılım yolculuğunu, deneyimini, eğitimini, sertifikalarını ve topluluk çalışmalarını keşfedin."
+    },
+    "references": {
+      "title": "Referanslar",
+      "description": "Birlikte çalıştığım kişilerin Poyraz Avsever hakkındaki profesyonel değerlendirmelerini ve referanslarını inceleyin."
+    },
+    "volunteerCommunity": {
+      "title": "Gönüllülük ve Topluluk",
+      "description": "Poyraz Avsever'in gönüllülük çalışmalarını, teknoloji topluluklarına katkılarını ve etkinlik deneyimlerini inceleyin."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Frontend, JavaScript, web mimarisi, kullanıcı deneyimi ve yazılım geliştirme üzerine teknik yazılar."
+    },
+    "projects": {
+      "title": "Projeler",
+      "description": "Poyraz Avsever'in web uygulamaları, mobil ürünleri, açık kaynak araçları, tarayıcı eklentileri ve tasarım çalışmalarını keşfedin."
+    },
+    "content": {
+      "title": "İçerikler",
+      "description": "Poyraz Avsever'in YouTube videoları, LinkedIn PDF notları ve JavaScript Anatomisi video serisi."
+    },
+    "gallery": {
+      "title": "Galeri",
+      "description": "Poyraz Avsever'in etkinlik, sunum, proje ve topluluk çalışmalarından seçilmiş görseller."
+    },
+    "links": {
+      "title": "Bağlantılar",
+      "description": "Poyraz Avsever'in sosyal medya hesaplarına, projelerine, içeriklerine ve hızlı erişim bağlantılarına tek sayfadan ulaşın."
+    },
+    "contact": {
+      "title": "İletişim",
+      "description": "Proje, iş birliği ve profesyonel iletişim için Poyraz Avsever'e e-posta veya sosyal medya üzerinden ulaşın."
+    }
+  },
   "Metadata": {
     "title": "Poyraz Avsever | Portfolyo",
     "titleTemplate": "%s | Poyraz Avsever",

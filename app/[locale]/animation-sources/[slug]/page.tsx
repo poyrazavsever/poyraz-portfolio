@@ -52,6 +52,7 @@ export async function generateMetadata({
       languages: {
         "tr-TR": turkishUrl,
         "en-US": englishUrl,
+        "x-default": turkishUrl,
       },
     },
     openGraph: {

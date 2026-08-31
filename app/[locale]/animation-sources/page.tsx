@@ -32,6 +32,7 @@ export async function generateMetadata({
       languages: {
         "tr-TR": `${SITE_URL}/animation-sources`,
         "en-US": `${SITE_URL}/en/animation-sources`,
+        "x-default": `${SITE_URL}/animation-sources`,
       },
     },
     openGraph: {

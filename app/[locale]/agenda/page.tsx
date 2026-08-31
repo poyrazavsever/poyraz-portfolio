@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { BlogContent } from "@/components/blog-content";
 import { getAgendaPageData } from "@/data/blog";
+import { createPageMetadata } from "@/lib/seo";
 
 type AgendaPageProps = {
   params: Promise<{ locale: string }>;
@@ -15,10 +16,12 @@ export async function generateMetadata({ params }: AgendaPageProps): Promise<Met
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Agenda" });
 
-  return {
+  return createPageMetadata({
+    locale: locale === "en" ? "en" : "tr",
     title: t("title"),
     description: t("description"),
-  };
+    path: "/agenda",
+  });
 }
 
 export default async function AgendaPage({ params, searchParams }: AgendaPageProps) {

@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogDetailContent } from "@/components/blog-detail-content";
 import { ArticleJsonLd } from "@/components/json-ld";
-import { getBlogDetailBySlug } from "@/data/blog-detail";
+import { getBlogDetailBySlug, getBlogTranslations } from "@/data/blog-detail";
 import { isNewsletterCategory } from "@/data/blog";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://poyrazavsever.com";
+import {
+  createAlternates,
+  getLocalizedUrl,
+  type SiteLocale,
+} from "@/lib/seo";
 
 type AgendaDetailPageProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -21,17 +24,30 @@ export async function generateMetadata({
     return { title: locale === "en" ? "Agenda post not found" : "Gündem yazısı bulunamadı" };
   }
 
-  const url = `${SITE_URL}${locale === "en" ? "/en" : ""}/agenda/${post.slug}`;
+  const siteLocale = locale as SiteLocale;
+  const translations = await getBlogTranslations(post);
+  const paths = Object.fromEntries(
+    translations.map((translation) => [
+      translation.lang,
+      `/agenda/${translation.slug}`,
+    ]),
+  );
+  const url = getLocalizedUrl(siteLocale, `/agenda/${post.slug}`);
 
   return {
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: url },
+    alternates: createAlternates(siteLocale, paths),
     openGraph: {
       title: post.title,
       description: post.excerpt,
       url,
       type: "article",
+      locale: locale === "en" ? "en_US" : "tr_TR",
+      alternateLocale:
+        translations.length > 1
+          ? [locale === "en" ? "tr_TR" : "en_US"]
+          : undefined,
       publishedTime: post.date,
       authors: [post.author],
       images: [
@@ -60,7 +76,10 @@ export default async function AgendaDetailPage({ params }: AgendaDetailPageProps
     notFound();
   }
 
-  const url = `${SITE_URL}${locale === "en" ? "/en" : ""}/agenda/${post.slug}`;
+  const url = getLocalizedUrl(
+    locale as SiteLocale,
+    `/agenda/${post.slug}`,
+  );
 
   return (
     <>
