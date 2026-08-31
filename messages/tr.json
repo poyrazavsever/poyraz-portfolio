@@ -137,14 +137,19 @@
     "footer": "Hızlıca açmak için {shortcut} kullan"
   },
   "Content": {
-    "youtubeTitle": "Son YouTube Videoları",
+    "youtubeTitlePrefix": "Son",
+    "youtubeTitle": "Videoları",
     "youtubeChannel": "YouTube kanalım",
     "youtubeEmbedTitle": "YouTube video oynatıcı",
-    "pdfTitle": "LinkedIn PDF Notları",
+    "pdfTitle": "PDF Notları",
     "linkedinProfile": "LinkedIn profilim",
-    "pdfPreviewError": "Önizleme yüklenemedi",
     "pdfPreviewTitle": "{name} önizleme",
+    "openPdf": "{name} PDF notunu aç",
     "pdfModalDefaultTitle": "PDF Notu",
+    "xTitle": "JavaScript Anatomisi",
+    "xSeries": "X'teki JavaScript Anatomisi serim",
+    "xVideoTitle": "JavaScript Anatomisi, bölüm {episode}",
+    "videoUnsupported": "Tarayıcınız video oynatmayı desteklemiyor.",
     "prev": "Önceki",
     "next": "Sonraki",
     "pdfNotFound": "/public/pdf içinde PDF bulunamadı."

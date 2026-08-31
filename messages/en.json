@@ -137,14 +137,19 @@
     "footer": "Press {shortcut} to open quickly"
   },
   "Content": {
-    "youtubeTitle": "Latest YouTube Videos",
+    "youtubeTitlePrefix": "Latest",
+    "youtubeTitle": "Videos",
     "youtubeChannel": "My YouTube channel",
     "youtubeEmbedTitle": "YouTube video player",
-    "pdfTitle": "LinkedIn PDF Notes",
+    "pdfTitle": "PDF Notes",
     "linkedinProfile": "My LinkedIn profile",
-    "pdfPreviewError": "Preview could not be loaded",
     "pdfPreviewTitle": "{name} preview",
+    "openPdf": "Open the {name} PDF note",
     "pdfModalDefaultTitle": "PDF Note",
+    "xTitle": "JavaScript Anatomy",
+    "xSeries": "My JavaScript Anatomy series on X",
+    "xVideoTitle": "JavaScript Anatomy, episode {episode}",
+    "videoUnsupported": "Your browser does not support video playback.",
     "prev": "Previous",
     "next": "Next",
     "pdfNotFound": "No PDF files found inside `/public/pdf`."

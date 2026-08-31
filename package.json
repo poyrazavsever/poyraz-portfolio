@@ -25,7 +25,6 @@
     "mermaid": "^11.13.0",
     "next": "16.1.6",
     "next-intl": "4.13.0",
-    "pdfjs-dist": "^5.5.207",
     "poyraz-ui": "3.0.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
