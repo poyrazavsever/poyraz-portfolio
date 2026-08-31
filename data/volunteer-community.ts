@@ -14,6 +14,27 @@ export type VolunteerCommunityItem = {
 
 export const VOLUNTEER_COMMUNITY_ITEMS: VolunteerCommunityItem[] = [
   {
+    id: "google-developer-student-club-tech-team-lead",
+    title: "Google Developer Student Club — Tech Team Lead",
+    timeline: {
+      tr: "2026 - Günümüz",
+      en: "2026 - Present",
+    },
+    focus: {
+      tr: "Teknoloji ekibine liderlik ederek workshop ve hackathon organizasyonlarını planlamak, katılımcılara mentorluk yapmak ve topluluğun Instagram hesabı için teknik videolar üretmek.",
+      en: "Leading the tech team by planning workshops and hackathons, mentoring participants, and producing technical videos for the community's Instagram account.",
+    },
+  },
+  {
+    id: "shipin-tech-core-team",
+    title: "Shipin — Tech Core Team Member",
+    timeline: "2026 - 2026",
+    focus: {
+      tr: "Topluluğun organizasyon ve etkinlik süreçlerine destek olmak, teknik sunumlar gerçekleştirmek ve katılımcılara mentorluk yapmak.",
+      en: "Supporting community operations and event organization, delivering technical presentations, and mentoring participants.",
+    },
+  },
+  {
     id: "youtube",
     title: "YouTube",
     timeline: {
