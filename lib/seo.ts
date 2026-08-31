@@ -1,9 +1,21 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 
-export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://poyrazavsever.com"
-).replace(/\/$/, "");
+function resolveSiteUrl() {
+  const url = new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.poyrazavsever.com",
+  );
+
+  // The public site redirects the apex domain to `www`. Canonicals must point
+  // directly to the final URL instead of a redirecting host.
+  if (url.hostname === "poyrazavsever.com") {
+    url.hostname = "www.poyrazavsever.com";
+  }
+
+  return url.origin;
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 export type SiteLocale = "tr" | "en";
 

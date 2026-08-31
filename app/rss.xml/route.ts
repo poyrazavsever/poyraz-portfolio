@@ -1,6 +1,6 @@
 import { getAllBlogArticles } from "@/data/blog";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://poyrazavsever.com";
+import { SITE_URL } from "@/lib/seo";
 const FEED_PATH = "/rss.xml";
 const FEED_TITLE = "Poyraz Avsever Blog";
 const FEED_DESCRIPTION =

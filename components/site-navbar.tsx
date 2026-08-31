@@ -25,9 +25,6 @@ import {
   SheetContent,
   SheetTitle,
   SheetTrigger,
-  Tabs,
-  TabsList,
-  TabsTrigger,
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -71,6 +68,18 @@ function getDesktopDropdownTriggerClass(isActive: boolean) {
     "transition-[color,background-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
     "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
     isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+  ].join(" ");
+}
+
+function getDesktopNavLinkClass(isActive: boolean) {
+  return [
+    "relative inline-flex h-9 shrink-0 items-center justify-center whitespace-nowrap rounded-sm px-2.5 text-xs font-medium outline-none",
+    "transition-[color,background-color] duration-[var(--poyraz-motion-duration-fast)] ease-[var(--poyraz-motion-ease-out)]",
+    "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+    "after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:rounded-full after:transition-colors",
+    isActive
+      ? "text-foreground after:bg-primary"
+      : "text-muted-foreground after:bg-transparent hover:text-foreground",
   ].join(" ");
 }
 
@@ -125,7 +134,6 @@ export function SiteNavbar({
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  const activeTab = NAV_LINKS.find((item) => isActiveLink(item.href))?.id;
   const activeMobileMenuGroup = NAV_DROPDOWN_GROUPS.find(
     (group) => group.id === mobileMenuGroupId,
   );
@@ -204,7 +212,7 @@ export function SiteNavbar({
           className="inline-flex shrink-0 items-center"
         >
           <Logo
-            src="/logo/logo.webp"
+            src="/logo/logo-96.webp"
             alt="Poyraz Avsever"
             width={40}
             height={40}
@@ -216,13 +224,10 @@ export function SiteNavbar({
         </Link>
 
         <div className="hidden min-w-0 flex-1 items-center justify-end gap-2 min-[840px]:flex">
-          <Tabs value={activeTab ?? ""} className="w-auto shrink-0">
-            <TabsList
-              variant="line"
-              radius="sm"
-              className="h-9 gap-1 bg-transparent p-0"
-              aria-label="Ana navigasyon"
-            >
+          <nav
+            aria-label={locale === "tr" ? "Ana navigasyon" : "Main navigation"}
+            className="flex h-9 w-auto shrink-0 items-center gap-1"
+          >
               {NAV_LINKS.map((item, index) => (
                 <Fragment key={item.id}>
                   <div className="flex items-center gap-1.5">
@@ -233,15 +238,15 @@ export function SiteNavbar({
                         decorative
                       />
                     )}
-                    <TabsTrigger
-                      value={item.id}
-                      asChild
-                      size="sm"
-                      radius="sm"
-                      className="cursor-pointer px-2.5"
+                    <Link
+                      href={item.href}
+                      aria-current={isActiveLink(item.href) ? "page" : undefined}
+                      className={getDesktopNavLinkClass(
+                        isActiveLink(item.href),
+                      )}
                     >
-                      <Link href={item.href}>{t(item.id)}</Link>
-                    </TabsTrigger>
+                      {t(item.id)}
+                    </Link>
                   </div>
 
                   {NAV_DROPDOWN_GROUPS.filter(
@@ -316,8 +321,7 @@ export function SiteNavbar({
                   ))}
                 </Fragment>
               ))}
-            </TabsList>
-          </Tabs>
+          </nav>
 
           <Separator
             orientation="vertical"

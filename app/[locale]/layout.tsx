@@ -10,6 +10,7 @@ import { GoogleAnalytics } from "@/components/google-analytics";
 import { PoyrazBottomRightFollower } from "@/components/poyraz-bottom-right-follower";
 import { listAnimationSources } from "@/data/animation-sources";
 import { getHomeBlogNews, getLatestAgendaArticle } from "@/data/blog";
+import { SITE_URL } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -24,7 +25,7 @@ export async function generateMetadata({
   const description = t("description");
 
   return {
-    metadataBase: new URL("https://poyrazavsever.com"),
+    metadataBase: new URL(SITE_URL),
     title: {
       default: title,
       template: titleTemplate,
@@ -34,7 +35,7 @@ export async function generateMetadata({
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
-        { url: "/logo/logo.webp", type: "image/webp" },
+        { url: "/logo/logo-96.webp", type: "image/webp", sizes: "96x96" },
       ],
       shortcut: "/favicon.ico",
       apple: "/logo/apple-touch-icon.png",

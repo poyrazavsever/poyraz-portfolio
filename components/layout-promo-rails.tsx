@@ -235,7 +235,7 @@ function PromoRail({
     >
       <div className="sticky top-4 py-4">
         <div
-          role="tablist"
+          role="group"
           aria-label={t("slideNavigationLabel")}
           onKeyDown={handleNavigationKeyDown}
           className="mb-3 flex h-5 items-center justify-center gap-2"
@@ -247,9 +247,7 @@ function PromoRail({
               <button
                 key={`${railId}-dot-${index}`}
                 type="button"
-                role="tab"
-                aria-selected={selected}
-                aria-controls={`${railId}-panel-${index}`}
+                aria-pressed={selected}
                 aria-label={t("slideCta", { slide: index + 1 })}
                 onClick={() => setActiveSlide(index)}
                 className="group flex size-5 items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
@@ -266,12 +264,19 @@ function PromoRail({
           })}
         </div>
 
+        <span className="sr-only" aria-live="polite">
+          {t("slideStatus", {
+            current: activeSlide + 1,
+            total: slides.length,
+          })}
+        </span>
+
         <div className="overflow-hidden">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={`${railId}-slide-${activeSlide}`}
               id={`${railId}-panel-${activeSlide}`}
-              role="tabpanel"
+              role="group"
               aria-label={t("slideStatus", {
                 current: activeSlide + 1,
                 total: slides.length,
