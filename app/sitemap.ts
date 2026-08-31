@@ -26,6 +26,7 @@ const STATIC_ROUTES = [
   { path: "/content", changeFrequency: "weekly", priority: 0.7 },
   { path: "/gallery", changeFrequency: "monthly", priority: 0.6 },
   { path: "/contact", changeFrequency: "yearly", priority: 0.5 },
+  { path: "/media-kit", changeFrequency: "monthly", priority: 0.6 },
   { path: "/links", changeFrequency: "monthly", priority: 0.4 },
   {
     path: "/animation-sources",
