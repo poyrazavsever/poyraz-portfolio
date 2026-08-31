@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { usePathname } from "@/i18n/routing";
 import { AnnouncementBar } from "poyraz-ui/organisms";
 import { SiteNavbar } from "@/components/site-navbar";
 import { NekoFollower } from "@/components/neko-follower";
@@ -10,6 +9,11 @@ import { useLocale } from "next-intl";
 import { getLocalizedValue } from "@/lib/locale";
 import dynamic from "next/dynamic";
 import type { AnimationSourceSearchItem } from "@/lib/command-palette-links";
+import {
+  LayoutLeftPromoRail,
+  LayoutRightPromoRail,
+  type LayoutContentPromo,
+} from "@/components/layout-promo-rails";
 
 const AtaturkWidgetModal = dynamic(
   () => import("@/components/ataturk-widget-modal").then((mod) => mod.AtaturkWidgetModal),
@@ -19,6 +23,8 @@ const AtaturkWidgetModal = dynamic(
 type AppShellProps = {
   children: React.ReactNode;
   animationSources: AnimationSourceSearchItem[];
+  latestAgenda: LayoutContentPromo | null;
+  latestPost: LayoutContentPromo | null;
 };
 
 export type ThemeMode = "light" | "dark";
@@ -32,15 +38,15 @@ function getInitialTheme(): ThemeMode {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-export function AppShell({ children, animationSources }: AppShellProps) {
-  const pathname = usePathname();
+export function AppShell({
+  children,
+  animationSources,
+  latestAgenda,
+  latestPost,
+}: AppShellProps) {
   const locale = useLocale();
   const announcement = ANNOUNCEMENT_ITEMS[0];
   const [theme, setTheme] = useState<ThemeMode>(getInitialTheme);
-  const isStandaloneLinksPage =
-    pathname === "/links" || pathname.startsWith("/links/");
-  const isStandaloneMediaKitPage =
-    pathname === "/media-kit" || pathname.startsWith("/media-kit/");
 
   useEffect(() => {
     document.documentElement.dataset.poyrazTheme = theme;
@@ -48,32 +54,37 @@ export function AppShell({ children, animationSources }: AppShellProps) {
     localStorage.setItem("poyraz-theme", theme);
   }, [theme]);
 
-  if (isStandaloneLinksPage || isStandaloneMediaKitPage) {
-    return children;
-  }
-
   const localizedText = announcement ? getLocalizedValue(announcement.text, locale) : "";
 
   return (
     <>
       <AtaturkWidgetModal theme={theme} />
       {ENABLE_NEKO_FOLLOWER ? <NekoFollower /> : null}
-      <div className="mx-auto flex w-full max-w-4xl flex-col px-4 py-4 ">
-        <SiteNavbar
-          theme={theme}
-          onThemeChange={setTheme}
-          animationSources={animationSources}
+      <div className="mx-auto grid w-full max-w-[1800px] grid-cols-1 gap-4 px-4 min-[1420px]:grid-cols-[220px_minmax(0,896px)_220px] min-[1420px]:justify-between">
+        <LayoutLeftPromoRail
+          latestAgenda={latestAgenda}
+          latestPost={latestPost}
         />
-        {announcement ? (
-          <AnnouncementBar
-            variant="branded"
-            dismissible={false}
-            icon={<Icon icon="mdi:sparkles" width={16} height={16} />}
-          >
-            {localizedText}
-          </AnnouncementBar>
-        ) : null}
-        <main className="flex-1 py-4">{children}</main>
+        <div className="min-w-0 w-full max-w-4xl justify-self-center min-[1420px]:max-w-none">
+          <div className="pt-4">
+            <SiteNavbar
+              theme={theme}
+              onThemeChange={setTheme}
+              animationSources={animationSources}
+            />
+            {announcement ? (
+              <AnnouncementBar
+                variant="branded"
+                dismissible={false}
+                icon={<Icon icon="mdi:sparkles" width={16} height={16} />}
+              >
+                {localizedText}
+              </AnnouncementBar>
+            ) : null}
+          </div>
+          <main className="min-w-0 py-4">{children}</main>
+        </div>
+        <LayoutRightPromoRail />
       </div>
     </>
   );

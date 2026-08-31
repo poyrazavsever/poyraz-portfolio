@@ -97,6 +97,11 @@ export async function getAllAgendaArticles(locale?: string): Promise<BlogArticle
   return articles.filter((article) => isNewsletterCategory(article.category));
 }
 
+export async function getLatestAgendaArticle(locale?: string) {
+  const articles = await getAllAgendaArticles(locale);
+  return articles[0] ?? null;
+}
+
 export async function getHomeBlogNews(locale?: string, limit = 3) {
   const articles = await getAllBlogArticles(locale);
 

@@ -9,6 +9,7 @@ import { AppShell } from "@/components/app-shell";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { PoyrazBottomRightFollower } from "@/components/poyraz-bottom-right-follower";
 import { listAnimationSources } from "@/data/animation-sources";
+import { getHomeBlogNews, getLatestAgendaArticle } from "@/data/blog";
 
 export async function generateMetadata({
   params,
@@ -116,10 +117,13 @@ export default async function LocaleLayout({
   }
 
   // Provide messages for NextIntlClientProvider
-  const [messages, animationSources] = await Promise.all([
-    getMessages(),
-    listAnimationSources(locale),
-  ]);
+  const [messages, animationSources, latestAgendaArticle, latestPosts] =
+    await Promise.all([
+      getMessages(),
+      listAnimationSources(locale),
+      getLatestAgendaArticle(locale),
+      getHomeBlogNews(locale, 1),
+    ]);
   const animationSourceSearchItems = animationSources.map((source) => ({
     slug: source.slug,
     title: source.title,
@@ -133,7 +137,25 @@ export default async function LocaleLayout({
       <body className="min-h-dvh bg-background text-foreground antialiased">
         <NextIntlClientProvider messages={messages}>
           <GoogleAnalytics />
-          <AppShell animationSources={animationSourceSearchItems}>
+          <AppShell
+            animationSources={animationSourceSearchItems}
+            latestAgenda={
+              latestAgendaArticle
+                ? {
+                    title: latestAgendaArticle.title,
+                    href: latestAgendaArticle.href,
+                  }
+                : null
+            }
+            latestPost={
+              latestPosts[0]
+                ? {
+                    title: latestPosts[0].title,
+                    href: latestPosts[0].href,
+                  }
+                : null
+            }
+          >
             {children}
           </AppShell>
           <PoyrazBottomRightFollower />
