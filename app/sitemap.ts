@@ -1,4 +1,5 @@
 import { listBlogDetails } from "@/data/blog-detail";
+import { isNewsletterCategory } from "@/data/blog";
 import { listAnimationSources } from "@/data/animation-sources";
 import type { MetadataRoute } from "next";
 
@@ -43,6 +44,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${SITE_URL}/agenda`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${SITE_URL}/projects`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -75,7 +82,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${SITE_URL}/blog/${post.slug}`,
+    url: `${SITE_URL}/${isNewsletterCategory(post.category) ? "agenda" : "blog"}/${post.slug}`,
     lastModified: post.date ? new Date(post.date) : new Date(),
     changeFrequency: "monthly",
     priority: 0.7,
