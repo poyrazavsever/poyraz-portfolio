@@ -14,16 +14,17 @@ type AtaturkWidgetModalProps = {
 
 export function AtaturkWidgetModal({ theme }: AtaturkWidgetModalProps) {
   const [isLoading, setIsLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations("AtaturkWidget");
   const locale = useLocale();
 
   return (
-    <Modal>
+    <Modal open={isOpen} onOpenChange={setIsOpen}>
       <ModalTrigger asChild>
         <button
           type="button"
           title={t("title")}
-          className="fixed bottom-4 left-4 z-50 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border-2 border-red-600 bg-background shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className={`fixed bottom-4 left-4 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full border-2 border-red-600 bg-background shadow-lg transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${isOpen ? "z-40" : "z-[80]"}`}
           aria-label={t("title")}
         >
           <div className="relative h-full w-full">
