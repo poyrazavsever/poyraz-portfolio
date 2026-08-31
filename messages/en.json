@@ -13,6 +13,7 @@
     "socialLinks": "Social Links",
     "others": "Others",
     "animationResources": "Animation Resources",
+    "technologies": "Technologies",
     "links": "Links",
     "mediaKit": "Media Kit",
     "references": "References",
@@ -34,9 +35,11 @@
     "reviewsAndReferences": "Reviews & References",
     "allReferences": "All references",
     "technologiesTitle": "Technologies I use",
+    "allTechnologies": "Explore all technologies",
     "technologyCategories": {
       "frontend": "Front End",
       "backend": "Back End",
+      "databases": "Databases",
       "languages": "Programming Languages",
       "designTools": "Design & Tools"
     },
@@ -216,6 +219,17 @@
       "resources": "Resources"
     }
   },
+  "Technologies": {
+    "title": "Technologies I Use",
+    "description": "The front-end, back-end, database, programming language, design, and development tools I use to build products.",
+    "categories": {
+      "frontend": "Front End",
+      "backend": "Back End",
+      "databases": "Databases",
+      "languages": "Programming Languages",
+      "designTools": "Design & Tools"
+    }
+  },
   "Gallery": {
     "empty": "No images added to the gallery yet.",
     "close": "Close",
@@ -254,6 +268,10 @@
     "gallery": {
       "title": "Gallery",
       "description": "Selected images from Poyraz Avsever's events, presentations, projects, and community work."
+    },
+    "technologies": {
+      "title": "Technologies I Use",
+      "description": "Explore the front-end, back-end, database, programming language, and development tools Poyraz Avsever uses to build products."
     },
     "links": {
       "title": "Links",

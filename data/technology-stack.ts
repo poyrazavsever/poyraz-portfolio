@@ -7,7 +7,7 @@ export type TechnologyStackItem = {
 };
 
 export type TechnologyStackGroup = {
-  id: "frontend" | "backend" | "languages" | "designTools";
+  id: "frontend" | "backend" | "databases" | "languages" | "designTools";
   items: readonly TechnologyStackItem[];
 };
 
@@ -56,11 +56,28 @@ export const TECHNOLOGY_STACK: readonly TechnologyStackGroup[] = [
         icon: "simple-icons:jsonwebtokens",
       },
       { id: "prisma", label: "Prisma", icon: "simple-icons:prisma" },
-      { id: "mongoose", label: "Mongoose", icon: "simple-icons:mongoose" },
       {
         id: "socket-io",
         label: "Socket.io",
         icon: "simple-icons:socketdotio",
+      },
+    ],
+  },
+  {
+    id: "databases",
+    items: [
+      { id: "mongodb", label: "MongoDB", icon: "simple-icons:mongodb" },
+      { id: "mongoose", label: "Mongoose", icon: "simple-icons:mongoose" },
+      {
+        id: "postgresql",
+        label: "PostgreSQL",
+        icon: "simple-icons:postgresql",
+      },
+      { id: "mysql", label: "MySQL", icon: "simple-icons:mysql" },
+      {
+        id: "mssql",
+        label: "Microsoft SQL Server",
+        icon: "simple-icons:microsoftsqlserver",
       },
     ],
   },

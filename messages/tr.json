@@ -13,6 +13,7 @@
     "socialLinks": "Sosyal Bağlantılar",
     "others": "Diğerleri",
     "animationResources": "Animasyon Kaynakları",
+    "technologies": "Teknolojiler",
     "links": "Bağlantılar",
     "mediaKit": "Medya Kiti",
     "references": "Referanslar",
@@ -34,9 +35,11 @@
     "reviewsAndReferences": "Yorumlar & Referanslar",
     "allReferences": "Tüm referanslar",
     "technologiesTitle": "Ben bu teknolojileri kullanıyorum",
+    "allTechnologies": "Tüm teknolojileri incele",
     "technologyCategories": {
       "frontend": "Ön Yüz",
       "backend": "Arka Yüz",
+      "databases": "Veritabanları",
       "languages": "Programlama Dilleri",
       "designTools": "Tasarım ve Araçlar"
     },
@@ -216,6 +219,17 @@
       "resources": "Kaynaklar"
     }
   },
+  "Technologies": {
+    "title": "Kullandığım Teknolojiler",
+    "description": "Ürün geliştirirken kullandığım ön yüz, arka yüz, veritabanı, programlama dili, tasarım ve geliştirme araçları.",
+    "categories": {
+      "frontend": "Ön Yüz",
+      "backend": "Arka Yüz",
+      "databases": "Veritabanları",
+      "languages": "Programlama Dilleri",
+      "designTools": "Tasarım ve Araçlar"
+    }
+  },
   "Gallery": {
     "empty": "Henüz galeriye görsel eklenmemiş.",
     "close": "Kapat",
@@ -254,6 +268,10 @@
     "gallery": {
       "title": "Galeri",
       "description": "Poyraz Avsever'in etkinlik, sunum, proje ve topluluk çalışmalarından seçilmiş görseller."
+    },
+    "technologies": {
+      "title": "Kullandığım Teknolojiler",
+      "description": "Poyraz Avsever'in ürün geliştirirken kullandığı ön yüz, arka yüz, veritabanı, programlama dili ve geliştirme araçlarını inceleyin."
     },
     "links": {
       "title": "Bağlantılar",

@@ -30,6 +30,7 @@ type StaticSeoPage =
   | "projects"
   | "content"
   | "gallery"
+  | "technologies"
   | "links"
   | "contact";
 

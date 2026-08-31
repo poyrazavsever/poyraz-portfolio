@@ -87,6 +87,21 @@ export const NAV_DROPDOWN_GROUPS = [
         external: false,
         keywords: ["animasyon", "animation", "kaynak", "resource", "motion"],
       },
+      {
+        id: "technologies",
+        label: "Teknolojiler",
+        href: "/technologies",
+        icon: "mdi:layers-triple-outline",
+        external: false,
+        keywords: [
+          "teknolojiler",
+          "technologies",
+          "tech stack",
+          "araçlar",
+          "tools",
+          "skills",
+        ],
+      },
     ],
   },
 ] as const;
