@@ -13,6 +13,10 @@ const ALERT_TIME = 3;
 const IDLE_THRESHOLD = 3;
 const IDLE_ANIMATION_CHANCE = 1 / 20;
 const MIN_DISTANCE = 10;
+const ROAM_MARGIN = 24;
+const MIN_ROAM_DISTANCE = 160;
+const MIN_IDLE_FRAMES = 8;
+const MAX_IDLE_FRAMES = 20;
 const SPRITE_GAP = 1;
 const BACKGROUND_TARGET_COLOR: [number, number, number] = [0, 174, 240];
 
@@ -21,8 +25,9 @@ type SpriteSet = Record<string, [number, number][]>;
 class Neko {
   private posX: number;
   private posY: number;
-  private mouseX: number;
-  private mouseY: number;
+  private targetX: number;
+  private targetY: number;
+  private idleFramesRemaining: number;
   private frameCount: number;
   private idleTime: number;
   private idleAnimation: string | null;
@@ -43,8 +48,9 @@ class Neko {
     this.nekoImageUrl = nekoImageUrl;
     this.posX = Math.max(NEKO_HALF_WIDTH, window.innerWidth - NEKO_HALF_WIDTH - margin);
     this.posY = Math.max(NEKO_HALF_HEIGHT, window.innerHeight - NEKO_HALF_HEIGHT - margin);
-    this.mouseX = this.posX;
-    this.mouseY = this.posY;
+    this.targetX = this.posX;
+    this.targetY = this.posY;
+    this.idleFramesRemaining = this.randomIdleDuration();
     this.frameCount = 0;
     this.idleTime = 0;
     this.idleAnimation = null;
@@ -186,18 +192,13 @@ class Neko {
     this.render();
   }
 
-  private handleMouseMove = (event: MouseEvent) => {
-    this.mouseX = event.clientX;
-    this.mouseY = event.clientY;
-  };
-
   private handleResize = () => {
     this.clampToViewport();
+    this.clampTargetToViewport();
     this.render();
   };
 
   private addEventListeners() {
-    document.addEventListener("mousemove", this.handleMouseMove);
     window.addEventListener("resize", this.handleResize);
   }
 
@@ -222,21 +223,34 @@ class Neko {
 
   private updateState() {
     this.frameCount += 1;
-    this.followMouse();
-  }
 
-  private followMouse() {
-    const diffX = this.posX - this.mouseX;
-    const diffY = this.posY - this.mouseY;
-    const distance = Math.hypot(diffX, diffY);
-
-    if (distance < MIN_DISTANCE) {
+    if (this.idleFramesRemaining > 0 || this.idleAnimation !== null) {
       this.idleBehavior();
+
+      if (this.idleAnimation === null) {
+        this.idleFramesRemaining -= 1;
+      }
+
+      if (this.idleFramesRemaining <= 0 && this.idleAnimation === null) {
+        this.chooseNewTarget();
+      }
       return;
     }
 
-    if (this.idleTime > IDLE_THRESHOLD && this.alertTimeRemaining === 0) {
-      this.alertTimeRemaining = ALERT_TIME;
+    this.wander();
+  }
+
+  private wander() {
+    const diffX = this.posX - this.targetX;
+    const diffY = this.posY - this.targetY;
+    const distance = Math.hypot(diffX, diffY);
+
+    if (distance < MIN_DISTANCE) {
+      this.posX = this.targetX;
+      this.posY = this.targetY;
+      this.idleFramesRemaining = this.randomIdleDuration();
+      this.idleBehavior();
+      return;
     }
 
     if (this.alertTimeRemaining > 0) {
@@ -261,6 +275,37 @@ class Neko {
     this.posX -= (diffX / distance) * step;
     this.posY -= (diffY / distance) * step;
     this.clampToViewport();
+  }
+
+  private chooseNewTarget() {
+    const minX = Math.min(NEKO_HALF_WIDTH + ROAM_MARGIN, window.innerWidth / 2);
+    const maxX = Math.max(minX, window.innerWidth - NEKO_HALF_WIDTH - ROAM_MARGIN);
+    const minY = Math.min(NEKO_HALF_HEIGHT + ROAM_MARGIN, window.innerHeight / 2);
+    const maxY = Math.max(minY, window.innerHeight - NEKO_HALF_HEIGHT - ROAM_MARGIN);
+
+    let nextX = this.posX;
+    let nextY = this.posY;
+
+    for (let attempt = 0; attempt < 8; attempt += 1) {
+      nextX = minX + Math.random() * (maxX - minX);
+      nextY = minY + Math.random() * (maxY - minY);
+
+      if (Math.hypot(nextX - this.posX, nextY - this.posY) >= MIN_ROAM_DISTANCE) {
+        break;
+      }
+    }
+
+    this.targetX = nextX;
+    this.targetY = nextY;
+    this.alertTimeRemaining = ALERT_TIME;
+    this.idleTime = 0;
+  }
+
+  private randomIdleDuration() {
+    return (
+      MIN_IDLE_FRAMES +
+      Math.floor(Math.random() * (MAX_IDLE_FRAMES - MIN_IDLE_FRAMES + 1))
+    );
   }
 
   private idleBehavior() {
@@ -320,6 +365,17 @@ class Neko {
     );
   }
 
+  private clampTargetToViewport() {
+    this.targetX = Math.min(
+      Math.max(NEKO_HALF_WIDTH, this.targetX),
+      window.innerWidth - NEKO_HALF_WIDTH,
+    );
+    this.targetY = Math.min(
+      Math.max(NEKO_HALF_HEIGHT, this.targetY),
+      window.innerHeight - NEKO_HALF_HEIGHT,
+    );
+  }
+
   private render() {
     if (!this.nekoElement) return;
     this.nekoElement.style.left = `${this.posX - NEKO_HALF_WIDTH}px`;
@@ -345,7 +401,6 @@ class Neko {
       this.animationFrameId = null;
     }
 
-    document.removeEventListener("mousemove", this.handleMouseMove);
     window.removeEventListener("resize", this.handleResize);
 
     if (this.nekoElement) {
@@ -368,4 +423,3 @@ export function NekoFollower() {
 
   return null;
 }
-
