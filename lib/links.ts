@@ -57,12 +57,6 @@ export const SOCIAL_LINKS = [
     icon: "mdi:behance",
   },
   {
-    id: "spotify",
-    label: "Spotify",
-    href: "https://open.spotify.com/user/3136fdjkc5p4cbzmuxhvqdd4b2hu",
-    icon: "mdi:spotify",
-  },
-  {
     id: "buy-me-a-coffee",
     label: "Bana kahve ısmarla",
     href: "https://buymeacoffee.com/poyrazavsever",
@@ -153,15 +147,67 @@ export const LINK_DIRECTORY_CATEGORIES: ReadonlyArray<{
   { id: "resources", label: "Kaynaklar" },
 ];
 
-export const LINK_DIRECTORY: LinkDirectoryItem[] = [
+const STATIC_PAGE_LINKS = [
+  {
+    id: "home",
+    label: "Ana Sayfa",
+    href: "/",
+    icon: "mdi:home-outline",
+    keywords: ["ana sayfa", "home", "portfolio"],
+  },
   ...NAV_LINKS.map((item) => ({
+    ...item,
+    icon: "mdi:compass-outline",
+    keywords: [item.label, item.href, "sayfa", "navigasyon", "internal"],
+  })),
+  ...NAV_DROPDOWN_GROUPS.flatMap((group) =>
+    group.items.map((item) => ({
+      id: item.id,
+      label: item.label,
+      href: item.href,
+      icon: item.icon,
+      keywords: [...item.keywords],
+    })),
+  ),
+  {
+    id: "references",
+    label: "Referanslar",
+    href: "/about/references",
+    icon: "mdi:comment-quote-outline",
+    keywords: ["referans", "references", "testimonial", "yorum"],
+  },
+  {
+    id: "volunteerCommunity",
+    label: "Gönüllülük ve Topluluk",
+    href: "/about/volunteer-community",
+    icon: "mdi:account-group-outline",
+    keywords: ["gönüllülük", "topluluk", "volunteer", "community"],
+  },
+  {
+    id: "mediaKit",
+    label: "Medya Kiti",
+    href: "/media-kit",
+    icon: "mdi:chart-box-outline",
+    keywords: ["medya kiti", "media kit", "sponsor", "iş birliği"],
+  },
+  {
+    id: "links",
+    label: "Bağlantılar",
+    href: "/links",
+    icon: "mdi:link-variant",
+    keywords: ["bağlantılar", "links", "link in bio"],
+  },
+] as const;
+
+export const LINK_DIRECTORY: LinkDirectoryItem[] = [
+  ...STATIC_PAGE_LINKS.map((item) => ({
     id: item.id,
     label: item.label,
     href: item.href,
-    icon: "mdi:compass-outline",
+    icon: item.icon,
     external: false,
     category: "navigation" as const,
-    keywords: [item.label, item.href, "sayfa", "navigasyon", "internal"],
+    keywords: [...item.keywords],
   })),
   ...SOCIAL_LINKS.map((item) => ({
     id: item.id,
