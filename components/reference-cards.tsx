@@ -1,5 +1,7 @@
 
-import { TestimonialCard } from "poyraz-ui/molecules";
+import Image from "next/image";
+import { Card, CardContent } from "poyraz-ui/atoms";
+import { StarRating } from "poyraz-ui/molecules";
 import { REFERENCES } from "@/data/references";
 import { useLocale } from "next-intl";
 import { getLocalizedValue } from "@/lib/locale";
@@ -27,14 +29,41 @@ export function ReferenceCards({
         const quoteText = getLocalizedValue(item.quote, locale);
 
         const card = (
-          <TestimonialCard
-            quote={quoteText}
-            author={item.author}
-            role={getLocalizedValue(item.role, locale)}
-            avatar={item.avatar}
-            rating={showRating ? item.rating : undefined}
-            className={`flex flex-col rounded-sm ${lineClamp ? "[&_blockquote]:line-clamp-4" : ""} ${hoverClassName} ${cardClassName || "w-70 shrink-0"}`}
-          />
+          <Card
+            className={`group flex h-full flex-col rounded-sm ${hoverClassName} ${cardClassName || "w-70 shrink-0"}`}
+          >
+            <CardContent className="flex h-full flex-1 flex-col p-5">
+              <span className="font-secondary text-4xl leading-none text-primary">
+                “
+              </span>
+              <blockquote
+                className={`mt-1 text-sm leading-relaxed text-secondary-foreground ${lineClamp ? "line-clamp-4" : ""}`}
+              >
+                {quoteText}
+              </blockquote>
+              {showRating && item.rating != null ? (
+                <StarRating rating={item.rating} className="mt-3" />
+              ) : null}
+              <div className="mt-auto flex items-center gap-3 border-t border-border pt-4">
+                <Image
+                  src={item.avatar}
+                  alt=""
+                  width={36}
+                  height={36}
+                  sizes="36px"
+                  className="size-9 rounded-full object-cover"
+                />
+                <div className="min-w-0">
+                  <div className="truncate text-sm font-semibold">
+                    {item.author}
+                  </div>
+                  <div className="truncate text-xs text-muted-foreground">
+                    {getLocalizedValue(item.role, locale)}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         );
 
         const href = item.documentHref || item.profileHref;

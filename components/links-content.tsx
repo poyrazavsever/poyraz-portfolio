@@ -131,7 +131,7 @@ export function LinksContent({
         <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex min-w-0 items-start gap-4">
             <Avatar className="size-16 shrink-0 rounded-sm border border-border bg-background sm:size-20">
-              <AvatarImage src="/logo/logo.webp" alt="Poyraz Avsever" />
+              <AvatarImage src="/logo/logo-96.webp" alt="Poyraz Avsever" />
               <AvatarFallback className="rounded-sm bg-muted font-semibold">
                 PA
               </AvatarFallback>

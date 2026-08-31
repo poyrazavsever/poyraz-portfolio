@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Icon } from "@iconify/react";
-import { Badge, Typography } from "poyraz-ui/atoms";
+import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import {
-  ImageCard,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -25,6 +25,7 @@ type ProjectCardWithPopoverProps = {
   architectureLabel: string;
   className?: string;
   triggerClassName?: string;
+  priority?: boolean;
 };
 
 export function ProjectCardWithPopover({
@@ -41,6 +42,7 @@ export function ProjectCardWithPopover({
   architectureLabel,
   className,
   triggerClassName,
+  priority = false,
 }: ProjectCardWithPopoverProps) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -69,13 +71,30 @@ export function ProjectCardWithPopover({
   }, []);
 
   const card = (
-    <ImageCard
-      image={image}
-      title={title}
-      description={description}
-      badge={badge}
-      className={className}
-    />
+    <Card
+      variant="interactive"
+      className={`group relative aspect-[4/3] overflow-hidden ${className ?? ""}`}
+    >
+      <Image
+        src={image}
+        alt=""
+        fill
+        sizes="(max-width: 767px) 224px, 224px"
+        preload={priority}
+        fetchPriority={priority ? "high" : "auto"}
+        className="object-cover transition-transform duration-500 ease-[var(--poyraz-motion-ease-out)] group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-overlay via-overlay/20 to-transparent transition-opacity group-hover:opacity-90" />
+      {badge ? (
+        <Badge className="absolute left-3 top-3 z-10">{badge}</Badge>
+      ) : null}
+      <div className="absolute inset-x-0 bottom-0 z-10 p-4 text-primary-foreground">
+        <h3 className="font-semibold leading-tight">{title}</h3>
+        {description ? (
+          <p className="mt-1 line-clamp-2 text-xs opacity-80">{description}</p>
+        ) : null}
+      </div>
+    </Card>
   );
   const triggerClasses = `block ${triggerClassName ?? ""} text-inherit outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`;
 

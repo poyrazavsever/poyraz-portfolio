@@ -43,7 +43,7 @@ export function HomeProjectsSection() {
 
       <div className="relative overflow-hidden py-1">
         <div className="flex w-max items-stretch gap-2">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <ProjectCardWithPopover
               key={project.id}
               image={project.image}
@@ -61,6 +61,7 @@ export function HomeProjectsSection() {
               architectureLabel={tProjects("architecture")}
               triggerClassName="w-56 shrink-0 md:w-[calc((100vw-8rem)/4)] md:max-w-56"
               className="aspect-square rounded-sm border-border"
+              priority={index === 0}
             />
           ))}
         </div>
