@@ -6,7 +6,7 @@ readTime: "6 min read"
 author: "Poyraz Avsever"
 slug: "software-with-poyraz-1319072026"
 excerpt: "This week, we have a packed tech agenda, from AI model price wars and enterprise agent protocols to HTTP QUERY, Figma updates, and Cloudflare's machine-economy push."
-coverImage: "/blog/images/poyraz-ile-yazilima-dair-1319072026-cover.png"
+coverImage: "/blog/images/poyraz-ile-yazilima-dair-1319072026-cover.webp"
 lang: "en"
 ---
 

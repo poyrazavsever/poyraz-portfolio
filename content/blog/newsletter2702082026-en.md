@@ -6,7 +6,7 @@ readTime: "5 min read"
 author: "Poyraz Avsever"
 slug: "newsletter2702082026-en"
 excerpt: "This week, we have a packed agenda, from autonomous AI models and data center water consumption to major shifts in design tools, next-generation batteries, and chip technologies."
-coverImage: "/blog/images/newsletter2702082026-cover.png"
+coverImage: "/blog/images/newsletter2702082026-cover.webp"
 lang: "en"
 ---
 

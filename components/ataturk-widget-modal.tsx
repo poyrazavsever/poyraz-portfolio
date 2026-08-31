@@ -28,7 +28,7 @@ export function AtaturkWidgetModal({ theme }: AtaturkWidgetModalProps) {
         >
           <div className="relative h-full w-full">
             <Image
-              src="/ataturk.png"
+              src="/ataturk.webp"
               alt={t("alt")}
               fill
               sizes="56px"

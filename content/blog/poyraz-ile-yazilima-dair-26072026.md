@@ -6,7 +6,7 @@ readTime: "7 min read"
 author: "Poyraz Avsever"
 slug: "poyraz-ile-yazilima-dair-26072026"
 excerpt: "Bu hafta otonom yapay zeka güvenliğinden kamu kurumlarında üretken yapay zekaya, sıfır tıklama açıklarından Figma'nın tasarım araçlarındaki liderliğine kadar yoğun bir teknoloji gündemimiz var."
-coverImage: "/blog/images/poyraz-ile-yazilima-dair-26072026-cover.png"
+coverImage: "/blog/images/poyraz-ile-yazilima-dair-26072026-cover.webp"
 lang: "tr"
 ---
 

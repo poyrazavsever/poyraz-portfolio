@@ -6,7 +6,7 @@ readTime: "13 min read"
 author: "Poyraz Avsever"
 slug: "poyraz-ile-yazilima-dair-2430082026"
 excerpt: "Bu hafta kontrolden çıkan yapay zekâ ajanlarından fiziksel cihazları yöneten sistemlere, Kubernetes 1.37'den Apple M6'ya kadar yoğun bir teknoloji gündemimiz var."
-coverImage: "/blog/images/poyraz-ile-yazilima-dair-2430082026-cover.png"
+coverImage: "/blog/images/poyraz-ile-yazilima-dair-2430082026-cover.webp"
 lang: "tr"
 ---
 

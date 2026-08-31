@@ -2,7 +2,7 @@
 title: "How to Build an AI Avatar That Follows the Pointer"
 slug: "poyraz-cursor-portrait"
 excerpt: "Build the effect from start to finish with the prompts, Wiro AI and MiniMax H3 video workflow, FFmpeg preparation, and React integration I used."
-coverImage: "/animation-sources/poyraz-cursor-portrait/avatar-mouse-follow.gif"
+coverImage: "/animation-sources/poyraz-cursor-portrait/avatar-mouse-follow.webp"
 platform: "Web"
 tools:
   - "Wiro AI"

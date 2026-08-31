@@ -6,7 +6,7 @@ readTime: "6 min read"
 author: "Poyraz Avsever"
 slug: "css-frameworkleri-tan-yoruz-5-b-l-m-materialize"
 excerpt: "CSS Frameworkleri Tanıyoruz | 5. Bölüm: Materialize Merhaba arkadaşlar, bugün 5.bölümde sizlerle “Materialize” ile tanışıyoruz. Dilerseniz başlayalım. Google’ın Material Design …"
-coverImage: "/blog/images/css-frameworkleri-tan-yoruz-5-b-l-m-materialize-cover.jpg"
+coverImage: "/blog/images/css-frameworkleri-tan-yoruz-5-b-l-m-materialize-cover.webp"
 canonicalUrl: "https://medium.com/@poyrazavsever/css-frameworkleri-tan%C4%B1yoruz-5-b%C3%B6l%C3%BCm-materialize-5fd3c99862c2"
 ---
 

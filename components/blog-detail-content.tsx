@@ -45,15 +45,13 @@ function MarkdownImage({ src, alt }: { src?: string; alt?: string }) {
           className="h-auto w-full object-cover"
         />
       ) : (
-        <img
+        <Image
           src={src}
           alt={caption}
           width={1200}
           height={675}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 900px"
           loading="lazy"
-          decoding="async"
-          fetchPriority="low"
-          referrerPolicy="strict-origin-when-cross-origin"
           className="h-auto w-full object-cover"
         />
       )}

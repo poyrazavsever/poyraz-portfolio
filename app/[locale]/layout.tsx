@@ -36,10 +36,10 @@ export async function generateMetadata({
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
-        { url: "/logo/logo.png", type: "image/jpeg" },
+        { url: "/logo/logo.webp", type: "image/webp" },
       ],
       shortcut: "/favicon.ico",
-      apple: "/logo/logo.png",
+      apple: "/logo/apple-touch-icon.png",
     },
     authors: [{ name: "Poyraz Avsever" }],
     creator: "Poyraz Avsever",
@@ -53,7 +53,7 @@ export async function generateMetadata({
       description: description,
       images: [
         {
-          url: "/logo/logo.png",
+          url: "/logo/logo.webp",
           width: 1200,
           height: 1200,
           alt: "Poyraz Avsever Logo",
@@ -64,7 +64,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: title,
       description: description,
-      images: ["/logo/logo.png"],
+      images: ["/logo/logo.webp"],
       creator: "@poyrazavsever",
     },
     keywords: [

@@ -145,7 +145,7 @@ Bu bakış açısını öğrendiğimden ve uygulamaya başladığımdan beri fro
 Frontend mimarisinde güven veren şey, hatasız olmak değil; **hatalarla yaşayabilecek bir yapı kurmaktır**.
 
 
-![](/blog/images/frontend-mimarisinde-en-zor-k-s-m-karar-vermek-img-7.jpg)
+![](/blog/images/frontend-mimarisinde-en-zor-k-s-m-karar-vermek-img-7.webp)
 
 ## Frontend Mimarisinde Olgunluğumun Gelişimi
 

@@ -156,7 +156,7 @@ export function BlogContent({ data, section = "blog" }: BlogContentProps) {
                   readTime={post.readTime}
                   href={post.href}
                   className="rounded-sm border-border [&_h3]:line-clamp-2 [&_h3]:min-h-[2.5rem] [&_p]:line-clamp-3"
-                  author={{ name: post.author, avatar: "/logo/logo.png" }}
+                  author={{ name: post.author, avatar: "/logo/logo.webp" }}
                 />
               </StaggerItem>
             ))}

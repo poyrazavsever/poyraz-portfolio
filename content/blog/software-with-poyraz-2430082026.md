@@ -6,7 +6,7 @@ readTime: "13 min read"
 author: "Poyraz Avsever"
 slug: "software-with-poyraz-2430082026"
 excerpt: "This week, we cover rogue AI agents, systems that connect models to physical devices, Kubernetes 1.37, Apple's M6, and the growing importance of control across technology."
-coverImage: "/blog/images/poyraz-ile-yazilima-dair-2430082026-cover.png"
+coverImage: "/blog/images/poyraz-ile-yazilima-dair-2430082026-cover.webp"
 lang: "en"
 ---
 

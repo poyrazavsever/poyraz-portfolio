@@ -6,7 +6,7 @@ readTime: "7 min read"
 author: "Poyraz Avsever"
 slug: "software-with-poyraz-0309082026"
 excerpt: "This week, we have a packed agenda, from AI cost competition and DeepMind's leadership shift to the 100x developer debate, Figma's file architecture updates, and changing power dynamics in tech."
-coverImage: "/blog/images/poyraz-ile-yazilima-dair-0309082026-cover.png"
+coverImage: "/blog/images/poyraz-ile-yazilima-dair-0309082026-cover.webp"
 lang: "en"
 ---
 

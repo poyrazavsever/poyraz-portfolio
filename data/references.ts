@@ -24,7 +24,7 @@ export const REFERENCES: Reference[] = [
       en: "Client - 2025",
     },
     rating: 5,
-    avatar: "/avatars/ali.png",
+    avatar: "/avatars/ali.webp",
     quote: {
       tr: "Web sitesi tam olarak istediğim gibi oldu. Poyraz benim gözden kaçırdığım detayları da düşündü, her kararı şeffaf şekilde anlattı ve beklentimin üstünde bir iş teslim etti.",
       en: "The website turned out exactly as I wanted. Poyraz thought of the details I missed, explained every decision transparently, and delivered a job beyond my expectations.",

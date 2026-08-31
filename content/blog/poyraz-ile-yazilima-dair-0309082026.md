@@ -6,7 +6,7 @@ readTime: "7 min read"
 author: "Poyraz Avsever"
 slug: "poyraz-ile-yazilima-dair-0309082026"
 excerpt: "Bu hafta yapay zeka maliyet savaşlarından DeepMind liderlik değişimine, 100x geliştirici tartışmasından Figma dosya mimarisine ve teknoloji sektöründeki güç dengelerine kadar yoğun bir gündemimiz var."
-coverImage: "/blog/images/poyraz-ile-yazilima-dair-0309082026-cover.png"
+coverImage: "/blog/images/poyraz-ile-yazilima-dair-0309082026-cover.webp"
 lang: "tr"
 ---
 

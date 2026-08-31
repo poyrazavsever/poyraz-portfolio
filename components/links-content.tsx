@@ -1,6 +1,7 @@
 "use client";
 
 import { Icon } from "@iconify/react";
+import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
@@ -124,9 +125,13 @@ export function LinksContent({
       <div className="relative mx-auto flex w-full max-w-xl justify-center">
         <Card className="w-full overflow-hidden rounded-[28px] border-border/80 bg-background/95 shadow-[0_24px_80px_rgba(15,23,42,0.16)] backdrop-blur">
           <div className="relative aspect-1878/410 overflow-hidden border-b border-border/70">
-            <img
+            <Image
               src="/logo/cover.png"
               alt="Poyraz Avsever kapak görseli"
+              fill
+              priority
+              sizes="(max-width: 640px) 100vw, 576px"
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-linear-to-t from-background/20 via-transparent to-transparent" />
           </div>
@@ -134,7 +139,7 @@ export function LinksContent({
           <div className="px-5 pb-5 pt-0 sm:px-6 sm:pb-6">
             <div className="-mt-14 flex flex-col gap-4">
               <Avatar className="h-24 w-24 rounded-[28px] border-4 border-background bg-background shadow-lg sm:h-28 sm:w-28">
-                <AvatarImage src="/logo/logo.png" alt="Poyraz Avsever" />
+                <AvatarImage src="/logo/logo.webp" alt="Poyraz Avsever" />
                 <AvatarFallback className="rounded-3xl bg-muted text-lg font-semibold">
                   PA
                 </AvatarFallback>

@@ -11,7 +11,7 @@ export type PersonJsonLdProps = {
 export function PersonJsonLd({
   name,
   url = SITE_URL,
-  image = `${SITE_URL}/logo/logo.png`,
+  image = `${SITE_URL}/logo/logo.webp`,
   jobTitle = "Fullstack Developer",
   sameAs = [],
 }: PersonJsonLdProps) {
@@ -68,7 +68,7 @@ export function ArticleJsonLd({
       name: authorName,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/logo/logo.png`,
+        url: `${SITE_URL}/logo/logo.webp`,
       },
     },
   };

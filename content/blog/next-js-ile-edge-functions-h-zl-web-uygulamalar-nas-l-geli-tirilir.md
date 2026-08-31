@@ -6,7 +6,7 @@ readTime: "5 min read"
 author: "Poyraz Avsever"
 slug: "next-js-ile-edge-functions-h-zl-web-uygulamalar-nas-l-geli-tirilir"
 excerpt: "Next.js ile Edge Functions: Hızlı Web Uygulamaları Nasıl Geliştirilir? TL;DR (Too Long; Didn’t Read): Edge Functions, kullanıcıya en yakın konumda çalışan, hızlı serverless …"
-coverImage: "/blog/images/next-js-ile-edge-functions-h-zl-web-uygulamalar-nas-l-geli-tirilir-cover.jpg"
+coverImage: "/blog/images/next-js-ile-edge-functions-h-zl-web-uygulamalar-nas-l-geli-tirilir-cover.webp"
 canonicalUrl: "https://medium.com/@poyrazavsever/next-js-ile-edge-functions-h%C4%B1zl%C4%B1-web-uygulamalar%C4%B1-nas%C4%B1l-geli%C5%9Ftirilir-d94eafacf50e"
 ---
 

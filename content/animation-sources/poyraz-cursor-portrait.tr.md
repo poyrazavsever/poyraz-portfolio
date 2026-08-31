@@ -2,7 +2,7 @@
 title: "Fareyi Takip Eden AI Avatar Nasıl Yapılır?"
 slug: "poyraz-cursor-portrait"
 excerpt: "Wiro AI üzerinde MiniMax H3 ile ürettiğim 1:1 avatar videosunu, promptlardan FFmpeg optimizasyonuna ve React entegrasyonuna kadar adım adım oluşturun."
-coverImage: "/animation-sources/poyraz-cursor-portrait/avatar-mouse-follow.gif"
+coverImage: "/animation-sources/poyraz-cursor-portrait/avatar-mouse-follow.webp"
 platform: "Web"
 tools:
   - "Wiro AI"

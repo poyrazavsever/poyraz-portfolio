@@ -59,7 +59,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "Kurumsal Portal",
       en: "Corporate Portal",
     },
-    image: "/projects/ostim.png",
+    image: "/projects/ostim.webp",
     href: "https://ostim.org.tr",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
@@ -81,7 +81,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "İstihdam Portalı",
       en: "Employment Portal",
     },
-    image: "/projects/ostim-istihdam.png",
+    image: "/projects/ostim-istihdam.webp",
     href: "https://ostimistihdam.com",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
@@ -103,7 +103,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "Dış Ticaret Portalı",
       en: "Foreign Trade Portal",
     },
-    image: "/projects/ostim-dis-ticaret.png",
+    image: "/projects/ostim-dis-ticaret.webp",
     href: "https://ostimdisticaret.net",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
@@ -122,7 +122,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "Freelance",
       en: "Freelance",
     },
-    image: "/projects/arc.png",
+    image: "/projects/arc.webp",
     technologies: ["Wix"],
     architecture: {
       tr: "Wix üzerinde yönetilebilir içerik ve kurumsal tanıtım sayfalarından oluşan, ihracat odaklı web sitesi yapısı.",
@@ -144,7 +144,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "Açık Kaynak",
       en: "Open Source",
     },
-    image: "/projects/ataturk.png",
+    image: "/projects/ataturk.webp",
     technologies: ["React"],
     architecture: {
       tr: "React ile geliştirilen, kronoloji verisini etkileşimli bir zaman çizelgesi arayüzünde sunan istemci taraflı uygulama.",

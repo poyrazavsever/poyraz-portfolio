@@ -17,6 +17,38 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "i.ytimg.com",
       },
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+      {
+        protocol: "https",
+        hostname: "miro.medium.com",
+      },
+      {
+        protocol: "https",
+        hostname: "www.c-sharpcorner.com",
+      },
+      {
+        protocol: "https",
+        hostname: "media.geeksforgeeks.org",
+      },
+      {
+        protocol: "https",
+        hostname: "edward-huang.com",
+      },
+      {
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.hashnode.com",
+      },
+      {
+        protocol: "https",
+        hostname: "i.sstatic.net",
+      },
     ],
   },
 };

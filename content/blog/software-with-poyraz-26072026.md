@@ -6,7 +6,7 @@ readTime: "7 min read"
 author: "Poyraz Avsever"
 slug: "software-with-poyraz-26072026"
 excerpt: "This week, we have a packed tech agenda, from autonomous AI safety and generative AI in public institutions to zero-click vulnerabilities and Figma's leadership in design tools."
-coverImage: "/blog/images/poyraz-ile-yazilima-dair-26072026-cover.png"
+coverImage: "/blog/images/poyraz-ile-yazilima-dair-26072026-cover.webp"
 lang: "en"
 ---
 

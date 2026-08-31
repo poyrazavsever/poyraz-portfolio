@@ -13,7 +13,7 @@ export const certificates = [
       tr: "Scrimba üzerindeki JavaScript'in Zor Kısımları sertifikasıyla scope, closure, hoisting ve asenkron akış gibi temel JavaScript kavramlarını daha derinlemesine pekiştirdim.",
       en: "With this Scrimba Tricky Parts of JavaScript certificate, I deepened my understanding of core JavaScript concepts such as scope, closures, hoisting, and asynchronous flow.",
     },
-    image: "/certificates/trickyPartsOfJavascriptScrimba.png",
+    image: "/certificates/trickyPartsOfJavascriptScrimba.webp",
     category: "web",
   },
   {
@@ -30,7 +30,7 @@ export const certificates = [
       tr: "Scrimba üzerindeki JavaScript sertifikasıyla temel programlama becerilerimi geliştirdim.",
       en: "With this Scrimba JavaScript certificate, I improved my foundational programming skills.",
     },
-    image: "/certificates/javascriptScrimba.png",
+    image: "/certificates/javascriptScrimba.webp",
     category: "web",
   },
   {
@@ -47,7 +47,7 @@ export const certificates = [
       tr: "Scrimba üzerindeki CSS Animasyonları sertifikasıyla geçişler, hareket ve etkileşimli arayüz animasyonları oluşturma becerilerimi geliştirdim.",
       en: "With this Scrimba CSS Animations certificate, I improved my skills in transitions, motion, and interactive interface animations.",
     },
-    image: "/certificates/cssAnimationsScrimba.png",
+    image: "/certificates/cssAnimationsScrimba.webp",
     category: "web",
   },
   {
@@ -64,7 +64,7 @@ export const certificates = [
       tr: "Scrimba üzerindeki CSS Grid sertifikasıyla modern ve duyarlı yerleşim sistemleri kurma becerilerimi geliştirdim.",
       en: "With this Scrimba CSS Grid certificate, I improved my ability to build modern and responsive layout systems.",
     },
-    image: "/certificates/cssGridScrimba.png",
+    image: "/certificates/cssGridScrimba.webp",
     category: "web",
   },
   {
@@ -81,7 +81,7 @@ export const certificates = [
       tr: "Scrimba üzerindeki HTML ve CSS sertifikasıyla semantik yapı kurma ve arayüz stil verme konularında temel yetkinlik kazandım.",
       en: "With this Scrimba HTML and CSS certificate, I gained foundational skills in semantic structure and interface styling.",
     },
-    image: "/certificates/htmlCssScrimba.png",
+    image: "/certificates/htmlCssScrimba.webp",
     category: "web",
   },
   {
@@ -217,7 +217,7 @@ export const certificates = [
       tr: "Git ve GitHub üzerine aldığım bu eğitimde sürüm kontrol süreçleri, proje yönetimi ve ekip çalışmasında değişiklik takibi konularında yetkinliğimi artırdım.",
       en: "In this training on Git and GitHub, I increased my competence in version control processes, project management, and tracking changes in teamwork.",
     },
-    image: "/certificates/git.png",
+    image: "/certificates/git.webp",
     category: "yazılım",
   },
   {
@@ -251,7 +251,7 @@ export const certificates = [
       tr: "Profesyonel profil oluşturma, networking stratejileri geliştirme ve LinkedIn'i daha verimli kullanma konularında bilgi kazandım.",
       en: "I gained knowledge about creating a professional profile, developing networking strategies, and using LinkedIn more efficiently.",
     },
-    image: "/certificates/linkedin.png",
+    image: "/certificates/linkedin.webp",
     category: "kişisel",
   },
   {

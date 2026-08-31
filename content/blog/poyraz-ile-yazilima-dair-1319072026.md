@@ -6,7 +6,7 @@ readTime: "6 min read"
 author: "Poyraz Avsever"
 slug: "poyraz-ile-yazilima-dair-1319072026"
 excerpt: "Bu hafta yapay zeka model fiyat savaşlarından kurumsal ajan protokollerine, HTTP QUERY metodundan Figma ve Cloudflare güncellemelerine kadar yoğun bir teknoloji gündemimiz var."
-coverImage: "/blog/images/poyraz-ile-yazilima-dair-1319072026-cover.png"
+coverImage: "/blog/images/poyraz-ile-yazilima-dair-1319072026-cover.webp"
 lang: "tr"
 ---
 

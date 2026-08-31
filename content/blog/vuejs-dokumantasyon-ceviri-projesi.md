@@ -6,12 +6,12 @@ readTime: "5 min read"
 author: "Poyraz Avsever"
 slug: "vuejs-dokumantasyon-ceviri-projesi"
 excerpt: "Vue.js öğrenme sürecimde hissettiğim Türkçe kaynak eksikliğini gidermek için başlattığım topluluk çeviri projesine davetlisiniz."
-coverImage: "/blog/images/vuejs-ceviri-bolum1.png"
+coverImage: "/blog/images/vuejs-ceviri-bolum1.webp"
 ---
 
 # Vue.js Dokümantasyonunu Birlikte Türkçeye Çeviriyoruz!
 
-![]( /blog/images/vuejs-ceviri-bolum1.png)
+![]( /blog/images/vuejs-ceviri-bolum1.webp)
 
 Merhaba,
 
@@ -25,7 +25,7 @@ Son zamanlarda kendimi frontend alanında geliştirmeye devam ediyorum ve rotam�
 
 ## Peki Bunu Nasıl Düzenliyoruz?
 
-![]( /blog/images/vuejs-ceviri-bolum2.png)
+![]( /blog/images/vuejs-ceviri-bolum2.webp)
 
 Açıkçası projeye ilk başladığımda "Bunu nasıl yöneteceğim?" sorusu kafamı biraz kurcaladı. Markdown dosyalarını tek tek kendi kendime çevirip commit atmak yerine, başkalarının da kolayca katılıp iş bölümü yapabileceği bir düzen kurmam gerekiyordu. 
 
@@ -35,7 +35,7 @@ Yani dokümantasyondaki her sayfa, projemizde tamamlanmayı bekleyen bir görev 
 
 ## Süreci Takip Etmek İçin Ne Yaptım?
 
-![]( /blog/images/vuejs-ceviri-bolum3.png)
+![]( /blog/images/vuejs-ceviri-bolum3.webp)
 
 Issue açmak güzeldi ama "şu an kim ne yapıyor, hangi sayfa boşta?" sorularının yanıtı hala belirsizdi. Bu yüzden GitHub üzerinde bir **Kanban board** kurdum. Benim gibi projeler üretmeyi seven biriyseniz, o "Done" sütununun dolmaya başlamasının ne kadar motive edici olduğunu bilirsiniz.
 
@@ -49,7 +49,7 @@ Böylece kimse "acaba bu sayfayı çeviren var mı?" diye düşünmüyor. Her ş
 
 ## Nasıl Dahil Olabilirsiniz?
 
-![]( /blog/images/vuejs-ceviri-bolum4.png)
+![]( /blog/images/vuejs-ceviri-bolum4.webp)
 
 Bu projeyi tek başıma yürütmemin çok uzun süreceğini söylemiştim. O yüzden eğer Vue.js öğreniyorsanız, İngilizce okuma pratiği yapmak istiyorsanız veya sadece açık kaynağa destek olmanın o güzel hissini yaşamak istiyorsanız sizi de bekliyoruz. Süreç inanın çok basit:
 
@@ -62,7 +62,7 @@ Gördüğünüz gibi aslında son derece standart bir açık kaynak katkı süre
 
 ## Çevirirken Dikkat Ettiğimiz Birkaç Şey
 
-![]( /blog/images/vuejs-ceviri-bolum5.png)
+![]( /blog/images/vuejs-ceviri-bolum5.webp)
 
 Herkesin farklı bir çeviri tarzı olduğu için ortaya tutarlı bir Türkçe kaynak çıkması adına ufak tefek kurallarımız var elbette. Çok göz korkutucu şeyler değil; örneğin kod bloklarının içini çevirmemeye özen gösteriyoruz veya "component", "props", "render" gibi Türkçeye çevrildiğinde kafa karıştırabilecek teknik terimleri orijinal haliyle bırakmayı tercih ediyoruz.
 
@@ -70,7 +70,7 @@ Bütün bu detayları repomuzdaki `CONTRIBUTING.md` dosyasında derledik. Çevir
 
 ## Son Söz
 
-![]( /blog/images/vuejs-ceviri-bolum6.png)
+![]( /blog/images/vuejs-ceviri-bolum6.webp)
 
 Eğer siz de benim gibi Vue.js dünyasını keşfediyorsanız veya halihazırda tecrübeli bir geliştiriciyseniz, bu projede herkese yetecek kadar sayfa var. Birlikte, ekosisteme değer katacak sağlam bir Türkçe kaynak bırakabiliriz.
 

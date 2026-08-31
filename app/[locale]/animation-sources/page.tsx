@@ -20,7 +20,7 @@ export async function generateMetadata({
   ]);
   const localizedPath = locale === "en" ? "/en/animation-sources" : "/animation-sources";
   const url = `${SITE_URL}${localizedPath}`;
-  const socialImagePath = sources[0]?.coverImage ?? "/logo/logo.png";
+  const socialImagePath = sources[0]?.coverImage ?? "/logo/logo.webp";
   const socialImageUrl = new URL(socialImagePath, SITE_URL).toString();
   const isGif = socialImagePath.toLowerCase().endsWith(".gif");
 

@@ -6,7 +6,7 @@ readTime: "5 min read"
 author: "Poyraz Avsever"
 slug: "newsletter0612072026-en"
 excerpt: "This week, we have a packed agenda, ranging from OpenAI's changing model strategies to the historic trade secret theft lawsuit filed by Apple, and from new technologies running in the browser to useful open-source projects."
-coverImage: "/blog/images/newsletter0612072026-cover.png"
+coverImage: "/blog/images/newsletter0612072026-cover.webp"
 lang: "en"
 ---
 

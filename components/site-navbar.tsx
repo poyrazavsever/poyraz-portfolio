@@ -204,7 +204,7 @@ export function SiteNavbar({
           className="inline-flex shrink-0 items-center"
         >
           <Logo
-            src="/logo/logo.png"
+            src="/logo/logo.webp"
             alt="Poyraz Avsever"
             width={40}
             height={40}
