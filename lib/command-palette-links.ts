@@ -113,6 +113,18 @@ export function getCommandPaletteGroups(
       keywords: ["blog", locale === "tr" ? "yazı" : "post", "article"],
     },
     {
+      id: "agenda-index",
+      label: locale === "tr" ? "Haftalık Gündem" : "Weekly Agenda",
+      href: "/agenda",
+      icon: "mdi:newspaper-variant-outline",
+      keywords: [
+        "newsletter",
+        locale === "tr" ? "gündem" : "agenda",
+        locale === "tr" ? "haftalık" : "weekly",
+        locale === "tr" ? "haber" : "news",
+      ],
+    },
+    {
       id: "blog-content-page",
       label: locale === "tr" ? "Video ve Notlar" : "Videos and Notes",
       href: "/content",

@@ -51,6 +51,10 @@ const SearchCommand = dynamic(
 );
 
 const slowShineClassName = "[--poyraz-motion-duration-deliberate:1100ms]";
+const dropdownItemLinkClassName =
+  "grid w-full grid-cols-[1.25rem_minmax(0,1fr)] items-center gap-2";
+const mobileDropdownItemLinkClassName =
+  "grid min-h-10 w-full grid-cols-[1.25rem_minmax(0,1fr)_1rem] items-center gap-3 rounded-sm px-2 py-2 text-sm text-foreground/70 transition-colors hover:bg-muted hover:text-foreground";
 
 function getNavLinkClass(isActive: boolean) {
   return [
@@ -280,18 +284,28 @@ export function SiteNavbar({
                                   href={groupItem.href}
                                   target="_blank"
                                   rel="noreferrer"
-                                  className="flex items-center gap-2"
+                                  className={dropdownItemLinkClassName}
                                 >
-                                  <Icon icon={groupItem.icon} width={16} height={16} />
-                                  <span>{t(groupItem.id)}</span>
+                                  <Icon
+                                    icon={groupItem.icon}
+                                    width={16}
+                                    height={16}
+                                    className="block justify-self-center"
+                                  />
+                                  <span className="min-w-0 leading-5">{t(groupItem.id)}</span>
                                 </a>
                               ) : (
                                 <Link
                                   href={groupItem.href}
-                                  className="flex items-center gap-2"
+                                  className={dropdownItemLinkClassName}
                                 >
-                                  <Icon icon={groupItem.icon} width={16} height={16} />
-                                  <span>{t(groupItem.id)}</span>
+                                  <Icon
+                                    icon={groupItem.icon}
+                                    width={16}
+                                    height={16}
+                                    className="block justify-self-center"
+                                  />
+                                  <span className="min-w-0 leading-5">{t(groupItem.id)}</span>
                                 </Link>
                               )}
                             </DropdownMenuItem>
@@ -430,15 +444,20 @@ export function SiteNavbar({
                                 href={groupItem.href}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="flex min-h-10 w-full items-center gap-3 rounded-sm px-2 py-2 text-sm text-foreground/70 transition-colors hover:bg-muted hover:text-foreground"
+                                className={mobileDropdownItemLinkClassName}
                               >
-                                <Icon icon={groupItem.icon} width={18} height={18} />
-                                <span>{t(groupItem.id)}</span>
+                                <Icon
+                                  icon={groupItem.icon}
+                                  width={18}
+                                  height={18}
+                                  className="block justify-self-center"
+                                />
+                                <span className="min-w-0 leading-5">{t(groupItem.id)}</span>
                                 <Icon
                                   icon="mdi:open-in-new"
                                   width={14}
                                   height={14}
-                                  className="ml-auto text-muted-foreground"
+                                  className="block justify-self-center text-muted-foreground"
                                 />
                               </a>
                             </SheetClose>
@@ -446,15 +465,20 @@ export function SiteNavbar({
                             <SheetClose asChild>
                               <Link
                                 href={groupItem.href}
-                                className="flex min-h-10 w-full items-center gap-3 rounded-sm px-2 py-2 text-sm text-foreground/70 transition-colors hover:bg-muted hover:text-foreground"
+                                className={mobileDropdownItemLinkClassName}
                               >
-                                <Icon icon={groupItem.icon} width={18} height={18} />
-                                <span>{t(groupItem.id)}</span>
+                                <Icon
+                                  icon={groupItem.icon}
+                                  width={18}
+                                  height={18}
+                                  className="block justify-self-center"
+                                />
+                                <span className="min-w-0 leading-5">{t(groupItem.id)}</span>
                                 <Icon
                                   icon="mdi:chevron-right"
                                   width={16}
                                   height={16}
-                                  className="ml-auto text-muted-foreground"
+                                  className="block justify-self-center text-muted-foreground"
                                 />
                               </Link>
                             </SheetClose>

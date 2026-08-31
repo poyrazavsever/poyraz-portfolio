@@ -7,7 +7,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import type { BlogDetail } from "@/data/blog-detail";
@@ -16,6 +16,7 @@ import { GiscusComments } from "@/components/giscus-comments";
 
 type BlogDetailContentProps = {
   post: BlogDetail;
+  section?: "blog" | "agenda";
 };
 
 function isHttpUrl(value: string) {
@@ -98,7 +99,8 @@ function MermaidBlock({ chart }: { chart: string }) {
   const t = useTranslations("Blog");
   const [svg, setSvg] = useState("");
   const [error, setError] = useState("");
-  const idRef = useRef(`mermaid-${Math.random().toString(36).slice(2)}`);
+  const generatedId = useId();
+  const idRef = useRef(`mermaid-${generatedId.replace(/:/g, "")}`);
 
   useEffect(() => {
     let mounted = true;
@@ -163,8 +165,9 @@ const GISCUS_CATEGORY =
   process.env.NEXT_PUBLIC_GISCUS_CATEGORY || "Announcements";
 const GISCUS_CATEGORY_ID = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID || "";
 
-export function BlogDetailContent({ post }: BlogDetailContentProps) {
+export function BlogDetailContent({ post, section = "blog" }: BlogDetailContentProps) {
   const t = useTranslations("Blog");
+  const agendaT = useTranslations("Agenda");
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const [tocOpen, setTocOpen] = useState(false);
 
@@ -199,10 +202,10 @@ export function BlogDetailContent({ post }: BlogDetailContentProps) {
         <div className="min-w-0 flex-1">
           <article className="space-y-5 rounded-sm border border-border p-5 md:p-8">
             <Link
-              href="/blog"
+              href={section === "agenda" ? "/agenda" : "/blog"}
               className="inline-flex items-center rounded-sm border border-border px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
-              {t("backToBlog")}
+              {section === "agenda" ? agendaT("backToAgenda") : t("backToBlog")}
             </Link>
 
             <header className="space-y-3">

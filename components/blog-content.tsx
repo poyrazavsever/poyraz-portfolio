@@ -19,9 +19,13 @@ import type { BlogPageData } from "@/data/blog";
 
 type BlogContentProps = {
   data: BlogPageData;
+  section?: "blog" | "agenda";
 };
 
-function buildHref(params: { page?: number; category?: string; search?: string }) {
+function buildHref(
+  params: { page?: number; category?: string; search?: string },
+  section: "blog" | "agenda",
+) {
   const qs = new URLSearchParams();
 
   if (params.page && params.page > 1) qs.set("page", String(params.page));
@@ -29,12 +33,15 @@ function buildHref(params: { page?: number; category?: string; search?: string }
   if (params.search) qs.set("search", params.search);
 
   const query = qs.toString();
-  return query ? `/blog?${query}` : "/blog";
+  const basePath = section === "agenda" ? "/agenda" : "/blog";
+  return query ? `${basePath}?${query}` : basePath;
 }
 
-export function BlogContent({ data }: BlogContentProps) {
+export function BlogContent({ data, section = "blog" }: BlogContentProps) {
   const router = useRouter();
   const t = useTranslations("Blog");
+  const agendaT = useTranslations("Agenda");
+  const isAgenda = section === "agenda";
   const [searchInput, setSearchInput] = useState(data.searchQuery);
   const pageNumbers = Array.from({ length: data.totalPages }, (_, i) => i + 1);
   const hasArticles = data.articles.length > 0;
@@ -42,15 +49,15 @@ export function BlogContent({ data }: BlogContentProps) {
   const submitSearch = useCallback(
     (value: string) => {
       const trimmed = value.trim();
-      router.push(buildHref({ category: data.selectedCategory, search: trimmed }));
+      router.push(buildHref({ category: data.selectedCategory, search: trimmed }, section));
     },
-    [router, data.selectedCategory],
+    [router, data.selectedCategory, section],
   );
 
   const clearFilters = useCallback(() => {
     setSearchInput("");
-    router.push("/blog");
-  }, [router]);
+    router.push(section === "agenda" ? "/agenda" : "/blog");
+  }, [router, section]);
 
   return (
     <section className="flex h-full flex-col gap-4 overflow-y-auto">
@@ -58,24 +65,26 @@ export function BlogContent({ data }: BlogContentProps) {
       <Card className="rounded-sm border-border p-4">
         <div className="flex flex-col gap-3">
           {/* Kategoriler */}
-          <div className="flex flex-wrap items-center gap-2">
-            <Typography variant="small" className="mr-1 text-muted-foreground">
-              {t("categories")}:
-            </Typography>
-            {data.categories.map((category) => (
-              <Link
-                key={category}
-                href={buildHref({ category, search: data.searchQuery })}
-              >
-                <Badge
-                  variant={category === data.selectedCategory ? "default" : "outline"}
-                  className="cursor-pointer rounded-sm transition-colors"
+          {!isAgenda && (
+            <div className="flex flex-wrap items-center gap-2">
+              <Typography variant="small" className="mr-1 text-muted-foreground">
+                {t("categories")}:
+              </Typography>
+              {data.categories.map((category) => (
+                <Link
+                  key={category}
+                  href={buildHref({ category, search: data.searchQuery }, section)}
                 >
-                  {category}
-                </Badge>
-              </Link>
-            ))}
-          </div>
+                  <Badge
+                    variant={category === data.selectedCategory ? "default" : "outline"}
+                    className="cursor-pointer rounded-sm transition-colors"
+                  >
+                    {category}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          )}
 
           {/* Arama */}
           <div className="relative">
@@ -86,14 +95,15 @@ export function BlogContent({ data }: BlogContentProps) {
               className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground"
             />
             <input
-              id="blog-search"
+              id={isAgenda ? "agenda-search" : "blog-search"}
+              aria-label={isAgenda ? agendaT("searchPlaceholder") : t("searchPlaceholder")}
               type="text"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") submitSearch(searchInput);
               }}
-              placeholder={t("searchPlaceholder")}
+              placeholder={isAgenda ? agendaT("searchPlaceholder") : t("searchPlaceholder")}
               className="w-full rounded-sm border border-border bg-background py-2 pr-10 pl-9 text-sm text-foreground placeholder:text-muted-foreground focus:border-red-600 focus:ring-1 focus:ring-red-600/30 focus:outline-none"
             />
             {searchInput && (
@@ -161,9 +171,13 @@ export function BlogContent({ data }: BlogContentProps) {
             />
             <Typography variant="p" className="text-muted-foreground">
               {data.searchQuery
-                ? t("noSearch", { search: data.searchQuery })
+                ? isAgenda
+                  ? agendaT("noSearch", { search: data.searchQuery })
+                  : t("noSearch", { search: data.searchQuery })
                 : data.selectedCategory === "All"
-                  ? t("empty")
+                  ? isAgenda
+                    ? agendaT("empty")
+                    : t("empty")
                   : t("emptyCategory", { category: data.selectedCategory })}
             </Typography>
             {(data.searchQuery || data.selectedCategory !== "All") && (
@@ -185,11 +199,14 @@ export function BlogContent({ data }: BlogContentProps) {
             <PaginationContent className="justify-start">
               <PaginationItem>
                 <PaginationPrevious
-                  href={buildHref({
-                    page: Math.max(1, data.currentPage - 1),
-                    category: data.selectedCategory,
-                    search: data.searchQuery,
-                  })}
+                  href={buildHref(
+                    {
+                      page: Math.max(1, data.currentPage - 1),
+                      category: data.selectedCategory,
+                      search: data.searchQuery,
+                    },
+                    section,
+                  )}
                   aria-disabled={data.currentPage <= 1}
                 />
               </PaginationItem>
@@ -197,11 +214,14 @@ export function BlogContent({ data }: BlogContentProps) {
               {pageNumbers.map((page) => (
                 <PaginationItem key={page}>
                   <PaginationLink
-                    href={buildHref({
-                      page,
-                      category: data.selectedCategory,
-                      search: data.searchQuery,
-                    })}
+                    href={buildHref(
+                      {
+                        page,
+                        category: data.selectedCategory,
+                        search: data.searchQuery,
+                      },
+                      section,
+                    )}
                     isActive={page === data.currentPage}
                   >
                     {page}
@@ -211,11 +231,14 @@ export function BlogContent({ data }: BlogContentProps) {
 
               <PaginationItem>
                 <PaginationNext
-                  href={buildHref({
-                    page: Math.min(data.totalPages, data.currentPage + 1),
-                    category: data.selectedCategory,
-                    search: data.searchQuery,
-                  })}
+                  href={buildHref(
+                    {
+                      page: Math.min(data.totalPages, data.currentPage + 1),
+                      category: data.selectedCategory,
+                      search: data.searchQuery,
+                    },
+                    section,
+                  )}
                   aria-disabled={data.currentPage >= data.totalPages}
                 />
               </PaginationItem>

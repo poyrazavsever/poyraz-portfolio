@@ -2,6 +2,7 @@
   "Nav": {
     "about": "About",
     "blog": "Blog",
+    "agenda": "Weekly Agenda",
     "content": "Content",
     "projects": "Projects",
     "gallery": "Gallery",
@@ -86,6 +87,14 @@
     "toc": "Table of Contents",
     "diagramLoading": "Diagram rendering...",
     "diagramError": "Could not render Mermaid diagram."
+  },
+  "Agenda": {
+    "title": "Weekly Agenda",
+    "description": "Weekly developments and commentary from software, technology, design, and artificial intelligence.",
+    "searchPlaceholder": "Search the weekly agenda...",
+    "empty": "No agenda posts yet.",
+    "noSearch": "No agenda posts found for \"{search}\".",
+    "backToAgenda": "<- Back to Weekly Agenda"
   },
   "AnimationSources": {
     "title": "Animation Sources",

@@ -2,6 +2,7 @@
   "Nav": {
     "about": "Hakkımda",
     "blog": "Blog",
+    "agenda": "Haftalık Gündem",
     "content": "İçerikler",
     "projects": "Projeler",
     "gallery": "Galeri",
@@ -86,6 +87,14 @@
     "toc": "İçindekiler",
     "diagramLoading": "Diyagram hazırlanıyor...",
     "diagramError": "Mermaid diyagramı oluşturulamadı."
+  },
+  "Agenda": {
+    "title": "Haftalık Gündem",
+    "description": "Yazılım, teknoloji, tasarım ve yapay zeka dünyasından haftalık gelişmeler ve yorumlar.",
+    "searchPlaceholder": "Haftalık gündemde ara...",
+    "empty": "Henüz gündem yazısı bulunmuyor.",
+    "noSearch": "\"{search}\" aramasına uygun gündem yazısı bulunamadı.",
+    "backToAgenda": "<- Haftalık Gündem'e dön"
   },
   "AnimationSources": {
     "title": "Animasyon Kaynakları",

@@ -78,6 +78,14 @@ export const NAV_DROPDOWN_GROUPS = [
     insertAfter: "gallery",
     items: [
       {
+        id: "agenda",
+        label: "Haftalık Gündem",
+        href: "/agenda",
+        icon: "mdi:newspaper-variant-outline",
+        external: false,
+        keywords: ["gündem", "agenda", "newsletter", "haftalık", "weekly", "haber"],
+      },
+      {
         id: "animationResources",
         label: "Animasyon Kaynakları",
         href: "/animation-sources",
