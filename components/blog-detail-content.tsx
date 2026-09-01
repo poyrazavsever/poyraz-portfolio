@@ -462,7 +462,11 @@ export function BlogDetailContent({ post, section = "blog" }: BlogDetailContentP
                 <Icon icon="mdi:close" width={18} height={18} />
               </button>
             </div>
-            <BlogToc markdown={post.markdown} onNavigate={closeToc} />
+            <BlogToc
+              markdown={post.markdown}
+              onNavigate={closeToc}
+              showTitle={false}
+            />
           </div>
         </div>
       )}

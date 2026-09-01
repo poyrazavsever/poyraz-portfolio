@@ -1,7 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Typography } from "poyraz-ui/atoms";
+import { Icon } from "@iconify/react";
+import { useTranslations } from "next-intl";
+import {
+  Button,
+  ButtonIcon,
+  ButtonLabel,
+  Typography,
+} from "poyraz-ui/atoms";
 
 type TocHeading = {
   id: string;
@@ -37,9 +44,15 @@ function parseHeadings(markdown: string): TocHeading[] {
 type BlogTocProps = {
   markdown: string;
   onNavigate?: () => void;
+  showTitle?: boolean;
 };
 
-export function BlogToc({ markdown, onNavigate }: BlogTocProps) {
+export function BlogToc({
+  markdown,
+  onNavigate,
+  showTitle = true,
+}: BlogTocProps) {
+  const t = useTranslations("Blog");
   const headings = useMemo(() => parseHeadings(markdown), [markdown]);
   const [activeId, setActiveId] = useState("");
   const rafRef = useRef(0);
@@ -55,6 +68,11 @@ export function BlogToc({ markdown, onNavigate }: BlogTocProps) {
     },
     [onNavigate],
   );
+
+  const handleBackToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    onNavigate?.();
+  }, [onNavigate]);
 
   useEffect(() => {
     if (headings.length === 0) return;
@@ -112,13 +130,18 @@ export function BlogToc({ markdown, onNavigate }: BlogTocProps) {
   if (headings.length < 2) return null;
 
   return (
-    <nav aria-label="İçindekiler" className="space-y-1">
-      <Typography
-        variant="small"
-        className="mb-2 font-semibold text-foreground"
-      >
-        İçindekiler
-      </Typography>
+    <nav
+      aria-label={t("toc")}
+      className="max-h-[calc(100dvh-7rem)] space-y-1 overflow-y-auto overscroll-contain pr-1 [scrollbar-width:thin]"
+    >
+      {showTitle ? (
+        <Typography
+          variant="small"
+          className="mb-2 font-semibold text-foreground"
+        >
+          {t("toc")}
+        </Typography>
+      ) : null}
       {headings.map((heading, index) => (
         <button
           key={`${heading.id}-${index}`}
@@ -135,6 +158,23 @@ export function BlogToc({ markdown, onNavigate }: BlogTocProps) {
           {heading.text}
         </button>
       ))}
+      <div className="mt-3 border-t border-border pt-3">
+        <Button
+          type="button"
+          variant="outline"
+          size="xs"
+          radius="sm"
+          effect="swap"
+          swapTarget="both"
+          onClick={handleBackToTop}
+          className="w-full justify-between"
+        >
+          <ButtonLabel>{t("backToTop")}</ButtonLabel>
+          <ButtonIcon>
+            <Icon icon="mdi:arrow-up" width={14} height={14} />
+          </ButtonIcon>
+        </Button>
+      </div>
     </nav>
   );
 }
