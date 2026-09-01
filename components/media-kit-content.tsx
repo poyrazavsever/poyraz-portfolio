@@ -116,7 +116,7 @@ const COPY = {
     ctaDescription:
       "Let’s shape a partnership that understands, experiences, and explains your product clearly.",
     dataNote:
-      "Performance, demographic, device, and geography breakdowns are lifetime figures. Active hours cover the last 28 days.",
+      "Performance, demographic, device, and geography breakdowns are lifetime figures.",
   },
 } as const;
 
@@ -437,30 +437,7 @@ export function MediaKitContent({
             </div>
           </Card>
 
-          <Card className="rounded-sm border-border p-4 md:col-span-2">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <Typography variant="large" component="h3" className="text-sm font-semibold">
-                  {copy.activeTitle}
-                </Typography>
-                <Typography variant="caption" className="mt-1 block text-muted-foreground">
-                  {copy.activePeriod}
-                </Typography>
-              </div>
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-sm bg-primary/10 text-primary">
-                <Icon icon="mdi:clock-time-four-outline" width={17} height={17} />
-              </span>
-            </div>
-            <Typography
-              variant="h3"
-              className="mt-5 font-secondary tracking-[-0.035em] tabular-nums"
-            >
-              {copy.activeHours}
-            </Typography>
-            <Typography variant="small" className="mt-2 max-w-xl text-xs leading-5 text-muted-foreground">
-              {copy.activeDescription}
-            </Typography>
-          </Card>
+         
         </div>
 
         <Typography variant="caption" className="block text-muted-foreground">
