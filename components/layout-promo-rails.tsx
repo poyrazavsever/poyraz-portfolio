@@ -315,16 +315,9 @@ function PromoRail({
               }}
               className="space-y-3"
             >
-              {activeCards.map((card, index) => (
+              {activeCards.map((card) => (
                 <motion.div
                   key={card.id}
-                  initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: reduceMotion ? 0 : 0.28,
-                    delay: reduceMotion ? 0 : index * 0.045,
-                    ease: "easeOut",
-                  }}
                   whileHover={reduceMotion ? undefined : { y: -3 }}
                 >
                   <PromoCard
