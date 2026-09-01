@@ -179,6 +179,7 @@
     "noSearch": "No results found for \"{search}\".",
     "comments": "Comments",
     "toc": "Table of Contents",
+    "backToTop": "Back to top",
     "diagramLoading": "Diagram rendering...",
     "diagramError": "Could not render Mermaid diagram."
   },

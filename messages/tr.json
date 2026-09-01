@@ -34,8 +34,8 @@
     "allProjects": "Tüm projeler",
     "reviewsAndReferences": "Yorumlar & Referanslar",
     "allReferences": "Tüm referanslar",
-    "technologiesTitle": "Ben bu teknolojileri kullanıyorum",
-    "allTechnologies": "Tüm teknolojileri incele",
+    "technologiesTitle": "Teknolojiler",
+    "allTechnologies": "İncele",
     "technologyCategories": {
       "frontend": "Ön Yüz",
       "backend": "Arka Yüz",
@@ -179,6 +179,7 @@
     "noSearch": "\"{search}\" aramasına uygun sonuç bulunamadı.",
     "comments": "Yorumlar",
     "toc": "İçindekiler",
+    "backToTop": "En üste çık",
     "diagramLoading": "Diyagram hazırlanıyor...",
     "diagramError": "Mermaid diyagramı oluşturulamadı."
   },
