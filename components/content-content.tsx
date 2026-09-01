@@ -109,10 +109,10 @@ export function ContentContent({
           />
         </div>
         <div className="grid gap-2 md:grid-cols-3">
-          {embeddedVideos.map((link) => (
+          {embeddedVideos.map((link, index) => (
             <Card
               key={link}
-              className="overflow-hidden rounded-sm border-border p-0"
+              className={`overflow-hidden rounded-sm border-border p-0 ${index > 0 ? "hidden md:block" : ""}`}
             >
               <YoutubeLiteEmbed link={link} title={t("youtubeEmbedTitle")} />
             </Card>
@@ -138,7 +138,7 @@ export function ContentContent({
               key={pdf.fileName}
               type="button"
               onClick={() => openPdfModal(index)}
-              className="cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className={`cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${index > 1 ? "hidden md:block" : ""}`}
               aria-label={t("openPdf", { name: pdf.title })}
             >
               <Card className="relative aspect-4/5 overflow-hidden rounded-sm border-border bg-muted/20 p-0 transition-colors hover:border-zinc-700">
@@ -174,15 +174,15 @@ export function ContentContent({
           />
         </div>
         <div className="grid gap-2 md:grid-cols-2">
-          {xVideos.map((video) => (
+          {xVideos.map((video, index) => (
             <Card
               key={video.src}
-              className="relative aspect-video overflow-hidden rounded-sm border-border bg-black p-0"
+              className={`relative aspect-video overflow-hidden rounded-sm border-border bg-black p-0 ${index > 0 ? "hidden md:block" : ""}`}
             >
               <video
                 controls
                 playsInline
-                preload="metadata"
+                preload={index === 0 ? "metadata" : "none"}
                 className="absolute inset-0 h-full w-full object-cover"
                 aria-label={t("xVideoTitle", { episode: video.episode })}
               >
