@@ -1,5 +1,8 @@
 export type ProjectItem = {
   id: string;
+  icon: string;
+  simpleOrder?: number;
+  madeIt?: boolean;
   title: {
     tr: string;
     en: string;
@@ -25,6 +28,8 @@ export type ProjectItem = {
 export const MOBILE_APPS: ProjectItem[] = [
   {
     id: "targiz-app",
+    icon: "mdi:sprout-outline",
+    simpleOrder: 1,
     title: "Targiz App",
     badge: "Agritech",
     image: "/projects/targiz.png",
@@ -59,6 +64,8 @@ const OSTIM_TECHNOLOGIES = [
 export const WEB_APPS: ProjectItem[] = [
   {
     id: "ostim-web-portal",
+    icon: "mdi:office-building-outline",
+    simpleOrder: 2,
     title: {
       tr: "OSTİM Web Portalı",
       en: "OSTİM Web Portal",
@@ -82,6 +89,7 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "ostim-employment",
+    icon: "mdi:briefcase-search-outline",
     title: {
       tr: "OSTİM İstihdam",
       en: "OSTİM Employment",
@@ -105,6 +113,7 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "ostim-foreign-trade",
+    icon: "mdi:earth",
     title: {
       tr: "OSTİM Dış Ticaret",
       en: "OSTİM Foreign Trade",
@@ -127,6 +136,7 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "arc-foreign-trade",
+    icon: "mdi:factory",
     title: "ARC Foreign Trade",
     badge: {
       tr: "Freelance",
@@ -146,6 +156,7 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "ataturk-chronology",
+    icon: "mdi:timeline-clock-outline",
     title: {
       tr: "Atatürk Kronolojisi",
       en: "Atatürk Chronology",
@@ -168,6 +179,7 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "mockup-factory",
+    icon: "mdi:cellphone-screenshot",
     title: "Mockup Factory",
     badge: {
       tr: "Açık Kaynak",
@@ -187,6 +199,9 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "ohhike",
+    icon: "mdi:hiking",
+    simpleOrder: 3,
+    madeIt: true,
     title: "OhHike",
     badge: {
       tr: "Self-hosted",
@@ -215,6 +230,9 @@ export const WEB_APPS: ProjectItem[] = [
   },
   {
     id: "neta",
+    icon: "mdi:view-dashboard-outline",
+    simpleOrder: 4,
+    madeIt: true,
     title: "Take Neta",
     badge: {
       tr: "Self-hosted",
@@ -238,6 +256,7 @@ export const WEB_APPS: ProjectItem[] = [
 export const EXTENSIONS: ProjectItem[] = [
   {
     id: "shortcut-injector",
+    icon: "mdi:keyboard-outline",
     title: "Shortcut Injector",
     badge: {
       tr: "Çapraz Tarayıcı",
@@ -257,6 +276,7 @@ export const EXTENSIONS: ProjectItem[] = [
   },
   {
     id: "tab-audio-relay",
+    icon: "mdi:music-note-bluetooth",
     title: "Tab Audio Relay",
     badge: {
       tr: "Çapraz Tarayıcı",
@@ -279,6 +299,7 @@ export const EXTENSIONS: ProjectItem[] = [
 export const FIGMA_TEMPLATES: ProjectItem[] = [
   {
     id: "hsd-website",
+    icon: "mdi:account-group-outline",
     title: "HSD Community Website",
     badge: "Figma",
     image: "/projects/hsd.png",
@@ -295,6 +316,7 @@ export const FIGMA_TEMPLATES: ProjectItem[] = [
   },
   {
     id: "restaurant-menu",
+    icon: "mdi:silverware-fork-knife",
     title: "Restaurant Menu UI Design",
     badge: "Figma",
     image: "/projects/menu.png",
@@ -309,4 +331,11 @@ export const FIGMA_TEMPLATES: ProjectItem[] = [
       en: "Restaurant Menu UI Design Template for the community.",
     },
   },
+];
+
+export const ALL_PROJECTS: readonly ProjectItem[] = [
+  ...MOBILE_APPS,
+  ...WEB_APPS,
+  ...EXTENSIONS,
+  ...FIGMA_TEMPLATES,
 ];

@@ -50,6 +50,19 @@
       "sponsors": "Sponsorlar"
     }
   },
+  "Experience": {
+    "chooserTitle": "Nasıl keşfetmek istersin?",
+    "complex": "Karmaşık",
+    "simple": "Sade",
+    "loading": "Yükleniyor",
+    "chooseAgain": "Görünümü değiştir",
+    "latestPost": "En son yazım",
+    "latestNewsletter": "Son haftalık gündem",
+    "workingOn": "Üzerinde çalıştıklarım:",
+    "made": "Yaptıklarım:",
+    "findMe": "Beni burada bul:",
+    "useThese": "Kullandıklarım:"
+  },
   "LayoutPromos": {
     "leftRailLabel": "Öne çıkan içerikler",
     "rightRailLabel": "İş birlikleri ve iletişim",

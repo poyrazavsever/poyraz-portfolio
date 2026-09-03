@@ -4,6 +4,7 @@ export type TechnologyStackItem = {
   id: string;
   label: string | Localized;
   icon: string;
+  featured?: boolean;
 };
 
 export type TechnologyStackGroup = {
@@ -15,8 +16,8 @@ export const TECHNOLOGY_STACK: readonly TechnologyStackGroup[] = [
   {
     id: "frontend",
     items: [
-      { id: "react", label: "React.js", icon: "simple-icons:react" },
-      { id: "nextjs", label: "Next.js", icon: "simple-icons:nextdotjs" },
+      { id: "react", label: "React.js", icon: "simple-icons:react", featured: true },
+      { id: "nextjs", label: "Next.js", icon: "simple-icons:nextdotjs", featured: true },
       { id: "angular", label: "Angular", icon: "simple-icons:angular" },
       {
         id: "react-native",
@@ -28,6 +29,7 @@ export const TECHNOLOGY_STACK: readonly TechnologyStackGroup[] = [
         id: "tailwindcss",
         label: "Tailwind CSS",
         icon: "simple-icons:tailwindcss",
+        featured: true,
       },
       {
         id: "bootstrap",
@@ -41,8 +43,8 @@ export const TECHNOLOGY_STACK: readonly TechnologyStackGroup[] = [
   {
     id: "backend",
     items: [
-      { id: "nodejs", label: "Node.js", icon: "simple-icons:nodedotjs" },
-      { id: "express", label: "Express.js", icon: "simple-icons:express" },
+      { id: "nodejs", label: "Node.js", icon: "simple-icons:nodedotjs", featured: true },
+      { id: "express", label: "Express.js", icon: "simple-icons:express", featured: true },
       { id: "nestjs", label: "Nest.js", icon: "simple-icons:nestjs" },
       { id: "dotnet", label: ".NET", icon: "simple-icons:dotnet" },
       {
@@ -93,6 +95,7 @@ export const TECHNOLOGY_STACK: readonly TechnologyStackGroup[] = [
         id: "typescript",
         label: "TypeScript",
         icon: "simple-icons:typescript",
+        featured: true,
       },
       { id: "csharp", label: "C#", icon: "mdi:language-csharp" },
     ],
@@ -111,7 +114,7 @@ export const TECHNOLOGY_STACK: readonly TechnologyStackGroup[] = [
         label: { tr: "Tasarım Sistemleri", en: "Design Systems" },
         icon: "mdi:palette-swatch-outline",
       },
-      { id: "git", label: "Git", icon: "simple-icons:git" },
+      { id: "git", label: "Git", icon: "simple-icons:git", featured: true },
       { id: "github", label: "GitHub", icon: "simple-icons:github" },
       { id: "firebase", label: "Firebase", icon: "simple-icons:firebase" },
       { id: "supabase", label: "Supabase", icon: "simple-icons:supabase" },
