@@ -50,19 +50,6 @@
       "sponsors": "Sponsors"
     }
   },
-  "Experience": {
-    "chooserTitle": "How would you like to explore?",
-    "complex": "Complex",
-    "simple": "Simple",
-    "loading": "Loading",
-    "chooseAgain": "Change view",
-    "latestPost": "Latest article",
-    "latestNewsletter": "Latest weekly agenda",
-    "workingOn": "I'm working on:",
-    "made": "I've made:",
-    "findMe": "Find me on:",
-    "useThese": "I use these:"
-  },
   "LayoutPromos": {
     "leftRailLabel": "Featured content",
     "rightRailLabel": "Partnerships and contact",

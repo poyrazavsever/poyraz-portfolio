@@ -7,6 +7,7 @@ import "../globals.css";
 
 import { AppShell } from "@/components/app-shell";
 import { GoogleAnalytics } from "@/components/google-analytics";
+import { PoyrazBottomRightFollower } from "@/components/poyraz-bottom-right-follower";
 import { listAnimationSources } from "@/data/animation-sources";
 import { getHomeBlogNews, getLatestAgendaArticle } from "@/data/blog";
 import { SITE_URL } from "@/lib/seo";
@@ -158,6 +159,7 @@ export default async function LocaleLayout({
           >
             {children}
           </AppShell>
+          <PoyrazBottomRightFollower />
         </NextIntlClientProvider>
       </body>
     </html>

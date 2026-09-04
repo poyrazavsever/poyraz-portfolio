@@ -114,14 +114,12 @@ function ThemeToggle({ theme, onThemeChange }: ThemeToggleProps) {
 
 type SiteNavbarProps = ThemeToggleProps & {
   animationSources: AnimationSourceSearchItem[];
-  onChooseExperience?: () => void;
 };
 
 export function SiteNavbar({
   theme,
   onThemeChange,
   animationSources,
-  onChooseExperience,
 }: SiteNavbarProps) {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -203,28 +201,6 @@ export function SiteNavbar({
                 {locale === "tr" ? "Tema değiştir" : "Toggle theme"}
               </TooltipContent>
             </Tooltip>
-
-            {onChooseExperience ? (
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    size="icon-sm"
-                    radius="sm"
-                    effect="shine"
-                    className={`cursor-pointer ${slowShineClassName}`}
-                    aria-label={locale === "tr" ? "Görünümü değiştir" : "Change view"}
-                    onClick={onChooseExperience}
-                  >
-                    <Icon icon="mdi:view-grid-plus-outline" width={16} height={16} />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent side="bottom" surface="soft" radius="sm" size="sm">
-                  {locale === "tr" ? "Görünümü değiştir" : "Change view"}
-                </TooltipContent>
-              </Tooltip>
-            ) : null}
           </NavbarTopBarSection>
         </NavbarTopBar>
       </TooltipProvider>
