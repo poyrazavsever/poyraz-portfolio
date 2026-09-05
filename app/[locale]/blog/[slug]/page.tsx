@@ -4,8 +4,10 @@ import { BlogDetailContent } from "@/components/blog-detail-content";
 import { ArticleJsonLd } from "@/components/json-ld";
 import { getBlogDetailBySlug, getBlogTranslations } from "@/data/blog-detail";
 import { isNewsletterCategory } from "@/data/blog";
+import { getShareCardPath } from "@/lib/article-share";
 import {
   createAlternates,
+  getAbsoluteUrl,
   getLocalizedUrl,
   type SiteLocale,
 } from "@/lib/seo";
@@ -33,6 +35,14 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
     ]),
   );
   const url = getLocalizedUrl(siteLocale, `/blog/${post.slug}`);
+  const socialImage = getAbsoluteUrl(
+    getShareCardPath({
+      locale: siteLocale,
+      section: "blog",
+      slug: post.slug,
+      variant: "x",
+    }),
+  );
 
   return {
     title: post.title,
@@ -53,7 +63,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       authors: [post.author],
       images: [
         {
-          url: post.coverImage,
+          url: socialImage,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -64,7 +74,7 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: [post.coverImage],
+      images: [socialImage],
       creator: "@poyrazavsever",
     },
   };

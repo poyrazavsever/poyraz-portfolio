@@ -11,6 +11,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { Badge, Card, Typography } from "poyraz-ui/atoms";
 import type { BlogDetail } from "@/data/blog-detail";
+import { ArticleShare } from "@/components/article-share";
 import { BlogToc } from "@/components/blog-toc";
 import { GiscusComments } from "@/components/giscus-comments";
 
@@ -406,24 +407,44 @@ export function BlogDetailContent({ post, section = "blog" }: BlogDetailContentP
               </ReactMarkdown>
             </section>
 
-            {showGiscus && (
-              <section className="border-t border-border pt-6">
-                <Typography variant="h3" className="mb-4">
-                  {t("comments")}
-                </Typography>
-                <GiscusComments
-                  repo={GISCUS_REPO}
-                  repoId={GISCUS_REPO_ID}
-                  category={GISCUS_CATEGORY}
-                  categoryId={GISCUS_CATEGORY_ID}
-                />
-              </section>
-            )}
+            <section className="space-y-6 border-t border-border pt-6">
+              <ArticleShare
+                slug={post.slug}
+                title={post.title}
+                excerpt={post.excerpt}
+                author={post.author}
+                lang={post.lang}
+                section={section}
+              />
+
+              {showGiscus ? (
+                <div>
+                  <Typography variant="h3" className="mb-4">
+                    {t("comments")}
+                  </Typography>
+                  <GiscusComments
+                    repo={GISCUS_REPO}
+                    repoId={GISCUS_REPO_ID}
+                    category={GISCUS_CATEGORY}
+                    categoryId={GISCUS_CATEGORY_ID}
+                  />
+                </div>
+              ) : null}
+            </section>
           </article>
         </div>
 
         <aside className="hidden w-52 shrink-0 lg:block">
           <div className="sticky top-24">
+            <ArticleShare
+              slug={post.slug}
+              title={post.title}
+              excerpt={post.excerpt}
+              author={post.author}
+              lang={post.lang}
+              section={section}
+              placement="sidebar"
+            />
             <BlogToc markdown={post.markdown} />
           </div>
         </aside>
@@ -462,6 +483,15 @@ export function BlogDetailContent({ post, section = "blog" }: BlogDetailContentP
                 <Icon icon="mdi:close" width={18} height={18} />
               </button>
             </div>
+            <ArticleShare
+              slug={post.slug}
+              title={post.title}
+              excerpt={post.excerpt}
+              author={post.author}
+              lang={post.lang}
+              section={section}
+              placement="sidebar"
+            />
             <BlogToc
               markdown={post.markdown}
               onNavigate={closeToc}
