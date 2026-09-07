@@ -116,6 +116,10 @@ export function ArticleShare({
     "inline-flex cursor-pointer items-center justify-center gap-2 rounded-sm border border-border bg-background text-foreground transition-colors hover:border-red-600 hover:text-red-600 disabled:cursor-wait disabled:opacity-60",
     isSidebar ? "min-h-9 px-2 text-xs" : "min-h-10 px-3 text-sm",
   ].join(" ");
+  const storyButtonClass = [
+    "inline-flex shrink-0 cursor-pointer items-center justify-center rounded-sm border border-border bg-background text-foreground transition-colors hover:border-red-600 hover:text-red-600 disabled:cursor-wait disabled:opacity-60",
+    isSidebar ? "size-9" : "size-10",
+  ].join(" ");
 
   return (
     <section
@@ -135,12 +139,12 @@ export function ArticleShare({
         ) : null}
       </div>
 
-      <div className={isSidebar ? "grid grid-cols-2 gap-2" : "flex flex-wrap gap-2"}>
+      <div className="flex flex-wrap gap-2">
         <button
           type="button"
           onClick={() => void shareToStory()}
           disabled={storyStatus === "preparing"}
-          className={buttonClass}
+          className={storyButtonClass}
           aria-label={t("shareStoryAria")}
         >
           <Icon
@@ -149,7 +153,6 @@ export function ArticleShare({
             height={17}
             className={storyStatus === "preparing" ? "animate-spin" : undefined}
           />
-          <span>{isSidebar ? t("shareStoryShort") : t("shareInstagram")}</span>
         </button>
 
         <button

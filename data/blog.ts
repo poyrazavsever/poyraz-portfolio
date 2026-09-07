@@ -1,6 +1,7 @@
 import "server-only";
 
 import { listBlogDetails } from "@/data/blog-detail";
+import { getSubstackPosts } from "@/lib/substack";
 
 export type BlogArticleItem = {
   id: string;
@@ -13,6 +14,7 @@ export type BlogArticleItem = {
   readTime: string;
   href: string;
   author: string;
+  external?: boolean;
 };
 
 export type BlogPageData = {
@@ -93,8 +95,38 @@ export async function getAllBlogArticles(locale?: string): Promise<BlogArticleIt
 }
 
 export async function getAllAgendaArticles(locale?: string): Promise<BlogArticleItem[]> {
-  const articles = await getAllArticles(locale);
-  return articles.filter((article) => isNewsletterCategory(article.category));
+  try {
+    const posts = await getSubstackPosts();
+    const language = locale === "en" ? "en-US" : "tr-TR";
+
+    if (posts.length > 0) {
+      return posts.map((post) => ({
+        id: post.id,
+        slug: post.id.replace(/^substack-/, ""),
+        title: post.title,
+        excerpt: post.excerpt,
+        category: "Substack",
+        image: post.image,
+        date: new Intl.DateTimeFormat(language, {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        }).format(new Date(post.publishedAt)),
+        readTime:
+          locale === "en"
+            ? `${post.readingMinutes} min read`
+            : `${post.readingMinutes} dk okuma`,
+        href: post.url,
+        author: post.author,
+        external: true,
+      }));
+    }
+  } catch {
+    // Keep the existing local archive available if Substack is temporarily unreachable.
+  }
+
+  const localArticles = await getAllArticles(locale);
+  return localArticles.filter((article) => isNewsletterCategory(article.category));
 }
 
 export async function getLatestAgendaArticle(locale?: string) {
