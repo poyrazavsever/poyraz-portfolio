@@ -23,6 +23,7 @@ type HomeHeroProps = {
     date: string;
     image: string;
     href: string;
+    external?: boolean;
   }[];
 };
 
@@ -56,7 +57,28 @@ export function HomeHero({ children, news }: HomeHeroProps) {
             {t("heroDescription")}
           </Typography>
 
-          <NewsletterSubscribeForm className="w-full max-w-lg pt-1" />
+          <div className="grid w-full max-w-2xl gap-2 pt-1 md:grid-cols-2">
+            <div className="rounded-sm border border-border bg-background/70 p-2.5">
+              <Typography
+                variant="small"
+                className="mb-2 flex items-center gap-1.5 text-xs font-medium text-foreground"
+              >
+                <Icon icon="mdi:post-outline" width={14} height={14} aria-hidden="true" />
+                {t("blogNewsletter")}
+              </Typography>
+              <NewsletterSubscribeForm publication="blog" compact />
+            </div>
+            <div className="rounded-sm border border-border bg-background/70 p-2.5">
+              <Typography
+                variant="small"
+                className="mb-2 flex items-center gap-1.5 text-xs font-medium text-foreground"
+              >
+                <Icon icon="mdi:rss" width={14} height={14} aria-hidden="true" />
+                {t("agendaNewsletter")}
+              </Typography>
+              <NewsletterSubscribeForm publication="agenda" compact />
+            </div>
+          </div>
         </div>
 
       </div>
@@ -98,6 +120,7 @@ export function HomeHero({ children, news }: HomeHeroProps) {
                 date={item.date}
                 image={item.image}
                 href={item.href}
+                external={item.external}
                 priority={index === 0}
               />
             ))}

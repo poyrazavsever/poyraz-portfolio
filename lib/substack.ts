@@ -1,7 +1,26 @@
 import "server-only";
 
-const SUBSTACK_ORIGIN = "https://yazilimadair.substack.com";
-const SUBSTACK_FEED_URL = `${SUBSTACK_ORIGIN}/feed`;
+export type SubstackPublication = "agenda" | "blog";
+
+const SUBSTACK_PUBLICATIONS: Record<
+  SubstackPublication,
+  { origin: string; medium: string }
+> = {
+  agenda: {
+    origin: "https://yazilimadair.substack.com",
+    medium: "agenda",
+  },
+  blog: {
+    origin: "https://poyrazavsever.substack.com",
+    medium: "blog",
+  },
+};
+
+const TRUSTED_IMAGE_HOSTS = new Set([
+  "miro.medium.com",
+  "substackcdn.com",
+  "substack-post-media.s3.amazonaws.com",
+]);
 
 export type SubstackPost = {
   id: string;
@@ -68,24 +87,24 @@ function getEnclosureUrl(xml: string) {
 
   try {
     const imageUrl = new URL(value);
-    const isTrustedHost =
-      imageUrl.hostname === "substackcdn.com" ||
-      imageUrl.hostname === "substack-post-media.s3.amazonaws.com";
+    const isTrustedHost = TRUSTED_IMAGE_HOSTS.has(imageUrl.hostname);
     return imageUrl.protocol === "https:" && isTrustedHost ? imageUrl.toString() : "";
   } catch {
     return "";
   }
 }
 
-function getSafeSubstackUrl(value: string) {
+function getSafeSubstackUrl(value: string, publication: SubstackPublication) {
+  const config = SUBSTACK_PUBLICATIONS[publication];
+
   try {
     const url = new URL(decodeXmlEntities(value));
-    if (url.protocol !== "https:" || url.hostname !== "yazilimadair.substack.com") {
+    if (url.protocol !== "https:" || url.origin !== config.origin) {
       return null;
     }
 
     url.searchParams.set("utm_source", "poyrazavsever.com");
-    url.searchParams.set("utm_medium", "agenda");
+    url.searchParams.set("utm_medium", config.medium);
     return url.toString();
   } catch {
     return null;
@@ -97,11 +116,14 @@ function getReadingMinutes(html: string) {
   return Math.max(1, Math.ceil(wordCount / 220));
 }
 
-function parseSubstackFeed(xml: string): SubstackPost[] {
+function parseSubstackFeed(
+  xml: string,
+  publication: SubstackPublication,
+): SubstackPost[] {
   const itemBlocks = xml.match(/<item>[\s\S]*?<\/item>/gi) ?? [];
 
   return itemBlocks.flatMap((item) => {
-    const url = getSafeSubstackUrl(getTag(item, "link"));
+    const url = getSafeSubstackUrl(getTag(item, "link"), publication);
     const title = decodeXmlEntities(getTag(item, "title"));
     const publishedAt = getTag(item, "pubDate");
 
@@ -126,8 +148,11 @@ function parseSubstackFeed(xml: string): SubstackPost[] {
   });
 }
 
-export async function getSubstackPosts() {
-  const response = await fetch(SUBSTACK_FEED_URL, {
+export async function getSubstackPosts(
+  publication: SubstackPublication = "agenda",
+) {
+  const config = SUBSTACK_PUBLICATIONS[publication];
+  const response = await fetch(`${config.origin}/feed`, {
     headers: {
       Accept: "application/rss+xml, application/xml;q=0.9, text/xml;q=0.8",
     },
@@ -138,5 +163,5 @@ export async function getSubstackPosts() {
     throw new Error(`Substack RSS request failed with ${response.status}`);
   }
 
-  return parseSubstackFeed(await response.text());
+  return parseSubstackFeed(await response.text(), publication);
 }

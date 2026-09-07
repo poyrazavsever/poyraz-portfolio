@@ -7,10 +7,19 @@ import { Button, ButtonIcon, ButtonLabel } from "poyraz-ui/atoms";
 
 type NewsletterSubscribeFormProps = {
   className?: string;
+  compact?: boolean;
+  publication?: "agenda" | "blog";
 };
+
+const SUBSTACK_SUBSCRIBE_URLS = {
+  agenda: "https://yazilimadair.substack.com/api/v1/free?nojs=true",
+  blog: "https://poyrazavsever.substack.com/api/v1/free?nojs=true",
+} as const;
 
 export function NewsletterSubscribeForm({
   className = "",
+  compact = false,
+  publication = "agenda",
 }: NewsletterSubscribeFormProps) {
   const t = useTranslations("Home");
   const generatedId = useId().replace(/:/g, "");
@@ -19,7 +28,7 @@ export function NewsletterSubscribeForm({
   return (
     <div className={className}>
       <form
-        action="https://yazilimadair.substack.com/api/v1/free?nojs=true"
+        action={SUBSTACK_SUBSCRIBE_URLS[publication]}
         method="post"
         target="_blank"
         className="flex w-full flex-col gap-2 sm:flex-row"
@@ -55,7 +64,7 @@ export function NewsletterSubscribeForm({
           swapTarget="both"
           className="shrink-0 justify-center"
         >
-          <ButtonLabel>{t("subscribe")}</ButtonLabel>
+          <ButtonLabel>{t(compact ? "subscribeShort" : "subscribe")}</ButtonLabel>
           <ButtonIcon>
             <Icon icon="mdi:arrow-right" width={15} height={15} />
           </ButtonIcon>

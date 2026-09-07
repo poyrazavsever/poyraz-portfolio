@@ -90,13 +90,70 @@ async function getAllArticles(locale?: string): Promise<BlogArticleItem[]> {
 }
 
 export async function getAllBlogArticles(locale?: string): Promise<BlogArticleItem[]> {
+  try {
+    const [posts, localArticles] = await Promise.all([
+      getSubstackPosts("blog"),
+      getAllArticles("tr"),
+    ]);
+    const language = locale === "en" ? "en-US" : "tr-TR";
+    const localByTitle = new Map(
+      localArticles
+        .filter((article) => !isNewsletterCategory(article.category))
+        .map((article) => [article.title.trim().toLocaleLowerCase("tr"), article]),
+    );
+
+    if (posts.length > 0) {
+      const remoteArticles = posts.map((post) => {
+        const localArticle = localByTitle.get(post.title.trim().toLocaleLowerCase("tr"));
+
+        return {
+          id: post.id,
+          slug: post.id.replace(/^substack-/, ""),
+          title: post.title,
+          excerpt: post.excerpt,
+          category: localArticle?.category ?? "General",
+          image: post.image,
+          date: new Intl.DateTimeFormat(language, {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          }).format(new Date(post.publishedAt)),
+          readTime:
+            locale === "en"
+              ? `${post.readingMinutes} min read`
+              : `${post.readingMinutes} dk okuma`,
+          href: post.url,
+          author: post.author,
+          external: true,
+        };
+      });
+
+      if (locale === "en") return remoteArticles;
+
+      const remoteTitles = new Set(
+        posts.map((post) => post.title.trim().toLocaleLowerCase("tr")),
+      );
+      const legacyArticles = localArticles.filter(
+        (article) =>
+          !isNewsletterCategory(article.category) &&
+          !remoteTitles.has(article.title.trim().toLocaleLowerCase("tr")),
+      );
+
+      // Substack limits publication RSS feeds to recent posts. Keep older local
+      // articles visible while every new post comes from the live feed.
+      return [...remoteArticles, ...legacyArticles];
+    }
+  } catch {
+    // Keep the local archive available if Substack is temporarily unreachable.
+  }
+
   const articles = await getAllArticles(locale);
   return articles.filter((article) => !isNewsletterCategory(article.category));
 }
 
 export async function getAllAgendaArticles(locale?: string): Promise<BlogArticleItem[]> {
   try {
-    const posts = await getSubstackPosts();
+    const posts = await getSubstackPosts("agenda");
     const language = locale === "en" ? "en-US" : "tr-TR";
 
     if (posts.length > 0) {
@@ -144,6 +201,7 @@ export async function getHomeBlogNews(locale?: string, limit = 3) {
     image: item.image,
     date: item.date,
     href: item.href,
+    external: item.external,
   }));
 }
 
