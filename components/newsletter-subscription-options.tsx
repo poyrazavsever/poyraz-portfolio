@@ -24,7 +24,7 @@ export function NewsletterSubscriptionOptions({
         >
           {t("blogNewsletter")}
         </Typography>
-        <NewsletterSubscribeForm publication="blog" compact />
+        <NewsletterSubscribeForm publication="blog" />
       </div>
 
       <div className="min-w-0 pt-3 sm:pt-0 sm:pl-4">
@@ -34,7 +34,7 @@ export function NewsletterSubscriptionOptions({
         >
           {t("agendaNewsletter")}
         </Typography>
-        <NewsletterSubscribeForm publication="agenda" compact />
+        <NewsletterSubscribeForm publication="agenda" />
       </div>
     </div>
   );

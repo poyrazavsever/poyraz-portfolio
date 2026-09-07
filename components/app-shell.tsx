@@ -14,6 +14,7 @@ import {
   LayoutRightPromoRail,
   type LayoutContentPromo,
 } from "@/components/layout-promo-rails";
+import { SiteThemeContext } from "@/components/site-theme-context";
 
 const AtaturkWidgetModal = dynamic(
   () => import("@/components/ataturk-widget-modal").then((mod) => mod.AtaturkWidgetModal),
@@ -57,7 +58,7 @@ export function AppShell({
   const localizedText = announcement ? getLocalizedValue(announcement.text, locale) : "";
 
   return (
-    <>
+    <SiteThemeContext.Provider value={theme}>
       <AtaturkWidgetModal theme={theme} />
       {ENABLE_NEKO_FOLLOWER ? <NekoFollower /> : null}
       <div className="mx-auto grid w-full max-w-[1800px] grid-cols-1 gap-4 px-4 min-[1420px]:grid-cols-[220px_minmax(0,896px)_220px] min-[1420px]:justify-between">
@@ -86,6 +87,6 @@ export function AppShell({
         </div>
         <LayoutRightPromoRail />
       </div>
-    </>
+    </SiteThemeContext.Provider>
   );
 }
