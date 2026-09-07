@@ -140,7 +140,7 @@ function PromoCard({
         : null;
   const href = liveContent?.href ?? getLocalizedValue(card.href, locale);
   const description = liveContent?.title ?? t(card.descriptionKey);
-  const external = card.external ?? false;
+  const external = card.external ?? /^https?:\/\//.test(href);
   const iconSurface = card.iconSurface ?? "accent";
   const cardClassName =
     card.surface === "primary"

@@ -15,6 +15,7 @@ import {
   PaginationPrevious,
 } from "poyraz-ui/molecules";
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
+import { NewsletterSubscribeForm } from "@/components/newsletter-subscribe-form";
 import type { BlogPageData } from "@/data/blog";
 
 type BlogContentProps = {
@@ -60,7 +61,34 @@ export function BlogContent({ data, section = "blog" }: BlogContentProps) {
   }, [router, section]);
 
   return (
-    <section className="flex h-full flex-col gap-4 overflow-y-auto">
+    <section
+      className={
+        isAgenda
+          ? "flex h-full flex-col gap-4"
+          : "flex h-full flex-col gap-4 overflow-y-auto"
+      }
+    >
+      {isAgenda && (
+        <Card className="rounded-sm border-primary/25 bg-primary/5 p-4">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,28rem)] lg:items-center">
+            <div className="flex min-w-0 items-start gap-3">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-primary text-primary-foreground">
+                <Icon icon="mdi:rss" width={18} height={18} aria-hidden="true" />
+              </div>
+              <div className="min-w-0">
+                <Typography variant="large" component="h1" className="text-base leading-5">
+                  {agendaT("feedTitle")}
+                </Typography>
+                <Typography variant="small" className="mt-1 text-muted-foreground">
+                  {agendaT("feedDescription")}
+                </Typography>
+              </div>
+            </div>
+            <NewsletterSubscribeForm className="w-full" />
+          </div>
+        </Card>
+      )}
+
       {/* Filtre Çubuğu */}
       <Card className="rounded-sm border-border p-4">
         <div className="flex flex-col gap-3">
@@ -147,17 +175,37 @@ export function BlogContent({ data, section = "blog" }: BlogContentProps) {
           <StaggerContainer className="grid gap-3 md:grid-cols-3">
             {data.articles.map((post) => (
               <StaggerItem key={post.id}>
-                <ArticleCard
-                  image={post.image}
-                  category={post.category}
-                  title={post.title}
-                  excerpt={post.excerpt}
-                  date={post.date}
-                  readTime={post.readTime}
-                  href={post.href}
-                  className="rounded-sm border-border [&_h3]:line-clamp-2 [&_h3]:min-h-[2.5rem] [&_p]:line-clamp-3"
-                  author={{ name: post.author, avatar: "/logo/logo-96.webp" }}
-                />
+                {post.external ? (
+                  <a
+                    href={post.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block text-inherit no-underline"
+                  >
+                    <ArticleCard
+                      image={post.image}
+                      category={post.category}
+                      title={post.title}
+                      excerpt={post.excerpt}
+                      date={post.date}
+                      readTime={post.readTime}
+                      className="h-full rounded-sm border-border [&_h3]:line-clamp-2 [&_h3]:min-h-[2.5rem] [&_p]:line-clamp-3"
+                      author={{ name: post.author, avatar: "/logo/logo-96.webp" }}
+                    />
+                  </a>
+                ) : (
+                  <ArticleCard
+                    image={post.image}
+                    category={post.category}
+                    title={post.title}
+                    excerpt={post.excerpt}
+                    date={post.date}
+                    readTime={post.readTime}
+                    href={post.href}
+                    className="h-full rounded-sm border-border [&_h3]:line-clamp-2 [&_h3]:min-h-[2.5rem] [&_p]:line-clamp-3"
+                    author={{ name: post.author, avatar: "/logo/logo-96.webp" }}
+                  />
+                )}
               </StaggerItem>
             ))}
           </StaggerContainer>

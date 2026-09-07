@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { Icon } from "@iconify/react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
 import {
   Button,
@@ -11,8 +11,8 @@ import {
   TextEffect,
   Typography,
 } from "poyraz-ui/atoms";
-import { getResumeHref } from "@/lib/links";
 import { HomeNewsCard } from "@/components/home-news-card";
+import { NewsletterSubscribeForm } from "@/components/newsletter-subscribe-form";
 
 type HomeHeroProps = {
   children?: ReactNode;
@@ -28,7 +28,6 @@ type HomeHeroProps = {
 
 export function HomeHero({ children, news }: HomeHeroProps) {
   const t = useTranslations("Home");
-  const locale = useLocale();
   const router = useRouter();
 
   return (
@@ -57,36 +56,7 @@ export function HomeHero({ children, news }: HomeHeroProps) {
             {t("heroDescription")}
           </Typography>
 
-          <div className="flex flex-wrap items-center gap-2 pt-1">
-            <Button
-              type="button"
-              size="sm"
-              radius="sm"
-              effect="swap"
-              swapTarget="both"
-              onClick={() => router.push("/contact")}
-            >
-              <ButtonLabel>{t("hireMe")}</ButtonLabel>
-              <ButtonIcon>
-                <Icon icon="mdi:arrow-right" width={15} height={15} />
-              </ButtonIcon>
-            </Button>
-
-            <Button
-              type="button"
-              variant="secondary"
-              size="sm"
-              radius="sm"
-              effect="swap"
-              swapTarget="both"
-              onClick={() => window.open(getResumeHref(locale), "_blank", "noopener,noreferrer")}
-            >
-              <ButtonIcon>
-                <Icon icon="mdi:download" width={15} height={15} />
-              </ButtonIcon>
-              <ButtonLabel>{t("downloadCv")}</ButtonLabel>
-            </Button>
-          </div>
+          <NewsletterSubscribeForm className="w-full max-w-lg pt-1" />
         </div>
 
       </div>
