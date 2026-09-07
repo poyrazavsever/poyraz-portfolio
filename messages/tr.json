@@ -21,7 +21,10 @@
     "backToMenu": "Menüye dön",
     "menu": "Menü",
     "mobileMenu": "Mobil Menü",
-    "resume": "Özgeçmiş"
+    "resume": "Özgeçmiş",
+    "newsletter": "Substack'e abone ol",
+    "newsletterModalTitle": "Yayınlara abone ol",
+    "newsletterModalDescription": "Blog yazılarını ve haftalık Yazılıma Dair gündemini doğrudan e-posta kutuna al."
   },
   "Home": {
     "role": "<strong>Full-stack ürünler</strong> geliştiriyor, <strong>yapay zeka sistemleriyle</strong> deneyimler kuruyor ve <strong>teknoloji-tasarım-yazılımı</strong> uygulanabilir içeriklerle anlatıyorum.",

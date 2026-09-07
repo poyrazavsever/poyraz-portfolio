@@ -31,7 +31,11 @@ export function NewsletterSubscribeForm({
         action={SUBSTACK_SUBSCRIBE_URLS[publication]}
         method="post"
         target="_blank"
-        className="flex w-full flex-col gap-2 sm:flex-row"
+        className={
+          compact
+            ? "grid w-full grid-cols-1 gap-2 min-[340px]:grid-cols-[minmax(0,1fr)_auto]"
+            : "flex w-full flex-col gap-2 sm:flex-row"
+        }
       >
         <label htmlFor={emailId} className="sr-only">
           {t("newsletterEmailLabel")}

@@ -21,7 +21,10 @@
     "backToMenu": "Back to menu",
     "menu": "Menu",
     "mobileMenu": "Mobile Menu",
-    "resume": "Resume"
+    "resume": "Resume",
+    "newsletter": "Subscribe on Substack",
+    "newsletterModalTitle": "Subscribe to my publications",
+    "newsletterModalDescription": "Get blog posts and the weekly Software with Poyraz agenda directly in your inbox."
   },
   "Home": {
     "role": "I build <strong>full-stack products</strong>, shape experiences with <strong>AI systems</strong>, and explain <strong>technology-design-software</strong> through practical content.",

@@ -12,7 +12,7 @@ import {
   Typography,
 } from "poyraz-ui/atoms";
 import { HomeNewsCard } from "@/components/home-news-card";
-import { NewsletterSubscribeForm } from "@/components/newsletter-subscribe-form";
+import { NewsletterSubscriptionOptions } from "@/components/newsletter-subscription-options";
 
 type HomeHeroProps = {
   children?: ReactNode;
@@ -34,51 +34,32 @@ export function HomeHero({ children, news }: HomeHeroProps) {
   return (
     <section>
       <div className="relative min-h-[150px] overflow-hidden border-b border-border py-4 sm:py-5">
-        <div className="flex max-w-2xl flex-col justify-center gap-2">
-          <Typography
-            variant="h2"
-            component="h1"
-            className="leading-none tracking-[-0.045em] font-secondary font-semibold text-foreground text-2xl"
-          >
-            Poyraz{" "}
-            <TextEffect
-              effect="hand-drawn"
-              tone="primary"
-              className="tracking-[-0.04em]"
+        <div className="flex w-full flex-col gap-4">
+          <div className="flex max-w-2xl flex-col justify-center gap-2">
+            <Typography
+              variant="h2"
+              component="h1"
+              className="leading-none tracking-[-0.045em] font-secondary font-semibold text-foreground text-2xl"
             >
-              Avsever
-            </TextEffect>
-          </Typography>
-
-          <Typography
-            variant="small"
-            className="max-w-xl text-xs leading-5 text-muted-foreground sm:text-sm"
-          >
-            {t("heroDescription")}
-          </Typography>
-
-          <div className="grid w-full max-w-2xl gap-2 pt-1 md:grid-cols-2">
-            <div className="rounded-sm border border-border bg-background/70 p-2.5">
-              <Typography
-                variant="small"
-                className="mb-2 flex items-center gap-1.5 text-xs font-medium text-foreground"
+              Poyraz{" "}
+              <TextEffect
+                effect="hand-drawn"
+                tone="primary"
+                className="tracking-[-0.04em]"
               >
-                <Icon icon="mdi:post-outline" width={14} height={14} aria-hidden="true" />
-                {t("blogNewsletter")}
-              </Typography>
-              <NewsletterSubscribeForm publication="blog" compact />
-            </div>
-            <div className="rounded-sm border border-border bg-background/70 p-2.5">
-              <Typography
-                variant="small"
-                className="mb-2 flex items-center gap-1.5 text-xs font-medium text-foreground"
-              >
-                <Icon icon="mdi:rss" width={14} height={14} aria-hidden="true" />
-                {t("agendaNewsletter")}
-              </Typography>
-              <NewsletterSubscribeForm publication="agenda" compact />
-            </div>
+                Avsever
+              </TextEffect>
+            </Typography>
+
+            <Typography
+              variant="small"
+              className="max-w-xl text-xs leading-5 text-muted-foreground sm:text-sm"
+            >
+              {t("heroDescription")}
+            </Typography>
           </div>
+
+          <NewsletterSubscriptionOptions />
         </div>
 
       </div>

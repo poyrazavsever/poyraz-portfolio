@@ -20,6 +20,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  Modal,
+  ModalContent,
+  ModalTitle,
   Sheet,
   SheetClose,
   SheetContent,
@@ -41,6 +44,7 @@ import {
 } from "@/lib/links";
 import type { ThemeMode } from "@/components/app-shell";
 import type { AnimationSourceSearchItem } from "@/lib/command-palette-links";
+import { NewsletterSubscriptionOptions } from "@/components/newsletter-subscription-options";
 
 const SearchCommand = dynamic(
   () => import("@/components/search-command").then((mod) => mod.SearchCommand),
@@ -123,6 +127,7 @@ export function SiteNavbar({
 }: SiteNavbarProps) {
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [newsletterOpen, setNewsletterOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuGroupId, setMobileMenuGroupId] = useState<string | null>(null);
   const shortcut = useKeyboardShortcutLabel();
@@ -152,6 +157,26 @@ export function SiteNavbar({
           className="border-0 bg-transparent p-0 shadow-none [&>div]:max-w-none [&>div]:px-0"
         >
           <NavbarTopBarSection align="end" className="gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="icon-sm"
+                  radius="sm"
+                  effect="shine"
+                  aria-label={t("newsletter")}
+                  className={`cursor-pointer ${slowShineClassName}`}
+                  onClick={() => setNewsletterOpen(true)}
+                >
+                  <Icon icon="simple-icons:substack" width={15} height={15} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" surface="soft" radius="sm" size="sm">
+                {t("newsletter")}
+              </TooltipContent>
+            </Tooltip>
+
             {TOP_ICON_LINKS.map((item) => {
               const href = item.id === "cv" ? getResumeHref(locale) : item.href;
               const label = t.has(item.id) ? t(item.id) : item.label;
@@ -203,6 +228,16 @@ export function SiteNavbar({
             </Tooltip>
           </NavbarTopBarSection>
         </NavbarTopBar>
+
+        <Modal open={newsletterOpen} onOpenChange={setNewsletterOpen}>
+          <ModalContent className="rounded-sm p-5 sm:max-w-2xl sm:p-6">
+            <ModalTitle>{t("newsletterModalTitle")}</ModalTitle>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              {t("newsletterModalDescription")}
+            </p>
+            <NewsletterSubscriptionOptions className="mt-5" />
+          </ModalContent>
+        </Modal>
       </TooltipProvider>
 
       <header className="flex min-w-0 items-center justify-between gap-3 border-b border-border pb-4">
