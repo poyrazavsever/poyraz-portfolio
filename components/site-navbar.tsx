@@ -230,7 +230,7 @@ export function SiteNavbar({
         </NavbarTopBar>
 
         <Modal open={newsletterOpen} onOpenChange={setNewsletterOpen}>
-          <ModalContent className="rounded-sm p-5 sm:max-w-2xl sm:p-6">
+          <ModalContent className="max-h-[90vh] overflow-y-auto rounded-sm p-5 sm:max-w-4xl sm:p-6">
             <ModalTitle>{t("newsletterModalTitle")}</ModalTitle>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
               {t("newsletterModalDescription")}

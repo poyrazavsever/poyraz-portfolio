@@ -68,32 +68,17 @@ export function BlogContent({ data, section = "blog" }: BlogContentProps) {
           : "flex h-full flex-col gap-4 overflow-y-auto"
       }
     >
-      <Card className="rounded-sm border-primary/25 bg-primary/5 p-4">
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,28rem)] lg:items-center">
-          <div className="flex min-w-0 items-start gap-3">
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-primary text-primary-foreground">
-              <Icon
-                icon={isAgenda ? "mdi:rss" : "mdi:email-fast-outline"}
-                width={18}
-                height={18}
-                aria-hidden="true"
-              />
-            </div>
-            <div className="min-w-0">
-              <Typography variant="large" component="h1" className="text-base leading-5">
-                {isAgenda ? agendaT("feedTitle") : t("feedTitle")}
-              </Typography>
-              <Typography variant="small" className="mt-1 text-muted-foreground">
-                {isAgenda ? agendaT("feedDescription") : t("feedDescription")}
-              </Typography>
-            </div>
-          </div>
+      <div className="grid gap-2 py-1 sm:grid-cols-[minmax(0,1fr)_minmax(20rem,28rem)] sm:items-center">
+        <Typography variant="large" component="h1" className="text-base leading-5">
+          {isAgenda ? agendaT("feedTitle") : t("feedTitle")}
+        </Typography>
+        <div className="min-w-0">
           <NewsletterSubscribeForm
             className="w-full"
             publication={isAgenda ? "agenda" : "blog"}
           />
         </div>
-      </Card>
+      </div>
 
       {/* Filtre Çubuğu */}
       <Card className="rounded-sm border-border p-4">
