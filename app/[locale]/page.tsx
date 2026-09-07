@@ -3,6 +3,7 @@ import { HomeProjectsSection } from "@/components/home-projects-section";
 import { HomeTechnologyStack } from "@/components/home-technology-stack";
 import { HomeVideosSection } from "@/components/home-videos-section";
 import { ReferencesSection } from "@/components/references-section";
+import { NewsletterSubscriptionOptions } from "@/components/newsletter-subscription-options";
 import { getHomeBlogNews } from "@/data/blog";
 import { getStaticPageMetadata } from "@/lib/seo";
 
@@ -36,6 +37,9 @@ export default async function Home({
       <HomeProjectsSection />
       <ReferencesSection />
       <HomeVideosSection />
+      <section className="pt-12 md:pt-14">
+        <NewsletterSubscriptionOptions />
+      </section>
     </section>
   );
 }

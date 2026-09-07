@@ -47,7 +47,7 @@ export function HomeTechnologyStack() {
         </Button>
       </div>
 
-      <div className="relative max-h-14 overflow-hidden border-t border-border pt-3">
+      <div className="relative max-h-14 overflow-hidden pt-1">
         <div className="flex flex-wrap gap-2" aria-label={t("technologiesTitle")}>
           {technologies.map((technology) => (
             <TechnologyBadge key={technology.id} technology={technology} />
