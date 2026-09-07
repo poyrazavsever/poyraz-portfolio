@@ -44,4 +44,11 @@ export const SPONSORS: Sponsor[] = [
     logo: "/sponsors/hosting-dunyam.png",
     websiteUrl: "https://hostingdunyam.com",
   },
+  {
+    id: "watchman-tower",
+    name: "Watchman Tower",
+    job: "Monitoring Platformu",
+    logo: "/sponsors/watchmantower.png",
+    websiteUrl: "https://www.watchmantower.com/",
+  },
 ];
