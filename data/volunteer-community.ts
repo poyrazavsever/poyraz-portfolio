@@ -1,3 +1,5 @@
+import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
+
 export type VolunteerCommunityItem = {
   id: string;
   title: string;
@@ -41,7 +43,7 @@ export const VOLUNTEER_COMMUNITY_ITEMS: VolunteerCommunityItem[] = [
       tr: "2025 - Günümüz",
       en: "2025 - Present",
     },
-    link: "https://youtube.com/@poyrazavsever",
+    link: TRACKED_SOCIAL_HREFS.youtube,
     focus: {
       tr: "Yeni geliştiricilerin ilk projelerini yayına almalarına yardımcı olmak için içerik üretici ekonomisi analizleri ve eğitimleri yayınlamak.",
       en: "Publishing creator economy breakdowns and tutorials to help new devs ship their first projects.",

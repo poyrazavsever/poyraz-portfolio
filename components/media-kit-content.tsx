@@ -24,6 +24,7 @@ import {
   type MediaKitLocale,
 } from "@/data/media-kit";
 import type { YouTubeChannelStats } from "@/lib/youtube-channel-stats";
+import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
 
 const COPY = {
   tr: {
@@ -326,7 +327,7 @@ export function MediaKitContent({
             swapTarget="both"
           >
             <a
-              href="https://youtube.com/@poyrazavsever"
+              href={TRACKED_SOCIAL_HREFS.youtube}
               target="_blank"
               rel="noreferrer"
             >

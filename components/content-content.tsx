@@ -10,6 +10,7 @@ import { YoutubeLiteEmbed } from "@/components/youtube-lite-embed";
 import type { XVideo } from "@/data/x-videos";
 import { X_JAVASCRIPT_ANATOMY_URL } from "@/data/x-videos";
 import type { PdfNote } from "@/lib/content-page";
+import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
 
 type ContentContentProps = {
   youtubeLinks: readonly string[];
@@ -102,7 +103,7 @@ export function ContentContent({
             titlePrefix={t("youtubeTitlePrefix")}
             titleIcon="mdi:youtube"
             titleIconClassName="text-red-600"
-            href="https://youtube.com/@poyrazavsever"
+            href={TRACKED_SOCIAL_HREFS.youtube}
             label={t("youtubeChannel")}
             handle="@poyrazavsever"
             icon="mdi:youtube"
@@ -126,7 +127,7 @@ export function ContentContent({
             title={t("pdfTitle")}
             titleIcon="mdi:linkedin"
             titleIconClassName="text-[#0a66c2]"
-            href="https://www.linkedin.com/in/poyrazavsever/"
+            href={TRACKED_SOCIAL_HREFS.linkedin}
             label={t("linkedinProfile")}
             handle="@poyrazavsever"
             icon="mdi:linkedin"

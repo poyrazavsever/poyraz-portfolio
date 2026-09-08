@@ -5,6 +5,7 @@ import { Button, ButtonIcon, ButtonLabel, Card, Typography } from "poyraz-ui/ato
 import { YOUTUBE_VIDEO_LINKS } from "@/data/youtube-videos";
 import { YoutubeLiteEmbed } from "@/components/youtube-lite-embed";
 import { useTranslations } from "next-intl";
+import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
 
 export function HomeVideosSection() {
   const t = useTranslations("Content");
@@ -28,7 +29,7 @@ export function HomeVideosSection() {
           swapTarget="both"
           onClick={() =>
             window.open(
-              "https://youtube.com/@poyrazavsever",
+              TRACKED_SOCIAL_HREFS.youtube,
               "_blank",
               "noopener,noreferrer",
             )

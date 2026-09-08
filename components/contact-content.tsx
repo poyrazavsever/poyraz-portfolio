@@ -2,6 +2,7 @@ import { Link } from "@/i18n/routing";
 import { Icon } from "@iconify/react";
 import { Card, Typography } from "poyraz-ui/atoms";
 import { useTranslations } from "next-intl";
+import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
 
 export const CONTACT_LINKS = [
   {
@@ -15,14 +16,14 @@ export const CONTACT_LINKS = [
     id: "linkedin",
     label: "LinkedIn",
     value: "linkedin.com/in/poyrazavsever",
-    href: "https://www.linkedin.com/in/poyrazavsever/",
+    href: TRACKED_SOCIAL_HREFS.linkedin,
     icon: "mdi:linkedin",
   },
   {
     id: "instagram",
     label: "Instagram",
     value: "@poyraz_avsever",
-    href: "https://instagram.com/poyraz_avsever",
+    href: TRACKED_SOCIAL_HREFS.instagram,
     icon: "mdi:instagram",
   },
 ] as const;

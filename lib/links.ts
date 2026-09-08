@@ -7,6 +7,17 @@ export const NAV_LINKS = [
   { id: "contact", label: "İletişim", href: "/contact" },
 ] as const;
 
+export const TRACKED_SOCIAL_HREFS = {
+  linkedin: "https://go.poyrazavsever.com/linkedin-website",
+  github: "https://go.poyrazavsever.com/github-website",
+  instagram: "https://go.poyrazavsever.com/instagram-website",
+  youtube: "https://go.poyrazavsever.com/youtube-website",
+  medium: "https://go.poyrazavsever.com/medium-website",
+  x: "https://go.poyrazavsever.com/x-website",
+  behance: "https://go.poyrazavsever.com/behance-website",
+  buyMeACoffee: "https://go.poyrazavsever.com/buy-me-a-coffee-website",
+} as const;
+
 export const SOCIAL_LINKS = [
   {
     id: "email",
@@ -17,49 +28,49 @@ export const SOCIAL_LINKS = [
   {
     id: "linkedin",
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/poyrazavsever/",
+    href: TRACKED_SOCIAL_HREFS.linkedin,
     icon: "mdi:linkedin",
   },
   {
     id: "github",
     label: "GitHub",
-    href: "https://github.com/poyrazavsever",
+    href: TRACKED_SOCIAL_HREFS.github,
     icon: "mdi:github",
   },
   {
     id: "instagram",
     label: "Instagram",
-    href: "https://instagram.com/poyraz_avsever",
+    href: TRACKED_SOCIAL_HREFS.instagram,
     icon: "mdi:instagram",
   },
   {
     id: "youtube",
     label: "YouTube",
-    href: "https://youtube.com/@poyrazavsever",
+    href: TRACKED_SOCIAL_HREFS.youtube,
     icon: "mdi:youtube",
   },
   {
     id: "medium",
     label: "Medium",
-    href: "https://medium.com/@poyrazavsever",
+    href: TRACKED_SOCIAL_HREFS.medium,
     icon: "mdi:medium",
   },
   {
     id: "x",
     label: "X",
-    href: "https://x.com/poyrazavsever",
+    href: TRACKED_SOCIAL_HREFS.x,
     icon: "ri:twitter-x-fill",
   },
   {
     id: "behance",
     label: "Behance",
-    href: "https://behance.net/poyrazavsever",
+    href: TRACKED_SOCIAL_HREFS.behance,
     icon: "mdi:behance",
   },
   {
     id: "buy-me-a-coffee",
     label: "Bana kahve ısmarla",
-    href: "https://buymeacoffee.com/poyrazavsever",
+    href: TRACKED_SOCIAL_HREFS.buyMeACoffee,
     icon: "mdi:coffee",
   },
 ] as const;

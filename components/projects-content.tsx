@@ -25,6 +25,7 @@ import {
 } from "@/lib/project-feeds";
 import { getTranslations, getLocale } from "next-intl/server";
 import { getLocalizedValue } from "@/lib/locale";
+import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
 
 function getLanguageMeta(language: string) {
   const key = language.toLowerCase();
@@ -251,7 +252,7 @@ export async function ProjectsContent() {
           </Typography>
           <Button asChild variant="outline" size="xs" radius="sm">
             <a
-              href="https://github.com/poyrazavsever"
+              href={TRACKED_SOCIAL_HREFS.github}
               target="_blank"
               rel="noopener noreferrer"
             >

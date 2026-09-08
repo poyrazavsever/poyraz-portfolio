@@ -1,4 +1,5 @@
 import type { Localized } from "@/lib/locale";
+import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
 
 export type LayoutPromoCopyKey =
   | "weeklyEyebrow"
@@ -114,7 +115,7 @@ export const LEFT_LAYOUT_PROMO_SLIDES: readonly LayoutPromoSlide[] = [
       titleKey: "youtubeTitle",
       descriptionKey: "youtubeDescription",
       ctaKey: "youtubeCta",
-      href: "https://youtube.com/@poyrazavsever",
+      href: TRACKED_SOCIAL_HREFS.youtube,
       icon: "mdi:youtube",
       iconSurface: "primary",
       external: true,
@@ -182,7 +183,7 @@ export const RIGHT_LAYOUT_PROMO_SLIDES: readonly LayoutPromoSlide[] = [
       titleKey: "linkedinTitle",
       descriptionKey: "linkedinDescription",
       ctaKey: "linkedinCta",
-      href: "https://www.linkedin.com/in/poyrazavsever/",
+      href: TRACKED_SOCIAL_HREFS.linkedin,
       icon: "mdi:linkedin",
       external: true,
     },
@@ -192,7 +193,7 @@ export const RIGHT_LAYOUT_PROMO_SLIDES: readonly LayoutPromoSlide[] = [
       titleKey: "instagramTitle",
       descriptionKey: "instagramDescription",
       ctaKey: "instagramCta",
-      href: "https://instagram.com/poyraz_avsever",
+      href: TRACKED_SOCIAL_HREFS.instagram,
       icon: "mdi:instagram",
       surface: "primary",
       buttonVariant: "default",

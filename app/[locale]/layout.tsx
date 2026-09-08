@@ -7,6 +7,7 @@ import "../globals.css";
 
 import { AppShell } from "@/components/app-shell";
 import { GoogleAnalytics } from "@/components/google-analytics";
+import { MatomoAnalytics } from "@/components/matomo-analytics";
 import { PoyrazBottomRightFollower } from "@/components/poyraz-bottom-right-follower";
 import { listAnimationSources } from "@/data/animation-sources";
 import { getHomeBlogNews, getLatestAgendaArticle } from "@/data/blog";
@@ -138,6 +139,7 @@ export default async function LocaleLayout({
       <body className="min-h-dvh bg-background text-foreground antialiased">
         <NextIntlClientProvider messages={messages}>
           <GoogleAnalytics />
+          <MatomoAnalytics />
           <AppShell
             animationSources={animationSourceSearchItems}
             latestAgenda={

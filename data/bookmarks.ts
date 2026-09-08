@@ -1,3 +1,5 @@
+import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
+
 export type BookmarkItem = {
   id: string;
   title: string;
@@ -63,7 +65,7 @@ export const BOOKMARKS: BookmarkItem[] = [
   {
     id: "bookmark-github",
     title: "GitHub",
-    href: "https://github.com/poyrazavsever",
+    href: TRACKED_SOCIAL_HREFS.github,
     description: {
       tr: "Açık kaynaklı depolarım ve yayınladığım deneysel projeler.",
       en: "Open-source repositories and shipped experiments.",
