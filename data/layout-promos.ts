@@ -1,5 +1,5 @@
 import type { Localized } from "@/lib/locale";
-import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
+import { TRACKED_EXTERNAL_HREFS, TRACKED_SOCIAL_HREFS } from "@/lib/links";
 
 export type LayoutPromoCopyKey =
   | "weeklyEyebrow"
@@ -126,7 +126,7 @@ export const LEFT_LAYOUT_PROMO_SLIDES: readonly LayoutPromoSlide[] = [
       titleKey: "designSystemTitle",
       descriptionKey: "designSystemDescription",
       ctaKey: "designSystemCta",
-      href: "https://ui.poyrazavsever.com",
+      href: TRACKED_EXTERNAL_HREFS.uiKit,
       icon: "mdi:palette-swatch-outline",
       external: true,
     },

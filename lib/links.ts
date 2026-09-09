@@ -18,6 +18,39 @@ export const TRACKED_SOCIAL_HREFS = {
   buyMeACoffee: "https://go.poyrazavsever.com/buy-me-a-coffee-website",
 } as const;
 
+const TRACKED_BASE_URL = "https://go.poyrazavsever.com";
+
+export const TRACKED_EXTERNAL_HREFS = {
+  uiKit: `${TRACKED_BASE_URL}/ui-kit-website`,
+  weeksJs: `${TRACKED_BASE_URL}/52-weeks-js-website`,
+  cvTr: `${TRACKED_BASE_URL}/cv-tr-website`,
+  cvEn: `${TRACKED_BASE_URL}/cv-en-website`,
+  npmProfile: `${TRACKED_BASE_URL}/npm-profile-website`,
+  targiz: `${TRACKED_BASE_URL}/targiz-project-website`,
+  ostim: `${TRACKED_BASE_URL}/ostim-project-website`,
+  ostimEmployment: `${TRACKED_BASE_URL}/ostim-employment-project-website`,
+  ostimForeignTrade: `${TRACKED_BASE_URL}/ostim-foreign-trade-project-website`,
+  arcForeignTrade: `${TRACKED_BASE_URL}/arc-foreign-trade-project-website`,
+  ataturkChronology: `${TRACKED_BASE_URL}/ataturk-chronology-project-website`,
+  mockupFactory: `${TRACKED_BASE_URL}/mockup-factory-project-website`,
+  ohhike: `${TRACKED_BASE_URL}/ohhike-project-website`,
+  neta: `${TRACKED_BASE_URL}/neta-project-website`,
+  shortcutInjector: `${TRACKED_BASE_URL}/shortcut-injector-project-website`,
+  tabAudioRelay: `${TRACKED_BASE_URL}/tab-audio-relay-project-website`,
+  hsdFigma: `${TRACKED_BASE_URL}/hsd-figma-project-website`,
+  restaurantMenuFigma: `${TRACKED_BASE_URL}/restaurant-menu-figma-website`,
+} as const;
+
+const TRACKED_NPM_PACKAGES: Record<string, string> = {
+  "poyraz-ui": `${TRACKED_BASE_URL}/npm-poyraz-ui-website`,
+  "reactive-image": `${TRACKED_BASE_URL}/npm-reactive-image-website`,
+  "reactive-switcher": `${TRACKED_BASE_URL}/npm-reactive-switcher-website`,
+};
+
+export function getTrackedNpmPackageHref(name: string, fallback: string) {
+  return TRACKED_NPM_PACKAGES[name] ?? fallback;
+}
+
 export const SOCIAL_LINKS = [
   {
     id: "email",
@@ -121,14 +154,14 @@ export const TOP_ICON_LINKS = [
   {
     id: "ui-kit",
     label: "UI Kit",
-    href: "https://ui.poyrazavsever.com",
+    href: TRACKED_EXTERNAL_HREFS.uiKit,
     icon: "mdi:palette-swatch-outline",
     external: true,
   },
   {
     id: "52-weeks-js",
     label: "52 Weeks of JS",
-    href: "https://js.poyrazavsever.com",
+    href: TRACKED_EXTERNAL_HREFS.weeksJs,
     icon: "mdi:code-json",
     external: true,
   },
@@ -149,7 +182,9 @@ export const TOP_ICON_LINKS = [
 ] as const;
 
 export function getResumeHref(locale: string) {
-  return `/${locale === "en" ? "en" : "tr"}/resume.pdf`;
+  return locale === "en"
+    ? TRACKED_EXTERNAL_HREFS.cvEn
+    : TRACKED_EXTERNAL_HREFS.cvTr;
 }
 
 export type LinkDirectoryCategory = "navigation" | "social" | "resources";

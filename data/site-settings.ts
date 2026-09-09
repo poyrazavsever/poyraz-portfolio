@@ -1,3 +1,5 @@
+import { TRACKED_EXTERNAL_HREFS } from "@/lib/links";
+
 export type AnnouncementItem = {
   id: string;
   text: {
@@ -24,6 +26,6 @@ export const ANNOUNCEMENT_ITEMS: AnnouncementItem[] = [
       tr: "İncele ->",
       en: "Explore ->",
     },
-    actionHref: "https://www.takeneta.com",
+    actionHref: TRACKED_EXTERNAL_HREFS.neta,
   },
 ];

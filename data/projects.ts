@@ -1,3 +1,5 @@
+import { TRACKED_EXTERNAL_HREFS } from "@/lib/links";
+
 export type ProjectItem = {
   id: string;
   title: {
@@ -39,7 +41,7 @@ export const MOBILE_APPS: ProjectItem[] = [
       tr: "React Native ve Next.js istemcilerini; Express.js servisleri, Supabase veri katmanı ve yapay zekâ destekli modüllerle birleştiren çapraz platform mimarisi.",
       en: "A cross-platform architecture combining React Native and Next.js clients with Express.js services, a Supabase data layer, and AI-assisted modules.",
     },
-    href: "https://targiz.com",
+    href: TRACKED_EXTERNAL_HREFS.targiz,
     caseStudySlug: "targiz",
     description: {
       tr: "Üç kişilik ekipte yazılım liderliği ve full-stack geliştirme sorumluluğunu üstlendiğim; üreticilere hastalık tespiti, lojistik ve pazar erişimi sunan mobil öncelikli tarım platformu.",
@@ -68,7 +70,7 @@ export const WEB_APPS: ProjectItem[] = [
       en: "Corporate Portal",
     },
     image: "/projects/ostim.webp",
-    href: "https://ostim.org.tr",
+    href: TRACKED_EXTERNAL_HREFS.ostim,
     caseStudySlug: "ostim-web-portali",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
@@ -91,7 +93,7 @@ export const WEB_APPS: ProjectItem[] = [
       en: "Employment Portal",
     },
     image: "/projects/ostim-istihdam.webp",
-    href: "https://ostimistihdam.com",
+    href: TRACKED_EXTERNAL_HREFS.ostimEmployment,
     caseStudySlug: "ostim-istihdam",
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
@@ -114,7 +116,7 @@ export const WEB_APPS: ProjectItem[] = [
       en: "Foreign Trade Portal",
     },
     image: "/projects/ostim-dis-ticaret.webp",
-    href: "https://ostimdisticaret.net",
+    href: TRACKED_EXTERNAL_HREFS.ostimForeignTrade,
     technologies: OSTIM_TECHNOLOGIES,
     architecture: {
       tr: "Dış ticaret firmaları, ilanlar ve yabancı dil bilen öğrenciler için ayrı kayıt ve başvuru akışlarını ortak bir eşleştirme ve ilan havuzunda birleştiren çok taraflı portal mimarisi.",
@@ -138,7 +140,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "Wix üzerinde yönetilebilir içerik ve kurumsal tanıtım sayfalarından oluşan, ihracat odaklı web sitesi yapısı.",
       en: "An export-focused website architecture built on Wix with manageable content and corporate presentation pages.",
     },
-    href: "https://arcforeigntrade.com",
+    href: TRACKED_EXTERNAL_HREFS.arcForeignTrade,
     description: {
       tr: "Ankara merkezli ihracat odaklı bir üretici firma için kurumsal web sitesi yenileme projesi.",
       en: "Corporate website renewal project for an Ankara-based export-oriented manufacturer.",
@@ -160,7 +162,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "React ile geliştirilen, kronoloji verisini etkileşimli bir zaman çizelgesi arayüzünde sunan istemci taraflı uygulama.",
       en: "A client-side React application presenting chronology data through an interactive timeline interface.",
     },
-    href: "https://ataturk-kronolojisi.org",
+    href: TRACKED_EXTERNAL_HREFS.ataturkChronology,
     description: {
       tr: "Açık kaynak katkıcısı olarak yer aldığım; Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
       en: "An interactive timeline of key events, speeches, and reforms in Atatürk's life, to which I contributed as an open-source contributor.",
@@ -179,7 +181,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "Next.js tabanlı, görsel işleme akışını tamamen tarayıcıda çalıştıran istemci öncelikli araç mimarisi.",
       en: "A client-first Next.js tool architecture that runs its image-processing workflow entirely in the browser.",
     },
-    href: "https://mockup-factory-mu.vercel.app/",
+    href: TRACKED_EXTERNAL_HREFS.mockupFactory,
     description: {
       tr: "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç.",
       en: "An open-source tool running entirely in the browser that converts images into device mockups in seconds.",
@@ -206,7 +208,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "pnpm/Turborepo monorepo içinde React/Vite arayüzü ve modüler monolit Express API; SQLite, Drizzle ORM, gerçek servis testleri ve Docker tabanlı self-hosted dağıtım.",
       en: "A React/Vite frontend and modular-monolith Express API in a pnpm/Turborepo monorepo, with SQLite, Drizzle ORM, real-service tests, and Docker-based self-hosted deployment.",
     },
-    href: "https://www.ohhike.com",
+    href: TRACKED_EXTERNAL_HREFS.ohhike,
     caseStudySlug: "ohhike",
     description: {
       tr: "Masa başında çalışan geliştiriciler için aktivite, haftalık sağlık planı, beslenme ve kalori takibini bir araya getiren self-hosted uygulama.",
@@ -226,7 +228,7 @@ export const WEB_APPS: ProjectItem[] = [
       tr: "Landing page, uygulama ve API paketlerini birlikte yöneten Next.js ve Express.js tabanlı monorepo mimarisi.",
       en: "A Next.js and Express.js monorepo architecture managing landing page, application, and API packages together.",
     },
-    href: "https://www.takeneta.com",
+    href: TRACKED_EXTERNAL_HREFS.neta,
     caseStudySlug: "take-neta",
     description: {
       tr: "Freelancer'lar için görev, proje, müşteri, finans, yapay zekâ ve müşteri portalı akışlarını birleştiren self-hosted işletim sistemi.",
@@ -249,7 +251,7 @@ export const EXTENSIONS: ProjectItem[] = [
       tr: "Tarayıcı eklentisi API'leriyle çalışan, kısayol tanımlarını form alanlarına bağlayan çapraz tarayıcı JavaScript yapısı.",
       en: "A cross-browser JavaScript extension architecture that connects shortcut definitions to form fields through browser extension APIs.",
     },
-    href: "https://github.com/poyrazavsever/shortcut-injector",
+    href: TRACKED_EXTERNAL_HREFS.shortcutInjector,
     description: {
       tr: "Özel klavye kısayollarını kullanarak önceden tanımlanmış kişisel verileri ve bağlantıları web formlarına hızlıca enjekte etmek için geliştirilmiş bir tarayıcı eklentisi.",
       en: "A cross-browser extension to quickly inject predefined personal data and links into web forms using custom keyboard shortcuts.",
@@ -268,7 +270,7 @@ export const EXTENSIONS: ProjectItem[] = [
       tr: "Sekmelerin medya durumlarını izleyip oynatma komutlarını ileten olay tabanlı, çapraz tarayıcı eklenti mimarisi.",
       en: "An event-driven, cross-browser extension architecture that observes media state across tabs and relays playback commands.",
     },
-    href: "https://github.com/poyrazavsever/tab-audio-relay",
+    href: TRACKED_EXTERNAL_HREFS.tabAudioRelay,
     description: {
       tr: "Sekmeler arasındaki ses çalma işlemlerini senkronize eden bir tarayıcı eklentisi. Eğitim videonuz durduğunda müziğinizi otomatik olarak oynatır, eğitime devam ettiğinizde ise müziği duraklatır.",
       en: "A browser extension that synchronizes audio playback between tabs. Automatically plays your music when your tutorial/lecture video stops, and pauses it when you resume learning. Perfect for deep work and seamless study sessions.",
@@ -287,7 +289,7 @@ export const FIGMA_TEMPLATES: ProjectItem[] = [
       tr: "Bileşenler, kontrol paneli, açılış sayfası ve profil ekranlarını doğrudan Figma içinde düzenleyen bileşen tabanlı tasarım dosyası.",
       en: "A component-based design file organized directly in Figma across components, dashboard, landing page, and profile screens.",
     },
-    href: "https://www.figma.com/community/file/1613511833232376739",
+    href: TRACKED_EXTERNAL_HREFS.hsdFigma,
     description: {
       tr: "HSD Community için Web Site tasarımı. Bileşenler, kontrol paneli, açılış sayfası, profil sayfaları.",
       en: "Web Site design for HSD Community. Components, dashboard, landing page, profile pages.",
@@ -303,7 +305,7 @@ export const FIGMA_TEMPLATES: ProjectItem[] = [
       tr: "Tekrar kullanılabilir arayüz parçaları ve menü varyasyonlarından oluşan, doğrudan Figma üzerinde hazırlanan tasarım şablonu.",
       en: "A design template created directly in Figma with reusable interface elements and menu variants.",
     },
-    href: "https://www.figma.com/community/file/1613577450975840169/restaurant-menu-ui-design",
+    href: TRACKED_EXTERNAL_HREFS.restaurantMenuFigma,
     description: {
       tr: "Topluluk için Restaurant Menü Arayüz Tasarımı şablonu.",
       en: "Restaurant Menu UI Design Template for the community.",

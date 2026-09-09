@@ -8,6 +8,16 @@ const MATOMO_URL = (
   process.env.NEXT_PUBLIC_MATOMO_URL || "https://analytics.poyrazavsever.com"
 ).replace(/\/+$/, "");
 const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID || "2";
+const SOCIAL_SHORT_LINKS = new Set([
+  "linkedin",
+  "github",
+  "instagram",
+  "youtube",
+  "medium",
+  "x",
+  "behance",
+  "buy-me-a-coffee",
+]);
 
 type MatomoCommand = [string, ...unknown[]];
 
@@ -45,7 +55,13 @@ function getLinkEvent(anchor: HTMLAnchorElement): MatomoCommand | null {
       : null;
 
   if (shortLinkMatch) {
-    return ["trackEvent", "Social outbound", shortLinkMatch[1], currentPage];
+    const shortCode = shortLinkMatch[1];
+    const category = SOCIAL_SHORT_LINKS.has(shortCode)
+      ? "Social outbound"
+      : shortCode.startsWith("cv-")
+        ? "Download"
+        : "Tracked outbound";
+    return ["trackEvent", category, shortCode, currentPage];
   }
 
   if (url.pathname.toLowerCase().endsWith(".pdf")) {

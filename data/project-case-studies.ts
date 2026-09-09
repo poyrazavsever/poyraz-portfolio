@@ -1,3 +1,5 @@
+import { TRACKED_EXTERNAL_HREFS } from "@/lib/links";
+
 export type ProjectCaseStudyLocale = "tr" | "en";
 
 type LocalizedText = Record<ProjectCaseStudyLocale, string>;
@@ -108,7 +110,7 @@ const PROJECT_CASE_STUDIES: ProjectCaseStudyDefinition[] = [
     slug: "ostim-web-portali",
     projectId: "ostim-web-portal",
     image: "/projects/ostim.webp",
-    liveUrl: "https://ostim.org.tr",
+    liveUrl: TRACKED_EXTERNAL_HREFS.ostim,
     teamUrl: "https://omedya.com",
     applicationCategory: "BusinessApplication",
     technologies: [
@@ -306,7 +308,7 @@ const PROJECT_CASE_STUDIES: ProjectCaseStudyDefinition[] = [
     slug: "ostim-istihdam",
     projectId: "ostim-employment",
     image: "/projects/ostim-istihdam.webp",
-    liveUrl: "https://ostimistihdam.com",
+    liveUrl: TRACKED_EXTERNAL_HREFS.ostimEmployment,
     teamUrl: "https://omedya.com",
     applicationCategory: "BusinessApplication",
     technologies: [
@@ -505,7 +507,7 @@ const PROJECT_CASE_STUDIES: ProjectCaseStudyDefinition[] = [
     slug: "targiz",
     projectId: "targiz-app",
     image: "/projects/targiz.png",
-    liveUrl: "https://targiz.com",
+    liveUrl: TRACKED_EXTERNAL_HREFS.targiz,
     applicationCategory: "BusinessApplication",
     technologies: [
       "React Native",
@@ -734,7 +736,7 @@ const PROJECT_CASE_STUDIES: ProjectCaseStudyDefinition[] = [
     slug: "take-neta",
     projectId: "neta",
     image: "/projects/neta.png",
-    liveUrl: "https://www.takeneta.com",
+    liveUrl: TRACKED_EXTERNAL_HREFS.neta,
     sourceUrl: "https://github.com/poyrazavsever/neta",
     applicationCategory: "BusinessApplication",
     technologies: [
@@ -935,7 +937,7 @@ const PROJECT_CASE_STUDIES: ProjectCaseStudyDefinition[] = [
     slug: "ohhike",
     projectId: "ohhike",
     image: "/projects/ohhike.png",
-    liveUrl: "https://www.ohhike.com",
+    liveUrl: TRACKED_EXTERNAL_HREFS.ohhike,
     sourceUrl: "https://github.com/poyrazavsever/ohhike-mono",
     applicationCategory: "HealthApplication",
     technologies: [

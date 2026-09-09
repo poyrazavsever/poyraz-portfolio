@@ -1,3 +1,5 @@
+import { getTrackedNpmPackageHref } from "@/lib/links";
+
 const USERNAME = "poyrazavsever";
 
 export type GithubRepo = {
@@ -112,7 +114,10 @@ export async function getNpmPackages(): Promise<NpmPackage[]> {
         name: pkg.name ?? "unknown-package",
         version: pkg.version ?? "-",
         description: pkg.description ?? "No description",
-        npmUrl: pkg.links?.npm ?? `https://www.npmjs.com/package/${pkg.name}`,
+        npmUrl: getTrackedNpmPackageHref(
+          pkg.name,
+          pkg.links?.npm ?? `https://www.npmjs.com/package/${pkg.name}`,
+        ),
       }));
   } catch {
     return [];

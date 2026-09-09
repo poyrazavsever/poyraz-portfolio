@@ -1,4 +1,4 @@
-import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
+import { TRACKED_EXTERNAL_HREFS, TRACKED_SOCIAL_HREFS } from "@/lib/links";
 
 export type BookmarkItem = {
   id: string;
@@ -15,7 +15,7 @@ export const BOOKMARKS: BookmarkItem[] = [
   {
     id: "bookmark-poyraz-ui",
     title: "Poyraz UI",
-    href: "https://ui.poyrazavsever.com",
+    href: TRACKED_EXTERNAL_HREFS.uiKit,
     description: {
       tr: "Bu portfolyoda kullanılan tasarım sistemi için bileşen dokümantasyonu ve örnekleri.",
       en: "Component docs and examples for the design system used in this portfolio.",

@@ -23,6 +23,7 @@ import {
   getGithubRepos,
   getNpmPackages,
 } from "@/lib/project-feeds";
+import { TRACKED_EXTERNAL_HREFS } from "@/lib/links";
 import { getTranslations, getLocale } from "next-intl/server";
 import { getLocalizedValue } from "@/lib/locale";
 import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
@@ -195,7 +196,7 @@ export async function ProjectsContent() {
           </Typography>
           <Button asChild variant="outline" size="xs" radius="sm">
             <a
-              href="https://www.npmjs.com/~poyrazavsever"
+              href={TRACKED_EXTERNAL_HREFS.npmProfile}
               target="_blank"
               rel="noopener noreferrer"
             >
