@@ -110,15 +110,19 @@ export async function getNpmPackages(): Promise<NpmPackage[]> {
     return items
       .map((item) => item.package)
       .filter((pkg): pkg is NonNullable<typeof pkg> => Boolean(pkg?.name))
-      .map((pkg) => ({
-        name: pkg.name ?? "unknown-package",
-        version: pkg.version ?? "-",
-        description: pkg.description ?? "No description",
-        npmUrl: getTrackedNpmPackageHref(
-          pkg.name,
-          pkg.links?.npm ?? `https://www.npmjs.com/package/${pkg.name}`,
-        ),
-      }));
+      .map((pkg) => {
+        const packageName = pkg.name ?? "unknown-package";
+
+        return {
+          name: packageName,
+          version: pkg.version ?? "-",
+          description: pkg.description ?? "No description",
+          npmUrl: getTrackedNpmPackageHref(
+            packageName,
+            pkg.links?.npm ?? `https://www.npmjs.com/package/${packageName}`,
+          ),
+        };
+      });
   } catch {
     return [];
   }
