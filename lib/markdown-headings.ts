@@ -25,8 +25,26 @@ export function slugifyMarkdownHeading(text: string) {
 
 export function parseMarkdownHeadings(markdown: string): MarkdownHeading[] {
   const headings: MarkdownHeading[] = [];
+  let codeFence: { marker: string; length: number } | null = null;
 
   for (const line of markdown.split("\n")) {
+    const fence = /^\s{0,3}(`{3,}|~{3,})(.*)$/.exec(line);
+    if (codeFence) {
+      if (
+        fence &&
+        fence[1][0] === codeFence.marker &&
+        fence[1].length >= codeFence.length &&
+        !fence[2].trim()
+      ) {
+        codeFence = null;
+      }
+      continue;
+    }
+    if (fence) {
+      codeFence = { marker: fence[1][0], length: fence[1].length };
+      continue;
+    }
+
     const match = /^(#{2,3})\s+(.+)$/.exec(line.trim());
     if (!match) continue;
 

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { useTranslations } from "next-intl";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -18,7 +18,10 @@ import {
 import { ArticleToc } from "@/components/article-toc";
 import type { AnimationSource } from "@/data/animation-sources";
 import { Link } from "@/i18n/routing";
-import { slugifyMarkdownHeading } from "@/lib/markdown-headings";
+import {
+  parseMarkdownHeadings,
+  slugifyMarkdownHeading,
+} from "@/lib/markdown-headings";
 
 type AnimationSourceDetailContentProps = {
   source: AnimationSource;
@@ -125,7 +128,7 @@ function CopyableCodeBlock({
           fontSize: "13px",
           lineHeight: "1.65",
         }}
-        wrapLongLines={false}
+        wrapLongLines={language === "prompt"}
       >
         {code}
       </SyntaxHighlighter>
@@ -166,6 +169,10 @@ export function AnimationSourceDetailContent({
   const progressBarRef = useRef<HTMLDivElement>(null);
   const [tocOpen, setTocOpen] = useState(false);
   const closeToc = useCallback(() => setTocOpen(false), []);
+  const hasToc = useMemo(
+    () => parseMarkdownHeadings(source.markdown).length >= 2,
+    [source.markdown],
+  );
 
   useEffect(() => {
     let rafId = 0;
@@ -357,21 +364,25 @@ export function AnimationSourceDetailContent({
           </article>
         </div>
 
-        <aside className="hidden w-52 shrink-0 lg:block">
-          <div className="sticky top-24">
-            <ArticleToc markdown={source.markdown} title={t("toc")} />
-          </div>
-        </aside>
+        {hasToc ? (
+          <aside className="hidden w-52 shrink-0 lg:block">
+            <div className="sticky top-24">
+              <ArticleToc markdown={source.markdown} title={t("toc")} />
+            </div>
+          </aside>
+        ) : null}
       </div>
 
-      <button
-        type="button"
-        onClick={() => setTocOpen(true)}
-        className="fixed right-4 bottom-6 z-40 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border bg-background shadow-lg transition-transform hover:scale-105 active:scale-95 lg:hidden"
-        aria-label={t("toc")}
-      >
-        <Icon icon="mdi:table-of-contents" width={22} height={22} className="text-red-600" />
-      </button>
+      {hasToc ? (
+        <button
+          type="button"
+          onClick={() => setTocOpen(true)}
+          className="fixed right-4 bottom-6 z-40 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border bg-background shadow-lg transition-transform hover:scale-105 active:scale-95 lg:hidden"
+          aria-label={t("toc")}
+        >
+          <Icon icon="mdi:table-of-contents" width={22} height={22} className="text-red-600" />
+        </button>
+      ) : null}
 
       {tocOpen ? (
         <div className="fixed inset-0 z-50 lg:hidden" onClick={closeToc}>
