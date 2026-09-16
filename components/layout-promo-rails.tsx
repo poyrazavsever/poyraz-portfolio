@@ -78,28 +78,39 @@ function RailButton({
 function SponsorLogos() {
   return (
     <div className="mt-3 grid grid-cols-2 gap-1.5">
-      {SPONSORS.map((sponsor, index) => (
-        <a
-          key={sponsor.id}
-          href={sponsor.websiteUrl}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={sponsor.name}
-          className={`relative flex h-10 items-center justify-center rounded-sm border border-border bg-white p-1.5 transition-colors hover:border-primary/40 ${
-            index === SPONSORS.length - 1 && SPONSORS.length % 2 === 1
-              ? "col-span-2"
-              : ""
-          }`}
-        >
+      {SPONSORS.map((sponsor, index) => {
+        const className = `relative flex h-10 items-center justify-center rounded-sm border border-border bg-white p-1.5 transition-colors hover:border-primary/40 ${
+          index === SPONSORS.length - 1 && SPONSORS.length % 2 === 1
+            ? "col-span-2"
+            : ""
+        }`;
+        const logo = (
           <Image
             src={sponsor.logo}
-            alt=""
+            alt={sponsor.websiteUrl ? "" : sponsor.name}
             fill
             sizes="100px"
             className="object-contain p-1.5 grayscale transition duration-300 hover:grayscale-0"
           />
-        </a>
-      ))}
+        );
+
+        return sponsor.websiteUrl ? (
+          <a
+            key={sponsor.id}
+            href={sponsor.websiteUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={sponsor.name}
+            className={className}
+          >
+            {logo}
+          </a>
+        ) : (
+          <div key={sponsor.id} className={className}>
+            {logo}
+          </div>
+        );
+      })}
     </div>
   );
 }

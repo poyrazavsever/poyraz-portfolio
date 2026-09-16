@@ -51,4 +51,10 @@ export const SPONSORS: Sponsor[] = [
     logo: "/sponsors/watchmantower.png",
     websiteUrl: "https://www.watchmantower.com/",
   },
+  {
+    id: "aisa-one",
+    name: "AIsa One",
+    job: "Yapay Zeka Platformu",
+    logo: "/sponsors/aisa-one.svg",
+  },
 ];
