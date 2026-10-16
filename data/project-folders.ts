@@ -44,8 +44,8 @@ export const PROJECT_FOLDERS: ProjectFolder[] = [
       en: "Products",
     },
     description: {
-      tr: "Kendi fikrimden çıkan, uçtan uca tasarlayıp geliştirdiğim self-hosted ve açık kaynak ürünler.",
-      en: "Self-hosted and open-source products I designed and built end to end from my own ideas.",
+      tr: "Fikirden yayına kadar uçtan uca tasarlayıp geliştirdiğim girişim, self-hosted ve açık kaynak ürünler.",
+      en: "Startup, self-hosted, and open-source products I designed and built end to end, from idea to launch.",
     },
     items: PRODUCTS,
   },
@@ -57,8 +57,8 @@ export const PROJECT_FOLDERS: ProjectFolder[] = [
       en: "Extensions",
     },
     description: {
-      tr: "Günlük tarayıcı akışını hızlandıran, çapraz tarayıcı çalışan eklentiler.",
-      en: "Cross-browser extensions that speed up everyday browsing workflows.",
+      tr: "Günlük tarayıcı akışını hızlandıran eklentiler ve tamamen tarayıcıda çalışan araçlar.",
+      en: "Extensions and fully in-browser tools that speed up everyday browsing workflows.",
     },
     items: EXTENSIONS,
   },

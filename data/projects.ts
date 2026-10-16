@@ -102,29 +102,6 @@ export const WORK_PROJECTS: ProjectItem[] = [
     },
   },
   {
-    id: "targiz-app",
-    title: "Targiz App",
-    badge: "Agritech",
-    image: "/projects/targiz.png",
-    technologies: [
-      "React Native",
-      "Next.js",
-      "Express.js",
-      "Supabase",
-      "Tailwind CSS",
-    ],
-    architecture: {
-      tr: "React Native ve Next.js istemcilerini; Express.js servisleri, Supabase veri katmanı ve yapay zekâ destekli modüllerle birleştiren çapraz platform mimarisi.",
-      en: "A cross-platform architecture combining React Native and Next.js clients with Express.js services, a Supabase data layer, and AI-assisted modules.",
-    },
-    href: TRACKED_EXTERNAL_HREFS.targiz,
-    caseStudySlug: "targiz",
-    description: {
-      tr: "Üç kişilik ekipte yazılım liderliği ve full-stack geliştirme sorumluluğunu üstlendiğim; üreticilere hastalık tespiti, lojistik ve pazar erişimi sunan mobil öncelikli tarım platformu.",
-      en: "A mobile-first agriculture platform for disease diagnosis, logistics, and market access, where I led a three-person software team while contributing as a full-stack developer.",
-    },
-  },
-  {
     id: "arc-foreign-trade",
     title: "ARC Foreign Trade",
     badge: {
@@ -184,6 +161,25 @@ export const EXTENSIONS: ProjectItem[] = [
       en: "A browser extension that synchronizes audio playback between tabs. Automatically plays your music when your tutorial/lecture video stops, and pauses it when you resume learning. Perfect for deep work and seamless study sessions.",
     },
   },
+  {
+    id: "mockup-factory",
+    title: "Mockup Factory",
+    badge: {
+      tr: "Açık Kaynak",
+      en: "Open Source",
+    },
+    image: "/projects/mockup.png",
+    technologies: ["Next.js"],
+    architecture: {
+      tr: "Next.js tabanlı, görsel işleme akışını tamamen tarayıcıda çalıştıran istemci öncelikli araç mimarisi.",
+      en: "A client-first Next.js tool architecture that runs its image-processing workflow entirely in the browser.",
+    },
+    href: TRACKED_EXTERNAL_HREFS.mockupFactory,
+    description: {
+      tr: "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç.",
+      en: "An open-source tool running entirely in the browser that converts images into device mockups in seconds.",
+    },
+  },
 ];
 
 export const PRODUCTS: ProjectItem[] = [
@@ -236,25 +232,6 @@ export const PRODUCTS: ProjectItem[] = [
     },
   },
   {
-    id: "mockup-factory",
-    title: "Mockup Factory",
-    badge: {
-      tr: "Açık Kaynak",
-      en: "Open Source",
-    },
-    image: "/projects/mockup.png",
-    technologies: ["Next.js"],
-    architecture: {
-      tr: "Next.js tabanlı, görsel işleme akışını tamamen tarayıcıda çalıştıran istemci öncelikli araç mimarisi.",
-      en: "A client-first Next.js tool architecture that runs its image-processing workflow entirely in the browser.",
-    },
-    href: TRACKED_EXTERNAL_HREFS.mockupFactory,
-    description: {
-      tr: "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç.",
-      en: "An open-source tool running entirely in the browser that converts images into device mockups in seconds.",
-    },
-  },
-  {
     id: "ataturk-chronology",
     title: {
       tr: "Atatürk Kronolojisi",
@@ -274,6 +251,29 @@ export const PRODUCTS: ProjectItem[] = [
     description: {
       tr: "Açık kaynak katkıcısı olarak yer aldığım; Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
       en: "An interactive timeline of key events, speeches, and reforms in Atatürk's life, to which I contributed as an open-source contributor.",
+    },
+  },
+  {
+    id: "targiz-app",
+    title: "Targiz App",
+    badge: "Agritech",
+    image: "/projects/targiz.png",
+    technologies: [
+      "React Native",
+      "Next.js",
+      "Express.js",
+      "Supabase",
+      "Tailwind CSS",
+    ],
+    architecture: {
+      tr: "React Native ve Next.js istemcilerini; Express.js servisleri, Supabase veri katmanı ve yapay zekâ destekli modüllerle birleştiren çapraz platform mimarisi.",
+      en: "A cross-platform architecture combining React Native and Next.js clients with Express.js services, a Supabase data layer, and AI-assisted modules.",
+    },
+    href: TRACKED_EXTERNAL_HREFS.targiz,
+    caseStudySlug: "targiz",
+    description: {
+      tr: "Üç kişilik ekipte yazılım liderliği ve full-stack geliştirme sorumluluğunu üstlendiğim; üreticilere hastalık tespiti, lojistik ve pazar erişimi sunan mobil öncelikli tarım platformu.",
+      en: "A mobile-first agriculture platform for disease diagnosis, logistics, and market access, where I led a three-person software team while contributing as a full-stack developer.",
     },
   },
 ];
