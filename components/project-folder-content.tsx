@@ -38,15 +38,18 @@ export async function ProjectFolderContent({
         </span>
       </nav>
 
-      <header className="flex items-start gap-3">
-        <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-sm border border-border bg-muted text-red-600">
-          <Icon icon="mdi:folder-open-outline" width={24} height={24} aria-hidden="true" />
+      <header className="grid grid-cols-[auto_minmax(0,1fr)] items-stretch gap-3 md:gap-4">
+        <span className="inline-flex aspect-square h-full items-center justify-center self-stretch rounded-sm border border-border bg-muted text-4xl text-red-600">
+          <Icon icon="mdi:folder-open-outline" aria-hidden="true" />
         </span>
         <div className="min-w-0 space-y-1">
           <Typography variant="h3" component="h1" className="tracking-[-0.035em]">
             {getLocalizedValue(folder.title, locale)}
           </Typography>
-          <Typography variant="small" className="max-w-2xl text-muted-foreground">
+          <Typography
+            variant="small"
+            className="line-clamp-3 min-h-[2lh] max-w-2xl text-muted-foreground sm:line-clamp-2"
+          >
             {getLocalizedValue(folder.description, locale)}
           </Typography>
         </div>
