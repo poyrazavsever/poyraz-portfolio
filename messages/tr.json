@@ -151,7 +151,6 @@
     "contributionPlural": "katkı",
     "emptyNpm": "npm API yanıtı şu anda boş.",
     "emptyGithub": "GitHub API yanıtı şu anda boş.",
-    "foldersDescription": "Projelerimi türlerine göre klasörledim; incelemek için bir klasör aç.",
     "projectCount": "proje",
     "backToProjects": "Projeler",
     "folderBreadcrumb": "Proje klasörü konumu"

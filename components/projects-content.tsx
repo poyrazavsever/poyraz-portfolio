@@ -70,15 +70,7 @@ export async function ProjectsContent() {
 
   return (
     <section className="flex h-full flex-col gap-8 overflow-y-auto md:gap-10">
-      <section className="space-y-3">
-        <div className="space-y-1">
-          <Typography variant="large" className="text-base">
-            {t("sections.folders")}
-          </Typography>
-          <Typography variant="small" className="text-muted-foreground">
-            {t("foldersDescription")}
-          </Typography>
-        </div>
+      <section aria-label={t("sections.folders")}>
         <StaggerContainer className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {PROJECT_FOLDERS.map((folder, index) => (
             <StaggerItem key={folder.slug}>

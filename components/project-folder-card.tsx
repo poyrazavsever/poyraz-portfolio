@@ -38,11 +38,11 @@ export function ProjectFolderCard({
       aria-current={active ? "page" : undefined}
       className="group block rounded-sm text-inherit no-underline outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
-      <div className="relative aspect-[5/4] w-full [perspective:900px]">
+      <div className="relative aspect-square w-full [perspective:900px]">
         {/* Folder tab and back panel */}
         <div
           aria-hidden="true"
-          className={`absolute top-0 left-0 h-[14%] w-[44%] rounded-t-md border border-b-0 transition-colors ${
+          className={`absolute top-0 left-0 h-[12%] w-[44%] rounded-t-md border border-b-0 transition-colors ${
             active
               ? "border-red-600/40 bg-red-600/10"
               : "border-zinc-300 bg-zinc-200 group-hover:bg-zinc-300/80 dark:border-zinc-700 dark:bg-zinc-800 dark:group-hover:bg-zinc-700/80"
@@ -50,7 +50,7 @@ export function ProjectFolderCard({
         />
         <div
           aria-hidden="true"
-          className={`absolute inset-x-0 top-[13%] bottom-0 rounded-md rounded-tl-none border transition-colors ${
+          className={`absolute inset-x-0 top-[11%] bottom-0 rounded-md rounded-tl-none border transition-colors ${
             active
               ? "border-red-600/40 bg-red-600/10"
               : "border-zinc-300 bg-zinc-200 group-hover:bg-zinc-300/80 dark:border-zinc-700 dark:bg-zinc-800 dark:group-hover:bg-zinc-700/80"
@@ -58,7 +58,7 @@ export function ProjectFolderCard({
         />
 
         {/* Project previews peeking out of the folder */}
-        <div aria-hidden="true" className="absolute inset-x-[5%] top-[20%] bottom-[30%]">
+        <div aria-hidden="true" className="absolute inset-x-[5%] top-[19%] bottom-[34%]">
           {previews.map((project, index) => (
             <div
               key={project.id}
@@ -80,7 +80,7 @@ export function ProjectFolderCard({
 
         {/* Front panel */}
         <div
-          className={`absolute inset-x-0 bottom-0 z-10 flex h-[52%] origin-bottom flex-col justify-between rounded-md border bg-background/95 p-3 backdrop-blur-sm transition-transform duration-500 ease-[var(--poyraz-motion-ease-out)] group-hover:[transform:rotateX(-16deg)] md:p-4 ${
+          className={`absolute inset-x-0 bottom-0 z-10 flex min-h-[50%] origin-bottom flex-col justify-between gap-3 rounded-md border bg-background/95 p-3 backdrop-blur-sm transition-transform duration-500 ease-[var(--poyraz-motion-ease-out)] group-hover:[transform:rotateX(-16deg)] md:p-4 ${
             active ? "border-red-600/50" : "border-border"
           }`}
         >
