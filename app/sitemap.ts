@@ -3,6 +3,7 @@ import { listAnimationSources } from "@/data/animation-sources";
 import { isNewsletterCategory } from "@/data/blog";
 import { listBlogDetails } from "@/data/blog-detail";
 import { listProjectCaseStudies } from "@/data/project-case-studies";
+import { getProjectFolderPath, PROJECT_FOLDERS } from "@/data/project-folders";
 import {
   getAbsoluteUrl,
   getLocalizedUrl,
@@ -146,8 +147,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }),
   );
 
+  const projectFolderRoutes: MetadataRoute.Sitemap = PROJECT_FOLDERS.flatMap(
+    (folder) => {
+      const path = getProjectFolderPath(folder.slug);
+      const languages = getLanguageLinks({ tr: path, en: path });
+
+      return LOCALES.map((locale) => ({
+        url: getLocalizedUrl(locale, path),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+        alternates: { languages },
+      }));
+    },
+  );
+
   return [
     ...staticRoutes,
+    ...projectFolderRoutes,
     ...projectCaseStudyRoutes,
     ...blogRoutes,
     ...animationSourceRoutes,

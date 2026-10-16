@@ -134,10 +134,8 @@
   },
   "Projects": {
     "sections": {
-      "mobileApps": "Mobile Apps",
-      "webApps": "Web Applications",
+      "folders": "Folders",
       "extensions": "Extensions",
-      "figmaTemplates": "Figma Designs",
       "npmPackages": "npm Packages",
       "githubRepos": "GitHub Repositories"
     },
@@ -152,7 +150,11 @@
     "contributionSingular": "contribution",
     "contributionPlural": "contributions",
     "emptyNpm": "npm API response is currently empty.",
-    "emptyGithub": "GitHub API response is currently empty."
+    "emptyGithub": "GitHub API response is currently empty.",
+    "foldersDescription": "My projects are grouped into folders by type; open one to explore.",
+    "projectCount": "projects",
+    "backToProjects": "Projects",
+    "folderBreadcrumb": "Project folder location"
   },
   "ProjectCaseStudy": {
     "back": "Back to all projects",

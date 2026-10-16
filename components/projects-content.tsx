@@ -10,14 +10,8 @@ import {
 } from "poyraz-ui/atoms";
 import { StaggerContainer, StaggerItem } from "@/components/motion-wrapper";
 import { GithubContributionGraph } from "@/components/github-contribution-graph";
-import { ProjectCardWithPopover } from "@/components/project-card-with-popover";
-import {
-  EXTENSIONS,
-  FIGMA_TEMPLATES,
-  MOBILE_APPS,
-  WEB_APPS,
-  type ProjectItem,
-} from "@/data/projects";
+import { ProjectFolderCard } from "@/components/project-folder-card";
+import { PROJECT_FOLDERS } from "@/data/project-folders";
 import {
   getGithubContributions,
   getGithubRepos,
@@ -25,7 +19,6 @@ import {
 } from "@/lib/project-feeds";
 import { TRACKED_EXTERNAL_HREFS } from "@/lib/links";
 import { getTranslations, getLocale } from "next-intl/server";
-import { getLocalizedValue } from "@/lib/locale";
 import { TRACKED_SOCIAL_HREFS } from "@/lib/links";
 
 function getLanguageMeta(language: string) {
@@ -65,65 +58,6 @@ function getLanguageMeta(language: string) {
   return { icon: "mdi:code-tags", color: "text-zinc-500" };
 }
 
-type LocalizedProjectItem = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  architecture: string;
-  badge?: string;
-  href?: string;
-  caseStudySlug?: string;
-};
-
-function ProjectSection({
-  title,
-  items,
-  technologiesLabel,
-  architectureLabel,
-  caseStudyLabel,
-}: {
-  title: string;
-  items: LocalizedProjectItem[];
-  technologiesLabel: string;
-  architectureLabel: string;
-  caseStudyLabel: string;
-}) {
-  return (
-    <section className="space-y-3">
-      <Typography variant="large" className="text-base">
-        {title}
-      </Typography>
-      <StaggerContainer className="grid grid-cols-2 gap-2 lg:grid-cols-4">
-        {items.map((item) => (
-          <StaggerItem key={item.id}>
-            <ProjectCardWithPopover
-              image={item.image}
-              title={item.title}
-              description={item.description}
-              badge={item.badge}
-              href={item.href}
-              caseStudyHref={
-                item.caseStudySlug
-                  ? `/projects/${item.caseStudySlug}`
-                  : undefined
-              }
-              caseStudyLabel={caseStudyLabel}
-              technologies={item.technologies}
-              architecture={item.architecture}
-              technologiesLabel={technologiesLabel}
-              architectureLabel={architectureLabel}
-              triggerClassName="w-full"
-              className="aspect-square rounded-sm border-border"
-            />
-          </StaggerItem>
-        ))}
-      </StaggerContainer>
-    </section>
-  );
-}
-
 export async function ProjectsContent() {
   const t = await getTranslations("Projects");
   const locale = await getLocale();
@@ -134,18 +68,31 @@ export async function ProjectsContent() {
     getGithubContributions(),
   ]);
 
-  const localizeItems = (items: ProjectItem[]): LocalizedProjectItem[] => {
-    return items.map((item) => ({
-      ...item,
-      title: getLocalizedValue(item.title, locale),
-      description: getLocalizedValue(item.description, locale),
-      architecture: getLocalizedValue(item.architecture, locale),
-      badge: item.badge ? getLocalizedValue(item.badge, locale) : undefined,
-    }));
-  };
-
   return (
     <section className="flex h-full flex-col gap-8 overflow-y-auto md:gap-10">
+      <section className="space-y-3">
+        <div className="space-y-1">
+          <Typography variant="large" className="text-base">
+            {t("sections.folders")}
+          </Typography>
+          <Typography variant="small" className="text-muted-foreground">
+            {t("foldersDescription")}
+          </Typography>
+        </div>
+        <StaggerContainer className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {PROJECT_FOLDERS.map((folder, index) => (
+            <StaggerItem key={folder.slug}>
+              <ProjectFolderCard
+                folder={folder}
+                locale={locale}
+                countLabel={t("projectCount")}
+                priority={index === 0}
+              />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+      </section>
+
       <Card className="rounded-sm border-border bg-background p-2">
         <GithubContributionGraph
           days={contributions}
@@ -159,35 +106,6 @@ export async function ProjectsContent() {
           }}
         />
       </Card>
-
-      <ProjectSection
-        title={t("sections.webApps")}
-        items={localizeItems(WEB_APPS)}
-        technologiesLabel={t("technologies")}
-        architectureLabel={t("architecture")}
-        caseStudyLabel={t("viewCaseStudy")}
-      />
-      <ProjectSection
-        title={t("sections.mobileApps")}
-        items={localizeItems(MOBILE_APPS)}
-        technologiesLabel={t("technologies")}
-        architectureLabel={t("architecture")}
-        caseStudyLabel={t("viewCaseStudy")}
-      />
-      <ProjectSection
-        title={t("sections.extensions")}
-        items={localizeItems(EXTENSIONS)}
-        technologiesLabel={t("technologies")}
-        architectureLabel={t("architecture")}
-        caseStudyLabel={t("viewCaseStudy")}
-      />
-      <ProjectSection
-        title={t("sections.figmaTemplates")}
-        items={localizeItems(FIGMA_TEMPLATES)}
-        technologiesLabel={t("technologies")}
-        architectureLabel={t("architecture")}
-        caseStudyLabel={t("viewCaseStudy")}
-      />
 
       <section className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">

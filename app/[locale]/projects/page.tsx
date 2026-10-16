@@ -1,11 +1,6 @@
 import { ProjectsContent } from "@/components/projects-content";
 import { ProjectsJsonLd } from "@/components/json-ld";
-import {
-  EXTENSIONS,
-  FIGMA_TEMPLATES,
-  MOBILE_APPS,
-  WEB_APPS,
-} from "@/data/projects";
+import { ALL_PROJECTS } from "@/data/project-folders";
 import { getLocalizedValue } from "@/lib/locale";
 import { getLocalizedUrl, getStaticPageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
@@ -34,12 +29,7 @@ export default async function ProjectsPage({
     locale: siteLocale,
     namespace: "Seo.projects",
   });
-  const projects = [
-    ...WEB_APPS,
-    ...MOBILE_APPS,
-    ...EXTENSIONS,
-    ...FIGMA_TEMPLATES,
-  ].map((project) => ({
+  const projects = ALL_PROJECTS.map((project) => ({
     name: getLocalizedValue(project.title, siteLocale),
     description: getLocalizedValue(project.description, siteLocale),
     image: project.image,

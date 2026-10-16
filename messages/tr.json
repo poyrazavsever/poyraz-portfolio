@@ -134,10 +134,8 @@
   },
   "Projects": {
     "sections": {
-      "mobileApps": "Mobil Uygulamalar",
-      "webApps": "Web Uygulamaları",
+      "folders": "Klasörler",
       "extensions": "Extension'lar",
-      "figmaTemplates": "Figma Tasarımları",
       "npmPackages": "npm Paketleri",
       "githubRepos": "GitHub Repoları"
     },
@@ -152,7 +150,11 @@
     "contributionSingular": "katkı",
     "contributionPlural": "katkı",
     "emptyNpm": "npm API yanıtı şu anda boş.",
-    "emptyGithub": "GitHub API yanıtı şu anda boş."
+    "emptyGithub": "GitHub API yanıtı şu anda boş.",
+    "foldersDescription": "Projelerimi türlerine göre klasörledim; incelemek için bir klasör aç.",
+    "projectCount": "proje",
+    "backToProjects": "Projeler",
+    "folderBreadcrumb": "Proje klasörü konumu"
   },
   "ProjectCaseStudy": {
     "back": "Tüm projelere dön",

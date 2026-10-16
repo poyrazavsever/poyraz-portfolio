@@ -2,11 +2,9 @@ import { certificates } from "@/data/certificates";
 import { EDUCATION } from "@/data/education";
 import { EXPERIENCE } from "@/data/experience";
 import {
-  EXTENSIONS,
-  FIGMA_TEMPLATES,
-  MOBILE_APPS,
-  WEB_APPS,
-} from "@/data/projects";
+  getProjectFolderPath,
+  PROJECT_FOLDERS,
+} from "@/data/project-folders";
 import { REFERENCES } from "@/data/references";
 import { VOLUNTEER_COMMUNITY_ITEMS } from "@/data/volunteer-community";
 import { YOUTUBE_VIDEO_LINKS } from "@/data/youtube-videos";
@@ -227,80 +225,44 @@ export function getCommandPaletteGroups(
     }),
   ];
 
-  const projectItems: CommandPaletteItem[] = [
-    ...MOBILE_APPS.map((item) => {
-      const title = getLocalizedValue(item.title, locale);
-      const description = getLocalizedValue(item.description, locale);
-      const badgeStr = item.badge ? getLocalizedValue(item.badge, locale) : "";
-      return {
-        id: `mobile-project-${item.id}`,
-        label: title,
-        href: "/projects",
-        icon: "mdi:cellphone",
-        keywords: [
-          description,
-          badgeStr,
-          locale === "tr" ? "mobil" : "mobile",
-          locale === "tr" ? "proje" : "project",
-        ],
-      };
-    }),
-    ...WEB_APPS.map((item) => {
-      const title = getLocalizedValue(item.title, locale);
-      const description = getLocalizedValue(item.description, locale);
-      const badgeStr = item.badge ? getLocalizedValue(item.badge, locale) : "";
-      return {
-        id: `web-project-${item.id}`,
-        label: title,
-        href: item.href ?? "/projects",
-        icon: "mdi:web",
-        external: Boolean(item.href),
-        keywords: [
-          description,
-          badgeStr,
-          "web",
-          locale === "tr" ? "proje" : "project",
-        ],
-      };
-    }),
-    ...EXTENSIONS.map((item) => {
-      const title = getLocalizedValue(item.title, locale);
-      const description = getLocalizedValue(item.description, locale);
-      const badgeStr = item.badge ? getLocalizedValue(item.badge, locale) : "";
-      return {
-        id: `extension-project-${item.id}`,
-        label: title,
-        href: item.href ?? "/projects",
-        icon: "mdi:puzzle-outline",
-        external: Boolean(item.href),
-        keywords: [
-          description,
-          badgeStr,
-          "extension",
-          locale === "tr" ? "eklenti" : "addon",
-          locale === "tr" ? "proje" : "project",
-        ],
-      };
-    }),
-    ...FIGMA_TEMPLATES.map((item) => {
-      const title = getLocalizedValue(item.title, locale);
-      const description = getLocalizedValue(item.description, locale);
-      const badgeStr = item.badge ? getLocalizedValue(item.badge, locale) : "";
-      return {
-        id: `figma-project-${item.id}`,
-        label: title,
-        href: item.href ?? "/projects",
-        icon: "mdi:figma",
-        external: Boolean(item.href),
-        keywords: [
-          description,
-          badgeStr,
-          "figma",
-          locale === "tr" ? "şablon" : "template",
-        ],
-      };
-    }),
-  ];
+  const projectItems: CommandPaletteItem[] = PROJECT_FOLDERS.flatMap(
+    (folder) => {
+      const folderTitle = getLocalizedValue(folder.title, locale);
+      const folderHref = getProjectFolderPath(folder.slug);
+      const folderKeywords = [
+        locale === "tr" ? "klasör" : "folder",
+        locale === "tr" ? "proje" : "project",
+      ];
+
+      return [
+        {
+          id: `project-folder-${folder.slug}`,
+          label: folderTitle,
+          href: folderHref,
+          icon: "mdi:folder-outline",
+          keywords: [getLocalizedValue(folder.description, locale), ...folderKeywords],
+        },
+        ...folder.items.map((item) => {
+          const title = getLocalizedValue(item.title, locale);
+          const description = getLocalizedValue(item.description, locale);
+          const badgeStr = item.badge
+            ? getLocalizedValue(item.badge, locale)
+            : "";
+
+          return {
+            id: `${folder.slug}-project-${item.id}`,
+            label: title,
+            href: item.caseStudySlug
+              ? `/projects/${item.caseStudySlug}`
+              : (item.href ?? folderHref),
+            icon: folder.icon,
+            external: !item.caseStudySlug && Boolean(item.href),
+            keywords: [description, badgeStr, folderTitle, ...folderKeywords],
+          };
+        }),
+      ];
+    },
+  );
 
   const contentItems: CommandPaletteItem[] = YOUTUBE_VIDEO_LINKS.map(
     (item, index) => ({

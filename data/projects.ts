@@ -24,32 +24,6 @@ export type ProjectItem = {
   caseStudySlug?: string;
 };
 
-export const MOBILE_APPS: ProjectItem[] = [
-  {
-    id: "targiz-app",
-    title: "Targiz App",
-    badge: "Agritech",
-    image: "/projects/targiz.png",
-    technologies: [
-      "React Native",
-      "Next.js",
-      "Express.js",
-      "Supabase",
-      "Tailwind CSS",
-    ],
-    architecture: {
-      tr: "React Native ve Next.js istemcilerini; Express.js servisleri, Supabase veri katmanı ve yapay zekâ destekli modüllerle birleştiren çapraz platform mimarisi.",
-      en: "A cross-platform architecture combining React Native and Next.js clients with Express.js services, a Supabase data layer, and AI-assisted modules.",
-    },
-    href: TRACKED_EXTERNAL_HREFS.targiz,
-    caseStudySlug: "targiz",
-    description: {
-      tr: "Üç kişilik ekipte yazılım liderliği ve full-stack geliştirme sorumluluğunu üstlendiğim; üreticilere hastalık tespiti, lojistik ve pazar erişimi sunan mobil öncelikli tarım platformu.",
-      en: "A mobile-first agriculture platform for disease diagnosis, logistics, and market access, where I led a three-person software team while contributing as a full-stack developer.",
-    },
-  },
-];
-
 const OSTIM_TECHNOLOGIES = [
   ".NET 10",
   "Angular",
@@ -58,7 +32,7 @@ const OSTIM_TECHNOLOGIES = [
   "Tailwind CSS",
 ];
 
-export const WEB_APPS: ProjectItem[] = [
+export const WORK_PROJECTS: ProjectItem[] = [
   {
     id: "ostim-web-portal",
     title: {
@@ -128,6 +102,29 @@ export const WEB_APPS: ProjectItem[] = [
     },
   },
   {
+    id: "targiz-app",
+    title: "Targiz App",
+    badge: "Agritech",
+    image: "/projects/targiz.png",
+    technologies: [
+      "React Native",
+      "Next.js",
+      "Express.js",
+      "Supabase",
+      "Tailwind CSS",
+    ],
+    architecture: {
+      tr: "React Native ve Next.js istemcilerini; Express.js servisleri, Supabase veri katmanı ve yapay zekâ destekli modüllerle birleştiren çapraz platform mimarisi.",
+      en: "A cross-platform architecture combining React Native and Next.js clients with Express.js services, a Supabase data layer, and AI-assisted modules.",
+    },
+    href: TRACKED_EXTERNAL_HREFS.targiz,
+    caseStudySlug: "targiz",
+    description: {
+      tr: "Üç kişilik ekipte yazılım liderliği ve full-stack geliştirme sorumluluğunu üstlendiğim; üreticilere hastalık tespiti, lojistik ve pazar erişimi sunan mobil öncelikli tarım platformu.",
+      en: "A mobile-first agriculture platform for disease diagnosis, logistics, and market access, where I led a three-person software team while contributing as a full-stack developer.",
+    },
+  },
+  {
     id: "arc-foreign-trade",
     title: "ARC Foreign Trade",
     badge: {
@@ -144,95 +141,6 @@ export const WEB_APPS: ProjectItem[] = [
     description: {
       tr: "Ankara merkezli ihracat odaklı bir üretici firma için kurumsal web sitesi yenileme projesi.",
       en: "Corporate website renewal project for an Ankara-based export-oriented manufacturer.",
-    },
-  },
-  {
-    id: "ataturk-chronology",
-    title: {
-      tr: "Atatürk Kronolojisi",
-      en: "Atatürk Chronology",
-    },
-    badge: {
-      tr: "Açık Kaynak",
-      en: "Open Source",
-    },
-    image: "/projects/ataturk.webp",
-    technologies: ["React"],
-    architecture: {
-      tr: "React ile geliştirilen, kronoloji verisini etkileşimli bir zaman çizelgesi arayüzünde sunan istemci taraflı uygulama.",
-      en: "A client-side React application presenting chronology data through an interactive timeline interface.",
-    },
-    href: TRACKED_EXTERNAL_HREFS.ataturkChronology,
-    description: {
-      tr: "Açık kaynak katkıcısı olarak yer aldığım; Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
-      en: "An interactive timeline of key events, speeches, and reforms in Atatürk's life, to which I contributed as an open-source contributor.",
-    },
-  },
-  {
-    id: "mockup-factory",
-    title: "Mockup Factory",
-    badge: {
-      tr: "Açık Kaynak",
-      en: "Open Source",
-    },
-    image: "/projects/mockup.png",
-    technologies: ["Next.js"],
-    architecture: {
-      tr: "Next.js tabanlı, görsel işleme akışını tamamen tarayıcıda çalıştıran istemci öncelikli araç mimarisi.",
-      en: "A client-first Next.js tool architecture that runs its image-processing workflow entirely in the browser.",
-    },
-    href: TRACKED_EXTERNAL_HREFS.mockupFactory,
-    description: {
-      tr: "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç.",
-      en: "An open-source tool running entirely in the browser that converts images into device mockups in seconds.",
-    },
-  },
-  {
-    id: "ohhike",
-    title: "OhHike",
-    badge: {
-      tr: "Self-hosted",
-      en: "Self-hosted",
-    },
-    image: "/projects/ohhike.png",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Express.js",
-      "Better Auth",
-      "SQLite",
-      "Drizzle ORM",
-    ],
-    architecture: {
-      tr: "pnpm/Turborepo monorepo içinde React/Vite arayüzü ve modüler monolit Express API; SQLite, Drizzle ORM, gerçek servis testleri ve Docker tabanlı self-hosted dağıtım.",
-      en: "A React/Vite frontend and modular-monolith Express API in a pnpm/Turborepo monorepo, with SQLite, Drizzle ORM, real-service tests, and Docker-based self-hosted deployment.",
-    },
-    href: TRACKED_EXTERNAL_HREFS.ohhike,
-    caseStudySlug: "ohhike",
-    description: {
-      tr: "Masa başında çalışan geliştiriciler için aktivite, haftalık sağlık planı, beslenme ve kalori takibini bir araya getiren self-hosted uygulama.",
-      en: "A self-hosted activity, weekly health planning, nutrition, and calorie tracking application for desk-bound developers.",
-    },
-  },
-  {
-    id: "neta",
-    title: "Take Neta",
-    badge: {
-      tr: "Self-hosted",
-      en: "Self-hosted",
-    },
-    image: "/projects/neta.png",
-    technologies: ["Next.js", "TypeScript", "Express.js", "AI Integrations"],
-    architecture: {
-      tr: "Landing page, uygulama ve API paketlerini birlikte yöneten Next.js ve Express.js tabanlı monorepo mimarisi.",
-      en: "A Next.js and Express.js monorepo architecture managing landing page, application, and API packages together.",
-    },
-    href: TRACKED_EXTERNAL_HREFS.neta,
-    caseStudySlug: "take-neta",
-    description: {
-      tr: "Freelancer'lar için görev, proje, müşteri, finans, yapay zekâ ve müşteri portalı akışlarını birleştiren self-hosted işletim sistemi.",
-      en: "A self-hosted operating system for freelancers that unifies tasks, projects, clients, finance, AI, and client portal workflows.",
     },
   },
 ];
@@ -278,7 +186,99 @@ export const EXTENSIONS: ProjectItem[] = [
   },
 ];
 
-export const FIGMA_TEMPLATES: ProjectItem[] = [
+export const PRODUCTS: ProjectItem[] = [
+  {
+    id: "neta",
+    title: "Take Neta",
+    badge: {
+      tr: "Self-hosted",
+      en: "Self-hosted",
+    },
+    image: "/projects/neta.png",
+    technologies: ["Next.js", "TypeScript", "Express.js", "AI Integrations"],
+    architecture: {
+      tr: "Landing page, uygulama ve API paketlerini birlikte yöneten Next.js ve Express.js tabanlı monorepo mimarisi.",
+      en: "A Next.js and Express.js monorepo architecture managing landing page, application, and API packages together.",
+    },
+    href: TRACKED_EXTERNAL_HREFS.neta,
+    caseStudySlug: "take-neta",
+    description: {
+      tr: "Freelancer'lar için görev, proje, müşteri, finans, yapay zekâ ve müşteri portalı akışlarını birleştiren self-hosted işletim sistemi.",
+      en: "A self-hosted operating system for freelancers that unifies tasks, projects, clients, finance, AI, and client portal workflows.",
+    },
+  },
+  {
+    id: "ohhike",
+    title: "OhHike",
+    badge: {
+      tr: "Self-hosted",
+      en: "Self-hosted",
+    },
+    image: "/projects/ohhike.png",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Express.js",
+      "Better Auth",
+      "SQLite",
+      "Drizzle ORM",
+    ],
+    architecture: {
+      tr: "pnpm/Turborepo monorepo içinde React/Vite arayüzü ve modüler monolit Express API; SQLite, Drizzle ORM, gerçek servis testleri ve Docker tabanlı self-hosted dağıtım.",
+      en: "A React/Vite frontend and modular-monolith Express API in a pnpm/Turborepo monorepo, with SQLite, Drizzle ORM, real-service tests, and Docker-based self-hosted deployment.",
+    },
+    href: TRACKED_EXTERNAL_HREFS.ohhike,
+    caseStudySlug: "ohhike",
+    description: {
+      tr: "Masa başında çalışan geliştiriciler için aktivite, haftalık sağlık planı, beslenme ve kalori takibini bir araya getiren self-hosted uygulama.",
+      en: "A self-hosted activity, weekly health planning, nutrition, and calorie tracking application for desk-bound developers.",
+    },
+  },
+  {
+    id: "mockup-factory",
+    title: "Mockup Factory",
+    badge: {
+      tr: "Açık Kaynak",
+      en: "Open Source",
+    },
+    image: "/projects/mockup.png",
+    technologies: ["Next.js"],
+    architecture: {
+      tr: "Next.js tabanlı, görsel işleme akışını tamamen tarayıcıda çalıştıran istemci öncelikli araç mimarisi.",
+      en: "A client-first Next.js tool architecture that runs its image-processing workflow entirely in the browser.",
+    },
+    href: TRACKED_EXTERNAL_HREFS.mockupFactory,
+    description: {
+      tr: "Görsellerin cihaz mockup’larına saniyeler içinde dönüştürüldüğü, tamamen tarayıcı üzerinde çalışan açık kaynak araç.",
+      en: "An open-source tool running entirely in the browser that converts images into device mockups in seconds.",
+    },
+  },
+  {
+    id: "ataturk-chronology",
+    title: {
+      tr: "Atatürk Kronolojisi",
+      en: "Atatürk Chronology",
+    },
+    badge: {
+      tr: "Açık Kaynak",
+      en: "Open Source",
+    },
+    image: "/projects/ataturk.webp",
+    technologies: ["React"],
+    architecture: {
+      tr: "React ile geliştirilen, kronoloji verisini etkileşimli bir zaman çizelgesi arayüzünde sunan istemci taraflı uygulama.",
+      en: "A client-side React application presenting chronology data through an interactive timeline interface.",
+    },
+    href: TRACKED_EXTERNAL_HREFS.ataturkChronology,
+    description: {
+      tr: "Açık kaynak katkıcısı olarak yer aldığım; Atatürk’ün hayatındaki önemli olayları, konuşmaları ve reformları etkileşimli bir zaman çizelgesiyle sunan web deneyimi.",
+      en: "An interactive timeline of key events, speeches, and reforms in Atatürk's life, to which I contributed as an open-source contributor.",
+    },
+  },
+];
+
+export const DESIGNS: ProjectItem[] = [
   {
     id: "hsd-website",
     title: "HSD Community Website",

@@ -4,16 +4,14 @@ import { Icon } from "@iconify/react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button, ButtonIcon, ButtonLabel, Typography } from "poyraz-ui/atoms";
 import { useRouter } from "@/i18n/routing";
-import { WEB_APPS } from "@/data/projects";
-import { getLocalizedValue } from "@/lib/locale";
-import { ProjectCardWithPopover } from "@/components/project-card-with-popover";
+import { PROJECT_FOLDERS } from "@/data/project-folders";
+import { ProjectFolderCard } from "@/components/project-folder-card";
 
 export function HomeProjectsSection() {
   const t = useTranslations("Home");
   const tProjects = useTranslations("Projects");
   const locale = useLocale();
   const router = useRouter();
-  const projects = WEB_APPS.slice(0, 5);
 
   return (
     <section className="space-y-3 pt-12 md:pt-14">
@@ -41,35 +39,16 @@ export function HomeProjectsSection() {
         </Button>
       </div>
 
-      <div className="relative overflow-hidden py-1">
-        <div className="flex w-max items-stretch gap-2">
-          {projects.map((project, index) => (
-            <ProjectCardWithPopover
-              key={project.id}
-              image={project.image}
-              title={getLocalizedValue(project.title, locale)}
-              description={getLocalizedValue(project.description, locale)}
-              badge={
-                project.badge
-                  ? getLocalizedValue(project.badge, locale)
-                  : undefined
-              }
-              href={project.href}
-              technologies={project.technologies}
-              architecture={getLocalizedValue(project.architecture, locale)}
-              technologiesLabel={tProjects("technologies")}
-              architectureLabel={tProjects("architecture")}
-              triggerClassName="w-56 shrink-0 md:w-[calc((100vw-8rem)/4)] md:max-w-56"
-              className="aspect-square rounded-sm border-border"
-              priority={index === 0}
-            />
-          ))}
-        </div>
-
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-background via-background/80 to-transparent"
-        />
+      <div className="grid grid-cols-2 gap-3 py-1 md:grid-cols-4">
+        {PROJECT_FOLDERS.map((folder, index) => (
+          <ProjectFolderCard
+            key={folder.slug}
+            folder={folder}
+            locale={locale}
+            countLabel={tProjects("projectCount")}
+            priority={index === 0}
+          />
+        ))}
       </div>
     </section>
   );

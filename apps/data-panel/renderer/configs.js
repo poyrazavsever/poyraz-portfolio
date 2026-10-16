@@ -272,10 +272,10 @@ export const COLLECTION_CONFIGS = {
     }),
   },
   projectsMobile: {
-    label: "Projects Mobile",
-    itemLabel: "Mobile Project",
+    label: "Projects Work",
+    itemLabel: "Work Project",
     fileName: "projects.ts",
-    exportName: "MOBILE_APPS",
+    exportName: "WORK_PROJECTS",
     fields: [
       {
         key: "id",
@@ -313,10 +313,10 @@ export const COLLECTION_CONFIGS = {
     }),
   },
   projectsWeb: {
-    label: "Projects Web",
-    itemLabel: "Web Project",
+    label: "Projects Products",
+    itemLabel: "Product",
     fileName: "projects.ts",
-    exportName: "WEB_APPS",
+    exportName: "PRODUCTS",
     fields: [
       { key: "id", label: "ID", required: true, placeholder: "web-portfolio" },
       {
@@ -390,10 +390,10 @@ export const COLLECTION_CONFIGS = {
     }),
   },
   projectsFigma: {
-    label: "Projects Figma",
-    itemLabel: "Figma Template",
+    label: "Projects Designs",
+    itemLabel: "Design",
     fileName: "projects.ts",
-    exportName: "FIGMA_TEMPLATES",
+    exportName: "DESIGNS",
     fields: [
       {
         key: "id",
