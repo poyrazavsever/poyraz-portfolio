@@ -19,24 +19,6 @@
   }
 }
 
-@layer components {
-  .project-folder-tab {
-    border-color: #b91c1c;
-    background: #dc2626;
-  }
-
-  .project-folder-surface {
-    border-color: #b91c1c !important;
-    background: #dc2626 !important;
-  }
-
-  html[data-poyraz-theme="dark"] .project-folder-tab,
-  html[data-poyraz-theme="dark"] .project-folder-surface {
-    border-color: rgb(239 68 68 / 0.45) !important;
-    background: #7f1d1d !important;
-  }
-}
-
 html[data-poyraz-theme="light"] {
   --poyraz-background: #ffffff;
   background-color: #ffffff;
