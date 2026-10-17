@@ -42,8 +42,6 @@
     "readMyPosts": "Yazılarımı Okudun Mu",
     "allPosts": "Tüm yazılar",
     "projectsTitle": "Projeler",
-    "projectArchiveLabel": "Proje arşivi",
-    "projectsDescription": "Ürünlerden müşteri işlerine, eklentilerden arayüz tasarımlarına uzanan seçili çalışmalarımı klasörler halinde keşfet.",
     "allProjects": "Tüm projeler",
     "reviewsAndReferences": "Yorumlar & Referanslar",
     "allReferences": "Tüm referanslar",
@@ -135,9 +133,6 @@
     "backToAbout": "<- Hakkımda'ya dön"
   },
   "Projects": {
-    "title": "Ürettiklerim",
-    "description": "Yayına aldığım ürünleri, birlikte geliştirdiğim işleri ve deneysel çalışmalarımı düzenli bir proje arşivinde keşfet.",
-    "archiveLabel": "Seçili işler · 2021—2026",
     "sections": {
       "folders": "Klasörler",
       "extensions": "Extension'lar",
@@ -156,11 +151,9 @@
     "contributionPlural": "katkı",
     "emptyNpm": "npm API yanıtı şu anda boş.",
     "emptyGithub": "GitHub API yanıtı şu anda boş.",
-    "folderCount": "klasör",
     "projectCount": "proje",
     "backToProjects": "Projeler",
-    "folderBreadcrumb": "Proje klasörü konumu",
-    "folderSwitcher": "Proje klasörleri"
+    "folderBreadcrumb": "Proje klasörü konumu"
   },
   "ProjectCaseStudy": {
     "back": "Tüm projelere dön",
