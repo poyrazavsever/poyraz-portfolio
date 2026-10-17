@@ -42,6 +42,8 @@
     "readMyPosts": "Have You Read My Posts?",
     "allPosts": "All posts",
     "projectsTitle": "Projects",
+    "projectArchiveLabel": "Project archive",
+    "projectsDescription": "Explore selected work across products, client projects, browser extensions, and interface design — organized into folders.",
     "allProjects": "All projects",
     "reviewsAndReferences": "Reviews & References",
     "allReferences": "All references",
@@ -133,6 +135,9 @@
     "backToAbout": "<- Back to About"
   },
   "Projects": {
+    "title": "Selected work",
+    "description": "Explore shipped products, collaborative work, and experiments in a carefully organized project archive.",
+    "archiveLabel": "Selected work · 2021—2026",
     "sections": {
       "folders": "Folders",
       "extensions": "Extensions",
@@ -151,9 +156,11 @@
     "contributionPlural": "contributions",
     "emptyNpm": "npm API response is currently empty.",
     "emptyGithub": "GitHub API response is currently empty.",
+    "folderCount": "folders",
     "projectCount": "projects",
     "backToProjects": "Projects",
-    "folderBreadcrumb": "Project folder location"
+    "folderBreadcrumb": "Project folder location",
+    "folderSwitcher": "Project folders"
   },
   "ProjectCaseStudy": {
     "back": "Back to all projects",

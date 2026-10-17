@@ -21,41 +21,56 @@ export async function ProjectFolderContent({
 
   return (
     <section className="flex h-full flex-col gap-6 overflow-y-auto md:gap-8">
-      <nav
-        aria-label={t("folderBreadcrumb")}
-        className="flex items-center gap-1.5 text-sm text-muted-foreground"
-      >
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-1 no-underline transition-colors hover:text-red-600"
+      <header className="project-archive-hero relative overflow-hidden rounded-[1.75rem] border p-5 text-white shadow-[0_24px_70px_rgba(185,28,28,0.18)] sm:p-7">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-14 -top-16 size-56 rounded-full border-[30px] border-white/10"
+        />
+        <nav
+          aria-label={t("folderBreadcrumb")}
+          className="relative mb-6 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-white/65"
         >
-          <Icon icon="mdi:arrow-left" width={15} height={15} aria-hidden="true" />
-          <span>{t("backToProjects")}</span>
-        </Link>
-        <span aria-hidden="true">/</span>
-        <span className="text-foreground">
-          {getLocalizedValue(folder.title, locale)}
-        </span>
-      </nav>
-
-      <header className="grid grid-cols-[auto_minmax(0,1fr)] items-stretch gap-3 md:gap-4">
-        <span className="inline-flex aspect-square h-full items-center justify-center self-stretch rounded-sm border border-border bg-muted text-4xl text-red-600">
-          <Icon icon="mdi:folder-open-outline" aria-hidden="true" />
-        </span>
-        <div className="min-w-0 space-y-1">
-          <Typography variant="h3" component="h1" className="tracking-[-0.035em]">
-            {getLocalizedValue(folder.title, locale)}
-          </Typography>
-          <Typography
-            variant="small"
-            className="line-clamp-3 min-h-[2lh] max-w-2xl text-muted-foreground sm:line-clamp-2"
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-1 no-underline transition-colors hover:text-white"
           >
-            {getLocalizedValue(folder.description, locale)}
-          </Typography>
+            <Icon icon="mdi:arrow-left" width={14} height={14} aria-hidden="true" />
+            <span>{t("backToProjects")}</span>
+          </Link>
+          <span aria-hidden="true">/</span>
+          <span className="text-white">{folder.slug}</span>
+        </nav>
+
+        <div className="relative grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
+          <span className="inline-flex size-14 items-center justify-center rounded-2xl border border-white/20 bg-white/12 text-3xl shadow-inner shadow-white/10 backdrop-blur-sm sm:size-16">
+            <Icon icon={folder.icon} aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            <span className="mb-1 block font-mono text-[9px] uppercase tracking-[0.2em] text-white/55">
+              ~/portfolio/projects/{folder.slug}
+            </span>
+            <Typography
+              variant="h3"
+              component="h1"
+              className="text-white tracking-[-0.04em]"
+            >
+              {getLocalizedValue(folder.title, locale)}
+            </Typography>
+            <Typography
+              variant="small"
+              className="mt-1 line-clamp-3 max-w-2xl text-xs leading-relaxed text-white/72 sm:line-clamp-2 sm:text-sm"
+            >
+              {getLocalizedValue(folder.description, locale)}
+            </Typography>
+          </div>
         </div>
       </header>
 
-      <div className="flex flex-wrap gap-1.5" role="list">
+      <div
+        className="grid grid-cols-2 gap-2 rounded-2xl border border-border/80 bg-muted/20 p-2 sm:grid-cols-4"
+        role="list"
+        aria-label={t("folderSwitcher")}
+      >
         {PROJECT_FOLDERS.map((item) => {
           const active = item.slug === folder.slug;
 
@@ -65,21 +80,23 @@ export async function ProjectFolderContent({
               role="listitem"
               href={getProjectFolderPath(item.slug)}
               aria-current={active ? "page" : undefined}
-              className={`inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs font-medium no-underline transition-colors ${
+              className={`inline-flex min-w-0 items-center gap-2 rounded-xl border px-3 py-2.5 text-xs font-semibold no-underline transition-[color,background-color,border-color,transform] ${
                 active
-                  ? "border-red-600/50 bg-red-600/10 text-red-600"
-                  : "border-border text-muted-foreground hover:border-zinc-500 hover:text-foreground"
+                  ? "border-red-700 bg-red-600 text-white shadow-[0_8px_24px_rgba(220,38,38,0.2)]"
+                  : "border-transparent bg-background text-muted-foreground hover:-translate-y-0.5 hover:border-red-600/20 hover:text-red-600"
               }`}
             >
-              <Icon icon={item.icon} width={14} height={14} aria-hidden="true" />
-              <span>{getLocalizedValue(item.title, locale)}</span>
-              <span className="tabular-nums opacity-70">{item.items.length}</span>
+              <span className={`inline-flex size-6 shrink-0 items-center justify-center rounded-lg ${active ? "bg-white/15" : "bg-muted"}`}>
+                <Icon icon={item.icon} width={14} height={14} aria-hidden="true" />
+              </span>
+              <span className="truncate">{getLocalizedValue(item.title, locale)}</span>
+              <span className="ml-auto tabular-nums opacity-65">{item.items.length}</span>
             </Link>
           );
         })}
       </div>
 
-      <StaggerContainer className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+      <StaggerContainer className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {folder.items.map((item, index) => (
           <StaggerItem key={item.id}>
             <ProjectCardWithPopover
