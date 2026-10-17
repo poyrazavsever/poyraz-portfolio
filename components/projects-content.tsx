@@ -77,7 +77,6 @@ export async function ProjectsContent() {
               <ProjectFolderCard
                 folder={folder}
                 locale={locale}
-                countLabel={t("projectCount")}
                 priority={index === 0}
               />
             </StaggerItem>

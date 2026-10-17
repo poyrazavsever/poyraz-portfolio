@@ -9,7 +9,6 @@ import { ProjectFolderCard } from "@/components/project-folder-card";
 
 export function HomeProjectsSection() {
   const t = useTranslations("Home");
-  const tProjects = useTranslations("Projects");
   const locale = useLocale();
   const router = useRouter();
 
@@ -45,7 +44,6 @@ export function HomeProjectsSection() {
             key={folder.slug}
             folder={folder}
             locale={locale}
-            countLabel={tProjects("projectCount")}
             priority={index === 0}
           />
         ))}

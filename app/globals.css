@@ -33,6 +33,31 @@ html[data-poyraz-theme="light"] body {
     fill: var(--github-contribution-empty);
   }
 
+  .project-folder-shell {
+    border-color: color-mix(in srgb, #991b1b 45%, transparent);
+    background: #dc2626;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16);
+    transition: background-color 200ms ease, border-color 200ms ease;
+  }
+
+  .group:hover .project-folder-shell,
+  .project-folder-shell-active {
+    border-color: color-mix(in srgb, #7f1d1d 60%, transparent);
+    background: #c91f1f;
+  }
+
+  html[data-poyraz-theme="dark"] .project-folder-shell {
+    border-color: color-mix(in srgb, #f87171 20%, transparent);
+    background: #4c1117;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+  }
+
+  html[data-poyraz-theme="dark"] .group:hover .project-folder-shell,
+  html[data-poyraz-theme="dark"] .project-folder-shell-active {
+    border-color: color-mix(in srgb, #f87171 30%, transparent);
+    background: #5f151b;
+  }
+
   @keyframes marquee {
     0% { transform: translateX(0%); }
     100% { transform: translateX(-50%); }
