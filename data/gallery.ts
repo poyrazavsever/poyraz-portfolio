@@ -15,4 +15,6 @@ export const GALLERY_IMAGES: string[] = [
   "/gallery/13.webp",
   "/gallery/14.webp",
   "/gallery/15.webp",
+  "/gallery/16.png",
+  "/gallery/17.png",
 ];
