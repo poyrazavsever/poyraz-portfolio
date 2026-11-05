@@ -225,8 +225,8 @@ export const PRODUCTS: ProjectItem[] = [
     id: "clevio-kids",
     title: "Clevio Kids",
     badge: {
-      tr: "OSTİM",
-      en: "OSTİM",
+      tr: "Omedya",
+      en: "Omedya",
     },
     image: "/projects/clevio.png",
     href: "https://clevio.kids",
@@ -236,8 +236,8 @@ export const PRODUCTS: ProjectItem[] = [
       en: "A closed-source monorepo running 50+ mini games inside a shared React Native host app, collecting progress and cognitive-skill signals in a .NET backend, with an Angular admin panel and an Astro site.",
     },
     description: {
-      tr: "OSTİM bünyesinde geliştirdiğim; reklamsız oyunları, görevleri ve bilişsel beceri sinyallerini tek akışta birleştirerek ebeveynlerin çocuğunun gelişimini bağlamıyla takip etmesini sağlayan çocuk uygulaması.",
-      en: "A kids' app I developed within OSTİM that brings ad-free games, missions, and cognitive-skill signals into one flow so parents can follow their child's progress in context.",
+      tr: "Omedya bünyesinde geliştirdiğim; reklamsız oyunları, görevleri ve bilişsel beceri sinyallerini tek akışta birleştirerek ebeveynlerin çocuğunun gelişimini bağlamıyla takip etmesini sağlayan çocuk uygulaması.",
+      en: "A kids' app I developed at Omedya that brings ad-free games, missions, and cognitive-skill signals into one flow so parents can follow their child's progress in context.",
     },
   },
   {
