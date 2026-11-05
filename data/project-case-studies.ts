@@ -1155,6 +1155,697 @@ const PROJECT_CASE_STUDIES: ProjectCaseStudyDefinition[] = [
       en: "OhHike's monorepo source code is publicly available on GitHub.",
     },
   },
+  {
+    slug: "commit-kingdom",
+    projectId: "commit-kingdom",
+    image: "/projects/commitkingdom.png",
+    liveUrl: "https://commitkingdom.com",
+    applicationCategory: "GameApplication",
+    technologies: [
+      "React Native",
+      "React Native Web",
+      ".NET 10",
+      "EF Core",
+      "PostgreSQL",
+      "Angular",
+      "Astro",
+      "Electron",
+      "Go",
+      "VS Code Extension API",
+      "RevenueCat",
+      "Docker",
+      "Cloudflare",
+    ],
+    title: { tr: "Commit Kingdom", en: "Commit Kingdom" },
+    eyebrow: {
+      tr: "Bağımsız ürün vaka çalışması",
+      en: "Independent product case study",
+    },
+    summary: {
+      tr: "Editörde doğrulanan kodlama emeğini enerji, XP ve altına dönüştüren; oyuncunun bu kaynaklarla kulesini büyütüp ordusunu kurduğu ve ortak haritada sefere çıktığı, geliştiriciler için 2D strateji/RPG oyunu.",
+      en: "A 2D strategy/RPG game for developers that turns coding effort verified in the editor into energy, XP, and gold, which players spend growing their tower, training an army, and marching on a shared map.",
+    },
+    role: {
+      tr: "Kurucu, ürün tasarımcısı ve full-stack geliştirici",
+      en: "Founder, product designer, and full-stack developer",
+    },
+    team: {
+      tr: "Tek başıma geliştirdiğim side project",
+      en: "Solo side project",
+    },
+    context: {
+      tr: "Kapalı kaynak ticari side project",
+      en: "Closed-source commercial side project",
+    },
+    overview: {
+      tr: [
+        "Commit Kingdom, kişisel bir planlama uygulaması olarak başladı. ‘Yaptım’ demeye dayalı ödüllerin adil olmadığını, fotoğrafla kanıtlamanın ise angarya olduğunu gördüğümde kitleyi geliştiricilere daralttım: geliştiricinin emeği editörden, ek zahmet olmadan ölçülebiliyor.",
+        "Ürünü fikirden oyun tasarımına, editör eklentilerinden backend'e, mağaza hazırlığından ödeme altyapısına kadar tek başıma geliştiriyorum. Oyun kod yazmanın yerine geçmiyor; yazılan kod oyunu mümkün kılıyor.",
+      ],
+      en: [
+        "Commit Kingdom started as a personal planning app. When I saw that rewards based on saying ‘I did it’ were unfair and photo proof was a chore, I narrowed the audience to developers: a developer's effort can be measured straight from the editor with no extra work.",
+        "I build the product alone, from concept and game design to editor plugins, backend, store preparation, and billing. The game does not replace writing code; the code you write makes the game possible.",
+      ],
+    },
+    problem: {
+      tr: "Oyunlaştırılmış verimlilik uygulamaları çoğunlukla kullanıcının beyanına güveniyor; bu da ödülleri anlamsızlaştırıyor. Geliştiriciler için gerçek emeği gizliliği koruyarak, hile yapılamayacak şekilde ve AI destekli kodlamayı adil biçimde hesaba katarak ölçmek gerekiyordu.",
+      en: "Gamified productivity apps mostly trust user self-reports, which makes rewards meaningless. For developers, real effort had to be measured while preserving privacy, resisting cheating, and fairly accounting for AI-assisted coding.",
+    },
+    constraints: {
+      tr: [
+        "Kaynak kod, dosya yolu veya branch bilgisi sunucuya hiç gönderilmeden emek ölçmek",
+        "VS Code, Cursor, Windsurf, JetBrains IDE'leri ve Visual Studio gibi farklı editörleri desteklemek",
+        "AI destekli kodlamayı yok saymadan insan emeğinden ayırmak",
+        "Tek geliştiriciyle 1 Ocak 2027'de Android, iOS ve webde birlikte yayına çıkmak",
+        "Ücretli CI ve gereksiz altyapı maliyeti olmadan çalışmak",
+      ],
+      en: [
+        "Measure effort without ever sending source code, file paths, or branch names to the server",
+        "Support many editors, including VS Code, Cursor, Windsurf, JetBrains IDEs, and Visual Studio",
+        "Separate AI-assisted coding from human effort without ignoring it",
+        "Launch on Android, iOS, and the web together on January 1, 2027, as a solo developer",
+        "Operate without paid CI or unnecessary infrastructure costs",
+      ],
+    },
+    decisions: [
+      {
+        title: {
+          tr: "WakaTime uyumlu protokol, kendi sunucum",
+          en: "A WakaTime-compatible protocol with my own server",
+        },
+        description: {
+          tr: "Tracker, wakatime-cli'nin Go fork'u üzerine kurulu; .NET backend'deki Tracking modülü WakaTime uyumlu heartbeat'leri kabul ediyor. Böylece mevcut editör eklenti ekosistemi yeniden kullanılırken veri tamamen bende kalıyor. Proje adları cihazda HMAC ile hash'leniyor.",
+          en: "The Tracker builds on a Go fork of wakatime-cli, and the Tracking module in the .NET backend accepts WakaTime-compatible heartbeats. This reuses the existing editor plugin ecosystem while keeping data fully in-house. Project names are HMAC-hashed on the device.",
+        },
+      },
+      {
+        title: {
+          tr: "AI destekli kodu ağırlıklandırmak",
+          en: "Weighting AI-assisted code",
+        },
+        description: {
+          tr: "Beş dakikalık dilimlerde AI satır değişikliği insanınkini geçtiğinde dilim ‘AI destekli’ sayılıyor; insan emeği ×1.0, AI destekli emek ×0.5 ağırlıkla ve günlük üst sınırla enerjiye dönüşüyor.",
+          en: "A five-minute slice counts as ‘AI-assisted’ when AI line changes exceed human ones; human effort converts to energy at ×1.0 and AI-assisted effort at ×0.5, with a daily cap.",
+        },
+      },
+      {
+        title: {
+          tr: "Cezalandırmayan hile tespiti",
+          en: "Anti-cheat that does not punish",
+        },
+        description: {
+          tr: "Anomali servisi uzun gün, uzun hafta, düzenli aralık ve paylaşılan makine sinyallerini işaretliyor. İşaretli günler ödülü yine alıyor; yalnızca PvP baskınları admin incelemesine kadar duruyor ve ret durumunda ödüller ledger kayıtlarıyla geri alınıyor.",
+          en: "An anomaly service flags long-day, long-week, regular-interval, and shared-machine signals. Flagged days still earn rewards; only PvP raids pause until admin review, and rewards are reversed through ledger entries if rejected.",
+        },
+      },
+      {
+        title: {
+          tr: "Mikroservis yerine modüler monolit",
+          en: "A modular monolith instead of microservices",
+        },
+        description: {
+          tr: ".NET 10 backend; Tracking, Economy, Game, Billing, Reports gibi 13 modülden oluşuyor. MVP'de Redis veya kuyruk yok; transactional outbox ve host içi worker'lar yeterli.",
+          en: "The .NET 10 backend consists of 13 modules such as Tracking, Economy, Game, Billing, and Reports. The MVP has no Redis or message queue; a transactional outbox and in-host workers are enough.",
+        },
+      },
+      {
+        title: {
+          tr: "Gücü satmayan Plus aboneliği",
+          en: "A Plus subscription that never sells power",
+        },
+        description: {
+          tr: "Kingdom Plus; ayrıntılı kod raporları, paylaşılabilir kartlar ve GitHub README kartları sunuyor. Enerji ve asker asla satılmıyor; ödemeler RevenueCat ve sunucu taraflı entitlement ledger'ı ile yönetiliyor.",
+          en: "Kingdom Plus offers detailed code reports, shareable cards, and GitHub README cards. Energy and soldiers are never sold; payments run through RevenueCat and a server-side entitlement ledger.",
+        },
+      },
+    ],
+    designProcess: {
+      tr: "Tüm ürün, mimari ve ekonomi kararları Obsidian vault'unda ADR olarak tutuluyor. Kapsam teslim tarihine göre bilinçli olarak daraltıldı: Phaser tabanlı platform oyunu yerine kule ve ortak strateji haritasına odaklanıldı.",
+      en: "Every product, architecture, and economy decision is recorded as an ADR in an Obsidian vault. Scope was deliberately narrowed to fit the launch date: instead of a Phaser-based platformer, the game focuses on the tower and a shared strategy map.",
+    },
+    designSteps: {
+      tr: [
+        "Doğrulanabilir emek fikrini geliştirici kitlesine pivot ederek netleştirme",
+        "Tracker → heartbeat → enerji → oyun ekonomisi zincirini uçtan uca tasarlama",
+        "Gerçek bir Windows + VS Code kurulumunda 15 dakikalık kod hedefini uçtan uca doğrulama",
+        "Masaüstü uygulama, editör eklentileri, mobil uygulama ve mağaza süreçlerini aşamalı yayına hazırlama",
+      ],
+      en: [
+        "Clarify the verifiable-effort idea by pivoting to a developer audience",
+        "Design the Tracker → heartbeat → energy → game economy chain end to end",
+        "Validate a 15-minute coding goal end to end on a real Windows + VS Code setup",
+        "Prepare the desktop app, editor plugins, mobile app, and store processes for a staged release",
+      ],
+    },
+    challenge: {
+      tr: "Emek ölçümü hem adil hem de pratik olmak zorundaydı. Büyük AI araç günlüklerine sahip bir makinede ilk tarama sekiz dakikayı aştı; kullanıcı yokken çalışan AI ajanları ‘insan’ dakikası kazanabiliyordu; uzun ama dürüst çalışma günleri de hile gibi görünebiliyordu.",
+      en: "Effort measurement had to be both fair and practical. On a machine with large AI tool logs, the first scan took over eight minutes; AI agents running while the user was away could earn ‘human’ minutes; and long but honest work days could look like cheating.",
+    },
+    solution: {
+      tr: "Taramaya zaman ve boyut sınırı koyup CLI'ı editörü bloklamadan arka planda çalıştırdım. Satır değişikliği olmayan ve çoğunluğu AI kodlama heartbeat'i olan dilimleri AI destekli saydım. Hile tespitini ödülü kesmek yerine yalnızca rekabetçi etkiyi askıya alan ve geri alınabilir ledger kayıtlarına dayanan bir modele çevirdim.",
+      en: "I added time and size limits to the scan and ran the CLI in the background without blocking the editor. Slices with no line changes that are mostly AI-coding heartbeats count as AI-assisted. Anti-cheat became a model that suspends only competitive impact instead of withholding rewards, backed by reversible ledger entries.",
+    },
+    results: [
+      {
+        value: "13",
+        label: { tr: "Backend modülü", en: "Backend modules" },
+        description: {
+          tr: "Tracking'den Economy ve Billing'e kadar modüler monolit içinde ayrışan alanlar.",
+          en: "Domains separated within the modular monolith, from Tracking to Economy and Billing.",
+        },
+      },
+      {
+        value: "4",
+        label: { tr: "Editör ailesi", en: "Editor families" },
+        description: {
+          tr: "VS Code tabanlı editörler, JetBrains IDE'leri, Visual Studio ve masaüstü uygulaması üzerinden terminal AI ajanları.",
+          en: "VS Code-based editors, JetBrains IDEs, Visual Studio, and terminal AI agents through the desktop app.",
+        },
+      },
+      {
+        value: "3",
+        label: { tr: "Lansman platformu", en: "Launch platforms" },
+        description: {
+          tr: "Android, iOS ve web; 1 Ocak 2027'de aynı React Native kod tabanından.",
+          en: "Android, iOS, and the web from the same React Native codebase on January 1, 2027.",
+        },
+      },
+    ],
+    metricsNote: {
+      tr: "Commit Kingdom henüz lansman öncesi aşamada. Doğrulanmış kullanıcı veya gelir metriği paylaşmıyorum; bu bölüm teslim edilen kapsamı gösteriyor.",
+      en: "Commit Kingdom is still pre-launch. I am not publishing unverified user or revenue metrics; this section describes the delivered scope.",
+    },
+    screenshotAlt: {
+      tr: "Commit Kingdom ürün önizlemesi",
+      en: "Commit Kingdom product preview",
+    },
+    screenshots: [
+      {
+        src: "/projects/case-studies/commit-kingdom/marketing-site.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Commit Kingdom web sitesi ana sayfası",
+          en: "Commit Kingdom website homepage",
+        },
+        caption: {
+          tr: "Yazılan kodun krallığın gücüne dönüştüğünü anlatan ana sayfa.",
+          en: "The homepage explains how the code you write becomes your kingdom's power.",
+        },
+      },
+      {
+        src: "/projects/case-studies/commit-kingdom/how-it-works.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Commit Kingdom nasıl çalışır ve Kingdom Plus bölümü",
+          en: "Commit Kingdom how-it-works and Kingdom Plus section",
+        },
+        caption: {
+          tr: "Kodla, güce dönüştür, krallığını kur döngüsü ve Kingdom Plus aboneliği.",
+          en: "The code, convert to power, build your kingdom loop and the Kingdom Plus subscription.",
+        },
+      },
+    ],
+    sourceNote: {
+      tr: "Commit Kingdom ticari bir ürün olduğu için oyun ve backend kodu kapalıdır; editör entegrasyonlarını sağlayan Tracker ayrı bir açık kaynak depoda geliştiriliyor.",
+      en: "Commit Kingdom is a commercial product, so the game and backend code are private; the Tracker that powers editor integrations is developed in a separate open-source repository.",
+    },
+  },
+  {
+    slug: "tudi-daily",
+    projectId: "tudi-daily",
+    image: "/projects/tudidaily.png",
+    liveUrl: "https://tudidaily.com",
+    applicationCategory: "ProductivityApplication",
+    technologies: [
+      "React Native",
+      "React Native Web",
+      "Reanimated",
+      "react-native-svg",
+      "SQLite",
+      "IndexedDB",
+      ".NET 10",
+      "EF Core",
+      "PostgreSQL",
+      "Angular",
+      "Astro",
+      "Cloudflare Workers",
+      "Cloudflare D1",
+    ],
+    title: { tr: "Tudi Daily", en: "Tudi Daily" },
+    eyebrow: {
+      tr: "Ekip ürünü vaka çalışması",
+      en: "Team product case study",
+    },
+    summary: {
+      tr: "Ajanda, kişisel defterler ve serbest düzenlenebilir panoyu tablet kalemi odaklı tek bir çalışma alanında birleştiren; iOS, Android ve webde aynı kod tabanından çalışan, çevrim dışı öncelikli dijital kırtasiye ürünü.",
+      en: "A pen-first, offline-first digital stationery product that combines a planner, personal notebooks, and a free-form board in one workspace, running on iOS, Android, and the web from a single codebase.",
+    },
+    role: {
+      tr: "Proje yöneticisi, teknik karar sahibi ve code reviewer",
+      en: "Project manager, technical decision owner, and code reviewer",
+    },
+    team: {
+      tr: "Aslı Sena Mercimek ve Merve Safa Güneş ile üç kişilik ekip",
+      en: "Three-person team with Aslı Sena Mercimek and Merve Safa Güneş",
+    },
+    context: {
+      tr: "Kapalı kaynak ticari ürün",
+      en: "Closed-source commercial product",
+    },
+    overview: {
+      tr: [
+        "Tudi Daily, tablet ve dijital kalem kullanan öğrenciler için ‘kutudan çıktığı gibi çalışan, sonra kişiselleştirilebilen’ bir dijital kırtasiye deneyimi olarak tasarlandı. Ajanda tarihli bir defter gibi davranıyor; kapak, sayfa çevirme ve kalemle yazma ürünün merkezinde duruyor.",
+        "Ekipte rolüm ağırlıklı olarak proje yönetimi, görev dağılımı ve review süreçleriydi. Ürün ve mimari kararlarını kayda geçirdim, işi modül bazlı issue'lara bölüp ekip arkadaşlarımın uzmanlıklarına göre dağıttım, her PR'ı review edip merge ve sürüm sorumluluğunu üstlendim.",
+      ],
+      en: [
+        "Tudi Daily is designed as a digital stationery experience for students who use tablets and digital pens, one that works out of the box and can be personalized later. The planner behaves like a dated notebook; covers, page turns, and pen input sit at the heart of the product.",
+        "My role on the team centered on project management, task distribution, and review processes. I recorded product and architecture decisions, split the work into module-level issues assigned by expertise, reviewed every pull request, and owned merges and releases.",
+      ],
+    },
+    problem: {
+      tr: "Tablet kullanıcıları planlama, not alma ve fikir toplama için genellikle birbirinden kopuk uygulamalar kullanıyor; bu araçların çoğu ya kalemle yazmayı ikinci planda bırakıyor ya da bağlantı olmadan güvenilir çalışmıyor.",
+      en: "Tablet users usually rely on disconnected apps for planning, note-taking, and collecting ideas; most of them either treat pen input as an afterthought or fail to work reliably without a connection.",
+    },
+    constraints: {
+      tr: [
+        "Tek React Native kod tabanıyla iOS, Android ve web desteği",
+        "Kalem, dokunma ve fare girdisini platformlar arasında tutarlı hale getirmek; avuç içi temasını reddetmek",
+        "Bağlantı yokken veri kaybı olmadan çalışan çevrim dışı öncelikli depolama",
+        "Türkçe ve İngilizce'nin ilk günden birlikte yayına çıkması",
+        "Üç kişilik ekipte paralel çalışmayı bozmayan, ücretli CI gerektirmeyen bir süreç",
+      ],
+      en: [
+        "iOS, Android, and web support from one React Native codebase",
+        "Consistent pen, touch, and mouse input across platforms, with palm rejection",
+        "Offline-first storage that loses no data without a connection",
+        "Turkish and English shipping together from day one",
+        "A process that keeps a three-person team working in parallel without paid CI",
+      ],
+    },
+    decisions: [
+      {
+        title: {
+          tr: "Expo yerine bare React Native",
+          en: "Bare React Native instead of Expo",
+        },
+        description: {
+          tr: "Native host'ları doğrudan sahiplenmek; mürekkep çizimi ve SQLite gibi native işleri kolaylaştırırken ücretli build servislerine bağımlılığı ortadan kaldırdı.",
+          en: "Owning the native hosts directly simplified native work such as ink rendering and SQLite while removing dependence on paid build services.",
+        },
+      },
+      {
+        title: {
+          tr: "Skia'dan önce SVG ile mürekkep",
+          en: "SVG ink before Skia",
+        },
+        description: {
+          tr: "Kalem çizgileri, orta nokta Bézier yumuşatmasıyla SVG path'lerine dönüştürülüyor. Üç platformda zaten çalışan bu yaklaşım, NDK ve çapraz derleme riskini MVP sonrasına bıraktı; 1.000 çizgi 50 ms bütçenin çok altında işleniyor.",
+          en: "Pen strokes are converted into SVG paths with midpoint Bézier smoothing. This approach already worked on all three platforms and deferred NDK and cross-compilation risk until after the MVP; 1,000 strokes render well under a 50 ms budget.",
+        },
+      },
+      {
+        title: {
+          tr: "CRDT yerine outbox ile senkronizasyon",
+          en: "Outbox-based sync instead of CRDTs",
+        },
+        description: {
+          tr: "Tek kullanıcılı MVP için sıra numaralı ve idempotency anahtarlı bir sync outbox ile tombstone silmeler seçildi. SQLite, IndexedDB ve bellek adaptörleri aynı sözleşme testlerinden geçiyor.",
+          en: "For a single-user MVP we chose a sync outbox with sequence numbers, idempotency keys, and tombstone deletes. SQLite, IndexedDB, and in-memory adapters all pass the same contract test suite.",
+        },
+      },
+      {
+        title: {
+          tr: "Modül başına şema içeren modüler monolit",
+          en: "A modular monolith with one schema per module",
+        },
+        description: {
+          tr: ".NET 10 backend'de her modülün kendi PostgreSQL şeması ve DbContext'i var; böylece ekip üyeleri birbirinin migration'larıyla çakışmadan paralel çalışabiliyor.",
+          en: "In the .NET 10 backend each module has its own PostgreSQL schema and DbContext, so teammates can work in parallel without colliding on migrations.",
+        },
+      },
+      {
+        title: {
+          tr: "Waitlist için Worker + D1",
+          en: "Worker + D1 for the waitlist",
+        },
+        description: {
+          tr: "Ürün hazır olmadan backend operasyonu taşımamak için Astro sitesi Cloudflare Worker üzerinde, waitlist ise Turnstile, rate limit ve onay e-postasıyla D1'de çalışıyor.",
+          en: "To avoid running backend operations before the product exists, the Astro site runs on a Cloudflare Worker and the waitlist lives in D1 with Turnstile, rate limiting, and confirmation emails.",
+        },
+      },
+    ],
+    designProcess: {
+      tr: "Ürün ve mimari kararları Obsidian vault'unda ADR olarak tutuluyor; kod ile not ayrıştığında iş yarım sayılıyor. Her iş bir modülü uçtan uca kapsayan issue olarak tanımlanıyor, PR şablonu kapsam, doğrulama, erişilebilirlik ve risk/geri dönüş başlıklarını zorunlu kılıyor.",
+      en: "Product and architecture decisions live as ADRs in an Obsidian vault; work is not considered done when code and notes diverge. Each task is an issue that covers one module end to end, and the PR template requires scope, verification, accessibility, and risk/rollback sections.",
+    },
+    designSteps: {
+      tr: [
+        "İşi modül bazlı issue'lara bölüp efor puanlarıyla ekip arkadaşlarımın uzmanlıklarına göre dağıtma",
+        "Her PR'ı kendi worktree'sinde ve ayrı bir PostgreSQL veritabanında çalıştırarak review etme",
+        "Review bulgularını tarihli oturum notlarına ve handoff dokümanlarına işleme",
+        "PR'daki placeholder görselleri marka arşivinden veya Higgsfield ile gerçek asset'lere çevirip merge etme",
+      ],
+      en: [
+        "Split work into module-level issues with effort points and assign them by teammates' expertise",
+        "Review each PR in its own worktree against a separate PostgreSQL database",
+        "Record review findings in dated session notes and handoff documents",
+        "Replace placeholder images in PRs with real assets from the brand archive or Higgsfield before merging",
+      ],
+    },
+    challenge: {
+      tr: "En zor kısım, üç platformda aynı hissi veren bir kalem deneyimini çevrim dışı çalışan bir veri katmanıyla birlikte kurarken üç kişilik ekibin paralel ilerleyebilmesini sağlamaktı. IndexedDB'nin await'ler arasında transaction tutamaması, Reanimated'in web production paketinde çalışmaması ve kimlik akışındaki review bulguları bu sürecin somut örnekleriydi.",
+      en: "The hardest part was building a pen experience that feels the same on three platforms, on top of an offline-first data layer, while keeping a three-person team moving in parallel. IndexedDB being unable to hold transactions across awaits, Reanimated not working in the production web bundle, and review findings in the identity flow were concrete examples.",
+    },
+    solution: {
+      tr: "Platform farklarını sözleşme testleriyle güvence altına alınan adaptörlerin arkasına aldık: IndexedDB'de başarısız yazmalar elle geri alınıyor, web animasyonları CSS tabanlı .web.tsx dosyalarına taşındı. Süreç tarafında ücretli CI yerine herkesin push öncesi çalıştırdığı yerel CI'ı, şablonlu PR'ları ve tarihli review oturumlarını kurdum.",
+      en: "We put platform differences behind adapters guarded by contract tests: failed IndexedDB writes are rolled back manually, and web animations moved into CSS-based .web.tsx files. On the process side, I set up local CI that everyone runs before pushing instead of paid CI, templated PRs, and dated review sessions.",
+    },
+    results: [
+      {
+        value: "3",
+        label: { tr: "Platform, tek kod tabanı", en: "Platforms, one codebase" },
+        description: {
+          tr: "iOS, Android ve web aynı React Native uygulamasından çalışıyor.",
+          en: "iOS, Android, and web run from the same React Native app.",
+        },
+      },
+      {
+        value: "21.6 ms",
+        label: { tr: "1.000 çizgi işleme", en: "Render for 1,000 strokes" },
+        description: {
+          tr: "SVG tabanlı mürekkep, 50 ms bütçenin çok altında kalıyor.",
+          en: "SVG-based ink stays well under the 50 ms budget.",
+        },
+      },
+      {
+        value: "TR + EN",
+        label: { tr: "Eş zamanlı lansman", en: "Simultaneous launch" },
+        description: {
+          tr: "Landing sayfası ve waitlist iki dilde canlıda.",
+          en: "The landing page and waitlist are live in both languages.",
+        },
+      },
+    ],
+    metricsNote: {
+      tr: "Tudi Daily henüz waitlist aşamasında. Kullanıcı ve gelir metriği paylaşmıyorum; bu bölüm teslim edilen kapsamı ve ölçülmüş teknik değerleri gösteriyor.",
+      en: "Tudi Daily is still in the waitlist stage. I am not publishing user or revenue metrics; this section shows the delivered scope and measured technical values.",
+    },
+    screenshotAlt: {
+      tr: "Tudi Daily ürün önizlemesi",
+      en: "Tudi Daily product preview",
+    },
+    screenshots: [
+      {
+        src: "/projects/case-studies/tudi-daily/marketing-site.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Tudi Daily landing sayfası",
+          en: "Tudi Daily landing page",
+        },
+        caption: {
+          tr: "Erken erişim çağrısı ve maskot Tudi ile karşılayan landing sayfası.",
+          en: "The landing page greets visitors with the early-access call and the mascot Tudi.",
+        },
+      },
+      {
+        src: "/projects/case-studies/tudi-daily/planner.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Tudi Daily ajanda bölümü",
+          en: "Tudi Daily planner section",
+        },
+        caption: {
+          tr: "Tarihli ve tarihsiz planlama, görevler ve hızlı notları tanıtan ajanda bölümü.",
+          en: "The planner section presents dated and undated planning, tasks, and quick notes.",
+        },
+      },
+      {
+        src: "/projects/case-studies/tudi-daily/notebooks.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Tudi Daily defterler bölümü",
+          en: "Tudi Daily notebooks section",
+        },
+        caption: {
+          tr: "Kapak, kâğıt türü ve mürekkep seçenekleriyle kişisel defterler.",
+          en: "Personal notebooks with cover, paper type, and ink options.",
+        },
+      },
+    ],
+    sourceNote: {
+      tr: "Tudi Daily ticari bir ürün olduğu için kaynak kodu kapalıdır.",
+      en: "Tudi Daily is a commercial product, so its source code is private.",
+    },
+  },
+  {
+    slug: "clevio-kids",
+    projectId: "clevio-kids",
+    image: "/projects/clevio.png",
+    liveUrl: "https://clevio.kids",
+    teamUrl: "https://omedya.com",
+    applicationCategory: "EducationalApplication",
+    technologies: [
+      "React Native",
+      "Re.Pack",
+      "Module Federation",
+      "Reanimated",
+      "react-native-svg",
+      "Lottie",
+      "i18next",
+      ".NET 10",
+      "PostgreSQL",
+      "Angular",
+      "Astro",
+      "ElevenLabs",
+      "Cloudflare",
+    ],
+    title: { tr: "Clevio Kids", en: "Clevio Kids" },
+    eyebrow: {
+      tr: "Kurumsal vaka çalışması",
+      en: "Professional case study",
+    },
+    summary: {
+      tr: "Reklamsız mini oyunlar, görevler ve 14 bilişsel beceriyi ölçen bir öğrenme motorunu tek akışta birleştiren; ebeveynlerin çocuğunun gelişimini bağlamıyla takip etmesini sağlayan çocuk platformu.",
+      en: "A kids' platform that brings ad-free mini games, missions, and a learning engine measuring 14 cognitive skills into one flow, so parents can follow their child's progress in context.",
+    },
+    role: {
+      tr: "Mobil oyun geliştirici (React Native)",
+      en: "Mobile game developer (React Native)",
+    },
+    team: {
+      tr: "Omedya ürün ekibi",
+      en: "Omedya product team",
+    },
+    context: {
+      tr: "Omedya bünyesinde kapalı kaynak ticari ürün",
+      en: "Closed-source commercial product at Omedya",
+    },
+    overview: {
+      tr: [
+        "Clevio Kids; 3–5, 6–8, 9–12 ve 13+ yaş gruplarındaki çocuklar için oyunu ön planda tutarken ölçümü ve açıklamayı arka planda yürüten bir öğrenme platformu. Çocuk oyun görüyor, sistem sinyalleri okuyor, ebeveyn ise anlaşılır bir gelişim tablosuyla karşılaşıyor.",
+        "Omedya ekibinde ağırlıklı olarak mobil oyun tarafında çalıştım. Katalogdaki 57 mini oyunun 20'yi aşkın paketini iskeletten oyun kurallarına, asset üretiminden seslendirmeye, HUD cilasından vault'taki durum kaydına kadar uçtan uca geliştirdim.",
+      ],
+      en: [
+        "Clevio Kids is a learning platform for children in the 3–5, 6–8, 9–12, and 13+ age groups that keeps play in the foreground while measurement and explanation run behind it. The child sees a game, the system reads signals, and the parent gets an understandable picture of progress.",
+        "At Omedya I worked mainly on the mobile game side. I built more than 20 of the 57 mini-game packages in the catalog end to end, from scaffolding and game rules to asset production, narration, HUD polish, and status records in the team's vault.",
+      ],
+    },
+    problem: {
+      tr: "Çocuklara yönelik uygulamaların çoğu ya reklamla oyun akışını bölüyor ya da ebeveyne bağlamı olmayan puanlar sunuyor. Amaç, çocuğun 14 bilişsel becerideki durumunu ölçüp oyunu buna göre uyarlamak ve ebeveyne açıklanabilir bir rapor vermekti.",
+      en: "Most kids' apps either interrupt play with ads or show parents scores without context. The goal was to measure where a child stands across 14 cognitive skills, adapt play accordingly, and give parents an explainable report.",
+    },
+    constraints: {
+      tr: [
+        "Onlarca oyunu host uygulamayı yeniden yayınlamadan güncelleyebilmek",
+        "iOS, Android ve webde aynı oyun paketlerini çalıştırmak",
+        "Beş dilde (TR, EN, AR, ES, DE) tutarlı metin ve seslendirme",
+        "Düşük donanımlı cihazlarda akıcı animasyon",
+        "Çocuk güvenliği: reklamsız deneyim ve satın almaların ebeveyn kapısı arkasında olması",
+      ],
+      en: [
+        "Update dozens of games without republishing the host app",
+        "Run the same game packages on iOS, Android, and the web",
+        "Consistent text and narration in five languages (TR, EN, AR, ES, DE)",
+        "Smooth animation on low-end devices",
+        "Child safety: an ad-free experience with purchases behind a parent gate",
+      ],
+    },
+    decisions: [
+      {
+        title: {
+          tr: "Her oyun ayrı bir Module Federation remote'u",
+          en: "Every game is its own Module Federation remote",
+        },
+        description: {
+          tr: "Oyunlar host uygulamanın ekranları değil; Re.Pack ile derlenen ve çalışma anında indirilen ayrı paketler. Paylaşılan bağımlılıklar katı bir sürüm kataloğuyla sabitlendi, çünkü iki farklı sürüm çalışma anında kırılıyor.",
+          en: "Games are not screens inside the host app but separate packages built with Re.Pack and downloaded at runtime. Shared dependencies are pinned by a strict version catalog, because two versions of the same dependency break at runtime.",
+        },
+      },
+      {
+        title: {
+          tr: "Asset'leri bundle'dan çıkarmak",
+          en: "Moving assets out of the bundle",
+        },
+        description: {
+          tr: "Bir oyunun 16 MB'lık chunk'ının %99,4'ü base64 görsellerden oluşuyordu. Asset'ler içerik adresli ayrı paket dosyalarına taşındı; böylece paketler küçüldü ve artımlı güncelleme mümkün oldu.",
+          en: "One game's 16 MB chunk was 99.4% base64 images. Assets moved into separate content-addressed package files, which shrank packages and enabled incremental updates.",
+        },
+      },
+      {
+        title: {
+          tr: "Adlandırılmış kolonlarla beceri vektörü",
+          en: "A skill vector with named columns",
+        },
+        description: {
+          tr: "14 beceri JSON yerine PostgreSQL'de adlandırılmış kolonlar olarak tutuluyor; ‘ağırlık ≥ 0.8’ gibi filtreler doğrudan SQL'de çalışıyor. Katalog açılışta doğrulanıyor ve uyuşmazlıkta host başlamıyor.",
+          en: "The 14 skills are stored as named PostgreSQL columns instead of JSON, so filters such as ‘weight ≥ 0.8’ run directly in SQL. The catalog is validated at startup, and the host refuses to start on a mismatch.",
+        },
+      },
+      {
+        title: {
+          tr: "Çeviri tamamlanmadan atama yok",
+          en: "No assignment without a complete translation",
+        },
+        description: {
+          tr: "Bir oyun, o dildeki çevirisi ve seslendirme metinleri tamamlanmadan o dilde çocuğa atanmıyor. Seslendirme her dil için seçilmiş anlatıcıyla ElevenLabs üzerinden üretiliyor.",
+          en: "A game is not assigned in a language until its translation and narration scripts are complete. Narration is produced through ElevenLabs with a narrator chosen per language.",
+        },
+      },
+      {
+        title: {
+          tr: "Ortak oyun davranışını SDK'ya taşımak",
+          en: "Moving shared game behavior into the SDK",
+        },
+        description: {
+          tr: "Paketler arasında tutarlılığı korumak için ortak giriş kabuğu ve kutlama bankası SDK'ya alındı; tüm oyunlar altı eksenli bir denetim komutundan geçiyor.",
+          en: "To keep packages consistent, a shared intro shell and celebration bank moved into the SDK, and every game passes a six-axis audit command.",
+        },
+      },
+    ],
+    designProcess: {
+      tr: "Her oyun aynı üretim hattından geçiyor: iskelet, kurallar, yaş grubuna göre seviye tablosu, görsel asset'ler, beş dilde metin ve seslendirme, HUD cilası ve vault'ta durum kaydı. Seviye tabloları gerçek cihazda ölçülmeden yayına alınmıyor.",
+      en: "Every game goes through the same production pipeline: scaffold, rules, an age-banded level table, visual assets, text and narration in five languages, HUD polish, and a status record in the vault. Level tables do not ship until they are measured on a real device.",
+    },
+    designSteps: {
+      tr: [
+        "Oyun fikrini ölçülecek bilişsel becerilerle eşleştirme",
+        "Kuralları ve yaş gruplarına göre seviye tablosunu tasarlama",
+        "Görselleri ve animasyonları Reanimated, SVG ve Lottie ile hayata geçirme",
+        "Beş dilde metin ve seslendirmeyi bağlayıp paketi host'a senkronlama",
+      ],
+      en: [
+        "Map the game idea to the cognitive skills it should measure",
+        "Design the rules and an age-banded level table",
+        "Bring visuals and animation to life with Reanimated, SVG, and Lottie",
+        "Wire text and narration in five languages and sync the package to the host",
+      ],
+    },
+    challenge: {
+      tr: "Onlarca oyunu aynı kalitede tutarken paket boyutunu, animasyon performansını ve web desteğini yönetmek gerekiyordu. Sürekli çalışan dekor animasyonları her karede CPU harcıyor, web'deki remote dosyaları ise nosniff başlığı yüzünden engelleniyordu.",
+      en: "We had to keep dozens of games at the same quality while managing package size, animation performance, and web support. Always-on decor animations cost CPU every frame, and remote files on the web were blocked by the nosniff header.",
+    },
+    solution: {
+      tr: "Parlama efektlerini GPU'da tutup senkron UI prop'ları ve bir hareket kapısıyla CPU yükünü azalttık. Web için giriş dosyası .js olarak üretilip içerik türü yükleme sırasında uzantıdan belirlendi. Asset'lerin bundle dışına taşınmasıyla paketler küçüldü ve ortak SDK bileşenleri oyunlar arası tutarlılığı sağladı.",
+      en: "We kept shine effects on the GPU and reduced CPU load with synchronous UI props and a motion gate. For the web, the entry file is emitted as .js and its content type is set from the extension at upload. Moving assets out of the bundle shrank packages, and shared SDK components kept games consistent.",
+    },
+    results: [
+      {
+        value: "57",
+        label: { tr: "Mini oyun paketi", en: "Mini-game packages" },
+        description: {
+          tr: "20'yi aşkını uçtan uca benim geliştirdiğim, çalışma anında yüklenen oyun kataloğu.",
+          en: "A runtime-loaded game catalog, more than 20 of which I built end to end.",
+        },
+      },
+      {
+        value: "14",
+        label: { tr: "Bilişsel beceri", en: "Cognitive skills" },
+        description: {
+          tr: "Beş kategoride ölçülen ve dört yaş grubuna göre ölçeklenen beceriler.",
+          en: "Skills measured across five categories and scaled across four age groups.",
+        },
+      },
+      {
+        value: "5",
+        label: { tr: "Dil", en: "Languages" },
+        description: {
+          tr: "Türkçe, İngilizce, Arapça, İspanyolca ve Almanca içerik desteği.",
+          en: "Content support in Turkish, English, Arabic, Spanish, and German.",
+        },
+      },
+    ],
+    metricsNote: {
+      tr: "Clevio Kids henüz mağaza yayını öncesinde. Kullanıcı metriği paylaşmıyorum; bu bölüm ürünün teslim edilen kapsamını gösteriyor.",
+      en: "Clevio Kids has not yet been released on the app stores. I am not publishing user metrics; this section describes the delivered scope.",
+    },
+    screenshotAlt: {
+      tr: "Clevio Kids ürün önizlemesi",
+      en: "Clevio Kids product preview",
+    },
+    screenshots: [
+      {
+        src: "/projects/case-studies/clevio-kids/marketing-site.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Clevio Kids web sitesi ana sayfası",
+          en: "Clevio Kids website homepage",
+        },
+        caption: {
+          tr: "Çocuğun gelişimini oyun oynarken takip etmeyi anlatan ana sayfa.",
+          en: "The homepage explains tracking a child's progress while they play.",
+        },
+      },
+      {
+        src: "/projects/case-studies/clevio-kids/signals.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Clevio Kids üç adımlı sistem bölümü",
+          en: "Clevio Kids three-step system section",
+        },
+        caption: {
+          tr: "Çocuk oyunu görür, sistem sinyalleri okur: oyun, seçim ve gelişim adımları.",
+          en: "The child sees a game, the system reads signals: play, choices, and progress.",
+        },
+      },
+      {
+        src: "/projects/case-studies/clevio-kids/two-audiences.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Clevio Kids çocuk ve ebeveyn deneyimi",
+          en: "Clevio Kids child and parent experience",
+        },
+        caption: {
+          tr: "Çocuk için oyun, ebeveyn için açıklanabilir bir tablo sunan iki taraflı deneyim.",
+          en: "A two-sided experience: a game for the child, an explainable picture for the parent.",
+        },
+      },
+      {
+        src: "/projects/case-studies/clevio-kids/mini-games.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Clevio Kids mini oyun dünyaları",
+          en: "Clevio Kids mini-game worlds",
+        },
+        caption: {
+          tr: "Her mini oyun kendi görsel dünyasını kuruyor.",
+          en: "Every mini game builds its own visual world.",
+        },
+      },
+    ],
+    sourceNote: {
+      tr: "Clevio Kids, Omedya'nın ticari ürünü olduğu için kaynak kodu kapalıdır.",
+      en: "Clevio Kids is a commercial product of Omedya, so its source code is private.",
+    },
+  },
 ];
 
 function localizeDefinition(

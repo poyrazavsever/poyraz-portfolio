@@ -191,8 +191,9 @@ export const PRODUCTS: ProjectItem[] = [
       en: "Side Project",
     },
     image: "/projects/commitkingdom.png",
+    caseStudySlug: "commit-kingdom",
     href: "https://commitkingdom.com",
-    technologies: ["React Native", ".NET 10", "Angular", "Astro"],
+    technologies: ["React Native", ".NET 10", "PostgreSQL", "Electron", "Angular", "Astro"],
     architecture: {
       tr: "Editör tarafındaki Tracker'dan gelen doğrulanmış kodlama verisini .NET 10 modüler API'de işleyen; iOS, Android ve webi tek React Native kod tabanından sunan, Angular yönetim paneli ve Astro sitesiyle tamamlanan kapalı kaynak mimari.",
       en: "A closed-source architecture where a modular .NET 10 API processes verified coding data from the editor-side Tracker, serving iOS, Android, and web from a single React Native codebase, complemented by an Angular admin panel and an Astro site.",
@@ -210,6 +211,7 @@ export const PRODUCTS: ProjectItem[] = [
       en: "Team Product",
     },
     image: "/projects/tudidaily.png",
+    caseStudySlug: "tudi-daily",
     href: "https://tudidaily.com",
     technologies: ["React Native", ".NET", "PostgreSQL", "Angular", "Astro"],
     architecture: {
@@ -229,6 +231,7 @@ export const PRODUCTS: ProjectItem[] = [
       en: "Omedya",
     },
     image: "/projects/clevio.png",
+    caseStudySlug: "clevio-kids",
     href: "https://clevio.kids",
     technologies: ["React Native", ".NET", "Angular", "Astro"],
     architecture: {
