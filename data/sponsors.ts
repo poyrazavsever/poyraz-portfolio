@@ -57,4 +57,18 @@ export const SPONSORS: Sponsor[] = [
     job: "Yapay Zeka Platformu",
     logo: "/sponsors/aisa-one.svg",
   },
+  {
+    id: "atoms",
+    name: "Atoms",
+    job: "AI Uygulama Geliştirme Platformu",
+    logo: "/sponsors/atoms.png",
+    websiteUrl: "https://atoms.dev",
+  },
+  {
+    id: "stellar",
+    name: "Stellar",
+    job: "Veri Kurtarma Yazılımları",
+    logo: "/sponsors/stellar.png",
+    websiteUrl: "https://www.stellarinfo.com",
+  },
 ];
