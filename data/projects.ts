@@ -184,6 +184,63 @@ export const EXTENSIONS: ProjectItem[] = [
 
 export const PRODUCTS: ProjectItem[] = [
   {
+    id: "commit-kingdom",
+    title: "Commit Kingdom",
+    badge: {
+      tr: "Side Project",
+      en: "Side Project",
+    },
+    image: "/projects/commitkingdom.png",
+    href: "https://commitkingdom.com",
+    technologies: ["React Native", ".NET 10", "Angular", "Astro"],
+    architecture: {
+      tr: "Editör tarafındaki Tracker'dan gelen doğrulanmış kodlama verisini .NET 10 modüler API'de işleyen; iOS, Android ve webi tek React Native kod tabanından sunan, Angular yönetim paneli ve Astro sitesiyle tamamlanan kapalı kaynak mimari.",
+      en: "A closed-source architecture where a modular .NET 10 API processes verified coding data from the editor-side Tracker, serving iOS, Android, and web from a single React Native codebase, complemented by an Angular admin panel and an Astro site.",
+    },
+    description: {
+      tr: "Kişisel side projem: yazdığın kodu doğrulayıp enerjiye dönüştüren, bu enerjiyle kuleni büyütüp ordunu kurduğun ve ortak haritada sefere çıktığın oyunlaştırılmış kodlama takipçisi.",
+      en: "My personal side project: a gamified coding tracker that verifies the code you write and turns it into energy you spend growing your tower, training your army, and marching on a shared map.",
+    },
+  },
+  {
+    id: "tudi-daily",
+    title: "Tudi Daily",
+    badge: {
+      tr: "Ekip Ürünü",
+      en: "Team Product",
+    },
+    image: "/projects/tudidaily.png",
+    href: "https://tudidaily.com",
+    technologies: ["React Native", ".NET", "PostgreSQL", "Angular", "Astro"],
+    architecture: {
+      tr: "Ortak React Native iOS/Android/web uygulamasını; senkronizasyon, kimlik ve ödeme servislerini taşıyan .NET + PostgreSQL API, Angular operasyon portalı ve Astro landing/waitlist sitesiyle birleştiren kapalı kaynak mimari.",
+      en: "A closed-source architecture combining a shared React Native iOS/Android/web app with a .NET + PostgreSQL API for sync, identity, and billing, an Angular operations portal, and an Astro landing and waitlist site.",
+    },
+    description: {
+      tr: "Aslı Sena Mercimek ve Merve Safa Güneş ile birlikte geliştirdiğimiz; ajanda, kişisel defterler ve serbest panoyu tek çalışma alanında birleştiren, tablet kalemi odaklı dijital kırtasiye ürünü. Proje yönetimi, review süreçleri ve görev dağılımını ağırlıklı olarak ben üstlendim.",
+      en: "A pen-first digital stationery product combining a planner, personal notebooks, and a free-form board in one workspace, built with Aslı Sena Mercimek and Merve Safa Güneş. I primarily led project management, code reviews, and task distribution.",
+    },
+  },
+  {
+    id: "clevio-kids",
+    title: "Clevio Kids",
+    badge: {
+      tr: "OSTİM",
+      en: "OSTİM",
+    },
+    image: "/projects/clevio.png",
+    href: "https://clevio.kids",
+    technologies: ["React Native", ".NET", "Angular", "Astro"],
+    architecture: {
+      tr: "50'yi aşkın mini oyunu ortak bir React Native host uygulamasında çalıştıran; ilerleme ve bilişsel beceri sinyallerini .NET backend'de toplayan, Angular yönetim paneli ve Astro sitesiyle tamamlanan kapalı kaynak monorepo.",
+      en: "A closed-source monorepo running 50+ mini games inside a shared React Native host app, collecting progress and cognitive-skill signals in a .NET backend, with an Angular admin panel and an Astro site.",
+    },
+    description: {
+      tr: "OSTİM bünyesinde geliştirdiğim; reklamsız oyunları, görevleri ve bilişsel beceri sinyallerini tek akışta birleştirerek ebeveynlerin çocuğunun gelişimini bağlamıyla takip etmesini sağlayan çocuk uygulaması.",
+      en: "A kids' app I developed within OSTİM that brings ad-free games, missions, and cognitive-skill signals into one flow so parents can follow their child's progress in context.",
+    },
+  },
+  {
     id: "neta",
     title: "Take Neta",
     badge: {
