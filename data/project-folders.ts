@@ -1,12 +1,13 @@
 import {
   DESIGNS,
   EXTENSIONS,
+  MY_AKADEMI_PROJECTS,
   PRODUCTS,
   WORK_PROJECTS,
   type ProjectItem,
 } from "@/data/projects";
 
-export type ProjectFolderSlug = "work" | "products" | "extensions" | "designs";
+export type ProjectFolderSlug = "work" | "products" | "extensions" | "designs" | "my-akademi";
 
 export type ProjectFolder = {
   slug: ProjectFolderSlug;
@@ -74,6 +75,19 @@ export const PROJECT_FOLDERS: ProjectFolder[] = [
       en: "Interface designs and community templates I created in Figma.",
     },
     items: DESIGNS,
+  },
+  {
+    slug: "my-akademi",
+    icon: "mdi:school-outline",
+    title: {
+      tr: "M&Y Akademi",
+      en: "M&Y Academy",
+    },
+    description: {
+      tr: "Dahil olduğum M&Y Yazılım Eğitim Akademi bootcamp'inde geliştirdiğim projeler.",
+      en: "Projects I built during the M&Y Software Academy bootcamp I'm part of.",
+    },
+    items: MY_AKADEMI_PROJECTS,
   },
 ];
 

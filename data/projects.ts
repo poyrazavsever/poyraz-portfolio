@@ -372,3 +372,36 @@ export const DESIGNS: ProjectItem[] = [
     },
   },
 ];
+
+export const MY_AKADEMI_PROJECTS: ProjectItem[] = [
+  {
+    id: "my-akademi-portfolio",
+    title: {
+      tr: "Portfolyo ve Yönetim Paneli",
+      en: "Portfolio and Admin Panel",
+    },
+    badge: {
+      tr: "Bootcamp · 1. Proje",
+      en: "Bootcamp · Project 1",
+    },
+    image: "/projects/my-akademi-portfolio.webp",
+    href: "https://myportfolio.poyrazavsever.com",
+    caseStudySlug: "my-akademi-portfolio",
+    technologies: [
+      "ASP.NET Core MVC",
+      ".NET 10",
+      "EF Core",
+      "SQL Server",
+      "Bootstrap 5",
+      "Docker",
+    ],
+    architecture: {
+      tr: "Areas ile ayrılmış yönetim paneli, ana sayfanın her bölümü için bir View Component ve EF Core Code First veri katmanından oluşan, içeriğin tamamını veritabanından yöneten ASP.NET Core MVC mimarisi.",
+      en: "An ASP.NET Core MVC architecture with an Areas-based admin panel, one View Component per homepage section, and an EF Core Code First data layer that drives all content from the database.",
+    },
+    description: {
+      tr: "M&Y Yazılım Eğitim Akademi bootcamp'inin ilk projesi: tüm içeriği yönetim panelinden düzenlenebilen, .NET 10 ile geliştirilmiş kişisel portfolyo sitesi.",
+      en: "The first project of the M&Y Software Academy bootcamp: a personal portfolio built with .NET 10 whose entire content is editable from an admin panel.",
+    },
+  },
+];

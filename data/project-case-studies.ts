@@ -1846,6 +1846,255 @@ const PROJECT_CASE_STUDIES: ProjectCaseStudyDefinition[] = [
       en: "Clevio Kids is a commercial product of Omedya, so its source code is private.",
     },
   },
+  {
+    slug: "my-akademi-portfolio",
+    projectId: "my-akademi-portfolio",
+    image: "/projects/my-akademi-portfolio.webp",
+    liveUrl: "https://myportfolio.poyrazavsever.com",
+    sourceUrl: "https://github.com/poyrazavsever/my-portfolio",
+    applicationCategory: "WebApplication",
+    technologies: [
+      "ASP.NET Core MVC",
+      ".NET 10",
+      "Entity Framework Core 10",
+      "SQL Server",
+      "Bootstrap 5.3",
+      "SweetAlert2",
+      "jQuery Validation",
+      "Docker",
+      "Cloudflare Tunnel",
+      "Higgsfield",
+      "ffmpeg",
+    ],
+    title: {
+      tr: "Portfolyo ve Yönetim Paneli",
+      en: "Portfolio and Admin Panel",
+    },
+    eyebrow: {
+      tr: "M&Y Akademi bootcamp vaka çalışması",
+      en: "M&Y Academy bootcamp case study",
+    },
+    summary: {
+      tr: "M&Y Yazılım Eğitim Akademi 12. Dönem bootcamp'inin ilk projesi olarak geliştirdiğim; ana sayfadaki her bölümün veritabanından geldiği ve tamamının yönetim panelinden düzenlendiği ASP.NET Core MVC portfolyo sitesi.",
+      en: "An ASP.NET Core MVC portfolio built as the first project of the M&Y Software Academy 12th-term bootcamp, where every homepage section comes from the database and is fully editable from an admin panel.",
+    },
+    role: {
+      tr: "Full-stack geliştirici ve arayüz tasarımcısı",
+      en: "Full-stack developer and interface designer",
+    },
+    team: {
+      tr: "Bireysel bootcamp projesi",
+      en: "Individual bootcamp project",
+    },
+    context: {
+      tr: "M&Y Yazılım Eğitim Akademi · 12. Dönem Akşam Grubu · 1. Proje: Portfolyo Case",
+      en: "M&Y Software Academy · 12th Term Evening Group · Project 1: Portfolio Case",
+    },
+    overview: {
+      tr: [
+        "Case, statik bir portfolyo yerine içeriği tamamen yönetilebilen bir site istiyordu: hero, hakkımda, deneyim, eğitim, yetenekler, projeler, sertifikalar ve iletişim bölümlerinin hepsi veritabanından gelmeli ve admin panelinden düzenlenmeliydi.",
+        "Projeyi 12 faz hâlinde ilerlettim; her fazın sonunda neyi neden yaptığımı, karşılaştığım hataları ve çözümlerini öğrenme notlarına yazdım. Sonunda uygulamayı Docker ile kendi sunucumda yayına aldım.",
+      ],
+      en: [
+        "The case asked for a fully manageable site instead of a static portfolio: hero, about, experience, education, skills, projects, certificates, and contact sections all had to come from the database and be editable from an admin panel.",
+        "I worked through the project in 12 phases and wrote down what I did, why, and the errors I hit along the way in learning notes. Finally, I shipped the app to my own server with Docker.",
+      ],
+    },
+    problem: {
+      tr: "Bir bootcamp case'i kolayca çalışan ama sığ bir CRUD uygulamasına dönüşebilir. Hedefim, case gereksinimlerinin hepsini karşılarken ilişkisel veri, doğrulama, dosya yükleme güvenliği ve yayına hazırlık gibi gerçek bir üründe beklenen ayrıntıları da doğru kurmaktı.",
+      en: "A bootcamp case can easily become a shallow CRUD app that merely works. My goal was to meet every case requirement while also getting right the details expected from a real product: relational data, validation, upload security, and production readiness.",
+    },
+    constraints: {
+      tr: [
+        "ASP.NET Core MVC, EF Core Code First ve SQL Server ile sınırlı teknoloji seti",
+        "Kategori ↔ Proje bire-çok ilişkisi, filtre ve veritabanından gelen dropdown zorunluluğu",
+        "Gelen kutusunda mesajın orijinal içeriğinin düzenlenememesi",
+        "CV için yalnızca PDF kabul eden, sunucuda güvenli saklanan bir indirme akışı",
+        "Projenin migration'lar ve örnek veriyle sıfırdan kurulabilmesi",
+      ],
+      en: [
+        "A technology set limited to ASP.NET Core MVC, EF Core Code First, and SQL Server",
+        "A required one-to-many Category ↔ Project relation, filtering, and a database-backed dropdown",
+        "Inbox messages whose original content cannot be edited",
+        "A PDF-only CV download flow with secure server-side storage",
+        "A project that can be set up from scratch with migrations and sample data",
+      ],
+    },
+    decisions: [
+      {
+        title: {
+          tr: "Her bölüm için bir View Component",
+          en: "One View Component per section",
+        },
+        description: {
+          tr: "Ana sayfanın her bölümü kendi View Component'i ile veritabanından besleniyor. Pasif kayıtlar sorgu seviyesinde eleniyor; deneyim ve eğitim başlangıç tarihine göre sıralanıyor.",
+          en: "Each homepage section is fed from the database by its own View Component. Inactive records are filtered at the query level, and experience and education are ordered by start date.",
+        },
+      },
+      {
+        title: {
+          tr: "Kategori silmede Cascade yerine Restrict",
+          en: "Restrict instead of Cascade on category delete",
+        },
+        description: {
+          tr: "Bir kategori silinince projelerin sessizce kaybolmaması için ilişki Fluent API ile Restrict yapıldı; admin bunun yerine kategoride kaç proje olduğunu anlatan bir mesaj görüyor.",
+          en: "The relation was set to Restrict with the Fluent API so projects never silently disappear when a category is deleted; the admin instead sees a message stating how many projects it contains.",
+        },
+      },
+      {
+        title: {
+          tr: "Dosya yüklemede imza kontrolü",
+          en: "Signature checks on uploads",
+        },
+        description: {
+          tr: "Görseller ve CV için uzantı beyaz listesi, boyut sınırı ve magic bytes kontrolü yapılıyor. Dosyalar Guid ile yeniden adlandırılıyor; CV wwwroot dışında saklanıp yalnızca indirme action'ı üzerinden sunuluyor.",
+          en: "Images and the CV go through an extension allowlist, a size limit, and magic-byte checks. Files are renamed with a Guid, and the CV is stored outside wwwroot and served only through a download action.",
+        },
+      },
+      {
+        title: {
+          tr: "Token tabanlı tasarım sistemi",
+          en: "A token-based design system",
+        },
+        description: {
+          tr: "Renk, cam yüzey ve tipografi değerleri tek bir design-system.css dosyasında. Bootstrap'ın --bs-* değişkenleri bu token'lara bağlandığı için modal, form ve offcanvas bileşenleri de aynı koyu, mühendislik temalı dili konuşuyor.",
+          en: "Color, glass surface, and typography values live in a single design-system.css file. Bootstrap's --bs-* variables are bound to these tokens, so modals, forms, and offcanvas components share the same dark, engineering-themed language.",
+        },
+      },
+      {
+        title: {
+          tr: "Hash'li admin girişi",
+          en: "Hashed admin sign-in",
+        },
+        description: {
+          tr: "Cookie tabanlı oturum, PBKDF2 (210.000 tur) şifre hash'i, sabit zamanlı karşılaştırma ve IP başına dakikada 5 deneme sınırı. Şifrenin kendisi hiçbir yerde tutulmuyor.",
+          en: "Cookie-based sessions, PBKDF2 password hashing with 210,000 iterations, constant-time comparison, and a limit of 5 attempts per IP per minute. The password itself is never stored anywhere.",
+        },
+      },
+    ],
+    designProcess: {
+      tr: "Tasarım dilini koyu zemin, mühendislik ızgarası, cam yüzeyler ve tek bir kırmızı vurgu rengi üzerine kurdum. Bölüm ikonlarını Higgsfield ile üretip ffmpeg ile alfa kanallı WebM'e dönüştürdüm; bir Tag Helper önce şeffaf PNG basıyor, destekleyen tarayıcılarda bunu hareketli videoya yükseltiyor.",
+      en: "I built the design language on a dark background, an engineering grid, glass surfaces, and a single red accent color. I generated the section icons with Higgsfield and converted them to alpha-channel WebM with ffmpeg; a Tag Helper first renders a transparent PNG and upgrades it to animated video in supporting browsers.",
+    },
+    designSteps: {
+      tr: [
+        "Veri modelini tamamlama: tarihler, Data Annotations ve ilişki kuralları",
+        "Tasarım sistemi, cam ikon seti ve admin kabuğu",
+        "Admin CRUD modülleri, SweetAlert2 ve TempData bildirimleri",
+        "Public arayüzün veritabanına bağlanması ve iletişim formu",
+        "Gelen kutusu, CV indirme ve dashboard",
+        "Sıfırdan kurulum testi, smoke test ve Docker ile yayın",
+      ],
+      en: [
+        "Complete the data model: dates, Data Annotations, and relation rules",
+        "Design system, glass icon set, and admin shell",
+        "Admin CRUD modules with SweetAlert2 and TempData notifications",
+        "Connect the public UI to the database and build the contact form",
+        "Inbox, CV download, and dashboard",
+        "Fresh-install test, smoke test, and Docker deployment",
+      ],
+    },
+    challenge: {
+      tr: "İlk migration, mevcut 320 karakterlik bir görsel URL'si yüzünden kolonu 300 karaktere daraltmaya çalışırken 'String or binary data would be truncated' hatasıyla düştü. Ayrıca projenin yalnızca kendi makinemde değil, yeni klonlayan birinde de sorunsuz kurulduğundan emin olmam gerekiyordu.",
+      en: "The first migration failed with 'String or binary data would be truncated' while narrowing a column to 300 characters because an existing image URL was 320 characters long. I also had to make sure the project set up cleanly not just on my machine but for anyone cloning it fresh.",
+    },
+    solution: {
+      tr: "EF Core'un migration'ı transaction içinde çalıştırması sayesinde veritabanı bozulmadı; uygulanmamış migration'ı kaldırıp limitleri mevcut veriye göre yeniden belirledim. Teslimden önce ortam değişkeniyle boş bir test veritabanına bağlanıp 6 migration'ı, tekrar çalıştırılabilir seed'i ve 17 sayfalık smoke testi sıfırdan doğruladım.",
+      en: "Because EF Core runs migrations inside a transaction, the database stayed intact; I removed the unapplied migration and set the limits based on existing data. Before delivery, I pointed the app at an empty test database through an environment variable and verified all 6 migrations, the idempotent seed, and a 17-page smoke test from scratch.",
+    },
+    results: [
+      {
+        value: "8",
+        label: { tr: "Yönetilebilir bölüm", en: "Manageable sections" },
+        description: {
+          tr: "Hero'dan iletişime kadar ana sayfanın her bölümü admin panelinden düzenleniyor.",
+          en: "Every homepage section, from hero to contact, is edited from the admin panel.",
+        },
+      },
+      {
+        value: "12",
+        label: { tr: "Belgelenmiş faz", en: "Documented phases" },
+        description: {
+          tr: "Her fazın ne ve neden yapıldığı, hatalar ve çözümleriyle öğrenme notlarında.",
+          en: "What was done in each phase and why, with errors and fixes, recorded in learning notes.",
+        },
+      },
+      {
+        value: "17",
+        label: { tr: "Sayfalık smoke test", en: "Page smoke test" },
+        description: {
+          tr: "Boş bir veritabanında sıfırdan kurulumdan sonra bütün sayfalar beklenen yanıtı verdi.",
+          en: "After a fresh install on an empty database, every page returned the expected response.",
+        },
+      },
+    ],
+    metricsNote: {
+      tr: "Bu bir eğitim projesi; trafik veya kullanıcı metriği paylaşmıyorum. Bu bölüm case kapsamını ve doğrulama adımlarını gösteriyor.",
+      en: "This is a training project, so I am not publishing traffic or user metrics. This section describes the case scope and verification steps.",
+    },
+    screenshotAlt: {
+      tr: "Portfolyo ve yönetim paneli önizlemesi",
+      en: "Portfolio and admin panel preview",
+    },
+    screenshots: [
+      {
+        src: "/projects/case-studies/my-akademi-portfolio/home-projects.webp",
+        width: 1440,
+        height: 830,
+        alt: {
+          tr: "Portfolyo sitesinde kategori filtreli projeler bölümü",
+          en: "Projects section with category filter on the portfolio site",
+        },
+        caption: {
+          tr: "Veritabanından gelen projeler; kategori filtresi ve arama ile.",
+          en: "Projects from the database, with category filtering and search.",
+        },
+      },
+      {
+        src: "/projects/case-studies/my-akademi-portfolio/admin-dashboard.webp",
+        width: 1440,
+        height: 1000,
+        alt: {
+          tr: "Yönetim paneli dashboard ekranı",
+          en: "Admin panel dashboard screen",
+        },
+        caption: {
+          tr: "İstatistik kartları, son mesajlar, son projeler ve kategori grafiği.",
+          en: "Stat cards, recent messages, recent projects, and a category chart.",
+        },
+      },
+      {
+        src: "/projects/case-studies/my-akademi-portfolio/admin-inbox.webp",
+        width: 1440,
+        height: 900,
+        alt: {
+          tr: "Yönetim paneli gelen kutusu ve mesaj detayı",
+          en: "Admin panel inbox and message detail",
+        },
+        caption: {
+          tr: "Okundu takibi, arama ve modal ile mesaj detayı.",
+          en: "Read tracking, search, and message detail in a modal.",
+        },
+      },
+      {
+        src: "/projects/case-studies/my-akademi-portfolio/admin-project-form.webp",
+        width: 1440,
+        height: 1000,
+        alt: {
+          tr: "Yönetim panelinde proje ekleme formu",
+          en: "Project form in the admin panel",
+        },
+        caption: {
+          tr: "Veritabanından gelen kategori dropdown'u ve kapak görseli yükleme.",
+          en: "A database-backed category dropdown and cover image upload.",
+        },
+      },
+    ],
+    sourceNote: {
+      tr: "Projenin kaynak kodu, kurulum adımları ve öğrenme notları GitHub'da açık.",
+      en: "The project's source code, setup steps, and learning notes are public on GitHub.",
+    },
+  },
 ];
 
 function localizeDefinition(
