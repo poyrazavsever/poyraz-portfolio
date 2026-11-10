@@ -1,13 +1,20 @@
 import {
   DESIGNS,
   EXTENSIONS,
+  FREELANCE_PROJECTS,
   MY_AKADEMI_PROJECTS,
   PRODUCTS,
   WORK_PROJECTS,
   type ProjectItem,
 } from "@/data/projects";
 
-export type ProjectFolderSlug = "work" | "products" | "extensions" | "designs" | "my-akademi";
+export type ProjectFolderSlug =
+  | "work"
+  | "products"
+  | "freelance"
+  | "extensions"
+  | "designs"
+  | "my-akademi";
 
 export type ProjectFolder = {
   slug: ProjectFolderSlug;
@@ -49,6 +56,19 @@ export const PROJECT_FOLDERS: ProjectFolder[] = [
       en: "Startup, self-hosted, and open-source products I designed and built end to end, from idea to launch.",
     },
     items: PRODUCTS,
+  },
+  {
+    slug: "freelance",
+    icon: "mdi:handshake-outline",
+    title: {
+      tr: "Freelance",
+      en: "Freelance",
+    },
+    description: {
+      tr: "İşletmeler için uçtan uca tasarlayıp geliştirdiğim, canlıda çalışan müşteri projeleri.",
+      en: "Client projects I designed and built end to end for businesses, running live in production.",
+    },
+    items: FREELANCE_PROJECTS,
   },
   {
     slug: "extensions",

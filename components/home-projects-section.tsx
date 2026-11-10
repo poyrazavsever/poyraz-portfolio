@@ -7,6 +7,8 @@ import { useRouter } from "@/i18n/routing";
 import { PROJECT_FOLDERS } from "@/data/project-folders";
 import { ProjectFolderCard } from "@/components/project-folder-card";
 
+const HOME_FOLDER_LIMIT = 4;
+
 export function HomeProjectsSection() {
   const t = useTranslations("Home");
   const locale = useLocale();
@@ -39,7 +41,7 @@ export function HomeProjectsSection() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 py-1 md:grid-cols-4">
-        {PROJECT_FOLDERS.map((folder, index) => (
+        {PROJECT_FOLDERS.slice(0, HOME_FOLDER_LIMIT).map((folder, index) => (
           <ProjectFolderCard
             key={folder.slug}
             folder={folder}

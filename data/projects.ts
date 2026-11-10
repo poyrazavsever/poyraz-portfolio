@@ -101,12 +101,42 @@ export const WORK_PROJECTS: ProjectItem[] = [
       en: "A portal focused on matching foreign-trade companies with students who speak foreign languages.",
     },
   },
+];
+
+export const FREELANCE_PROJECTS: ProjectItem[] = [
+  {
+    id: "bowl-bar",
+    title: "Bowl Bar",
+    badge: {
+      tr: "Online Sipariş",
+      en: "Online Ordering",
+    },
+    image: "/projects/bowlbar.png",
+    href: "https://bowlbar.com.tr",
+    technologies: [
+      "Next.js 16",
+      "TypeScript",
+      "Tailwind CSS",
+      "GSAP",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Higgsfield",
+    ],
+    architecture: {
+      tr: "Site, yönetim paneli ve API'yi tek Next.js 16 uygulamasında toplayan; PostgreSQL + Drizzle veri katmanı, SSE ile canlı sipariş akışı, Higgsfield ile üretilmiş scroll animasyonları ve Dokploy üzerinde Docker Compose dağıtımıyla çalışan full-stack mimari.",
+      en: "A full-stack architecture that runs the site, admin panel, and API in one Next.js 16 app, with a PostgreSQL + Drizzle data layer, live order updates over SSE, Higgsfield-generated scroll animations, and Docker Compose deployment on Dokploy.",
+    },
+    description: {
+      tr: "Karaman'daki bowl restoranı için tanıtım sitesi, scroll ile dolan kase animasyonu, online sipariş ve canlı takip, raporlar ve içeriğin tamamını yöneten admin paneli.",
+      en: "A website for a bowl restaurant in Karaman with a scroll-driven bowl-filling animation, online ordering with live tracking, reports, and an admin panel that manages all content.",
+    },
+  },
   {
     id: "arc-foreign-trade",
     title: "ARC Foreign Trade",
     badge: {
-      tr: "Freelance",
-      en: "Freelance",
+      tr: "Kurumsal Site",
+      en: "Corporate Website",
     },
     image: "/projects/arc.webp",
     technologies: ["Wix"],
