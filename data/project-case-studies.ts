@@ -2095,6 +2095,296 @@ const PROJECT_CASE_STUDIES: ProjectCaseStudyDefinition[] = [
       en: "The project's source code, setup steps, and learning notes are public on GitHub.",
     },
   },
+  {
+    slug: "bowl-bar",
+    projectId: "bowl-bar",
+    image: "/projects/bowlbar.png",
+    liveUrl: "https://bowlbar.com.tr",
+    applicationCategory: "BusinessApplication",
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "GSAP",
+      "Lenis",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "Better Auth",
+      "Zod",
+      "Zustand",
+      "Tiptap",
+      "Server-Sent Events",
+      "Higgsfield",
+      "Vitest",
+      "Playwright",
+      "Docker",
+      "Dokploy",
+    ],
+    title: { tr: "Bowl Bar", en: "Bowl Bar" },
+    eyebrow: {
+      tr: "Freelance vaka çalışması",
+      en: "Freelance case study",
+    },
+    summary: {
+      tr: "Karaman'daki bir bowl restoranı için; scroll ile dolan kase animasyonlu tanıtım sitesini, kendi kaseni oluşturabildiğin online siparişi, canlı sipariş takibini ve işletmenin tüm operasyonunu yöneten admin panelini tek uygulamada birleştiren full-stack proje.",
+      en: "A full-stack project for a bowl restaurant in Karaman that combines a website with a scroll-driven bowl-filling animation, online ordering with a build-your-own-bowl flow, live order tracking, and an admin panel that runs the whole operation, all in one app.",
+    },
+    role: {
+      tr: "Freelance full-stack geliştirici, tasarımcı ve görsel varlık üreticisi",
+      en: "Freelance full-stack developer, designer, and visual asset producer",
+    },
+    team: {
+      tr: "Müşteriyle doğrudan çalışarak tek başıma",
+      en: "Solo, working directly with the client",
+    },
+    context: {
+      tr: "Canlıda çalışan freelance müşteri projesi",
+      en: "Freelance client project running in production",
+    },
+    overview: {
+      tr: [
+        "Bowl Bar; gel-al ve eve teslim çalışan, ödemenin kapıda nakit ya da kartla alındığı bir bowl restoranı. İşletmenin hem markasını iyi anlatan bir siteye hem de telefon trafiğini azaltacak, personelin kolayca yönetebileceği bir online sipariş sistemine ihtiyacı vardı.",
+        "Projeyi keşiften canlıya kadar tek başıma yürüttüm: ürün planı, tasarım sistemi, Higgsfield ile görsel ve video üretimi, site, sipariş akışı, admin paneli, testler, güvenlik denetimi ve Dokploy üzerinde deploy. Site bowlbar.com.tr adresinde canlı ve işletme siparişlerini bu panelden yönetiyor.",
+      ],
+      en: [
+        "Bowl Bar is a bowl restaurant that offers pickup and delivery, with payment collected at the door in cash or by card. The business needed a site that tells its brand story well, plus an online ordering system that reduces phone traffic and is easy for staff to run.",
+        "I ran the project alone from discovery to launch: product plan, design system, visual and video production with Higgsfield, the site, the ordering flow, the admin panel, tests, a security audit, and deployment on Dokploy. The site is live at bowlbar.com.tr, and the business manages its orders from this panel.",
+      ],
+    },
+    problem: {
+      tr: "Küçük bir restoranın elinde ne online ödeme altyapısı ne de teknik ekip var. Siparişlerin kaçmaması, menü ve fiyatların personel tarafından kolayca güncellenebilmesi, müşterinin siparişinin durumunu telefon etmeden görebilmesi ve sitenin rakiplerden ayrışacak kadar iştah açıcı olması gerekiyordu.",
+      en: "A small restaurant has neither an online payment setup nor a technical team. Orders could not be missed, staff had to update the menu and prices easily, customers needed to see their order status without calling, and the site had to be appetizing enough to stand out from competitors.",
+    },
+    constraints: {
+      tr: [
+        "Online ödeme yok: kapıda nakit veya kart, işletme ikisini ayrı ayrı açıp kapatabiliyor",
+        "Tek Node süreci ve tek sunucu üzerinde düşük işletme maliyeti",
+        "Teknik bilgisi olmayan personelin tablet veya telefondan rahatça kullanabileceği bir panel",
+        "Ağır scroll animasyonuna rağmen düşük segment telefonlarda hızlı açılış",
+        "KVKK uyumu: kişisel verilerin maskelenmesi ve eski siparişlerde anonimleştirme",
+      ],
+      en: [
+        "No online payment: cash or card at the door, each toggled independently by the business",
+        "Low running costs on a single Node process and a single server",
+        "A panel that non-technical staff can use comfortably from a tablet or phone",
+        "Fast loading on low-end phones despite a heavy scroll animation",
+        "KVKK compliance: masked personal data and anonymization of old orders",
+      ],
+    },
+    decisions: [
+      {
+        title: {
+          tr: "Higgsfield ile üretilen, scroll'a bağlı kare dizisi",
+          en: "A scroll-bound frame sequence generated with Higgsfield",
+        },
+        description: {
+          tr: "Boş ve dolu kase anahtar karelerini GPT Image ile, aradaki dolma videosunu Seedance ile ürettim. Kendi yazdığım pipeline videoyu masaüstünde 96, mobilde 48 WebP kareye çeviriyor; canvas üzerinde GSAP ScrollTrigger ile scroll'a bağlanıyor. 360° dönen kase de aynı setten, crossfade ile kesintisiz döngü olarak üretildi.",
+          en: "I generated the empty and full bowl keyframes with GPT Image and the filling video between them with Seedance. A pipeline I wrote turns the video into 96 WebP frames on desktop and 48 on mobile, bound to scroll on a canvas with GSAP ScrollTrigger. The 360° rotating bowl comes from the same set as a seamless crossfaded loop.",
+        },
+      },
+      {
+        title: {
+          tr: "Menü ve shop için tek ürün modeli",
+          en: "One product model for menu and shop",
+        },
+        description: {
+          tr: "Tek bir ürün tablosu ‘menüde göster’, ‘satılabilir’ ve ‘tükendi’ bayraklarıyla ayrışıyor. Menü fiyatsız tanıtım yaparken shop aynı ürünü fiyatıyla satıyor; personel bir ürünü iki yerde ayrı ayrı yönetmek zorunda kalmıyor.",
+          en: "A single products table splits into menu and shop through ‘show in menu’, ‘sellable’, and ‘sold out’ flags. The menu presents products without prices while the shop sells the same product with a price, so staff never manage one product in two places.",
+        },
+      },
+      {
+        title: {
+          tr: "Fiyatın her zaman sunucuda yeniden hesaplanması",
+          en: "Always recalculating prices on the server",
+        },
+        description: {
+          tr: "Ortak bir fiyat motoru; seçenek kurallarını, minimum tutarı, teslimat ücretini, stok ve açık/kapalı durumunu sunucuda yeniden doğruluyor. Ürün adı, fiyat ve seçenekler siparişe tek transaction içinde kopyalanıyor; sonradan yapılan menü değişiklikleri eski siparişleri bozmuyor.",
+          en: "A shared pricing engine revalidates option rules, the minimum order, the delivery fee, stock, and open/closed state on the server. Product names, prices, and options are copied into the order in a single transaction, so later menu changes never alter past orders.",
+        },
+      },
+      {
+        title: {
+          tr: "SSE ile canlı sipariş akışı",
+          en: "Live order flow over SSE",
+        },
+        description: {
+          tr: "Yeni sipariş, admin panelinde sesli uyarı, bildirim ve sekme sayacıyla anında görünüyor; durum değişiklikleri müşterinin takip sayfasına sayfa yenilemeden yansıyor. Tüm admin sekmeleri tarayıcının bağlantı sınırına takılmamak için tek bir SSE bağlantısını paylaşıyor.",
+          en: "New orders appear instantly in the admin panel with a sound alert, a notification, and a tab counter, and status changes reach the customer's tracking page without a refresh. All admin tabs share one SSE connection to stay within the browser's connection limit.",
+        },
+      },
+      {
+        title: {
+          tr: "Tek uygulama, tek sunucu",
+          en: "One app, one server",
+        },
+        description: {
+          tr: "Site, admin ve API tek Next.js 16 uygulamasında; PostgreSQL ve yüklenen dosyalar kalıcı volume'larda, günlük yedekle birlikte Docker Compose ile Dokploy üzerinde çalışıyor. Bu ölçekte mikroservis yerine bilinçli olarak tek süreç tercih edildi.",
+          en: "The site, admin, and API live in a single Next.js 16 app; PostgreSQL and uploaded files sit on persistent volumes with daily backups, running via Docker Compose on Dokploy. At this scale a single process was a deliberate choice over microservices.",
+        },
+      },
+    ],
+    designProcess: {
+      tr: "Tasarım, logodan çıkarılan renk paleti ve Bricolage Grotesque + Geist tipografisiyle bir token sistemine dönüştü. Tüm görseller tek bir art direction belgesine bağlı: aynı kömür siyahı kase, aynı açı, aynı ışık ve beyaz zemin. Beyaz zemin, krem renkli site üzerinde multiply ile kaybolarak kasenin sayfada ‘yüzmesini’ sağlıyor.",
+      en: "The design became a token system built on a palette taken from the logo and Bricolage Grotesque + Geist typography. Every visual follows one art direction document: the same charcoal bowl, angle, light, and white background. The white background disappears through multiply on the cream site, so the bowl appears to float on the page.",
+    },
+    designSteps: {
+      tr: [
+        "İşletmenin sipariş akışını, durumlarını ve kurallarını müşteriyle birlikte planlama",
+        "Logodan türetilen tasarım token'ları ve admin içinde canlı bir stil rehberi kurma",
+        "Higgsfield ile kase, video, hizmet illüstrasyonları ve teslimat görsellerini aynı setten üretme",
+        "Teknik olmayan personel için sade, sürükle-bırak ve tek tıklı aksiyonlarla çalışan bir panel tasarlama",
+      ],
+      en: [
+        "Plan the business's order flow, statuses, and rules together with the client",
+        "Build design tokens derived from the logo and a live style guide inside the admin",
+        "Produce the bowl, video, service illustrations, and delivery visuals from one Higgsfield set",
+        "Design a simple panel for non-technical staff with drag-and-drop and one-click actions",
+      ],
+    },
+    challenge: {
+      tr: "Ağır görsel deneyimi, gerçek bir işletmenin güvenilir sipariş operasyonuyla aynı uygulamada dengelemek gerekiyordu. Kare dizisi ve animasyon kütüphaneleri ilk açılışı yavaşlatabilir; canlı ortamda ise süresi dolmuş oturumlarda sonsuz yönlendirme, sekme başlığı sayacındaki bir döngü yüzünden admin donması ve harita linki üzerinden olası XSS gibi gerçek sorunlar çıktı.",
+      en: "A heavy visual experience had to coexist with a reliable order operation for a real business in the same app. Frame sequences and animation libraries can slow the first load, and in production real issues surfaced: an infinite redirect with expired sessions, an admin freeze caused by a loop in the tab-title counter, and a possible XSS through the map link.",
+    },
+    solution: {
+      tr: "Hero kareleri sayfa yüklendikten sonra, 360° video yalnızca görünür olduğunda iniyor; Lenis ve GSAP yalnızca mouse'lu cihazlarda tembel yükleniyor ve kullanılmayan font ekseni çıkarılarak font 129 KB'tan 76 KB'a indi. Canlı sorunları güvenlik denetimiyle bulup düzelttim; sipariş verme → admin'de onaylama → takip sayfasında canlı güncelleme akışını Playwright ile uçtan uca test altına aldım.",
+      en: "Hero frames load after the page, and the 360° video loads only when visible; Lenis and GSAP load lazily only on mouse devices, and removing an unused font axis cut the font from 129 KB to 76 KB. I found and fixed the production issues through a security audit, and covered the place order → confirm in admin → live tracking update flow end to end with Playwright.",
+    },
+    results: [
+      {
+        value: "100",
+        label: {
+          tr: "Lighthouse erişilebilirlik ve SEO",
+          en: "Lighthouse accessibility & SEO",
+        },
+        description: {
+          tr: "Mobil, yavaş 4G ve 4× yavaş CPU simülasyonunda; performans 85–91.",
+          en: "On mobile with simulated slow 4G and 4× CPU slowdown; performance 85–91.",
+        },
+      },
+      {
+        value: "96",
+        label: { tr: "Scroll karesi", en: "Scroll frames" },
+        description: {
+          tr: "Higgsfield videosundan üretilen masaüstü hero sekansı; mobilde 48 kare.",
+          en: "Desktop hero sequence generated from a Higgsfield video; 48 frames on mobile.",
+        },
+      },
+      {
+        value: "57",
+        label: { tr: "Unit test", en: "Unit tests" },
+        description: {
+          tr: "Fiyat motoru, durum geçişleri, telefon maskesi, SEO ve IP yardımcılarını kapsayan testler ile Playwright E2E akışı.",
+          en: "Tests covering the pricing engine, status transitions, phone mask, SEO, and IP helpers, plus a Playwright E2E flow.",
+        },
+      },
+    ],
+    metricsNote: {
+      tr: "Ekran görüntülerindeki fiyat, ciro ve hesap bilgileri işletmenin gizliliği için bulanıklaştırıldı. Sipariş ve gelir rakamlarını paylaşmıyorum; bu bölüm teslim edilen kapsamı ve ölçülmüş teknik değerleri gösteriyor.",
+      en: "Prices, revenue, and account details in the screenshots are blurred to protect the business's privacy. I am not publishing order or revenue figures; this section shows the delivered scope and measured technical values.",
+    },
+    screenshotAlt: {
+      tr: "Bowl Bar ürün önizlemesi",
+      en: "Bowl Bar product preview",
+    },
+    screenshots: [
+      {
+        src: "/projects/case-studies/bowl-bar/scroll-sequence.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Scroll ile dolan kasenin dört aşaması",
+          en: "Four stages of the scroll-driven bowl filling",
+        },
+        caption: {
+          tr: "Higgsfield ile üretilen kare dizisi: kullanıcı aşağı kaydırdıkça kase taban, sebze ve protein ile doluyor.",
+          en: "The Higgsfield-generated frame sequence: as the user scrolls, the bowl fills with base, vegetables, and protein.",
+        },
+      },
+      {
+        src: "/projects/case-studies/bowl-bar/hero.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Bowl Bar ana sayfa hero bölümü",
+          en: "Bowl Bar homepage hero section",
+        },
+        caption: {
+          tr: "‘Kaseni doldur.’ başlığı ve boş kaseyle başlayan hero.",
+          en: "The hero opens with ‘Fill your bowl.’ and an empty bowl.",
+        },
+      },
+      {
+        src: "/projects/case-studies/bowl-bar/favorites.webp",
+        width: 1660,
+        height: 1034,
+        alt: {
+          tr: "Bowl Bar favori ürünler bölümü",
+          en: "Bowl Bar favorites section",
+        },
+        caption: {
+          tr: "Admin panelinden yönetilen öne çıkan ürünler.",
+          en: "Featured products managed from the admin panel.",
+        },
+      },
+      {
+        src: "/projects/case-studies/bowl-bar/admin-dashboard.webp",
+        width: 1654,
+        height: 964,
+        alt: {
+          tr: "Bowl Bar admin genel bakış ekranı",
+          en: "Bowl Bar admin overview screen",
+        },
+        caption: {
+          tr: "Sesli sipariş takibi, büyük aç/kapa anahtarı, günün özeti ve eksik bilgi uyarıları.",
+          en: "Sound order alerts, a large open/close switch, today's summary, and missing-information warnings.",
+        },
+      },
+      {
+        src: "/projects/case-studies/bowl-bar/admin-reports.webp",
+        width: 1654,
+        height: 964,
+        alt: {
+          tr: "Bowl Bar raporlar ekranı",
+          en: "Bowl Bar reports screen",
+        },
+        caption: {
+          tr: "Tarih aralığına göre ciro, ortalama sepet, iptal oranı, günlük ciro grafiği ve CSV dışa aktarma (tutarlar bulanıklaştırıldı).",
+          en: "Revenue, average basket, cancellation rate, a daily revenue chart, and CSV export by date range (amounts blurred).",
+        },
+      },
+      {
+        src: "/projects/case-studies/bowl-bar/admin-menu.webp",
+        width: 1654,
+        height: 964,
+        alt: {
+          tr: "Bowl Bar menü yönetimi ekranı",
+          en: "Bowl Bar menu management screen",
+        },
+        caption: {
+          tr: "Sürükle-bırak sıralama, satışta/tükendi anahtarı ve kategori bazlı ürün yönetimi (fiyatlar bulanıklaştırıldı).",
+          en: "Drag-and-drop ordering, an on-sale/sold-out switch, and category-based product management (prices blurred).",
+        },
+      },
+      {
+        src: "/projects/case-studies/bowl-bar/admin-media.webp",
+        width: 1654,
+        height: 964,
+        alt: {
+          tr: "Bowl Bar görsel kütüphanesi",
+          en: "Bowl Bar media library",
+        },
+        caption: {
+          tr: "Yüklenen görselleri otomatik küçülten, WebP'ye çeviren ve nerede kullanıldığını gösteren medya kütüphanesi.",
+          en: "A media library that automatically resizes uploads, converts them to WebP, and shows where each image is used.",
+        },
+      },
+    ],
+    sourceNote: {
+      tr: "Bowl Bar bir müşteri projesi olduğu için kaynak kodu kapalıdır.",
+      en: "Bowl Bar is a client project, so its source code is private.",
+    },
+  },
 ];
 
 function localizeDefinition(

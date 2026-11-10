@@ -113,6 +113,7 @@ export const FREELANCE_PROJECTS: ProjectItem[] = [
     },
     image: "/projects/bowlbar.png",
     href: "https://bowlbar.com.tr",
+    caseStudySlug: "bowl-bar",
     technologies: [
       "Next.js 16",
       "TypeScript",
