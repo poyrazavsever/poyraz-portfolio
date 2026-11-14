@@ -27,52 +27,36 @@ export const MEDIA_KIT_PERIOD = {
 
 export const MEDIA_KIT_METRICS: MediaKitMetric[] = [
   {
-    id: "views",
-    label: {
-      tr: "Görüntüleme",
-      en: "Views",
-    },
-    value: {
-      tr: "788.422",
-      en: "788,422",
-    },
-    detail: {
-      tr: "Ömür boyu",
-      en: "Lifetime",
-    },
-    icon: "mdi:play-circle-outline",
-  },
-  {
-    id: "watch-time",
-    label: {
-      tr: "İzlenme süresi",
-      en: "Watch time",
-    },
-    value: {
-      tr: "16,5 B saat",
-      en: "16.5K hours",
-    },
-    detail: {
-      tr: "Ömür boyu",
-      en: "Lifetime",
-    },
-    icon: "mdi:clock-outline",
-  },
-  {
     id: "subscribers",
     label: {
       tr: "Aboneler",
       en: "Subscribers",
     },
     value: {
-      tr: "+9,3 B",
-      en: "+9.3K",
+      tr: "10.709",
+      en: "10,709",
     },
     detail: {
-      tr: "Ömür boyu kazanılan",
-      en: "Gained lifetime",
+      tr: "Toplam abone",
+      en: "Total subscribers",
     },
     icon: "mdi:account-multiple-outline",
+  },
+  {
+    id: "views",
+    label: {
+      tr: "Görüntüleme",
+      en: "Views",
+    },
+    value: {
+      tr: "1,1 Mn+",
+      en: "1.1M+",
+    },
+    detail: {
+      tr: "Ömür boyu",
+      en: "Lifetime",
+    },
+    icon: "mdi:play-circle-outline",
   },
   {
     id: "retention",
@@ -89,6 +73,75 @@ export const MEDIA_KIT_METRICS: MediaKitMetric[] = [
       en: "40.3% swiped away",
     },
     icon: "mdi:eye-check-outline",
+  },
+];
+
+export const MEDIA_KIT_RECENT_PERIOD = {
+  tr: "Son 28 gün",
+  en: "Last 28 days",
+} satisfies Record<MediaKitLocale, string>;
+
+export const MEDIA_KIT_RECENT_METRICS: MediaKitMetric[] = [
+  {
+    id: "recent-views",
+    label: {
+      tr: "Görüntüleme",
+      en: "Views",
+    },
+    value: {
+      tr: "83,8 B",
+      en: "83.8K",
+    },
+    detail: {
+      tr: "Son 28 gün",
+      en: "Last 28 days",
+    },
+    icon: "mdi:trending-up",
+  },
+  {
+    id: "recent-watch-time",
+    label: {
+      tr: "İzlenme süresi",
+      en: "Watch time",
+    },
+    value: {
+      tr: "1,3 B saat",
+      en: "1.3K hours",
+    },
+    detail: {
+      tr: "Son 28 gün",
+      en: "Last 28 days",
+    },
+    icon: "mdi:clock-outline",
+  },
+];
+
+export type MediaKitTopVideo = {
+  id: string;
+  title: string;
+  views: number;
+  format: "video" | "short";
+};
+
+/** En çok görüntülenen içerikler · son 48 saat (YouTube Studio). */
+export const MEDIA_KIT_TOP_VIDEOS: MediaKitTopVideo[] = [
+  {
+    id: "aQ4Byrs8ub4",
+    title: "Linux Nedir? Yeni Başlayanlar İçin Linux'a Giriş",
+    views: 2300,
+    format: "video",
+  },
+  {
+    id: "VmhwZhHdUQ0",
+    title: "Yazılımcılar İçin 5 Araç",
+    views: 403,
+    format: "short",
+  },
+  {
+    id: "b3SL2S1zYwU",
+    title: "Bu Videodan Sonra API Kafanda Oturacak",
+    views: 282,
+    format: "video",
   },
 ];
 

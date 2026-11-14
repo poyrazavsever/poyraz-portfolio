@@ -18,6 +18,9 @@ import {
   MEDIA_KIT_LOCATIONS,
   MEDIA_KIT_METRICS,
   MEDIA_KIT_PERIOD,
+  MEDIA_KIT_RECENT_METRICS,
+  MEDIA_KIT_RECENT_PERIOD,
+  MEDIA_KIT_TOP_VIDEOS,
   MEDIA_KIT_TOPICS,
   type MediaKitAudienceRow,
   type MediaKitBreakdownRow,
@@ -41,7 +44,15 @@ const COPY = {
     liveDescription:
       "Görüntüleme ve abone toplamı saatlik yenilenir; diğer değerler YouTube Studio raporundan gelir.",
     snapshotDescription:
-      "Ömür boyu performans ve güncel kitle kırılımları YouTube Studio raporundan alınmıştır.",
+      "Toplam abone, ömür boyu görüntüleme ve kitle kırılımları YouTube Studio raporundan alınmıştır.",
+    recentTitle: "Son dönem performansı",
+    recentDescription:
+      "Kanalın son 28 gündeki görüntüleme ve izlenme süresi ile son 48 saatte en çok izlenen içerikler.",
+    topVideosTitle: "En çok görüntülenen içerikler",
+    topVideosPeriod: "Son 48 saat",
+    viewsSuffix: "görüntüleme",
+    shortLabel: "Shorts",
+    videoLabel: "Video",
     publicTotal: "Herkese açık kanal toplamı",
     audienceTitle: "Kitle profili",
     audienceDescription:
@@ -71,7 +82,7 @@ const COPY = {
     ctaDescription:
       "Ürününüzü anlayan, deneyimleyen ve izleyicisine açık bir dille anlatan bir iş birliği kurgulayalım.",
     dataNote:
-      "Performans, demografi, cihaz ve ülke kırılımları ömür boyudur. Aktif saatler son 28 günü gösterir.",
+      "Demografi, cihaz ve ülke kırılımları ömür boyudur. Son dönem performansı son 28 günü, en çok görüntülenen içerikler son 48 saati gösterir.",
   },
   en: {
     eyebrow: "Media kit · 2026",
@@ -87,7 +98,15 @@ const COPY = {
     liveDescription:
       "View and subscriber totals refresh hourly; other figures come from YouTube Studio reports.",
     snapshotDescription:
-      "Lifetime performance and current audience breakdowns come from YouTube Studio reports.",
+      "Total subscribers, lifetime views, and audience breakdowns come from YouTube Studio reports.",
+    recentTitle: "Recent performance",
+    recentDescription:
+      "Channel views and watch time over the last 28 days, plus the most-viewed content from the last 48 hours.",
+    topVideosTitle: "Most-viewed content",
+    topVideosPeriod: "Last 48 hours",
+    viewsSuffix: "views",
+    shortLabel: "Shorts",
+    videoLabel: "Video",
     publicTotal: "Public channel total",
     audienceTitle: "Audience profile",
     audienceDescription:
@@ -117,7 +136,7 @@ const COPY = {
     ctaDescription:
       "Let’s shape a partnership that understands, experiences, and explains your product clearly.",
     dataNote:
-      "Performance, demographic, device, and geography breakdowns are lifetime figures.",
+      "Demographic, device, and geography breakdowns are lifetime figures. Recent performance covers the last 28 days; most-viewed content covers the last 48 hours.",
   },
 } as const;
 
@@ -360,7 +379,7 @@ export function MediaKitContent({
           </Badge>
         </div>
 
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-2 sm:grid-cols-3">
           {metrics.map((metric) => (
             <MetricCard
               key={metric.id}
@@ -370,6 +389,88 @@ export function MediaKitContent({
               icon={metric.icon}
             />
           ))}
+        </div>
+      </section>
+
+      <section className="space-y-3 pt-12 md:pt-14">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <Typography variant="h3" component="h2" className="tracking-[-0.035em]">
+              {copy.recentTitle}
+            </Typography>
+            <Typography variant="small" className="mt-1 max-w-xl text-xs leading-5 text-muted-foreground">
+              {copy.recentDescription}
+            </Typography>
+          </div>
+          <Badge variant="secondary" radius="sm" className="gap-1.5">
+            <Icon icon="mdi:calendar-outline" width={13} height={13} />
+            {MEDIA_KIT_RECENT_PERIOD[locale]}
+          </Badge>
+        </div>
+
+        <div className="grid gap-2 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-1">
+            {MEDIA_KIT_RECENT_METRICS.map((metric) => (
+              <MetricCard
+                key={metric.id}
+                label={metric.label[locale]}
+                value={metric.value[locale]}
+                detail={metric.detail[locale]}
+                icon={metric.icon}
+              />
+            ))}
+          </div>
+
+          <Card className="rounded-sm border-border p-4">
+            <div className="flex items-center justify-between gap-3">
+              <Typography variant="large" component="h3" className="text-sm font-semibold">
+                {copy.topVideosTitle}
+              </Typography>
+              <Typography variant="caption" className="text-muted-foreground">
+                {copy.topVideosPeriod}
+              </Typography>
+            </div>
+            <ol className="mt-4 space-y-2">
+              {MEDIA_KIT_TOP_VIDEOS.map((video, index) => (
+                <li key={video.id}>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${video.id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-center gap-3 rounded-sm border border-border p-2 transition-colors hover:border-primary/40"
+                  >
+                    <span className="relative aspect-video w-24 shrink-0 overflow-hidden rounded-sm bg-muted">
+                      <Image
+                        src={`https://i.ytimg.com/vi/${video.id}/mqdefault.jpg`}
+                        alt=""
+                        fill
+                        sizes="96px"
+                        className="object-cover"
+                      />
+                      <span className="absolute left-1 top-1 rounded-sm bg-background/90 px-1 text-[10px] font-semibold tabular-nums">
+                        {index + 1}
+                      </span>
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <Typography
+                        variant="small"
+                        className="line-clamp-2 text-xs font-medium leading-snug group-hover:text-primary"
+                      >
+                        {video.title}
+                      </Typography>
+                      <span className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground">
+                        <span className="tabular-nums">
+                          {formatCompactNumber(video.views, locale)} {copy.viewsSuffix}
+                        </span>
+                        <span aria-hidden="true">·</span>
+                        <span>{video.format === "short" ? copy.shortLabel : copy.videoLabel}</span>
+                      </span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </Card>
         </div>
       </section>
 
