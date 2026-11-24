@@ -25,7 +25,7 @@ export const BOOKMARKS: BookmarkItem[] = [
   {
     id: "bookmark-reactive-switcher",
     title: "Reactive Switcher",
-    href: "https://reactive-switcher.vercel.app",
+    href: "https://reactive-switcher.poyrazavsever.com",
     description: {
       tr: "Ölçeklenebilir açık ve koyu mod kurulumu için tema değiştirici paket dokümantasyonu.",
       en: "Theme switching package docs for scalable light and dark mode setup.",
