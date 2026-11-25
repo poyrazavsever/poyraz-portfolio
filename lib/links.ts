@@ -8,47 +8,40 @@ export const NAV_LINKS = [
 ] as const;
 
 export const TRACKED_SOCIAL_HREFS = {
-  linkedin: "https://go.poyrazavsever.com/linkedin-website",
-  github: "https://go.poyrazavsever.com/github-website",
-  instagram: "https://go.poyrazavsever.com/instagram-website",
-  youtube: "https://go.poyrazavsever.com/youtube-website",
-  medium: "https://go.poyrazavsever.com/medium-website",
-  x: "https://go.poyrazavsever.com/x-website",
-  behance: "https://go.poyrazavsever.com/behance-website",
-  buyMeACoffee: "https://go.poyrazavsever.com/buy-me-a-coffee-website",
+  linkedin: "https://www.linkedin.com/in/poyrazavsever/",
+  github: "https://github.com/poyrazavsever",
+  instagram: "https://instagram.com/poyraz_avsever",
+  youtube: "https://youtube.com/@poyrazavsever",
+  medium: "https://medium.com/@poyrazavsever",
+  x: "https://x.com/poyrazavsever",
+  behance: "https://behance.net/poyrazavsever",
+  buyMeACoffee: "https://buymeacoffee.com/poyrazavsever",
 } as const;
-
-const TRACKED_BASE_URL = "https://go.poyrazavsever.com";
 
 export const TRACKED_EXTERNAL_HREFS = {
-  uiKit: `${TRACKED_BASE_URL}/ui-kit-website`,
-  weeksJs: `${TRACKED_BASE_URL}/52-weeks-js-website`,
-  cvTr: `${TRACKED_BASE_URL}/cv-tr-website`,
-  cvEn: `${TRACKED_BASE_URL}/cv-en-website`,
-  npmProfile: `${TRACKED_BASE_URL}/npm-profile-website`,
-  targiz: `${TRACKED_BASE_URL}/targiz-project-website`,
-  ostim: `${TRACKED_BASE_URL}/ostim-project-website`,
-  ostimEmployment: `${TRACKED_BASE_URL}/ostim-employment-project-website`,
-  ostimForeignTrade: `${TRACKED_BASE_URL}/ostim-foreign-trade-project-website`,
-  arcForeignTrade: `${TRACKED_BASE_URL}/arc-foreign-trade-project-website`,
-  ataturkChronology: `${TRACKED_BASE_URL}/ataturk-chronology-project-website`,
-  mockupFactory: `${TRACKED_BASE_URL}/mockup-factory-project-website`,
-  ohhike: `${TRACKED_BASE_URL}/ohhike-project-website`,
-  neta: `${TRACKED_BASE_URL}/neta-project-website`,
-  shortcutInjector: `${TRACKED_BASE_URL}/shortcut-injector-project-website`,
-  tabAudioRelay: `${TRACKED_BASE_URL}/tab-audio-relay-project-website`,
-  hsdFigma: `${TRACKED_BASE_URL}/hsd-figma-project-website`,
-  restaurantMenuFigma: `${TRACKED_BASE_URL}/restaurant-menu-figma-website`,
+  uiKit: "https://ui.poyrazavsever.com",
+  weeksJs: "https://js.poyrazavsever.com",
+  cvTr: "/tr/resume.pdf",
+  cvEn: "/en/resume.pdf",
+  npmProfile: "https://www.npmjs.com/~poyrazavsever",
+  targiz: "https://targiz.com",
+  ostim: "https://ostim.org.tr",
+  ostimEmployment: "https://ostimistihdam.com",
+  ostimForeignTrade: "https://ostimdisticaret.net",
+  arcForeignTrade: "https://arcforeigntrade.com",
+  ataturkChronology: "https://ataturk-kronolojisi.org",
+  mockupFactory: "https://mockup-factory-mu.vercel.app/",
+  ohhike: "https://www.ohhike.com",
+  neta: "https://www.takeneta.com",
+  shortcutInjector: "https://github.com/poyrazavsever/shortcut-injector",
+  tabAudioRelay: "https://github.com/poyrazavsever/tab-audio-relay",
+  hsdFigma: "https://www.figma.com/community/file/1613511833232376739",
+  restaurantMenuFigma:
+    "https://www.figma.com/community/file/1613577450975840169/restaurant-menu-ui-design",
 } as const;
 
-const TRACKED_NPM_PACKAGES: Record<string, string> = {
-  "poyraz-ui": `${TRACKED_BASE_URL}/npm-poyraz-ui-website`,
-  "reactive-image": `${TRACKED_BASE_URL}/npm-reactive-image-website`,
-  "reactive-switcher": `${TRACKED_BASE_URL}/npm-reactive-switcher-website`,
-};
-
-export function getTrackedNpmPackageHref(name: string, fallback: string) {
-  return TRACKED_NPM_PACKAGES[name] ?? fallback;
+export function getTrackedNpmPackageHref(_name: string, fallback: string) {
+  return fallback;
 }
 
 export const SOCIAL_LINKS = [
